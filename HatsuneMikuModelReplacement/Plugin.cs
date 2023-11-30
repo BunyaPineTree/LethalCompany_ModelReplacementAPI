@@ -21,7 +21,7 @@ namespace HatsuneMikuModelReplacement
 
 
     [BepInPlugin("meow.MikuModelReplacement", "Miku Model", "0.1")]
-    [BepInDependency("meow.ModelReplacement", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("meow.ModelReplacementAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class Plugin : BaseUnityPlugin
     {
 

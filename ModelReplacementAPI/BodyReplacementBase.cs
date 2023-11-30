@@ -80,7 +80,7 @@ namespace ModelReplacement
             SkinnedMeshRenderer deadBodyRenderer = deadBody.GetComponentInChildren<SkinnedMeshRenderer>();
 
             replacementRenderer.enabled = true;
-            //deadBodyRenderer.enabled = false;
+            deadBodyRenderer.enabled = false;
 
 
 
@@ -210,7 +210,7 @@ namespace ModelReplacement
             bool localPlayer = (ulong)StartOfRound.Instance.thisClientPlayerId == controller.playerClientId;// Don't render miku if local player and alive
             if (localPlayer)
             {
-                //replacementModelSkinnedMeshRenderer.enabled = false;
+                replacementModelSkinnedMeshRenderer.enabled = false;
 
             }
             //if (true)
