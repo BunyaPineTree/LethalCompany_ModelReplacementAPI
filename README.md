@@ -56,3 +56,7 @@ Unknown issues
 -
 * Probably many, as this has only been lightly player tested
 
+Note
+-
+Compiling this project requires a publicized Assembly-CSharp
+
