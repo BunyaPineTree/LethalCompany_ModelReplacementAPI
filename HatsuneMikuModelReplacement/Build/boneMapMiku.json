@@ -1,0 +1,57 @@
+{
+
+  "itemHolderBone": "Hand.R", //Bone to hold items with
+
+  "_itemHolderPositionOffset": [ 0, 0.1, 0 ], //x y z offset in itemHolderBone local space
+
+  "_positionOffSet": [ 0, 0.24, 0 ], //x y z offset in player model "spine" bone local space
+
+  //All player model bones are accounted for in this list, all bone mappings are optional, rotation offset is optional
+  "boneMap": [
+
+    //[playerModelBone, replacecmentModelBone , [quaternion rotation offset x, y, z, w optional] , [additional comma separated vars optional]]
+    [ "spine", "Hips" ],
+    [ "spine.001", "Spine" ],
+    [ "spine.002", "" ], //Note that spine.002 practically does not move at all
+    [ "spine.003", "Chest" ],
+    [ "shoulder.L", "Shoulder.L" ],
+    [ "arm.L_upper", "Upper Arm.L" ],
+    [ "arm.L_lower", "Lower Arm.L" ],
+    [ "hand.L", "Hand.L" ],
+    [ "finger5.L", "Little Proximal.L" ],
+    [ "finger5.L.001", "Little Intermediate.L" ],
+    [ "finger4.L", "Ring Proximal.L" ],
+    [ "finger4.L.001", "Ring Intermediate.L" ],
+    [ "finger3.L", "Middle Proximal.L" ],
+    [ "finger3.L.001", "Middle Intermediate.L" ],
+    [ "finger2.L", "Index Proximal.L" ],
+    [ "finger2.L.001", "Index Intermediate.L" ],
+    [ "finger1.L", "Thumb Proximal.L" ],
+    [ "finger1.L.001", "Thumb Distal.L" ],
+    [ "shoulder.R", "Shoulder.R" ],
+    [ "arm.R_upper", "Upper Arm.R" ],
+    [ "arm.R_lower", "Lower Arm.R" ],
+    [ "hand.R", "Hand.R" ],
+    [ "finger5.R", "Little Proximal.R" ],
+    [ "finger5.R.001", "Little Intermediate.R" ],
+    [ "finger4.R", "Ring Proximal.R" ],
+    [ "finger4.R.001", "Ring Intermediate.R" ],
+    [ "finger3.R", "Middle Proximal.R" ],
+    [ "finger3.R.001", "Middle Intermediate.R" ],
+    [ "finger2.R", "Index Proximal.R" ],
+    [ "finger2.R.001", "Index Intermediate.R" ],
+    [ "finger1.R", "Thumb Proximal.R" ],
+    [ "finger1.R.001", "Thumb Distal.R" ],
+    [ "spine.004", "Head" ],
+    [ "thigh.L", "Upper Leg.L", 0, 1, 0, 0 ],
+    [ "shin.L", "Lower Leg.L", 0, 1, 0, 0 ],
+    [ "foot.L", "Foot.L", 0, "-0.996", "-0.087", 0 ],
+    [ "toe.L", "Toes.L", 0, -1, 0, 0 ],
+    [ "heel.02.L", "" ],
+    [ "thigh.R", "Upper Leg.R", 0, 1, 0, 0 ],
+    [ "shin.R", "Lower Leg.R", 0, 1, 0, 0 ],
+    [ "foot.R", "Foot.R", 0, "-0.996", "-0.087", 0 ],
+    [ "toe.R", "Toes.R", 0, -1, 0, 0 ],
+    [ "heel.02.R", "" ]
+  ]
+}
