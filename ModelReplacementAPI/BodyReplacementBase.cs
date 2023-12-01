@@ -50,107 +50,77 @@ namespace ModelReplacement
         /// </summary>
         public abstract void AddModelScripts();
 
-        //Virtual methods
-        /*
-        /// <summary>
-        /// An array containing at least the bone transforms mapped in boneMap.json. Override if your model has more than one SkinnedMeshRenderer, bones in more than one SkinnedMeshRenderer, or any other complex bone layout. 
-        /// </summary>
-        /// <param name="modelReplacement">Use this parameter when returning your model's bone transforms so that it can work on the ragdoll as well</param>
-        /// <returns></returns>
-        public virtual Transform[] GetMappedBones(GameObject modelReplacement)
-        {
-            return GetArmatureSkinnedMeshRenderer(modelReplacement).bones;
-        }
 
+        //Virtual methods
         /// <summary>
-        /// The SkinnedMeshRenderer that is attached to your model's armature. Override if your model has more than one SkinnedMeshRenderer. (such as the base game player model)
-        /// </summary>
-        /// <param name="modelReplacement">Use this parameter when returning your model's SkinnedMeshRenderer so that it can work on the ragdoll as well</param>
-        /// <returns></returns>
-        public virtual SkinnedMeshRenderer GetArmatureSkinnedMeshRenderer(GameObject modelReplacement )
-        {
-            return modelReplacement.GetComponentInChildren<SkinnedMeshRenderer>();
-        }
-        */
-        /// <summary>
-        /// An array containing at least the bone transforms mapped in boneMap.json. Override if your model has more than one SkinnedMeshRenderer, bones in more than one SkinnedMeshRenderer, or any other complex bone layout. 
+        /// An array containing at least the bone transforms mapped in boneMap.json. By base it returns all bones in a model. Override if your model has multiple armatures with duplicate bone names.  
         /// </summary>
         /// <returns></returns>
         public virtual Transform[] GetMappedBones()
         {
-            return replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().bones;
-        }
-
-        /// <summary>
-        /// The SkinnedMeshRenderer that is attached to your model's armature. Override if your model has more than one SkinnedMeshRenderer. (such as the base game player model)
-        /// </summary>
-        /// <returns></returns>
-        public virtual SkinnedMeshRenderer GetArmatureSkinnedMeshRenderer()
-        {
-            return replacementModel.GetComponentInChildren<SkinnedMeshRenderer>();
-        }
-        /// <summary>
-        /// The SkinnedMeshRenderer that is attached to your model's armature. Override if your model has more than one SkinnedMeshRenderer. (such as the base game player model) (Replace this with something good)
-        /// </summary>
-        /// <returns></returns>
-        public virtual SkinnedMeshRenderer GetDeadBodySkinnedMeshRenderer()
-        {
-            return replacementDeadBody.GetComponentInChildren<SkinnedMeshRenderer>();
+            List<Transform> result = new List<Transform>();
+            foreach (SkinnedMeshRenderer renderer in replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                result.AddRange(renderer.bones);
+            }
+            return result.ToArray();
         }
 
         private void CreateAndParentRagdoll(DeadBodyInfo bodyinfo)
         {
-           // alive = false;
             deadBody = bodyinfo.gameObject;
-            replacementDeadBody = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
-
-
-            //SkinnedMeshRenderer replacementRenderer = GetArmatureSkinnedMeshRenderer(replacementDeadBody);
-            //SkinnedMeshRenderer replacementRenderer = replacementDeadBody.GetComponentInChildren<SkinnedMeshRenderer>();
-            SkinnedMeshRenderer replacementRenderer = GetDeadBodySkinnedMeshRenderer();
-
-
             SkinnedMeshRenderer deadBodyRenderer = deadBody.GetComponentInChildren<SkinnedMeshRenderer>();
+            replacementDeadBody = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
             
-            replacementRenderer.enabled = true;
+            //Enable all renderers in replacement ragdoll and disable renderer for original
+            foreach (Renderer renderer in replacementDeadBody.GetComponentsInChildren<Renderer>())
+            {
+                renderer.enabled = true;
+            }
             deadBodyRenderer.enabled = false;
 
+
+            //Get all bones in the replacement model and select the ones whose names are in GetMappedBones
+            List<Transform> replacementDeadBodyBones = new List<Transform>();
+            foreach (SkinnedMeshRenderer renderer in replacementDeadBody.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                replacementDeadBodyBones.AddRange(renderer.bones);
+            }
             Transform[] originalMappedBones = this.GetMappedBones();
             Transform[] replacementMappedBones = new Transform[originalMappedBones.Length];
             for (int i = 0; i < originalMappedBones.Length; i++)
 			{
-                replacementMappedBones[i] = replacementRenderer.bones.Where((Transform bone) => bone.name == originalMappedBones[i].name).First<Transform>();
+                replacementMappedBones[i] = replacementDeadBodyBones.Where((Transform bone) => bone.name == originalMappedBones[i].name).First();
 
             }
 
-           // Transform[] deadMappedbones = GetMappedBones(replacementDeadBody);
+            //Make the replacement ragdoll bonemap and parent it
             ragDollMap = BoneMap.DeserializeFromJson(boneMapJsonStr);
             ragDollMap.MapBones(deadBodyRenderer.bones, replacementMappedBones);
-
-            replacementRenderer.rootBone.parent = deadBodyRenderer.rootBone;
-            replacementRenderer.rootBone.localPosition = Vector3.zero + ragDollMap.PositionOffset();
-
+            ragDollMap.RootBone().parent = controller.thisPlayerModel.rootBone;
+            ragDollMap.RootBone().localPosition = Vector3.zero + Map.PositionOffset();
 
             //blood decals not working
-            if(bloodDecalsEnabled)
+            foreach (var item in bodyinfo.bodyBloodDecals)
             {
-                foreach (var item in bodyinfo.bodyBloodDecals)
+                Transform bloodParentTransform = item.transform.parent;
+
+                Transform mappedTranform = ragDollMap.GetMappedTransform(bloodParentTransform.name);
+                if (mappedTranform)
                 {
-                    Transform bloodParentTransform = item.transform.parent;
-
-                    Transform mappedTranform = ragDollMap.GetMappedTransform(bloodParentTransform.name);
-                    if (mappedTranform)
-                    {
-                        UnityEngine.Object.Instantiate<GameObject>(item, mappedTranform);
-                    }
-
-
+                    UnityEngine.Object.Instantiate<GameObject>(item, mappedTranform);
                 }
+
+
             }
 
         }
 
-        void Awake()
+        public virtual void AfterAwake()
+        {
+
+        }
+        internal void Awake()
         {
             
             controller = base.GetComponent<PlayerControllerB>();
@@ -166,9 +136,9 @@ namespace ModelReplacement
 
 
             //Fix Materials
-            SkinnedMeshRenderer[] renderers = replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>();
+            Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
             Material gameMat = controller.thisPlayerModel.GetComponent<SkinnedMeshRenderer>().material;
-            foreach (SkinnedMeshRenderer renderer in renderers)
+            foreach (Renderer renderer in renderers)
             {
                 List<Material> mats = new List<Material>();
                 foreach (Material material in renderer.materials)
@@ -183,26 +153,18 @@ namespace ModelReplacement
             //Set scripts missing from assetBundle
             AddModelScripts();
 
-            //Instantiate model and parent to player body
+            //Instantiate model
             replacementModel = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
-
-
-            // SkinnedMeshRenderer replacementModelSkinnedMeshRenderer = GetArmatureSkinnedMeshRenderer(replacementModel);
-            SkinnedMeshRenderer replacementModelSkinnedMeshRenderer = GetArmatureSkinnedMeshRenderer();
-
-
-            replacementModelSkinnedMeshRenderer.enabled = false; //prevents model flickering for local player
+            SetRenderers(false); //Initializing with renderers disabled prevents model flickering for local player
             replacementModel.transform.localPosition = new Vector3(0, 0, 0);
             replacementModel.SetActive(true);
 
             //sets y extents to the same size for player body and extents.
-            var replacementExtents = replacementModelSkinnedMeshRenderer.bounds.extents;
             var playerBodyExtents = controller.thisPlayerModel.bounds.extents;
-            float scale = playerBodyExtents.y / replacementExtents.y;
+            float scale = playerBodyExtents.y / GetBounds().extents.y;
             replacementModel.transform.localScale *= scale;
 
-
-            //Load and set boneMap 
+            //Get all .jsons in plugins and select the matching boneMap.json, deserialize bone map
             string pluginsPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             while (true)
             {
@@ -210,30 +172,32 @@ namespace ModelReplacement
                 if(folder == "plugins") { break; }
                 Path.Combine(pluginsPath, "..");
             }
-
             string[] allfiles = Directory.GetFiles(pluginsPath, "*.json", SearchOption.AllDirectories);
             string jsonPath = allfiles.Where(f => Path.GetFileName(f) == boneMapFileName).First();
- 
             boneMapJsonStr = File.ReadAllText(jsonPath);
             Map = BoneMap.DeserializeFromJson(boneMapJsonStr);
 
-
-            // Map.MapBones(controller.thisPlayerModel.bones, GetMappedBones(replacementModel));
+            //Map bones and parent mdodel
             Map.MapBones(controller.thisPlayerModel.bones, GetMappedBones());
+            Map.RootBone().parent = controller.thisPlayerModel.rootBone;
+            Map.RootBone().localPosition = Vector3.zero + Map.PositionOffset();
 
-            replacementModelSkinnedMeshRenderer.rootBone.parent = controller.thisPlayerModel.rootBone;
-            replacementModelSkinnedMeshRenderer.rootBone.localPosition = Vector3.zero + Map.PositionOffset();
-
-
+            //Misc fixes
             var gameObjects = controller.gameObject.GetComponentsInChildren<MeshRenderer>();
             nameTagObj = gameObjects.Where(x => x.gameObject.name == "LevelSticker").First();
             nameTagObj2 = gameObjects.Where(x => x.gameObject.name == "BetaBadge").First();
             Console.WriteLine($"AwakeEnd {controller.playerUsername}");
+
+            AfterAwake();
         }
 
+        public virtual void AfterStart()
+        {
+
+        }
         void Start()
         {
-            Console.WriteLine($"Start {controller.playerUsername}");
+            //MoreCompany cosmetic support
             foreach (var item in controller.gameObject.GetComponentsInChildren<CosmeticApplication>())
             {
                 Transform mappedHead = Map.GetMappedTransform("spine.004");
@@ -247,33 +211,29 @@ namespace ModelReplacement
 
 
             }
+            AfterStart();
         }
 
+        public virtual void AfterUpdate()
+        {
+
+        }
         void Update()
         {
-            // Console.WriteLine($"Awake {controller.playerUsername}");
-
-            // SkinnedMeshRenderer replacementModelSkinnedMeshRenderer = GetArmatureSkinnedMeshRenderer(replacementModel);
-            SkinnedMeshRenderer replacementModelSkinnedMeshRenderer = GetArmatureSkinnedMeshRenderer();
-
-            replacementModelSkinnedMeshRenderer.enabled = true;
-            bool localPlayer = (ulong)StartOfRound.Instance.thisClientPlayerId == controller.playerClientId;// Don't render miku if local player and alive
-            if (localPlayer)
+            //Local/Nonlocal player logic
+            SetRenderers(true);
+            bool localPlayer = (ulong)StartOfRound.Instance.thisClientPlayerId == controller.playerClientId;
+            if (localPlayer) { SetRenderers(false); }// Don't render model replacement if local player
+            else
             {
-                replacementModelSkinnedMeshRenderer.enabled = false;
-
-            }
-            //if (true)
-            if (!localPlayer)
-            {
-                controller.thisPlayerModel.enabled = false;
+                controller.thisPlayerModel.enabled = false; //Don't render original body if non-local player
                 controller.thisPlayerModelLOD1.enabled = false;
                 controller.thisPlayerModelLOD2.enabled = false;
                 nameTagObj.enabled = false;
                 nameTagObj2.enabled = false;
-
             }
 
+            //Update replacement model
             Map.UpdateModelbones();
 
 
@@ -287,7 +247,7 @@ namespace ModelReplacement
                 }
                 catch { }
 
-                if ((deadBody != null) && (replacementDeadBody is null))
+                if ((deadBody) && (replacementDeadBody is null))
                 {
                     CreateAndParentRagdoll(controller.deadBody);
                 }
@@ -298,7 +258,6 @@ namespace ModelReplacement
                         Destroy(replacementDeadBody);
                         replacementDeadBody = null;
                         ragDollMap = null;
-                        return;
                     }
                     else
                     {
@@ -314,6 +273,7 @@ namespace ModelReplacement
             //if(handTransform)
             if (!localPlayer && handTransform)
             {
+                //I don't know which of these is correct, so i'll set all of them
                 if (controller.currentlyGrabbingObject && (controller.currentlyGrabbingObject.parentObject != handTransform))
                 {
                     GameObject HeldItemOffset = new GameObject();
@@ -337,6 +297,7 @@ namespace ModelReplacement
                     heldItemTransform.localPosition += Map.ItemHolderPositionOffset();
                 }
             }
+            AfterUpdate();
         }
 
         void OnDestroy()
@@ -351,9 +312,32 @@ namespace ModelReplacement
             Destroy(replacementDeadBody);
         }
 
+        private void SetRenderers(bool enabled)
+        {
+            foreach (Renderer renderer in replacementModel.GetComponentsInChildren<Renderer>())
+            {
+                renderer.enabled = enabled;
+            }
+        }
 
-  
-        
+        private Bounds GetBounds()
+        {
+            Bounds bounds = new Bounds();
+            var allBounds = replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>().Select(r => r.bounds);
+
+            float maxX = allBounds.OrderByDescending(x => x.max.x).First().max.x;
+            float maxY = allBounds.OrderByDescending(x => x.max.y).First().max.y;
+            float maxZ = allBounds.OrderByDescending(x => x.max.z).First().max.z;
+
+            float minX = allBounds.OrderBy(x => x.min.x).First().min.x;
+            float minY = allBounds.OrderBy(x => x.min.y).First().min.y;
+            float minZ = allBounds.OrderBy(x => x.min.z).First().min.z;
+
+            bounds.SetMinMax(new Vector3(minX, minY, minZ), new Vector3(maxZ, maxY, maxZ));
+            return bounds;
+        }
+
+
 
 
 

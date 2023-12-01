@@ -26,6 +26,10 @@ namespace ModelReplacement
         private string itemHolderBone = "";
         private Transform itemHolderTransform = null;
 
+        [JsonProperty]
+        private string rootBone = "";
+        private Transform rootBoneTransform = null;
+
 
 
         public static BoneMap DeserializeFromJson(string jsonStr)
@@ -94,8 +98,8 @@ namespace ModelReplacement
                 mappedBones.Add(new MappedBone(vars, playerTransform, modelTransform));
 
                 if(modelBone == itemHolderBone) { itemHolderTransform = modelTransform; }
+                if (modelBone == rootBone) { rootBoneTransform = modelTransform; }
             }
-           // itemHolderTransform = GetMappedTransform(itemHolderBone);
         }
 
         public void UpdateModelbones()
@@ -117,6 +121,7 @@ namespace ModelReplacement
         public Vector3 PositionOffset() => positionOffset;
         public Vector3 ItemHolderPositionOffset() => itemHolderPositionOffset;
         public Transform ItemHolder() => itemHolderTransform;
+        public Transform RootBone() => rootBoneTransform;
 
         public Transform GetMappedTransform(string playerTransformName)
         {

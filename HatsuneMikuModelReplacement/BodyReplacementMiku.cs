@@ -23,23 +23,6 @@ namespace HatsuneMikuModelReplacement
             return Assets.MainAssetBundle.LoadAsset<GameObject>(model_name);
         }
 
-        public override Transform[] GetMappedBones()
-        {
-            return replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().bones;
-        }
-
-
-        public override SkinnedMeshRenderer GetArmatureSkinnedMeshRenderer()
-        {
-            return replacementModel.GetComponentInChildren<SkinnedMeshRenderer>();
-        }
-
-        public override SkinnedMeshRenderer GetDeadBodySkinnedMeshRenderer()
-        {
-            return replacementDeadBody.GetComponentInChildren<SkinnedMeshRenderer>();
-        }
-
-
         public override void AddModelScripts()
         {
             //Set dynamic bones

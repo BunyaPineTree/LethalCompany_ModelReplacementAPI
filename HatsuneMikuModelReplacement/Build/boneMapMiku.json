@@ -2,6 +2,8 @@
 
   "itemHolderBone": "Hand.R", //Bone to hold items with
 
+  "rootBone": "Hips", //Parent bone of all other bones
+
   "_itemHolderPositionOffset": [ 0, 0.1, 0 ], //x y z offset in itemHolderBone local space
 
   "_positionOffSet": [ 0, 0.24, 0 ], //x y z offset in player model "spine" bone local space

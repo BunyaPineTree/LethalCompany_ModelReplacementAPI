@@ -29,8 +29,7 @@ namespace HatsuneMikuModelReplacement
         {
             // Plugin startup logic
 
-            ModelReplacementAPI.RegisterSuitModelReplacement("Default",typeof(BodyReplacementMiku));
-            //ModelReplacementAPI.RegisterSuitModelReplacement("Green Suit", typeof(BodyReplacementMikuEvil));
+            ModelReplacementAPI.RegisterSuitModelReplacement("Green Suit", typeof(BodyReplacementMiku));
 
             Assets.PopulateAssets();
 
@@ -50,7 +49,7 @@ namespace HatsuneMikuModelReplacement
             public static void UpdatePatch(ref PlayerControllerB __instance)
             {
                 if (__instance.playerSteamId == 0) { return; }
-                ModelReplacementAPI.SetPlayerModelReplacement(__instance, typeof(BodyReplacementMiku));
+                //ModelReplacementAPI.SetPlayerModelReplacement(__instance, typeof(BodyReplacementMinahoshi));
 
             }
 
@@ -59,18 +58,17 @@ namespace HatsuneMikuModelReplacement
 
 
     }
-
     public static class Assets
     {
+        public static string mainAssetBundleName = "mbundle";
         public static AssetBundle MainAssetBundle = null;
 
-
+        private static string GetAssemblyName() => Assembly.GetExecutingAssembly().FullName.Split(',')[0];
         public static void PopulateAssets()
         {
             if (MainAssetBundle == null)
             {
-                //projectAssemblyName.bundleName
-                using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("HatsuneMikuModelReplacement.mbundle"))
+                using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(GetAssemblyName() + "." + mainAssetBundleName))
                 {
                     MainAssetBundle = AssetBundle.LoadFromStream(assetStream);
                 }
