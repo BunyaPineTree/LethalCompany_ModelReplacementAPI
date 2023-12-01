@@ -28,13 +28,13 @@ Example workflow
 -
 See the attached Hatsune Miku model replacement for a more concrete example. It is assumed that the user already has an assetBundle with one or more rigged models.
 
-* Using a modeling program like Blender, go through each bone in your model and enter its name after the corresponding bone in your boneMap.json.
+* Using a modeling program like Blender, for each model go through each bone in your model and enter its name after the corresponding bone in that model's boneMap.json. 
 
 * For each model replacement create some `ExampleBodyReplacement` class deriving from `BodyReplacementBase`
 
-* In those classes define the abstract property `boneMapFileName` which is name of your bone map without path, and define the abstract methods `LoadAssetsAndReturnModel()` and `AddModelScripts()`. If your model has more than one SkinnedMeshRenderer or a complex bone layout override the virtual methods `GetMappedBones(GameObject modelReplacement)` and `GetArmatureSkinnedMeshRenderer(GameObject modelReplacement)`, however the level of support for models that have more than one SkinnedMeshRenderer is currently unknown.
+* In those classes define the abstract property `boneMapFileName` which is name of your bone map without path, and define the abstract methods `LoadAssetsAndReturnModel()` and `AddModelScripts()`. If your model has more than one armature with duplicate bone names, override `GetMappedBones(GameObject modelReplacement)` to only include bones in the armature that drives your player model. Note that even if you only have a single armature, this mod does not support armatures that have duplicate bone names.
 
-* Besides those methods and property, everything else is model agnostic and handled in `BodyReplacementBase`. Depending on how your mod functions you can now call the methods `ModelReplacementAPI.SetPlayerModelReplacement(PlayerControllerB player, Type type)` or `ModelReplacementAPI.RemovePlayerModelReplacement(PlayerControllerB player)` as necessary. Note that the type property is typeof(ExampleBodyReplacement)`.
+* Besides those methods and property, everything else is model agnostic and handled in `BodyReplacementBase`. Depending on how your mod functions you can now call the methods `ModelReplacementAPI.SetPlayerModelReplacement(PlayerControllerB player, Type type)` or `ModelReplacementAPI.RemovePlayerModelReplacement(PlayerControllerB player)` as necessary. Note that the type property is `typeof(ExampleBodyReplacement)`.
 
 * If you wish for a certain suit to have a model replacement (such as "Default") call `ModelReplacementAPI.RegisterSuitModelReplacement("{Suitname}", typeof(ExampleBodyReplacement))`
 
