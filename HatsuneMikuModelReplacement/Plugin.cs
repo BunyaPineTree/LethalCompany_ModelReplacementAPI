@@ -20,7 +20,7 @@ namespace HatsuneMikuModelReplacement
 
 
 
-    [BepInPlugin("meow.MikuModelReplacement", "Miku Model", "0.1")]
+    [BepInPlugin("meow.MikuModelReplacement", "Miku Model", "1.0")]
     [BepInDependency("meow.ModelReplacementAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class Plugin : BaseUnityPlugin
     {
@@ -50,7 +50,7 @@ namespace HatsuneMikuModelReplacement
             public static void UpdatePatch(ref PlayerControllerB __instance)
             {
                 if (__instance.playerSteamId == 0) { return; }
-               // ModelReplacementAPI.SetPlayerModelReplacement(__instance, typeof(BodyReplacementMiku));
+                ModelReplacementAPI.SetPlayerModelReplacement(__instance, typeof(BodyReplacementMiku));
 
             }
 

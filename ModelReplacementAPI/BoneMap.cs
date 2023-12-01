@@ -92,8 +92,10 @@ namespace ModelReplacement
                 Transform modelTransform = modelBones.Where(x => x.name == modelBone).First();
 
                 mappedBones.Add(new MappedBone(vars, playerTransform, modelTransform));
+
+                if(modelBone == itemHolderBone) { itemHolderTransform = modelTransform; }
             }
-            itemHolderTransform = GetMappedTransform(itemHolderBone);
+           // itemHolderTransform = GetMappedTransform(itemHolderBone);
         }
 
         public void UpdateModelbones()
