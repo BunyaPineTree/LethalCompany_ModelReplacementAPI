@@ -207,6 +207,7 @@ namespace ModelReplacement
                 catch
                 {
                     ModelReplacementAPI.Instance.Logger.LogError($"Could not Update bones for {playerTransform.name} to {modelTransform.name} ");
+                    return true;
                 }
                 return false;
                 

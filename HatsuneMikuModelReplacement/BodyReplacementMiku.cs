@@ -34,12 +34,12 @@ namespace HatsuneMikuModelReplacement
                 DynamicBone dynBone = bone.gameObject.AddComponent<DynamicBone>();
                 dynBone.m_Root = bone;
                 dynBone.m_UpdateRate = 60;
-                dynBone.m_Damping = 0.14f;
-                dynBone.m_Elasticity = 0.05f;
-                dynBone.m_Stiffness = 0.7f;
-                dynBone.m_Inert = 0.28f;
-                dynBone.m_Radius = 0.01f;
-                dynBone.m_Gravity = new Vector3(0, -0.01f, 0);
+                dynBone.m_Damping = 0.437f;
+                dynBone.m_Elasticity = 0.346f;
+                dynBone.m_Stiffness = 0.219f;
+                dynBone.m_Inert = 0.9f;
+                dynBone.m_Radius = 0.008f;
+                dynBone.m_Gravity = new Vector3(0, 0, 0);
                 skirtDynBones.Add(dynBone);
             });
 
@@ -47,22 +47,22 @@ namespace HatsuneMikuModelReplacement
             var legBoneL = replacementModel.GetComponentsInChildren<Transform>().Where(x => x.name.Contains("Upper Leg.L")).First();
             var legBoneR = replacementModel.GetComponentsInChildren<Transform>().Where(x => x.name.Contains("Upper Leg.R")).First();
             var colliderL = legBoneL.gameObject.AddComponent<DynamicBoneCollider>();
-            colliderL.m_Center = new Vector3(-0.01f, 0.15f, -0.01f);
+            colliderL.m_Center = new Vector3(-0.01f, 0.17f, -0.01f);
             colliderL.m_Radius = 0.085f;
-            colliderL.m_Height = 0.5f;
+            colliderL.m_Height = 0.45f;
             colliderL.m_Direction = DynamicBoneCollider.Direction.Y;
             colliderL.m_Bound = DynamicBoneCollider.Bound.Outside;
 
             var colliderR = legBoneR.gameObject.AddComponent<DynamicBoneCollider>();
-            colliderR.m_Center = new Vector3(0.01f, 0.15f, -0.01f);
+            colliderR.m_Center = new Vector3(0.01f, 0.17f, -0.01f);
             colliderR.m_Radius = 0.085f;
-            colliderR.m_Height = 0.5f;
+            colliderR.m_Height = 0.45f;
             colliderR.m_Direction = DynamicBoneCollider.Direction.Y;
             colliderR.m_Bound = DynamicBoneCollider.Bound.Outside;
 
             var colliderM = hipBone.gameObject.AddComponent<DynamicBoneCollider>();
-            colliderM.m_Center = new Vector3(0f, -0.08f, -0.03f);
-            colliderM.m_Radius = 0.13f;
+            colliderM.m_Center = new Vector3(0f, -0.08f, -0.015f);
+            colliderM.m_Radius = 0.1f;
             colliderM.m_Height = 0.3f;
             colliderM.m_Direction = DynamicBoneCollider.Direction.X;
             colliderM.m_Bound = DynamicBoneCollider.Bound.Outside;

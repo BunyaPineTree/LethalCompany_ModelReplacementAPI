@@ -170,7 +170,7 @@ namespace ModelReplacement
             {
                 string folder = new DirectoryInfo(pluginsPath).Name;
                 if(folder == "plugins") { break; }
-                Path.Combine(pluginsPath, "..");
+                pluginsPath = Path.Combine(pluginsPath, "..");
             }
             string[] allfiles = Directory.GetFiles(pluginsPath, "*.json", SearchOption.AllDirectories);
             string jsonPath = allfiles.Where(f => Path.GetFileName(f) == boneMapFileName).First();

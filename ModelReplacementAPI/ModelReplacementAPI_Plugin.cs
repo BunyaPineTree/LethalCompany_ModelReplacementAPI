@@ -14,6 +14,7 @@ using GameNetcodeStuff;
 using BepInEx.Logging;
 using MoreCompany;
 using Unity.Netcode;
+using System.Numerics;
 //using System.Numerics;
 
 namespace ModelReplacement
@@ -138,12 +139,30 @@ namespace ModelReplacement
         public class PlayerControllerBPatch
         {
 
-            [HarmonyPatch("Start")]
+            [HarmonyPatch("Update")]
             [HarmonyPostfix]
-            public static void StartPatch(ref PlayerControllerB __instance)
+            public static void UpdatePatch(ref PlayerControllerB __instance)
             {
-                UnlockableSuitPatch.SwitchSuitModelReplacementPatch(__instance, __instance.currentSuitID, false);
-                Console.WriteLine("Forced awake suit");
+                try
+                {
+                    //return;
+                    if (__instance.playerSteamId == 0) { return; }
+                    int suitID = __instance.currentSuitID;
+                    //Console.WriteLine(string.Format("player change suit on Update {0} suitID {1} ({2})", __instance.playerUsername, suitID, StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName));
+
+                    string suitName = StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName;
+
+                    if (RegisteredModelReplacements.ContainsKey(suitName))
+                    {
+                        Type type = RegisteredModelReplacements[suitName];
+                        SetPlayerModelReplacement(__instance, type);
+                    }
+                    else
+                    {
+                        RemovePlayerModelReplacement(__instance);
+                    }
+                }catch (Exception e) { }
+               
 
             }
 
