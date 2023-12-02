@@ -97,7 +97,7 @@ namespace ModelReplacement
             //Make the replacement ragdoll bonemap and parent it
             ragDollMap = BoneMap.DeserializeFromJson(boneMapJsonStr);
             ragDollMap.MapBones(deadBodyRenderer.bones, replacementMappedBones);
-            ragDollMap.RootBone().parent = controller.thisPlayerModel.rootBone;
+            ragDollMap.RootBone().parent = deadBodyRenderer.rootBone;
             ragDollMap.RootBone().localPosition = Vector3.zero + Map.PositionOffset();
 
             //blood decals not working

@@ -113,7 +113,7 @@ namespace ModelReplacement
         {
             [HarmonyPatch("SwitchSuitForPlayer")]
             [HarmonyPostfix]
-            private static void SwitchSuitModelReplacementPatch(PlayerControllerB player, int suitID, bool playAudio = true)
+            public static void SwitchSuitModelReplacementPatch(PlayerControllerB player, int suitID, bool playAudio = true)
             {
                 if (player.playerSteamId == 0) { return; }
                 Console.WriteLine(string.Format("player change suit {0} suitID {1} ({2})", player.playerUsername, suitID, StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName));
@@ -134,7 +134,22 @@ namespace ModelReplacement
         }
 
 
+        [HarmonyPatch(typeof(PlayerControllerB))]
+        public class PlayerControllerBPatch
+        {
 
+            [HarmonyPatch("Start")]
+            [HarmonyPostfix]
+            public static void StartPatch(ref PlayerControllerB __instance)
+            {
+                UnlockableSuitPatch.SwitchSuitModelReplacementPatch(__instance, __instance.currentSuitID, false);
+                Console.WriteLine("Forced awake suit");
+
+            }
+
+
+
+        }
 
 
     }
