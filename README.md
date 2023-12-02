@@ -48,11 +48,10 @@ Other features
 
 Known issues
 -
-* Some unknown error with mapping the bones between a dead player ragdoll and the ragdoll replacement is causing the bones to rotate faster than the body is moved, thus ragdoll is currently disabled
+* Ragdoll behaves strangely at times
 
 * Blood decals are not currently visible on the ragdoll replacement.
 
-* An unknown mod conflict prevents model replacements from loading immediately on entering a lobby.
 
 Unknown issues
 -
