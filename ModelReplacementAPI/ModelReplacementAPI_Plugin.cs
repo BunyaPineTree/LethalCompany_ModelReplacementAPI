@@ -22,7 +22,7 @@ namespace ModelReplacement
 
 
 
-    [BepInPlugin("meow.ModelReplacementAPI", "ModelReplacementAPI", "0.9")]
+    [BepInPlugin("meow.ModelReplacementAPI", "ModelReplacementAPI", "1.0")]
     [BepInDependency("me.swipez.melonloader.morecompany", BepInDependency.DependencyFlags.SoftDependency)]
     public class ModelReplacementAPI : BaseUnityPlugin
     {

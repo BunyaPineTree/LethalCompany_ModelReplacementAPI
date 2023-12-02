@@ -76,9 +76,9 @@ namespace HatsuneMikuModelReplacement
                 DynamicBone dynBone = bone.gameObject.AddComponent<DynamicBone>();
                 dynBone.m_Root = bone;
                 dynBone.m_UpdateRate = 60;
-                dynBone.m_Damping = 0.254f;
-                dynBone.m_Elasticity = 0.08f;
-                dynBone.m_Stiffness = 0.5f;
+                dynBone.m_Damping = 0.253f;
+                dynBone.m_Elasticity = 0.298f;
+                dynBone.m_Stiffness = 0.105f;
                 dynBone.m_Inert = 0.274f;
                 dynBone.m_Radius = 0.05f;
                 dynBone.m_Gravity = new Vector3(0, -0.01f, 0);

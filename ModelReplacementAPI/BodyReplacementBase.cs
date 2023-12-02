@@ -129,7 +129,7 @@ namespace ModelReplacement
             //Load model
             replacementModel = LoadAssetsAndReturnModel();
 
-            if(replacementModel is null)
+            if(replacementModel == null)
             {
                 Console.WriteLine("LoadAssetsAndReturnModel returned null");
             }
@@ -220,6 +220,13 @@ namespace ModelReplacement
         }
         void Update()
         {
+            if (Map.CompletelyDestroyed())
+            {
+                Destroy(this);
+                return;
+            }
+
+
             //Local/Nonlocal player logic
             SetRenderers(true);
             bool localPlayer = (ulong)StartOfRound.Instance.thisClientPlayerId == controller.playerClientId;
@@ -247,13 +254,13 @@ namespace ModelReplacement
                 }
                 catch { }
 
-                if ((deadBody) && (replacementDeadBody is null))
+                if ((deadBody) && (replacementDeadBody == null))
                 {
                     CreateAndParentRagdoll(controller.deadBody);
                 }
                 if (replacementDeadBody)
                 {
-                    if (deadBody is null)
+                    if (deadBody == null)
                     {
                         Destroy(replacementDeadBody);
                         replacementDeadBody = null;

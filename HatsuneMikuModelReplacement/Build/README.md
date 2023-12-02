@@ -1,8 +1,8 @@
-# Miku Model Replacement v1.0
+# Miku Model Replacement v1.0.0
 ### Replaces default suit with Hatsune Miku. This is the example mod for ModelReplacementAPI
 
 ## Instructions
-Place in plugins folder next to boneMapMiku.json. ModelReplacementAPI.dll is also required
+Place in plugins folder next to boneMapMiku.json and ModelReplacementAPI.dll
 
 For more info see https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI
 
@@ -11,5 +11,5 @@ Cloth physics can be very laggy. Use with caution in large lobbies.
 
 
 ## Changelog
-	- v1.0
+	- v1.0.0
 		- Release

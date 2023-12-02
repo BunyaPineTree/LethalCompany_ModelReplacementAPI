@@ -1,11 +1,11 @@
-# ModelReplacementAPI v0.9
+# ModelReplacementAPI v1.1.0
 ### Simplifies character model replacement for modders
 
 ## Instructions
-Place in plugins folder with any model replacements
-
 For more info see https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI
 
 ## Changelog
-	- v1.0
+	- v1.1.0
+		- Fixed some errors with bone mapping and biblically accurate angels. 
+	- v1.0.0
 		- Release

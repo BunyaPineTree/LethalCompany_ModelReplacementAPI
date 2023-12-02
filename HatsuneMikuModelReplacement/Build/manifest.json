@@ -1,11 +1,11 @@
 {
-    "name": "Miku Model Replacement",
-    "version_number": "1.0",
+    "name": "MikuModelReplacement",
+    "version_number": "1.0.0",
     "website_url": "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI",
     "description": "Replaces the default suit with Miku, example project for ModelReplacementAPI",
     "dependencies": [
         "BepInEx-BepInExPack-5.4.2100",
-		"ModelReplacementAPI"
+		"BunyaPineTree-ModelReplacementAPI-1.0.0"
 		
     ]
 }

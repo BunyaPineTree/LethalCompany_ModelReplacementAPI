@@ -97,9 +97,10 @@ namespace ModelReplacement
 
                 mappedBones.Add(new MappedBone(vars, playerTransform, modelTransform));
 
-                if(modelBone == itemHolderBone) { itemHolderTransform = modelTransform; }
-                if (modelBone == rootBone) { rootBoneTransform = modelTransform; }
             }
+
+            itemHolderTransform = modelBones.Where(x => x.name == itemHolderBone).First();
+            rootBoneTransform = modelBones.Where(x => x.name == rootBone).First();
         }
 
         public void UpdateModelbones()
@@ -118,6 +119,17 @@ namespace ModelReplacement
             });
             destroyBones.ForEach(x => { mappedBones.Remove(x); });
         }
+
+        public bool CompletelyDestroyed()
+        {
+            if ((mappedBones.Count() == 0) || rootBoneTransform == null)
+            {
+                Console.WriteLine("bone Map destroyed");
+                return true;
+            }
+            return false;
+        }
+
         public Vector3 PositionOffset() => positionOffset;
         public Vector3 ItemHolderPositionOffset() => itemHolderPositionOffset;
         public Transform ItemHolder() => itemHolderTransform;
@@ -193,7 +205,7 @@ namespace ModelReplacement
 
             public bool Update()
             {
-                if((modelTransform is null) || (playerTransform is null))
+                if((modelTransform == null) || (playerTransform == null))
                 {
                     ModelReplacementAPI.Instance.Logger.LogError($"Could not Update bone, model or player transform is null. Destroying MappedBone ({modelBoneString})");
                     

@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 1675108427
+CRC: 2751682735
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 03491e95bf843c1a40138a0a65d76141
+    Hash: 1bc40f48ffc62afa86eb7faa3faa20ed
   TypeTreeHash:
     serializedVersion: 2
     Hash: 576822be7a808894a71cfe2d58127c45
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 03491e95bf843c1a40138a0a65d76141
+    Hash: 1bc40f48ffc62afa86eb7faa3faa20ed
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -41,7 +41,6 @@ Assets:
 - Assets/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_Custom_PowerCap_Outline_Opaque.shader
 - Assets/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_Tess_TransCutout.shader
 - Assets/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_Mobile_TransparentOverlay.shader
-- Assets/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_TriShade_Transparent_MaskOut_Blend.shader
 - Assets/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_Transparent.shader
 - Assets/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_PowerCap_TransCutout.shader
 - Assets/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_Custom_LameOnly_Transparent.shader
@@ -84,7 +83,7 @@ Assets:
 - Assets/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_TriShade_Opaque.shader
 - Assets/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_TriShade_Transparent3Pass.shader
 - Assets/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_FakeFur_Transparent.shader
-- Assets/M/HatsuneMikuNT 1.prefab
+- Assets/MikuModel/HatsuneMikuNT 1.prefab
 - Assets/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_Mobile_Opaque.shader
 - Assets/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_Tess_Transparent3Pass.shader
 - Assets/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_Opaque.shader
