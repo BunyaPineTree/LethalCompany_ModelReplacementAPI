@@ -19,6 +19,10 @@ For more info on the ModelReplacementAPI, see https://github.com/BunyaPineTree/L
 - For some reason unity demands that sliders are moved with "a" and "d" keyboard characters even after you click off the slider. This is partially fixed after your release your mouse, but it sometimes fails.
 - I highly recommend that you save your model after each bone is set to the correct rotation, it will also remove focus from the sliders, which prevents your rotation from being ruined when you press "a" and "d".
 - I highly recommend that you set all of your model bone names in your boneMap.json before using this tool. Though it supports changing bone names with a dropdown menu, it currently does not reset the rotation of the bone that you changed off of, which can result in unexpected behavior. 
+- This tool supports symmetric bone names, and will rotate the symmetric bone mirrored to your original bone. This requires your bone to contain a .L, _L, .R, _R in capitalized or undercase.
+
+## Known Bugs
+- An unexpected bug of the symmetric bone support is that only the left side bone works, I have no clue why. If you are trying to slide a slider but it won't move, look for the bone on the other side.  
 
 ## Changelog
 	- v0.9.0
