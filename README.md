@@ -38,7 +38,7 @@ See the attached Hatsune Miku model replacement for a more concrete example. It 
 
 * If you wish for a certain suit to have a model replacement (such as "Default") call `ModelReplacementAPI.RegisterSuitModelReplacement("{Suitname}", typeof(ExampleBodyReplacement))`
 
-* At this point you should be able to enter the game and see your model replacement at work, however you will not be able to see it locally. I recommend UnityExplorer for this step. It is likely that there are some constant rotation offsets between your model bones and the player model bones. In boneMap.json you can set a quaternion rotation offset for each bone affected to fix this, which will likely take several attempts. As of this moment I have not created a tool for making this simple, but may in the future. 
+* At this point you should be able to enter the game and see your model replacement at work, but many of the bones likely have incorrect rotations. You can use [ModelReplacementTool](ModelReplacementTool/Build) to manually set rotation offsets for each bone.
 
 Other features
 -
@@ -51,6 +51,8 @@ Known issues
 * Ragdoll behaves strangely at times
 
 * Blood decals are not currently visible on the ragdoll replacement.
+
+* Dying at the company may make the dead individual respawn without a model, but it may also return at a later point in time. 
 
 
 Unknown issues
