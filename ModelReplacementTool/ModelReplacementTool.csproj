@@ -2,15 +2,24 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <AssemblyName>ModelReplacementAPI</AssemblyName>
+        <AssemblyName>ModelReplacementTool</AssemblyName>
         <Description>A template for Lethal Company</Description>
         <Version>1.0.0</Version>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
-
+  <ItemGroup>
+    <None Remove="tbundle" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="tbundle" />
+  </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ModelReplacementAPI\ModelReplacementAPI.csproj" />
     </ItemGroup>
 
   <ItemGroup>
@@ -50,9 +59,6 @@
       <Reference Include="MonoMod.Utils">
         <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\MonoMod.Utils.dll</HintPath>
       </Reference>
-      <Reference Include="MoreCompany">
-        <HintPath>MoreCompany.dll</HintPath>
-      </Reference>
       <Reference Include="Newtonsoft.Json">
         <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Newtonsoft.Json.dll</HintPath>
       </Reference>
@@ -64,6 +70,9 @@
       </Reference>
       <Reference Include="Unity.Netcode.Runtime">
         <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Netcode.Runtime.dll</HintPath>
+      </Reference>
+      <Reference Include="Unity.TextMeshPro">
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.TextMeshPro.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine">
         <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.dll</HintPath>
@@ -103,6 +112,9 @@
       </Reference>
       <Reference Include="UnityEngine.UIElementsNativeModule">
         <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.UIElementsNativeModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.UIModule">
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.UIModule.dll</HintPath>
       </Reference>
     </ItemGroup>
 

@@ -12,33 +12,82 @@ namespace ModelReplacement
     {
         [JsonProperty]
         private List<List<string>> boneMap = new List<List<string>>();
+        [JsonIgnore]
         private List<MappedBone> mappedBones = new List<MappedBone>();
 
         [JsonProperty]
         private List<float> _positionOffSet = new List<float>();
+        [JsonIgnore]
         private Vector3 positionOffset = Vector3.zero;
 
         [JsonProperty]
         private List<float> _itemHolderPositionOffset = new List<float>();
+        [JsonIgnore]
         private Vector3 itemHolderPositionOffset = Vector3.zero;
 
         [JsonProperty]
         private string itemHolderBone = "";
+        [JsonIgnore]
         private Transform itemHolderTransform = null;
 
         [JsonProperty]
         private string rootBone = "";
+        [JsonIgnore]
         private Transform rootBoneTransform = null;
-
-
-
+        [JsonIgnore]
+        public Transform[] playerBoneList = null;
+        [JsonIgnore]
+        public Transform[] modelBoneList = null;
+        [JsonIgnore]
+        public BodyReplacementBase replacementBase;
         public static BoneMap DeserializeFromJson(string jsonStr)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<BoneMap>(jsonStr);
         }
 
+        public string SerializeToJsonString()
+        {
+            _positionOffSet = new List<float> { positionOffset.x, positionOffset.y, positionOffset.z };
+            _itemHolderPositionOffset = new List<float> { itemHolderPositionOffset.x, itemHolderPositionOffset.y, itemHolderPositionOffset.z };
+
+            boneMap.Clear();
+            foreach (var item in mappedBones)
+            {
+                List<string> listStr = new List<string>();
+                listStr.Add(item.playerBoneString);
+                listStr.Add(item.modelBoneString);
+                if(item.rotationOffset != Quaternion.identity)
+                {
+                    listStr.Add(item.rotationOffset.x.ToString());
+                    listStr.Add(item.rotationOffset.y.ToString());
+                    listStr.Add(item.rotationOffset.z.ToString());
+                    listStr.Add(item.rotationOffset.w.ToString());
+                    if(item.additionalVars.Count > 0)
+                    {
+                        foreach (var item1 in item.additionalVars)
+                        {
+                            listStr.Add(item1);
+                        }
+                    }
+                }
+
+                boneMap.Add(listStr);
+            }
+
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+        
+        public void SetBodyReplacement(BodyReplacementBase body)
+        {
+            replacementBase = body;
+        }
+
         public void MapBones(Transform[] playerBones, Transform[] modelBones)
         {
+            playerBoneList = playerBones;
+            modelBoneList = modelBones;
+
             //Set ragdoll bone
             if(!boneMap.Where(x=> x[0] == "PlayerRagdoll(Clone)").Any())
             {
@@ -130,6 +179,7 @@ namespace ModelReplacement
             return false;
         }
 
+
         public Vector3 PositionOffset() => positionOffset;
         public Vector3 ItemHolderPositionOffset() => itemHolderPositionOffset;
         public Transform ItemHolder() => itemHolderTransform;
@@ -145,9 +195,74 @@ namespace ModelReplacement
             }
             ModelReplacementAPI.Instance.Logger.LogWarning($"No mapped bone with player bone name {playerTransformName}");
             return null;
+        }
 
+        public MappedBone GetMappedBoneWithPlayerName(string playerTransformName)
+        {
+            var a = mappedBones.Where(x => x.playerBoneString == playerTransformName);
 
+            if (a.Any())
+            {
+                return a.First();
+            }
+            ModelReplacementAPI.Instance.Logger.LogWarning($"No mapped bone with player bone name {playerTransformName}");
+            return null;
+        }
 
+        public List<MappedBone> GetMappedBones() => mappedBones;
+
+        public void UpdateMappedBone(string playerBoneString, string modelBoneString, Quaternion rotationOffset)
+        {
+            var oldMapped = mappedBones.Where(x => x.playerBoneString == playerBoneString);
+            if (oldMapped.Any())
+            {
+                var a = GetMappedBoneWithPlayerName(playerBoneString);
+                a.modelBoneString = modelBoneString;
+                a.rotationOffset = rotationOffset;
+
+                var b = modelBoneList.Where(x => x.name == modelBoneString);
+                if(b.Any()) { a.modelTransform = b.First(); }
+
+            }
+            else
+            {
+                var a = playerBoneList.Where(x => x.name == playerBoneString);
+                var b = modelBoneList.Where(x => x.name == modelBoneString);
+
+                Transform plTransform = null;
+                Transform mdTransform = null;
+
+                if(a.Any()) { plTransform = a.First(); }
+                if (b.Any()) { mdTransform = b.First(); }
+
+                MappedBone newMB = new MappedBone(playerBoneString, modelBoneString, rotationOffset, plTransform, mdTransform);
+                mappedBones.Add(newMB);
+
+            }
+
+        }
+
+        public void UpdateRootBoneAndOffset(Transform newRootBone, Vector3 offset)
+        {
+            if(newRootBone != rootBoneTransform)
+            {
+                rootBoneTransform.parent = null;
+
+                rootBoneTransform = newRootBone;
+                rootBone = newRootBone.name;
+            }
+            
+            positionOffset = offset;
+            replacementBase.ReparentModel();
+            
+        }
+
+        public void UpdateItemHolderBoneAndOffset(Transform newRootBone, Vector3 offset)
+        {
+            itemHolderTransform = newRootBone;
+            itemHolderBone = newRootBone.name;
+            itemHolderPositionOffset = offset;
+            replacementBase.flagReparentObject = true;
         }
 
         public class MappedBone
@@ -160,6 +275,16 @@ namespace ModelReplacement
             public Transform modelTransform;
 
             public List<string> additionalVars = new List<string>();
+
+            public MappedBone(string playerBoneString, string modelBoneString, Quaternion rotationOffset, Transform playerTransform, Transform modelTransform)
+            {
+                this.playerBoneString = playerBoneString;
+                this.modelBoneString = modelBoneString;
+                this.rotationOffset = rotationOffset;
+                this.playerTransform = playerTransform;
+                this.modelTransform = modelTransform;
+            }
+
             public MappedBone(List<string> vars, Transform player, Transform model)
             {
                 playerTransform = player;

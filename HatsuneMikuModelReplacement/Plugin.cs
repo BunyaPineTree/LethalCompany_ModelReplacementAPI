@@ -21,7 +21,7 @@ namespace HatsuneMikuModelReplacement
 
 
 
-    [BepInPlugin("meow.MikuModelReplacement", "Miku Model", "1.0")]
+    [BepInPlugin("meow.MikuModelReplacement", "Miku Model", "1.1.0")]
     [BepInDependency("meow.ModelReplacementAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class Plugin : BaseUnityPlugin
     {
@@ -30,10 +30,11 @@ namespace HatsuneMikuModelReplacement
         {
             // Plugin startup logic
 
-            ModelReplacementAPI.RegisterSuitModelReplacement("Green suit", typeof(BodyReplacementMiku));
+            //ModelReplacementAPI.RegisterSuitModelReplacement("Green suit", typeof(BodyReplacementMiku));
             ModelReplacementAPI.RegisterSuitModelReplacement("Default", typeof(BodyReplacementMiku));
             ModelReplacementAPI.RegisterSuitModelReplacement("Orange suit", typeof(BodyReplacementMiku));
-            ModelReplacementAPI.RegisterSuitModelReplacement("Pajama suit", typeof(BodyReplacementMiku));
+            //ModelReplacementAPI.RegisterSuitModelReplacement("Pajama suit", typeof(BodyReplacementMiku));
+            //ModelReplacementAPI.RegisterSuitModelReplacement("Hazard suit", typeof(BodyReplacementMiku));
 
             Assets.PopulateAssets();
 

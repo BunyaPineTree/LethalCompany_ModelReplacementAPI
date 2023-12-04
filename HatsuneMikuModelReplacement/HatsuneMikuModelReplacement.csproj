@@ -11,6 +11,8 @@
   <ItemGroup>
     <EmbeddedResource Include="mbundle" />
   </ItemGroup>
+  
+  
   <ItemGroup>
     <ProjectReference Include="..\ModelReplacementAPI\ModelReplacementAPI.csproj" />
   </ItemGroup>

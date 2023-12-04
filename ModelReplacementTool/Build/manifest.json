@@ -1,8 +1,8 @@
 {
-    "name": "MikuModelReplacement",
-    "version_number": "1.1.0",
+    "name": "ModelReplacementTool",
+    "version_number": "0.9.0",
     "website_url": "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI",
-    "description": "Replaces the default suit with Miku, example project for ModelReplacementAPI",
+    "description": "A tool for setting bones and bone offsets on a model replacement",
     "dependencies": [
         "BepInEx-BepInExPack-5.4.2100",
 		"BunyaPineTree-ModelReplacementAPI-1.0.0"

@@ -15,6 +15,7 @@ namespace ModelReplacement
     {
         // public bool alive = true;
         public string boneMapJsonStr;
+        public string jsonPath;
 
         public BoneMap Map;
         public PlayerControllerB controller;
@@ -32,7 +33,9 @@ namespace ModelReplacement
         //Settings
         internal bool ragdollEnabled = true;
         internal bool bloodDecalsEnabled = true;
-
+        public bool renderLocal = false;
+        public bool renderBase = false;
+        public bool renderModel = false;
 
         //Abstract methods 
         /// <summary>
@@ -149,7 +152,7 @@ namespace ModelReplacement
                 }
                 renderer.SetMaterials(mats);
             }
-
+ 
             //Set scripts missing from assetBundle
             AddModelScripts();
 
@@ -173,14 +176,14 @@ namespace ModelReplacement
                 pluginsPath = Path.Combine(pluginsPath, "..");
             }
             string[] allfiles = Directory.GetFiles(pluginsPath, "*.json", SearchOption.AllDirectories);
-            string jsonPath = allfiles.Where(f => Path.GetFileName(f) == boneMapFileName).First();
+            jsonPath = allfiles.Where(f => Path.GetFileName(f) == boneMapFileName).First();
             boneMapJsonStr = File.ReadAllText(jsonPath);
             Map = BoneMap.DeserializeFromJson(boneMapJsonStr);
 
             //Map bones and parent mdodel
             Map.MapBones(controller.thisPlayerModel.bones, GetMappedBones());
-            Map.RootBone().parent = controller.thisPlayerModel.rootBone;
-            Map.RootBone().localPosition = Vector3.zero + Map.PositionOffset();
+            Map.SetBodyReplacement(this);
+            ReparentModel();
 
             //Misc fixes
             var gameObjects = controller.gameObject.GetComponentsInChildren<MeshRenderer>();
@@ -189,6 +192,12 @@ namespace ModelReplacement
             Console.WriteLine($"AwakeEnd {controller.playerUsername}");
 
             AfterAwake();
+        }
+
+        public void ReparentModel()
+        {
+            Map.RootBone().parent = controller.thisPlayerModel.rootBone;
+            Map.RootBone().localPosition = Vector3.zero + Map.PositionOffset();
         }
 
         public virtual void AfterStart()
@@ -218,6 +227,7 @@ namespace ModelReplacement
         {
 
         }
+        public bool flagReparentObject = false;
         void Update()
         {
             if (Map.CompletelyDestroyed())
@@ -230,15 +240,27 @@ namespace ModelReplacement
             //Local/Nonlocal player logic
             SetRenderers(true);
             bool localPlayer = (ulong)StartOfRound.Instance.thisClientPlayerId == controller.playerClientId;
-            if (localPlayer) { SetRenderers(false); }// Don't render model replacement if local player
+            if (!renderLocal)
+            {
+                if (localPlayer) { SetRenderers(false); }// Don't render model replacement if local player
+                else
+                {
+                    controller.thisPlayerModel.enabled = false; //Don't render original body if non-local player
+                    controller.thisPlayerModelLOD1.enabled = false;
+                    controller.thisPlayerModelLOD2.enabled = false;
+                    nameTagObj.enabled = false;
+                    nameTagObj2.enabled = false;
+                }
+            }
             else
             {
-                controller.thisPlayerModel.enabled = false; //Don't render original body if non-local player
-                controller.thisPlayerModelLOD1.enabled = false;
-                controller.thisPlayerModelLOD2.enabled = false;
-                nameTagObj.enabled = false;
-                nameTagObj2.enabled = false;
+                foreach (Renderer renderer in controller.gameObject.GetComponentsInChildren<SkinnedMeshRenderer>())
+                {
+                    renderer.enabled = renderBase;
+                }
+                SetRenderers(renderModel);
             }
+           
 
             //Update replacement model
             Map.UpdateModelbones();
@@ -277,32 +299,45 @@ namespace ModelReplacement
 
             //Held Item
             Transform handTransform = Map.ItemHolder();
-            //if(handTransform)
-            if (!localPlayer && handTransform)
+            if(handTransform)
+            //if (!localPlayer && handTransform)
             {
+                /*
                 //I don't know which of these is correct, so i'll set all of them
-                if (controller.currentlyGrabbingObject && (controller.currentlyGrabbingObject.parentObject != handTransform))
+                if (controller.currentlyGrabbingObject && ((controller.currentlyGrabbingObject.parentObject != handTransform) || flagReparentObject))
                 {
-                    GameObject HeldItemOffset = new GameObject();
+                    //flagReparentObject = false;
+                    GameObject HeldItemOffset = new GameObject("HandReparentObject");
                     Transform heldItemTransform = UnityEngine.Object.Instantiate<GameObject>(HeldItemOffset, handTransform).transform;
                     controller.currentlyGrabbingObject.parentObject = heldItemTransform;
                     heldItemTransform.localPosition += Map.ItemHolderPositionOffset();
 
                 }
-                if (controller.currentlyHeldObjectServer && (controller.currentlyHeldObjectServer.parentObject != handTransform))
+                */
+                if (controller.currentlyHeldObjectServer &&( (controller.currentlyHeldObjectServer.parentObject != handTransform) || flagReparentObject))
                 {
-                    GameObject HeldItemOffset = new GameObject();
+                    foreach (HandGameObject fooObj in UnityEngine.Object.FindObjectsOfType<HandGameObject>())
+                    {
+                        Destroy(fooObj.gameObject);
+                    }
+                    //flagReparentObject = false;
+                    GameObject HeldItemOffset = new GameObject("HandReparentObject2");
+                    HeldItemOffset.AddComponent<HandGameObject>();
                     Transform heldItemTransform = UnityEngine.Object.Instantiate<GameObject>(HeldItemOffset, handTransform).transform;
                     controller.currentlyHeldObjectServer.parentObject = heldItemTransform;
                     heldItemTransform.localPosition += Map.ItemHolderPositionOffset();
                 }
-                if (controller.currentlyHeldObject && (controller.currentlyHeldObject.parentObject != handTransform))
+                /*
+                if (controller.currentlyHeldObject && ((controller.currentlyHeldObject.parentObject != handTransform) || flagReparentObject))
                 {
-                    GameObject HeldItemOffset = new GameObject();
+                    //flagReparentObject = false;
+                    GameObject HeldItemOffset = new GameObject("HandReparentObject3");
                     Transform heldItemTransform = UnityEngine.Object.Instantiate<GameObject>(HeldItemOffset, handTransform).transform;
                     controller.currentlyHeldObject.parentObject = heldItemTransform;
                     heldItemTransform.localPosition += Map.ItemHolderPositionOffset();
                 }
+                */
+                flagReparentObject = false;
             }
             AfterUpdate();
         }
@@ -313,6 +348,7 @@ namespace ModelReplacement
             controller.thisPlayerModel.enabled = true;
             controller.thisPlayerModelLOD1.enabled = true;
             controller.thisPlayerModelLOD2.enabled = true;
+           
             nameTagObj.enabled = true;
             nameTagObj2.enabled = true;
             Destroy(replacementModel);
@@ -344,6 +380,10 @@ namespace ModelReplacement
             return bounds;
         }
 
+        public class HandGameObject: MonoBehaviour
+        {
+
+        }
 
 
 

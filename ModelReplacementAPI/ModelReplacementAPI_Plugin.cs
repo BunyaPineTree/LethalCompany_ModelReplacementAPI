@@ -14,7 +14,11 @@ using GameNetcodeStuff;
 using BepInEx.Logging;
 using MoreCompany;
 using Unity.Netcode;
-using System.Numerics;
+//using System.Numerics;
+using MoreCompany.Cosmetics;
+using UnityEngine;
+using UnityEngine.UI;
+//using static System.Net.Mime.MediaTypeNames;
 //using System.Numerics;
 
 namespace ModelReplacement
@@ -22,7 +26,7 @@ namespace ModelReplacement
 
 
 
-    [BepInPlugin("meow.ModelReplacementAPI", "ModelReplacementAPI", "1.0")]
+    [BepInPlugin("meow.ModelReplacementAPI", "ModelReplacementAPI", "1.2.0")]
     [BepInDependency("me.swipez.melonloader.morecompany", BepInDependency.DependencyFlags.SoftDependency)]
     public class ModelReplacementAPI : BaseUnityPlugin
     {
