@@ -396,3 +396,18 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+#Personal
+BAModelReplacement
+MinahoshiModelReplacement
+Uploads
+Libraries
+**/DynamicBoneScripts
+CharacterModelReplacementPersonal.sln
+
+
+
+
+
+
+
