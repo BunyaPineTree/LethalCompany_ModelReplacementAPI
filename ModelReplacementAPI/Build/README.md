@@ -1,4 +1,4 @@
-# ModelReplacementAPI v1.2.3
+# ModelReplacementAPI v1.2.4
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -6,6 +6,8 @@ For more info on making model replacements see https://github.com/BunyaPineTree/
 
 
 ## Changelog
+	- v1.2.4
+		- Fixed an issue where the bone offset tool was not setting the held item offset
 	- v1.2.3
 		- Fixed the same bug a second time, hopefully for real this time. 
 		- Fixed MoreCompany cosmetics not parenting correctly. 

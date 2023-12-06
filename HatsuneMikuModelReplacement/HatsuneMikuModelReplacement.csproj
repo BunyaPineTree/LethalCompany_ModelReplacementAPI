@@ -17,78 +17,95 @@
     <ProjectReference Include="..\ModelReplacementAPI\ModelReplacementAPI.csproj" />
   </ItemGroup>
   <ItemGroup>
-    
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>..\Libraries\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\Libraries\Assembly-CSharp_publicized.dll</HintPath>
+    </Reference>
+    <Reference Include="MoreCompany">
+      <HintPath>..\Libraries\MoreCompany.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\BepInEx.dll</HintPath>
+      <HintPath>..\Libraries\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Harmony">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\BepInEx.Harmony.dll</HintPath>
+      <HintPath>..\Libraries\BepInEx.Harmony.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Preloader">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\BepInEx.Preloader.dll</HintPath>
+      <HintPath>..\Libraries\BepInEx.Preloader.dll</HintPath>
     </Reference>
     <Reference Include="HarmonyXInterop">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\HarmonyXInterop.dll</HintPath>
+      <HintPath>..\Libraries\HarmonyXInterop.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\Mono.Cecil.dll</HintPath>
+      <HintPath>..\Libraries\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>..\Libraries\Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>..\Libraries\Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\Mono.Cecil.Rocks.dll</HintPath>
+      <HintPath>..\Libraries\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\MonoMod.RuntimeDetour.dll</HintPath>
+      <HintPath>..\Libraries\MonoMod.RuntimeDetour.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.Utils">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\MonoMod.Utils.dll</HintPath>
+      <HintPath>..\Libraries\MonoMod.Utils.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\Libraries\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InputSystem">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.InputSystem.dll</HintPath>
+      <HintPath>..\Libraries\Unity.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InputSystem.ForUI">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.InputSystem.ForUI.dll</HintPath>
+      <HintPath>..\Libraries\Unity.InputSystem.ForUI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Netcode.Runtime">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Netcode.Runtime.dll</HintPath>
+      <HintPath>..\Libraries\Unity.Netcode.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\Libraries\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+      <HintPath>..\Libraries\UnityEngine.AssetBundleModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AudioModule">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+      <HintPath>..\Libraries\UnityEngine.AudioModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ClusterInputModule">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.ClusterInputModule.dll</HintPath>
+      <HintPath>..\Libraries\UnityEngine.ClusterInputModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\Libraries\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\Libraries\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>..\Libraries\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputModule">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.InputModule.dll</HintPath>
+      <HintPath>..\Libraries\UnityEngine.InputModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>..\Libraries\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\Libraries\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\Libraries\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>..\Libraries\UnityEngine.UIElementsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsNativeModule">
+      <HintPath>..\Libraries\UnityEngine.UIElementsNativeModule.dll</HintPath>
     </Reference>
   </ItemGroup>
 

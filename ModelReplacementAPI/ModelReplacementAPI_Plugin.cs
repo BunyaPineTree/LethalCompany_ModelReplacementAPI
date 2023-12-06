@@ -14,7 +14,7 @@ namespace ModelReplacement
 
 
 
-    [BepInPlugin("meow.ModelReplacementAPI", "ModelReplacementAPI", "1.2.3")]
+    [BepInPlugin("meow.ModelReplacementAPI", "ModelReplacementAPI", "1.2.4")]
     [BepInDependency("me.swipez.melonloader.morecompany", BepInDependency.DependencyFlags.SoftDependency)]
     public class ModelReplacementAPI : BaseUnityPlugin
     {
@@ -113,7 +113,7 @@ namespace ModelReplacement
                 if (__instance.playerHeldBy == null) { return; }
                 var a = __instance.playerHeldBy.gameObject.GetComponent<BodyReplacementBase>();
                 if (a == null) { return; }
-                if (a.localPlayer) { return; }
+                if (a.localPlayer && !a.renderLocal) { return; }
 
                 Transform parentObject = a.Map.ItemHolder();
                 Vector3 positionOffset = a.Map.ItemHolderPositionOffset();
