@@ -8,11 +8,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 namespace ModelReplacement
 {
     public abstract class BodyReplacementBase : MonoBehaviour
     {
+        public bool localPlayer => (ulong)StartOfRound.Instance.thisClientPlayerId == controller.playerClientId;
         // public bool alive = true;
         public string boneMapJsonStr;
         public string jsonPath;
@@ -29,6 +31,8 @@ namespace ModelReplacement
         //Misc components
         private MeshRenderer nameTagObj = null;
         private MeshRenderer nameTagObj2 = null;
+        public bool flagReparentObject = false;
+        public bool moreCompanyCosmeticsReparented = false;
 
         //Settings
         internal bool ragdollEnabled = true;
@@ -36,6 +40,7 @@ namespace ModelReplacement
         public bool renderLocal = false;
         public bool renderBase = false;
         public bool renderModel = false;
+
 
         //Abstract methods 
         /// <summary>
@@ -71,6 +76,8 @@ namespace ModelReplacement
 
         private void CreateAndParentRagdoll(DeadBodyInfo bodyinfo)
         {
+            Console.WriteLine($"Death on {controller.playerUsername}");
+
             deadBody = bodyinfo.gameObject;
             SkinnedMeshRenderer deadBodyRenderer = deadBody.GetComponentInChildren<SkinnedMeshRenderer>();
             replacementDeadBody = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
@@ -152,9 +159,17 @@ namespace ModelReplacement
                 }
                 renderer.SetMaterials(mats);
             }
- 
+
             //Set scripts missing from assetBundle
-            AddModelScripts();
+            try
+            {
+                AddModelScripts();
+            }
+            catch (Exception e)
+            {
+                ModelReplacementAPI.Instance.Logger.LogError($"Could not set all model scripts.\n Error: {e.Message}");
+            }
+            
 
             //Instantiate model
             replacementModel = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
@@ -206,20 +221,6 @@ namespace ModelReplacement
         }
         void Start()
         {
-            //MoreCompany cosmetic support
-            foreach (var item in controller.gameObject.GetComponentsInChildren<CosmeticApplication>())
-            {
-                Transform mappedHead = Map.GetMappedTransform("spine.004");
-                Transform mappedLowerArmRight = Map.GetMappedTransform("arm.R_lower");
-                Transform mappedHip = Map.GetMappedTransform("spine");
-
-
-                item.head = mappedHead;
-                item.lowerArmRight = mappedLowerArmRight;
-                item.hip = mappedHip;
-
-
-            }
             AfterStart();
         }
 
@@ -227,7 +228,84 @@ namespace ModelReplacement
         {
 
         }
-        public bool flagReparentObject = false;
+        
+        private void AttemptUnparentMoreCompanyCosmetics()
+        {
+            if (!moreCompanyCosmeticsReparented) { return; } //no cosmetics parented
+            var applications = controller.gameObject.GetComponentsInChildren<CosmeticApplication>();
+            if ((applications.Any()))
+            {
+                foreach (var application in applications)
+                {
+                    foreach (var cosmeticInstance in application.spawnedCosmetics)
+                    {
+                        cosmeticInstance.transform.parent = null;
+                    }
+                    moreCompanyCosmeticsReparented = false;
+                }
+            }
+            Console.WriteLine(" unparent done");
+        }
+        private void AttemptReparentMoreCompanyCosmetics()
+        {
+
+            if (moreCompanyCosmeticsReparented) { return; } //cosmetics already parented
+            var applications = controller.gameObject.GetComponentsInChildren<CosmeticApplication>();
+            if ((applications.Any()))
+            {
+                foreach (var application in applications)
+                {
+                    Console.WriteLine($"{application.GetType().Name} parent");
+                    Transform mappedHead = Map.GetMappedTransform("spine.004");
+                    Transform mappedChest = Map.GetMappedTransform("spine.003");
+                    Transform mappedLowerArmRight = Map.GetMappedTransform("arm.R_lower");
+                    Transform mappedHip = Map.GetMappedTransform("spine");
+                    Transform mappedShinLeft = Map.GetMappedTransform("shin.L");
+                    Transform mappedShinRight = Map.GetMappedTransform("shin.R");
+
+
+                    application.head = mappedHead;
+                    application.chest = mappedChest;
+                    application.lowerArmRight = mappedLowerArmRight;
+                    application.hip = mappedHip;
+                    application.shinLeft = mappedShinLeft;  
+                    application.shinRight = mappedShinRight;
+
+                    foreach (var cosmeticInstance in application.spawnedCosmetics)
+                    {
+                        Transform transform = null;
+                        switch (cosmeticInstance.cosmeticType)
+                        {
+                            case CosmeticType.HAT:
+                                transform = application.head;
+                                break;
+                            case CosmeticType.CHEST:
+                                transform = application.chest;
+                                break;
+                            case CosmeticType.R_LOWER_ARM:
+                                transform = application.lowerArmRight;
+                                break;
+                            case CosmeticType.HIP:
+                                transform = application.hip;
+                                break;
+                            case CosmeticType.L_SHIN:
+                                transform = application.shinLeft;
+                                break;
+                            case CosmeticType.R_SHIN:
+                                transform = application.shinRight;
+                                break;
+                        }
+                        cosmeticInstance.transform.position = transform.position;
+                        cosmeticInstance.transform.rotation = transform.rotation;
+                        cosmeticInstance.transform.parent = transform;
+                    }
+                    moreCompanyCosmeticsReparented = true;
+                }
+                Console.WriteLine(" reparent done");
+            }
+           
+        }
+
         void Update()
         {
             if (Map.CompletelyDestroyed())
@@ -239,7 +317,6 @@ namespace ModelReplacement
 
             //Local/Nonlocal player logic
             SetRenderers(true);
-            bool localPlayer = (ulong)StartOfRound.Instance.thisClientPlayerId == controller.playerClientId;
             if (!renderLocal)
             {
                 if (localPlayer) { SetRenderers(false); }// Don't render model replacement if local player
@@ -264,7 +341,7 @@ namespace ModelReplacement
 
             //Update replacement model
             Map.UpdateModelbones();
-
+            AttemptReparentMoreCompanyCosmetics();
 
             //Ragdoll
             if (ragdollEnabled)
@@ -294,51 +371,9 @@ namespace ModelReplacement
                     }
                 }
             }
+                
+            //HeldItem handled through patch
             
-            
-
-            //Held Item
-            Transform handTransform = Map.ItemHolder();
-            if(handTransform)
-            //if (!localPlayer && handTransform)
-            {
-                /*
-                //I don't know which of these is correct, so i'll set all of them
-                if (controller.currentlyGrabbingObject && ((controller.currentlyGrabbingObject.parentObject != handTransform) || flagReparentObject))
-                {
-                    //flagReparentObject = false;
-                    GameObject HeldItemOffset = new GameObject("HandReparentObject");
-                    Transform heldItemTransform = UnityEngine.Object.Instantiate<GameObject>(HeldItemOffset, handTransform).transform;
-                    controller.currentlyGrabbingObject.parentObject = heldItemTransform;
-                    heldItemTransform.localPosition += Map.ItemHolderPositionOffset();
-
-                }
-                */
-                if (controller.currentlyHeldObjectServer &&( (controller.currentlyHeldObjectServer.parentObject != handTransform) || flagReparentObject))
-                {
-                    foreach (HandGameObject fooObj in UnityEngine.Object.FindObjectsOfType<HandGameObject>())
-                    {
-                        Destroy(fooObj.gameObject);
-                    }
-                    //flagReparentObject = false;
-                    GameObject HeldItemOffset = new GameObject("HandReparentObject2");
-                    HeldItemOffset.AddComponent<HandGameObject>();
-                    Transform heldItemTransform = UnityEngine.Object.Instantiate<GameObject>(HeldItemOffset, handTransform).transform;
-                    controller.currentlyHeldObjectServer.parentObject = heldItemTransform;
-                    heldItemTransform.localPosition += Map.ItemHolderPositionOffset();
-                }
-                /*
-                if (controller.currentlyHeldObject && ((controller.currentlyHeldObject.parentObject != handTransform) || flagReparentObject))
-                {
-                    //flagReparentObject = false;
-                    GameObject HeldItemOffset = new GameObject("HandReparentObject3");
-                    Transform heldItemTransform = UnityEngine.Object.Instantiate<GameObject>(HeldItemOffset, handTransform).transform;
-                    controller.currentlyHeldObject.parentObject = heldItemTransform;
-                    heldItemTransform.localPosition += Map.ItemHolderPositionOffset();
-                }
-                */
-                flagReparentObject = false;
-            }
             AfterUpdate();
         }
 
@@ -351,6 +386,8 @@ namespace ModelReplacement
            
             nameTagObj.enabled = true;
             nameTagObj2.enabled = true;
+            AttemptUnparentMoreCompanyCosmetics();
+
             Destroy(replacementModel);
             Destroy(replacementDeadBody);
         }
@@ -382,6 +419,19 @@ namespace ModelReplacement
 
         public class HandGameObject: MonoBehaviour
         {
+
+            public void UnparentItems()
+            {
+                Transform objTransform = base.gameObject.transform;
+                for (int i = 0; i < objTransform.childCount;i++)
+                {
+                    Transform child = objTransform.GetChild(i);
+                    child.parent = null;
+                }
+
+
+            }
+
 
         }
 

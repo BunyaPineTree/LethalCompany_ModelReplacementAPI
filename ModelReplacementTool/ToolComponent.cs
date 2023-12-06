@@ -98,11 +98,50 @@ namespace ModelReplacementTool
 
         }
 
+        Toggle x = null;
+        Toggle y = null;
+        Toggle z = null;
+
+        Toggle a = null;
+        Toggle b = null;
+
+        public bool Symmetric { get { return x.isOn; } set { x.isOn = value; if (value) { antisymmetric = false; notSymmetric = false; } } }
+        public bool antisymmetric { get { return y.isOn; } set { y.isOn = value;  if (value) {  Symmetric = false; notSymmetric = false; } } }
+        public bool notSymmetric { get { return z.isOn; } set { z.isOn = value; if (value) {   Symmetric = false; antisymmetric = false; } } }
+
+
+
+        public bool aa { get { return y.isOn; } set { a.isOn = value; DoRenderHelmet(value); } }
+        public bool bb { get { return z.isOn; } set { b.isOn = value; bodyReplacement.renderBase = value; } }
+        GameObject camTempParent = new GameObject("CamTempParent");
+        Transform camOrigTrans;
+
+        void DoRenderHelmet(bool render)
+        {
+            if (render)
+            {
+                controller.cameraContainerTransform.parent = camOrigTrans;
+            }
+            else
+            {
+                controller.cameraContainerTransform.parent = camTempParent.transform;
+            }
+            
+
+
+        }
+
         void Awake()
         {
             controller = base.GetComponent<PlayerControllerB>();
             bodyReplacement = base.GetComponent<BodyReplacementBase>();
             map = bodyReplacement.Map;
+            camOrigTrans = controller.cameraContainerTransform.parent;
+
+            camTempParent.transform.parent = camOrigTrans;
+            camTempParent.transform.localPosition = new Vector3(0, 100, 0);
+
+            
 
             GameObject itemObj = UnityEngine.Object.Instantiate<GameObject>(UnityEngine.Object.FindObjectOfType<Terminal>().buyableItemsList[0].spawnPrefab);
             var go = itemObj.GetComponent<GrabbableObject>();
@@ -138,6 +177,11 @@ namespace ModelReplacementTool
             var BonePanelBase = UnityEngine.Object.Instantiate<GameObject>(Assets.MainAssetBundle.LoadAsset<GameObject>(model_name2));
             BonePanelBase.AddComponent<BonePanel>();
 
+            Console.WriteLine("a");
+            string model_name22 = "BonePanel2";
+            var BonePanelBase2 = UnityEngine.Object.Instantiate<GameObject>(Assets.MainAssetBundle.LoadAsset<GameObject>(model_name22));
+            BonePanelBase2.AddComponent<BonePanel>();
+
             string model_name3 = "BonePanelRotation";
             var BonePanelRotationBase = UnityEngine.Object.Instantiate<GameObject>(Assets.MainAssetBundle.LoadAsset<GameObject>(model_name3));
             BonePanelRotationBase.AddComponent<BonePanel>();
@@ -165,8 +209,22 @@ namespace ModelReplacementTool
                 }
 
             }
+            var togs = CanvasBase.GetComponentsInChildren<Toggle>();
+            foreach (var item in togs)
+            {
+                Console.WriteLine(item.gameObject.name);
+                if (item.gameObject.name == "S1") { x = item; }
+                if (item.gameObject.name == "S2") { y = item; }
+                if (item.gameObject.name == "S3") { z = item; }
+                if (item.gameObject.name == "S4") { a = item; }
+                if (item.gameObject.name == "S5") { b = item; }
 
-
+            }
+            x.onValueChanged.AddListener((x) => { Symmetric = x; });
+            y.onValueChanged.AddListener((x) => { antisymmetric = x; });
+            z.onValueChanged.AddListener((x) => { notSymmetric = x; });
+            a.onValueChanged.AddListener((x) => { aa = x; });
+            b.onValueChanged.AddListener((x) => { bb = x; });
 
             var rooboneGO = UnityEngine.Object.Instantiate<GameObject>(BonePanelBase, Content.transform);
             rooboneGO.transform.localScale = Vector3.one * 0.7f;
@@ -175,7 +233,7 @@ namespace ModelReplacementTool
             bonePanel.isRootBone = true;
             bonePanel.Initialize(this);
 
-            var itemHolderBoneGO = UnityEngine.Object.Instantiate<GameObject>(BonePanelBase, Content.transform);
+            var itemHolderBoneGO = UnityEngine.Object.Instantiate<GameObject>(BonePanelBase2, Content.transform);
             itemHolderBoneGO.transform.localScale = Vector3.one * 0.7f;
             var itemPanel = itemHolderBoneGO.GetComponent<BonePanel>();
             itemPanel.map = map;

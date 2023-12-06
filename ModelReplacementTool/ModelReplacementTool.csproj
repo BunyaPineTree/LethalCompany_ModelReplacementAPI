@@ -15,7 +15,7 @@
     <EmbeddedResource Include="tbundle" />
   </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
-        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" /> 
     </ItemGroup>
 
     <ItemGroup>
@@ -23,11 +23,11 @@
     </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\Libraries\Assembly-CSharp_publicized.dll</HintPath>
+    </Reference>
       <Reference Include="0Harmony">
         <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\0Harmony.dll</HintPath>
-      </Reference>
-      <Reference Include="Assembly-CSharp">
-        <HintPath>Assembly-CSharp_publicized.dll</HintPath>
       </Reference>
       <Reference Include="BepInEx">
         <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\BepInEx.dll</HintPath>

@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3645460165
+CRC: 2840562728
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e74006e66a0358f29ea65350a966153d
+    Hash: 0f0208714d70d2c393cf6c966e99e4e4
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 2c49fd7f8f1fed13627b96245343eb7f
+    Hash: 4f5ce9ab7934a1fac71739f480516815
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: e74006e66a0358f29ea65350a966153d
+    Hash: 0f0208714d70d2c393cf6c966e99e4e4
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -40,6 +40,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 - Class: 114
@@ -104,6 +106,8 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.ColorBlock
 - AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.FontData
+- AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.Navigation
@@ -118,6 +122,7 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.Toggle/ToggleEvent
 Assets:
+- Assets/ToolUI/BonePanel2.prefab
 - Assets/ToolUI/BonePanelRotation.prefab
 - Assets/ToolUI/ToolPanelBase.prefab
 - Assets/ToolUI/BonePanel.prefab

@@ -168,10 +168,19 @@ namespace ModelReplacementTool
                 BonePanel othPanel = comp.MapSymmetric(this);
                 if(othPanel != null)
                 {
+                    if (comp.Symmetric)
+                    {
+                        othPanel.xf = xf;
+                        othPanel.yf = -yf;
+                        othPanel.zf = -zf;
+                    }
+                    if (comp.antisymmetric)
+                    {
+                        othPanel.xf = xf;
+                        othPanel.yf = yf;
+                        othPanel.zf = zf;
+                    }
 
-                    othPanel.xf = xf;
-                    othPanel.yf = -yf;
-                    othPanel.zf = -zf;
                 }
                 
             }

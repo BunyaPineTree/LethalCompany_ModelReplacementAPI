@@ -1,23 +1,11 @@
 ﻿using BepInEx;
-using System.Linq;
-using System.Runtime.InteropServices;
-using Zeekerss;
-using Zeekerss.Core;
-using Zeekerss.Core.Singletons;
-using System;
-using HarmonyLib;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
-using System.Reflection;
-using GameNetcodeStuff;
 using BepInEx.Logging;
-using MoreCompany;
-using Unity.Netcode;
-//using System.Numerics;
-using MoreCompany.Cosmetics;
+using GameNetcodeStuff;
+using HarmonyLib;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+//using System.Numerics;
 //using static System.Net.Mime.MediaTypeNames;
 //using System.Numerics;
 
@@ -26,7 +14,7 @@ namespace ModelReplacement
 
 
 
-    [BepInPlugin("meow.ModelReplacementAPI", "ModelReplacementAPI", "1.2.0")]
+    [BepInPlugin("meow.ModelReplacementAPI", "ModelReplacementAPI", "1.2.3")]
     [BepInDependency("me.swipez.melonloader.morecompany", BepInDependency.DependencyFlags.SoftDependency)]
     public class ModelReplacementAPI : BaseUnityPlugin
     {
@@ -113,34 +101,62 @@ namespace ModelReplacement
         }
 
 
-        [HarmonyPatch(typeof(UnlockableSuit))]
-        internal class UnlockableSuitPatch
+        [HarmonyPatch(typeof(GrabbableObject))]
+        public class LocateHeldObjectsOnModelReplacementPatch
         {
-            [HarmonyPatch("SwitchSuitForPlayer")]
+
+            [HarmonyPatch("LateUpdate")]
             [HarmonyPostfix]
-            public static void SwitchSuitModelReplacementPatch(PlayerControllerB player, int suitID, bool playAudio = true)
+            public static void LateUpdatePatch(ref GrabbableObject __instance)
             {
-                if (player.playerSteamId == 0) { return; }
-                Console.WriteLine(string.Format("player change suit {0} suitID {1} ({2})", player.playerUsername, suitID, StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName));
+                if (__instance.parentObject == null) { return; }
+                if (__instance.playerHeldBy == null) { return; }
+                var a = __instance.playerHeldBy.gameObject.GetComponent<BodyReplacementBase>();
+                if (a == null) { return; }
+                if (a.localPlayer) { return; }
 
-                string suitName = StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName;
+                Transform parentObject = a.Map.ItemHolder();
+                Vector3 positionOffset = a.Map.ItemHolderPositionOffset();
 
-                if (RegisteredModelReplacements.ContainsKey(suitName))
-                {
-                    Type type = RegisteredModelReplacements[suitName];
-                    SetPlayerModelReplacement(player, type);
-                }
-                else
-                {
-                    RemovePlayerModelReplacement(player);
-                }
+                __instance.transform.rotation = parentObject.rotation;
+                __instance.transform.Rotate(__instance.itemProperties.rotationOffset);
+                __instance.transform.position = parentObject.position;
+                Vector3 vector = __instance.itemProperties.positionOffset + positionOffset;
+                vector = parentObject.rotation * vector;
+                __instance.transform.position += vector;
+
 
             }
         }
 
 
+
+        [HarmonyPatch(typeof(StartOfRound))]
+        public class RepairBrokenBodyReplacementsPatch
+        {
+
+            [HarmonyPatch("ReviveDeadPlayers")]
+            [HarmonyPostfix]
+            public static void ReviveDeadPlayersPatch(ref StartOfRound __instance)
+            {
+
+                foreach (var item in __instance.allPlayerScripts)
+                {
+                    if (!item.isPlayerDead) { continue; } //player isn't dead
+                    if (item.gameObject.GetComponent<BodyReplacementBase>() == null) { continue; } //player doesn't have a body replacement
+
+                    Console.WriteLine($"Reinstantiating model replacement for {item.playerUsername} ");
+                    Type BodyReplacementType = item.gameObject.GetComponent<BodyReplacementBase>().GetType();
+                    Destroy(item.gameObject.GetComponent<BodyReplacementBase>());
+                    item.gameObject.AddComponent(BodyReplacementType);
+                }
+            }
+        }
+
+
+
         [HarmonyPatch(typeof(PlayerControllerB))]
-        public class PlayerControllerBPatch
+        public class SetRegisteredBodyReplacements
         {
 
             [HarmonyPatch("Update")]
@@ -165,14 +181,14 @@ namespace ModelReplacement
                     {
                         RemovePlayerModelReplacement(__instance);
                     }
-                }catch (Exception e) { }
-               
+                }
+                catch (Exception e) { }
+
 
             }
-
-
-
         }
+
+
 
 
     }

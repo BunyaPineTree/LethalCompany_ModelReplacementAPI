@@ -18,8 +18,11 @@
         <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\0Harmony.dll</HintPath>
       </Reference>
       <Reference Include="Assembly-CSharp">
-        <HintPath>Assembly-CSharp_publicized.dll</HintPath>
+        <HintPath>..\Libraries\Assembly-CSharp_publicized.dll</HintPath>
       </Reference>
+    <Reference Include="MoreCompany">
+      <HintPath>..\Libraries\MoreCompany.dll</HintPath>
+    </Reference>
       <Reference Include="BepInEx">
         <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\BepInEx.dll</HintPath>
       </Reference>
@@ -49,9 +52,6 @@
       </Reference>
       <Reference Include="MonoMod.Utils">
         <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\MonoMod.Utils.dll</HintPath>
-      </Reference>
-      <Reference Include="MoreCompany">
-        <HintPath>MoreCompany.dll</HintPath>
       </Reference>
       <Reference Include="Newtonsoft.Json">
         <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Newtonsoft.Json.dll</HintPath>

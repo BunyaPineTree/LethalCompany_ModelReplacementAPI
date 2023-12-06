@@ -1,4 +1,4 @@
-# Miku Model Replacement v1.1.0
+# Miku Model Replacement v1.1.3
 ### Replaces default suit with Hatsune Miku. This is the example mod for ModelReplacementAPI
 
 ## Instructions
