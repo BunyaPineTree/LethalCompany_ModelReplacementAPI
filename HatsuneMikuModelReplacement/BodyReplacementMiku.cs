@@ -40,6 +40,9 @@ namespace HatsuneMikuModelReplacement
                 dynBone.m_Inert = 0.9f;
                 dynBone.m_Radius = 0.008f;
                 dynBone.m_Gravity = new Vector3(0, 0, 0);
+                dynBone.m_UpdateRate = Plugin.UpdateRate.Value;
+                dynBone.m_DistantDisable = Plugin.disablePhysicsAtRange.Value;
+                dynBone.m_DistanceToObject = Plugin.distanceDisablePhysics.Value;
                 skirtDynBones.Add(dynBone);
             });
 
@@ -82,6 +85,9 @@ namespace HatsuneMikuModelReplacement
                 dynBone.m_Inert = 0.274f;
                 dynBone.m_Radius = 0.05f;
                 dynBone.m_Gravity = new Vector3(0, -0.01f, 0);
+                dynBone.m_UpdateRate = Plugin.UpdateRate.Value;
+                dynBone.m_DistantDisable = Plugin.disablePhysicsAtRange.Value;
+                dynBone.m_DistanceToObject = Plugin.distanceDisablePhysics.Value;
             });
 
             var HairBones2 = replacementModel.GetComponentsInChildren<Transform>().Where(x => x.name.Contains("TwinTail.A.001"));
