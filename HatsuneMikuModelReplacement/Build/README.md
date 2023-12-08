@@ -1,4 +1,4 @@
-# Miku Model Replacement v1.2
+# Miku Model Replacement v1.2.1
 ### Replaces default suit with Hatsune Miku. This is the example mod for ModelReplacementAPI
 
 ## Instructions
@@ -11,6 +11,8 @@ Cloth physics can be very laggy. It is recommended in larger lobbies that you lo
 
 
 ## Changelog
+	- v1.2.1
+		- Fixed miku appearing in first person
 	- v1.2.0
 		- Added config options to improve dynamic bone performance. 
 	- V1.1.0

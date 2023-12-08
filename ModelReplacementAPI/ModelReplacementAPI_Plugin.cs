@@ -123,18 +123,22 @@ namespace ModelReplacement
                 if (__instance.playerHeldBy == null) { return; }
                 var a = __instance.playerHeldBy.gameObject.GetComponent<BodyReplacementBase>();
                 if (a == null) { return; }
-                if (a.DontRenderBodyReplacement && !a.renderLocalDebug) { return; }
+                if (a.RenderBodyReplacement())
+                {
+                    if(a.renderLocalDebug && !a.renderModel) { return; }
 
-                Transform parentObject = a.Map.ItemHolder();
-                Vector3 positionOffset = a.Map.ItemHolderPositionOffset();
+                    Transform parentObject = a.Map.ItemHolder();
+                    Vector3 positionOffset = a.Map.ItemHolderPositionOffset();
 
-                __instance.transform.rotation = parentObject.rotation;
-                __instance.transform.Rotate(__instance.itemProperties.rotationOffset);
-                __instance.transform.position = parentObject.position;
-                Vector3 vector = __instance.itemProperties.positionOffset + positionOffset;
-                vector = parentObject.rotation * vector;
-                __instance.transform.position += vector;
+                    __instance.transform.rotation = parentObject.rotation;
+                    __instance.transform.Rotate(__instance.itemProperties.rotationOffset);
+                    __instance.transform.position = parentObject.position;
+                    Vector3 vector = __instance.itemProperties.positionOffset + positionOffset;
+                    vector = parentObject.rotation * vector;
+                    __instance.transform.position += vector;
 
+
+                }
 
             }
         }

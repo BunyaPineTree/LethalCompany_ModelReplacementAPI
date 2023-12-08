@@ -16,11 +16,22 @@ namespace ModelReplacement
     public abstract class BodyReplacementBase : MonoBehaviour
     {
         public bool localPlayer => (ulong)StartOfRound.Instance.thisClientPlayerId == controller.playerClientId;
-        public bool thirdPersonFlag => ModelReplacementAPI.thirdPersonPresent && ThirdPersonCamera.ViewState;
         public bool renderLocalDebug = false;
         public bool renderBase = false;
         public bool renderModel = false;
-        public bool DontRenderBodyReplacement => localPlayer && !thirdPersonFlag ;
+
+        public bool RenderBodyReplacement()
+        {
+            if(!localPlayer) { return true; }
+            Console.WriteLine(ModelReplacementAPI.thirdPersonPresent);
+            if (ModelReplacementAPI.thirdPersonPresent)
+            {
+                return ThirdPersonCamera.ViewState;
+            }
+            Console.WriteLine("Finish");
+            return false;
+        }
+
 
         // public bool alive = true;
         public string boneMapJsonStr;
@@ -351,24 +362,23 @@ namespace ModelReplacement
                 return;
             }
 
-
+            
             //Local/Nonlocal player logic
-            SetRenderers(true);
             if (!renderLocalDebug)
             {
 
-                Console.WriteLine($"{localPlayer} {thirdPersonFlag} ({ModelReplacementAPI.thirdPersonPresent} {ThirdPersonCamera.ViewState})");
-
-                if (DontRenderBodyReplacement) { 
-                    SetRenderers(false); 
-                }// Don't render model replacement if local player
-                else
-                {
+                if (RenderBodyReplacement()) {
+                    SetRenderers(true);
                     controller.thisPlayerModel.enabled = false; //Don't render original body if non-local player
                     controller.thisPlayerModelLOD1.enabled = false;
                     controller.thisPlayerModelLOD2.enabled = false;
                     nameTagObj.enabled = false;
                     nameTagObj2.enabled = false;
+                    
+                }
+                else
+                {
+                    SetRenderers(false); // Don't render model replacement if local player
                 }
             }
             else
@@ -379,7 +389,7 @@ namespace ModelReplacement
                 }
                 SetRenderers(renderModel);
             }
-           
+
 
             //Update replacement model
             Map.UpdateModelbones();

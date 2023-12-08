@@ -71,6 +71,9 @@
       <Reference Include="UnityEngine">
         <HintPath>..\Libraries\UnityEngine.dll</HintPath>
       </Reference>
+      <Reference Include="UnityEngine.AnimationModule">
+        <HintPath>..\Libraries\UnityEngine.AnimationModule.dll</HintPath>
+      </Reference>
       <Reference Include="UnityEngine.AssetBundleModule">
         <HintPath>..\Libraries\UnityEngine.AssetBundleModule.dll</HintPath>
       </Reference>

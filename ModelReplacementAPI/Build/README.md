@@ -1,4 +1,4 @@
-# ModelReplacementAPI v1.3.0
+# ModelReplacementAPI v1.3.2
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -6,6 +6,8 @@ For more info on making model replacements see https://github.com/BunyaPineTree/
 
 
 ## Changelog
+	- v1.3.2
+		- Fixed models appearing in first person for users without the 3rdperson mod.
 	- v1.3.0
 		- Added support for 3rdperson.
 	- v1.2.4

@@ -44,10 +44,9 @@ namespace HatsuneMikuModelReplacement
             config = base.Config;
             InitConfig();
             // Plugin startup logic
-
             //ModelReplacementAPI.RegisterSuitModelReplacement("Green suit", typeof(BodyReplacementMiku));
-            ModelReplacementAPI.RegisterSuitModelReplacement("Default", typeof(BodyReplacementMiku));
-            ModelReplacementAPI.RegisterSuitModelReplacement("Orange suit", typeof(BodyReplacementMiku));
+            ModelReplacement.ModelReplacementAPI.RegisterSuitModelReplacement("Default", typeof(BodyReplacementMiku));
+            ModelReplacement.ModelReplacementAPI.RegisterSuitModelReplacement("Orange suit", typeof(BodyReplacementMiku));
             //ModelReplacementAPI.RegisterSuitModelReplacement("Pajama suit", typeof(BodyReplacementMiku));
             //ModelReplacementAPI.RegisterSuitModelReplacement("Hazard suit", typeof(BodyReplacementMiku));
 
