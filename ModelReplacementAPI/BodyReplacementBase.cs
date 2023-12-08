@@ -1,4 +1,5 @@
-﻿using GameNetcodeStuff;
+﻿using _3rdPerson.Helper;
+using GameNetcodeStuff;
 using ModelReplacement;
 using MoreCompany.Cosmetics;
 using System;
@@ -15,6 +16,12 @@ namespace ModelReplacement
     public abstract class BodyReplacementBase : MonoBehaviour
     {
         public bool localPlayer => (ulong)StartOfRound.Instance.thisClientPlayerId == controller.playerClientId;
+        public bool thirdPersonFlag => ModelReplacementAPI.thirdPersonPresent && ThirdPersonCamera.ViewState;
+        public bool renderLocalDebug = false;
+        public bool renderBase = false;
+        public bool renderModel = false;
+        public bool DontRenderBodyReplacement => localPlayer && !thirdPersonFlag ;
+
         // public bool alive = true;
         public string boneMapJsonStr;
         public string jsonPath;
@@ -37,9 +44,7 @@ namespace ModelReplacement
         //Settings
         internal bool ragdollEnabled = true;
         internal bool bloodDecalsEnabled = true;
-        public bool renderLocal = false;
-        public bool renderBase = false;
-        public bool renderModel = false;
+        
 
 
         //Abstract methods 
@@ -130,6 +135,34 @@ namespace ModelReplacement
         {
 
         }
+        public void RepairModel()
+        {
+            if (controller == null)
+            {
+                ModelReplacementAPI.Instance.Logger.LogFatal($" {GetType()} PlayerControllerB is null");
+                Destroy(this);
+            }
+            if (controller.thisPlayerModel == null)
+            {
+                ModelReplacementAPI.Instance.Logger.LogFatal($"{controller.name} {GetType()} base player model is null");
+                Destroy(this);
+            }
+            if (replacementModel == null)
+            {
+                ModelReplacementAPI.Instance.Logger.LogFatal($"{controller.name} {GetType()} replacementModel is null");
+                Destroy(this);
+            }
+   
+            Map = BoneMap.DeserializeFromJson(boneMapJsonStr);
+            Map.MapBones(controller.thisPlayerModel.bones, GetMappedBones());
+            Map.SetBodyReplacement(this);
+            ReparentModel();
+            moreCompanyCosmeticsReparented = false;
+
+
+        }
+
+
         internal void Awake()
         {
             
@@ -158,6 +191,7 @@ namespace ModelReplacement
                     mats.Add(mat);
                 }
                 renderer.SetMaterials(mats);
+
             }
 
             //Set scripts missing from assetBundle
@@ -231,6 +265,7 @@ namespace ModelReplacement
         
         private void AttemptUnparentMoreCompanyCosmetics()
         {
+            if (!ModelReplacementAPI.moreCompanyPresent) { return; }
             if (!moreCompanyCosmeticsReparented) { return; } //no cosmetics parented
             var applications = controller.gameObject.GetComponentsInChildren<CosmeticApplication>();
             if ((applications.Any()))
@@ -246,11 +281,13 @@ namespace ModelReplacement
             }
             Console.WriteLine(" unparent done");
         }
+
         private void AttemptReparentMoreCompanyCosmetics()
         {
-
+            if(!ModelReplacementAPI.moreCompanyPresent) { return; }
             if (moreCompanyCosmeticsReparented) { return; } //cosmetics already parented
             var applications = controller.gameObject.GetComponentsInChildren<CosmeticApplication>();
+
             if ((applications.Any()))
             {
                 foreach (var application in applications)
@@ -317,9 +354,14 @@ namespace ModelReplacement
 
             //Local/Nonlocal player logic
             SetRenderers(true);
-            if (!renderLocal)
+            if (!renderLocalDebug)
             {
-                if (localPlayer) { SetRenderers(false); }// Don't render model replacement if local player
+
+                Console.WriteLine($"{localPlayer} {thirdPersonFlag} ({ModelReplacementAPI.thirdPersonPresent} {ThirdPersonCamera.ViewState})");
+
+                if (DontRenderBodyReplacement) { 
+                    SetRenderers(false); 
+                }// Don't render model replacement if local player
                 else
                 {
                     controller.thisPlayerModel.enabled = false; //Don't render original body if non-local player
@@ -416,25 +458,6 @@ namespace ModelReplacement
             bounds.SetMinMax(new Vector3(minX, minY, minZ), new Vector3(maxZ, maxY, maxZ));
             return bounds;
         }
-
-        public class HandGameObject: MonoBehaviour
-        {
-
-            public void UnparentItems()
-            {
-                Transform objTransform = base.gameObject.transform;
-                for (int i = 0; i < objTransform.childCount;i++)
-                {
-                    Transform child = objTransform.GetChild(i);
-                    child.parent = null;
-                }
-
-
-            }
-
-
-        }
-
 
 
 

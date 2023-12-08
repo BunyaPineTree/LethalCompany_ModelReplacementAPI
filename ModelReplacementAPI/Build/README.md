@@ -1,4 +1,4 @@
-# ModelReplacementAPI v1.2.4
+# ModelReplacementAPI v1.3.0
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -6,6 +6,8 @@ For more info on making model replacements see https://github.com/BunyaPineTree/
 
 
 ## Changelog
+	- v1.3.0
+		- Added support for 3rdperson.
 	- v1.2.4
 		- Fixed an issue where the bone offset tool was not setting the held item offset
 	- v1.2.3

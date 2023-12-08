@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Bootstrap;
 using BepInEx.Logging;
 using GameNetcodeStuff;
 using HarmonyLib;
@@ -16,6 +17,7 @@ namespace ModelReplacement
 
     [BepInPlugin("meow.ModelReplacementAPI", "ModelReplacementAPI", "1.2.4")]
     [BepInDependency("me.swipez.melonloader.morecompany", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("verity.3rdperson", BepInDependency.DependencyFlags.SoftDependency)]
     public class ModelReplacementAPI : BaseUnityPlugin
     {
 
@@ -29,11 +31,19 @@ namespace ModelReplacement
                 ModelReplacementAPI.Instance = this;
             }
 
+            moreCompanyPresent = Chainloader.PluginInfos.ContainsKey("me.swipez.melonloader.morecompany");
+            thirdPersonPresent = Chainloader.PluginInfos.ContainsKey("verity.3rdperson");
 
             Harmony harmony = new Harmony("meow.ModelReplacementAPI");
             harmony.PatchAll();
             Logger.LogInfo($"Plugin {"meow.ModelReplacementAPI"} is loaded!");
         }
+        //soft dependencies
+        public static bool moreCompanyPresent;
+        public static bool thirdPersonPresent;
+
+
+
         public static ModelReplacementAPI Instance;
         public new ManualLogSource Logger;
         private static Dictionary<string, Type> RegisteredModelReplacements = new Dictionary<string, Type>();
@@ -113,7 +123,7 @@ namespace ModelReplacement
                 if (__instance.playerHeldBy == null) { return; }
                 var a = __instance.playerHeldBy.gameObject.GetComponent<BodyReplacementBase>();
                 if (a == null) { return; }
-                if (a.localPlayer && !a.renderLocal) { return; }
+                if (a.DontRenderBodyReplacement && !a.renderLocalDebug) { return; }
 
                 Transform parentObject = a.Map.ItemHolder();
                 Vector3 positionOffset = a.Map.ItemHolderPositionOffset();

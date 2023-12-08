@@ -252,7 +252,7 @@ namespace ModelReplacementTool
             }
 
 
-            bodyReplacement.renderLocal = true;
+            bodyReplacement.renderLocalDebug = true;
             bodyReplacement.renderBase = true;
             bodyReplacement.renderModel = true;
 

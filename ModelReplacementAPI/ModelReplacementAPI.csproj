@@ -17,6 +17,9 @@
       <Reference Include="0Harmony">
         <HintPath>..\Libraries\0Harmony.dll</HintPath>
       </Reference>
+      <Reference Include="3rdPerson">
+        <HintPath>..\Libraries\3rdPerson.dll</HintPath>
+      </Reference>
       <Reference Include="Assembly-CSharp">
         <HintPath>..\Libraries\Assembly-CSharp_publicized.dll</HintPath>
       </Reference>
