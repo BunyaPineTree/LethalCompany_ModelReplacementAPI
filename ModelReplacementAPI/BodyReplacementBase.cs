@@ -23,12 +23,10 @@ namespace ModelReplacement
         public bool RenderBodyReplacement()
         {
             if(!localPlayer) { return true; }
-            Console.WriteLine(ModelReplacementAPI.thirdPersonPresent);
             if (ModelReplacementAPI.thirdPersonPresent)
             {
                 return ThirdPersonCamera.ViewState;
             }
-            Console.WriteLine("Finish");
             return false;
         }
 
