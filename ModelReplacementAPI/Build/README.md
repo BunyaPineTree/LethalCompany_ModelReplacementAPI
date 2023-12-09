@@ -1,4 +1,4 @@
-# ModelReplacementAPI v1.4.0
+# ModelReplacementAPI v1.4.1
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -6,6 +6,8 @@ For more info on making model replacements see https://github.com/BunyaPineTree/
 
 
 ## Changelog
+	- v1.4.1
+		- Added RegisterModelReplacementOverride(Type bodyReplacement) to the API to prevent body replacements from constantly being removed and put back on when you want every player to have the same body replacement. 
 	- v1.4.0
 		- Added support for LCThirdPerson
 		- Fixed bug that caused incompatibility with the More Suits mod. Thanks to Linkoid for the fix. 

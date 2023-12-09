@@ -1,8 +1,7 @@
-# Miku Model Replacement v1.3.0
+# Miku Model Replacement v1.3.1
 ### Replaces suits with Hatsune Miku. This is the example mod for ModelReplacementAPI
 
 ## Instructions
--
 - Place in plugins folder next to boneMapMiku.json and ModelReplacementAPI.dll
 - Set your preferred replacement suits in the config, or enable miku for all suits. By default the starting suit is replaced. 
 - For more info see https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI
@@ -12,9 +11,11 @@ Cloth physics can be very laggy. It is recommended in larger lobbies that you lo
 
 
 ## Changelog
+	- v1.3.1
+		- Fixed the enable miku for all suits setting constantly putting on and removing the miku body replacement, make sure to download the latest version of ModelReplacementAPI 
 	- v1.3.0
 		- Added config options to set model replacements for specific suit names, or all suits. 
-		- The bug that prevented miku from disappearing after changing suits has been resolved, make sure to update to the altest ModelReplacementAPI version. 
+		- The bug that prevented miku from disappearing after changing suits has been resolved, make sure to update to the latest ModelReplacementAPI version. 
 	- v1.2.1
 		- Fixed miku appearing in first person
 	- v1.2.0

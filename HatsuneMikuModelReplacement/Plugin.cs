@@ -49,6 +49,8 @@ namespace HatsuneMikuModelReplacement
         {
             config = base.Config;
             InitConfig();
+            Assets.PopulateAssets();
+
             // Plugin startup logic
             if (!enableMikuForAllSuits.Value)
             {
@@ -59,28 +61,16 @@ namespace HatsuneMikuModelReplacement
                 }
 
             }
+            else
+            {
+                ModelReplacementAPI.RegisterModelReplacementOverride(typeof(BodyReplacementMiku));
+            }
 
-            Assets.PopulateAssets();
+            
 
             Harmony harmony = new Harmony("meow.MikuModelReplacement");
             harmony.PatchAll();
             Logger.LogInfo($"Plugin {"meow.MikuModelReplacement"} is loaded!");
-        }
-
-
-
-        [HarmonyPatch(typeof(PlayerControllerB))]
-        public class PlayerControllerBPatch
-        {
-
-            [HarmonyPatch("Update")]
-            [HarmonyPostfix]
-            public static void UpdatePatch(ref PlayerControllerB __instance)
-            {
-                if (__instance.playerSteamId == 0) { return; }
-                if (!enableMikuForAllSuits.Value) { return; }
-                ModelReplacementAPI.SetPlayerModelReplacement(__instance, typeof(BodyReplacementMiku));
-            }
         }
     }
     public static class Assets

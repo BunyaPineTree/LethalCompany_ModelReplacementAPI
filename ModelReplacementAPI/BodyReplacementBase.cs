@@ -376,6 +376,7 @@ namespace ModelReplacement
         {
             if (Map.CompletelyDestroyed())
             {
+                Console.WriteLine("Map gone destroy");
                 Destroy(this);
                 return;
             }
@@ -449,7 +450,7 @@ namespace ModelReplacement
 
         void OnDestroy()
         {
-           // Console.WriteLine($"Destroy body component for {controller.playerUsername}");
+            Console.WriteLine($"Destroy body component for {controller.playerUsername}");
             controller.thisPlayerModel.enabled = true;
             controller.thisPlayerModelLOD1.enabled = true;
             controller.thisPlayerModelLOD2.enabled = true;

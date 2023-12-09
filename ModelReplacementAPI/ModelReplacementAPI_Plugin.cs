@@ -50,6 +50,31 @@ namespace ModelReplacement
         public static ModelReplacementAPI Instance;
         public new ManualLogSource Logger;
         private static Dictionary<string, Type> RegisteredModelReplacements = new Dictionary<string, Type>();
+        private static Type RegisteredModelReplacementOverride = null;
+
+
+        /// <summary>
+        /// Registers a body replacement class to override. All players will have their model replaced. 
+        /// </summary>
+        /// <param name="suitNameToReplace"></param>
+        /// <param name="type"></param>
+        public static void RegisterModelReplacementOverride(Type type) 
+        {
+            if (!(type.IsSubclassOf(typeof(BodyReplacementBase))))
+            {
+                Instance.Logger.LogError($"Cannot register body replacement override type {type.GetType()}, must inherit from BodyReplacementBase");
+                return;
+            }
+            if (RegisteredModelReplacementOverride != null)
+            {
+                Instance.Logger.LogError($"Cannot register body replacement override, already registered to {RegisteredModelReplacementOverride.GetType()}.");
+                return;
+            }
+
+            Instance.Logger.LogInfo($"Registering body replacement override type {type.GetType()}.");
+
+            RegisteredModelReplacementOverride = type;
+        }
 
         /// <summary>
         /// Registers a specified body replacement class to a specified suit name. All players wearing a suit with the specified name will have their model replaced. 
@@ -61,16 +86,16 @@ namespace ModelReplacement
             suitNameToReplace = suitNameToReplace.ToLower().Replace(" ", "");
             if (!(type.IsSubclassOf(typeof(BodyReplacementBase))))
             {
-                Instance.Logger.LogError($"Cannot register body replacement type {type.Name}, must inherit from BodyReplacementBase");
+                Instance.Logger.LogError($"Cannot register body replacement type {type.GetType()}, must inherit from BodyReplacementBase");
                 return;
             }
             if (RegisteredModelReplacements.ContainsKey(suitNameToReplace))
             {
-                Instance.Logger.LogError($"Cannot register body replacement type {type.Name}, suit name to replace {suitNameToReplace} is already registered.");
+                Instance.Logger.LogError($"Cannot register body replacement type {type.GetType()}, suit name to replace {suitNameToReplace} is already registered.");
                 return;
             }
 
-            Instance.Logger.LogInfo($"Registering body replacement type {type.Name} to suit name {suitNameToReplace}.");
+            Instance.Logger.LogInfo($"Registering body replacement type {type.GetType()} to suit name {suitNameToReplace}.");
             
             RegisteredModelReplacements.Add(suitNameToReplace, type);
         }
@@ -186,6 +211,12 @@ namespace ModelReplacement
                 {
                     //return;
                     if (__instance.playerSteamId == 0) { return; }
+                    if(RegisteredModelReplacementOverride != null)
+                    {
+                        SetPlayerModelReplacement(__instance, RegisteredModelReplacementOverride);
+                        return;
+                    }
+
                     int suitID = __instance.currentSuitID;
                     string suitName = StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName;
                     suitName = suitName.ToLower().Replace(" ", "");
