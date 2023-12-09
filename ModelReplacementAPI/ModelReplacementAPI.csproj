@@ -9,7 +9,11 @@
     <LangVersion>latest</LangVersion>
     <LethalCompanyPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\</LethalCompanyPath>
   </PropertyGroup>
-
+  
+  <PropertyGroup>
+    <RestoreSources>$(RestoreSources);https://api.nuget.org/v3/index.json;https://nuget.bepinex.dev/v3/index.json</RestoreSources>
+  </PropertyGroup>
+  
   <PropertyGroup>
     <ReferencePath>$(ReferencePath);$(LethalCompanyPath)\Lethal Company_Data\Managed</ReferencePath>
     <ReferencePath>$(ReferencePath);$(LethalCompanyPath)\Lethal Company_Data\Plugins</ReferencePath>
