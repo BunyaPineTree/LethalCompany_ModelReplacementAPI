@@ -40,6 +40,8 @@ See the attached Hatsune Miku model replacement for a more concrete example. It 
 
 * At this point you should be able to enter the game and see your model replacement at work, but many of the bones likely have incorrect rotations. You can use [ModelReplacementTool](ModelReplacementTool/Build) to manually set rotation offsets for each bone.
 
+* See the Miku example project for a demonstration on how your registered model replacement can make use of bepinex configs. 
+
 Other features
 -
 * More Company cosmetic support
