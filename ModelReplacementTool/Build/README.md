@@ -1,4 +1,4 @@
-# ModelReplacementTool v0.9.2
+# ModelReplacementTool v0.9.3
 ### A tool to simplify setting bone offsets for replacement Models
 ModelReplacementAPI requires a boneMap.json file that contains a map between player model bones and replacement model bones, with an optional rotation offset. 
 Because rotations are represented as quaternions, it is difficult or impossible for the user to guess what their offset should be without extended testing. 
@@ -27,6 +27,8 @@ For more info on the ModelReplacementAPI, see https://github.com/BunyaPineTree/L
 - numerous others. 
 
 ## Changelog
+	- v0.9.3
+		- Patch for changing field names in ModelReplacementAPI
 	- v0.9.2
 		- Added symmetry options, note that not all models benefit from this.
 		- Added the ability to remove the helmet/arms (Which are not a part of the character model's renderers)
