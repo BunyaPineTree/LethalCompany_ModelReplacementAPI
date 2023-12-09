@@ -13,9 +13,16 @@ using UnityEngine;
 namespace ModelReplacement
 {
 
+    internal static class PluginInfo
+    {
+        public const string GUID = "meow.ModelReplacementAPI";
+        public const string NAME = "ModelReplacementAPI";
+        public const string VERSION = "1.2.4";
+        public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
+    }
 
 
-    [BepInPlugin("meow.ModelReplacementAPI", "ModelReplacementAPI", "1.2.4")]
+    [BepInPlugin(PluginInfo.GUID, PluginInfo.NAME, PluginInfo.VERSION)]
     [BepInDependency("me.swipez.melonloader.morecompany", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("verity.3rdperson", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("LCThirdPerson", BepInDependency.DependencyFlags.SoftDependency)]
