@@ -1,121 +1,63 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
-        <AssemblyName>ModelReplacementAPI</AssemblyName>
-        <Description>A template for Lethal Company</Description>
-        <Version>1.0.0</Version>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <LangVersion>latest</LangVersion>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>ModelReplacementAPI</AssemblyName>
+    <Description>A template for Lethal Company</Description>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <LethalCompanyPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\</LethalCompanyPath>
+  </PropertyGroup>
 
-    <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
-        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
-    </ItemGroup>
+  <PropertyGroup>
+    <ReferencePath>$(ReferencePath);$(LethalCompanyPath)\Lethal Company_Data\Managed</ReferencePath>
+    <ReferencePath>$(ReferencePath);$(LethalCompanyPath)\Lethal Company_Data\Plugins</ReferencePath>
+    <ReferencePath>$(ReferencePath);$(LethalCompanyPath)\BepinEx\plugins</ReferencePath>
+  </PropertyGroup>
 
-<ItemGroup>
-      <Reference Include="0Harmony">
-        <HintPath>..\Libraries\0Harmony.dll</HintPath>
-      </Reference>
-      <Reference Include="3rdPerson">
-        <HintPath>..\Libraries\3rdPerson.dll</HintPath>
-      </Reference>
-      <Reference Include="Assembly-CSharp">
-        <HintPath>..\Libraries\Assembly-CSharp_publicized.dll</HintPath>
-      </Reference>
-      <Reference Include="LCThirdPerson">
-        <HintPath>..\Libraries\LCThirdPerson.dll</HintPath>
-      </Reference>
+  <ItemGroup>
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.Core" Version="5.*" IncludeAssets="compile" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" IncludeAssets="compile" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" IncludeAssets="compile" />
+    <PackageReference Include="UnityEngine.Modules" Version="2022.3.9" IncludeAssets="compile" />
+    <PackageReference Include="HarmonyX" Version="2.10.2" IncludeAssets="compile" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp" Publicize="true">
+      <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="3rdPerson">
+      <HintPath>..\Libraries\3rdPerson.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="LCThirdPerson">
+      <HintPath>..\Libraries\LCThirdPerson.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="MoreCompany">
       <HintPath>..\Libraries\MoreCompany.dll</HintPath>
+      <Private>false</Private>
     </Reference>
-      <Reference Include="BepInEx">
-        <HintPath>..\Libraries\BepInEx.dll</HintPath>
-      </Reference>
-      <Reference Include="BepInEx.Harmony">
-        <HintPath>..\Libraries\BepInEx.Harmony.dll</HintPath>
-      </Reference>
-      <Reference Include="BepInEx.Preloader">
-        <HintPath>..\Libraries\BepInEx.Preloader.dll</HintPath>
-      </Reference>
-      <Reference Include="HarmonyXInterop">
-        <HintPath>..\Libraries\HarmonyXInterop.dll</HintPath>
-      </Reference>
-      <Reference Include="Mono.Cecil">
-        <HintPath>..\Libraries\Mono.Cecil.dll</HintPath>
-      </Reference>
-      <Reference Include="Mono.Cecil.Mdb">
-        <HintPath>..\Libraries\Mono.Cecil.Mdb.dll</HintPath>
-      </Reference>
-      <Reference Include="Mono.Cecil.Pdb">
-        <HintPath>..\Libraries\Mono.Cecil.Pdb.dll</HintPath>
-      </Reference>
-      <Reference Include="Mono.Cecil.Rocks">
-        <HintPath>..\Libraries\Mono.Cecil.Rocks.dll</HintPath>
-      </Reference>
-      <Reference Include="MonoMod.RuntimeDetour">
-        <HintPath>..\Libraries\MonoMod.RuntimeDetour.dll</HintPath>
-      </Reference>
-      <Reference Include="MonoMod.Utils">
-        <HintPath>..\Libraries\MonoMod.Utils.dll</HintPath>
-      </Reference>
-      <Reference Include="Newtonsoft.Json">
-        <HintPath>..\Libraries\Newtonsoft.Json.dll</HintPath>
-      </Reference>
-      <Reference Include="Unity.InputSystem">
-        <HintPath>..\Libraries\Unity.InputSystem.dll</HintPath>
-      </Reference>
-      <Reference Include="Unity.InputSystem.ForUI">
-        <HintPath>..\Libraries\Unity.InputSystem.ForUI.dll</HintPath>
-      </Reference>
-      <Reference Include="Unity.Netcode.Runtime">
-        <HintPath>..\Libraries\Unity.Netcode.Runtime.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine">
-        <HintPath>..\Libraries\UnityEngine.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.AnimationModule">
-        <HintPath>..\Libraries\UnityEngine.AnimationModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.AssetBundleModule">
-        <HintPath>..\Libraries\UnityEngine.AssetBundleModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.AudioModule">
-        <HintPath>..\Libraries\UnityEngine.AudioModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.ClusterInputModule">
-        <HintPath>..\Libraries\UnityEngine.ClusterInputModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.CoreModule">
-        <HintPath>..\Libraries\UnityEngine.CoreModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.IMGUIModule">
-        <HintPath>..\Libraries\UnityEngine.IMGUIModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.InputLegacyModule">
-        <HintPath>..\Libraries\UnityEngine.InputLegacyModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.InputModule">
-        <HintPath>..\Libraries\UnityEngine.InputModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.PhysicsModule">
-        <HintPath>..\Libraries\UnityEngine.PhysicsModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.TextRenderingModule">
-        <HintPath>..\Libraries\UnityEngine.TextRenderingModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.UI">
-        <HintPath>..\Libraries\UnityEngine.UI.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.UIElementsModule">
-        <HintPath>..\Libraries\UnityEngine.UIElementsModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.UIElementsNativeModule">
-        <HintPath>..\Libraries\UnityEngine.UIElementsNativeModule.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-	
-<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(ProjDir)Build&quot; &#xD;&#xA;copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\plugins\BunyaPineTree-ModelReplacementAPI&quot;     " />
-  </Target>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Unity.InputSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.Netcode.Runtime">
+      <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Unity.Netcode.Runtime.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  
+  <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+      <Exec Command="copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(ProjDir)Build&quot; &#xD;&#xA;copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\plugins\BunyaPineTree-ModelReplacementAPI&quot;     " />
+  </Target>-->
 </Project>
