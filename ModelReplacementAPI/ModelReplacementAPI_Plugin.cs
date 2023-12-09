@@ -18,6 +18,7 @@ namespace ModelReplacement
     [BepInPlugin("meow.ModelReplacementAPI", "ModelReplacementAPI", "1.2.4")]
     [BepInDependency("me.swipez.melonloader.morecompany", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("verity.3rdperson", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("LCThirdPerson", BepInDependency.DependencyFlags.SoftDependency)]
     public class ModelReplacementAPI : BaseUnityPlugin
     {
 
@@ -33,6 +34,8 @@ namespace ModelReplacement
 
             moreCompanyPresent = Chainloader.PluginInfos.ContainsKey("me.swipez.melonloader.morecompany");
             thirdPersonPresent = Chainloader.PluginInfos.ContainsKey("verity.3rdperson");
+            LCthirdPersonPresent = Chainloader.PluginInfos.ContainsKey("LCThirdPerson");
+
 
             Harmony harmony = new Harmony("meow.ModelReplacementAPI");
             harmony.PatchAll();
@@ -41,7 +44,7 @@ namespace ModelReplacement
         //soft dependencies
         public static bool moreCompanyPresent;
         public static bool thirdPersonPresent;
-
+        public static bool LCthirdPersonPresent;
 
 
         public static ModelReplacementAPI Instance;
@@ -55,6 +58,7 @@ namespace ModelReplacement
         /// <param name="type"></param>
         public static void RegisterSuitModelReplacement(string suitNameToReplace, Type type)
         {
+            suitNameToReplace = suitNameToReplace.ToLower().Replace(" ", "");
             if (!(type.IsSubclassOf(typeof(BodyReplacementBase))))
             {
                 Instance.Logger.LogError($"Cannot register body replacement type {type.Name}, must inherit from BodyReplacementBase");
@@ -67,6 +71,7 @@ namespace ModelReplacement
             }
 
             Instance.Logger.LogInfo($"Registering body replacement type {type.Name} to suit name {suitNameToReplace}.");
+            
             RegisteredModelReplacements.Add(suitNameToReplace, type);
         }
 
@@ -182,10 +187,8 @@ namespace ModelReplacement
                     //return;
                     if (__instance.playerSteamId == 0) { return; }
                     int suitID = __instance.currentSuitID;
-                    //Console.WriteLine(string.Format("player change suit on Update {0} suitID {1} ({2})", __instance.playerUsername, suitID, StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName));
-
                     string suitName = StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName;
-
+                    suitName = suitName.ToLower().Replace(" ", "");
                     if (RegisteredModelReplacements.ContainsKey(suitName))
                     {
                         Type type = RegisteredModelReplacements[suitName];

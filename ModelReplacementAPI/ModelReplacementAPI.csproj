@@ -23,6 +23,9 @@
       <Reference Include="Assembly-CSharp">
         <HintPath>..\Libraries\Assembly-CSharp_publicized.dll</HintPath>
       </Reference>
+      <Reference Include="LCThirdPerson">
+        <HintPath>..\Libraries\LCThirdPerson.dll</HintPath>
+      </Reference>
     <Reference Include="MoreCompany">
       <HintPath>..\Libraries\MoreCompany.dll</HintPath>
     </Reference>

@@ -1,5 +1,6 @@
 ﻿using _3rdPerson.Helper;
 using GameNetcodeStuff;
+using LCThirdPerson;
 using ModelReplacement;
 using MoreCompany.Cosmetics;
 using System;
@@ -20,12 +21,24 @@ namespace ModelReplacement
         public bool renderBase = false;
         public bool renderModel = false;
 
+        public bool DangerousViewState()
+        {
+            return ThirdPersonCamera.ViewState;
+        }
+        public bool DangerousLCViewState()
+        {
+            return ThirdPersonPlugin.Instance.Enabled;
+        }
         public bool RenderBodyReplacement()
         {
             if(!localPlayer) { return true; }
             if (ModelReplacementAPI.thirdPersonPresent)
             {
-                return ThirdPersonCamera.ViewState;
+                return DangerousViewState();
+            }
+            if(ModelReplacementAPI.LCthirdPersonPresent)
+            {
+                return DangerousLCViewState();
             }
             return false;
         }
@@ -276,6 +289,17 @@ namespace ModelReplacement
         {
             if (!ModelReplacementAPI.moreCompanyPresent) { return; }
             if (!moreCompanyCosmeticsReparented) { return; } //no cosmetics parented
+            DangerousUnparent();
+        }
+        private void AttemptReparentMoreCompanyCosmetics()
+        {
+            if (!ModelReplacementAPI.moreCompanyPresent) { return; }
+            if (moreCompanyCosmeticsReparented) { return; } //cosmetics already parented
+            DangerousParent();
+
+        }
+        private void DangerousUnparent()
+        {
             var applications = controller.gameObject.GetComponentsInChildren<CosmeticApplication>();
             if ((applications.Any()))
             {
@@ -289,14 +313,11 @@ namespace ModelReplacement
                 }
             }
             Console.WriteLine(" unparent done");
+
         }
-
-        private void AttemptReparentMoreCompanyCosmetics()
+        private void DangerousParent()
         {
-            if(!ModelReplacementAPI.moreCompanyPresent) { return; }
-            if (moreCompanyCosmeticsReparented) { return; } //cosmetics already parented
             var applications = controller.gameObject.GetComponentsInChildren<CosmeticApplication>();
-
             if ((applications.Any()))
             {
                 foreach (var application in applications)
@@ -314,7 +335,7 @@ namespace ModelReplacement
                     application.chest = mappedChest;
                     application.lowerArmRight = mappedLowerArmRight;
                     application.hip = mappedHip;
-                    application.shinLeft = mappedShinLeft;  
+                    application.shinLeft = mappedShinLeft;
                     application.shinRight = mappedShinRight;
 
                     foreach (var cosmeticInstance in application.spawnedCosmetics)
@@ -349,7 +370,6 @@ namespace ModelReplacement
                 }
                 Console.WriteLine(" reparent done");
             }
-           
         }
 
         void Update()

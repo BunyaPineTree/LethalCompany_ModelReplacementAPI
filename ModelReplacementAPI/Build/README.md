@@ -1,4 +1,4 @@
-# ModelReplacementAPI v1.3.3
+# ModelReplacementAPI v1.4.0
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -6,6 +6,9 @@ For more info on making model replacements see https://github.com/BunyaPineTree/
 
 
 ## Changelog
+	- v1.4.0
+		- Added support for LCThirdPerson
+		- Fixed bug that caused incompatibility with the More Suits mod. Thanks to Linkoid for the fix. 
 	- v1.3.2
 		- Fixed models appearing in first person for users without the 3rdperson mod.
 	- v1.3.0
