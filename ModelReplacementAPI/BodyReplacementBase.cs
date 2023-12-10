@@ -207,28 +207,28 @@ namespace ModelReplacement
             Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
             Material gameMat = controller.thisPlayerModel.GetComponent<SkinnedMeshRenderer>().sharedMaterial;
             gameMat = new Material(gameMat); // Copy so that shared material isn't accidently changed by overriders of GetReplacementMaterial()
-			Dictionary<Material, Material> matMap = new();
+            Dictionary<Material, Material> matMap = new();
             List<Material> materials = ListPool<Material>.Get();
-			foreach (Renderer renderer in renderers)
-			{
-				renderer.GetSharedMaterials(materials);
-				for (int i = 0; i < materials.Count; i++)
+            foreach (Renderer renderer in renderers)
+            {
+                renderer.GetSharedMaterials(materials);
+                for (int i = 0; i < materials.Count; i++)
                 {
-					Material mat = materials[i];
-					if (!matMap.TryGetValue(mat, out var replacementMat))
+                    Material mat = materials[i];
+                    if (!matMap.TryGetValue(mat, out var replacementMat))
                     {
                         matMap[mat] = replacementMat = GetReplacementMaterial(gameMat, mat);
-					}
+                    }
                     materials[i] = replacementMat;
-				}
+                }
                 renderer.SetMaterials(materials);
             }
             ListPool<Material>.Release(materials);
 
 
 
-			//Set scripts missing from assetBundle
-			try
+            //Set scripts missing from assetBundle
+            try
             {
                 AddModelScripts();
             }
@@ -287,28 +287,29 @@ namespace ModelReplacement
             "Unlit/",
         };
 
-		/// <summary>
-		/// Get a replacement material based on the original game material, and the material found on the replacing model.
-		/// </summary>
-		/// <param name="gameMaterial">The equivalent material on the model being replaced.</param>
-		/// <param name="modelMaterial">The material on the replacing model.</param>
-		/// <returns>The replacement material created from the <see cref="gameMaterial"/> and the <see cref="modelMaterial"/></returns>
-		protected virtual Material GetReplacementMaterial(Material gameMaterial, Material modelMaterial)
+        /// <summary>
+        /// Get a replacement material based on the original game material, and the material found on the replacing model.
+        /// </summary>
+        /// <param name="gameMaterial">The equivalent material on the model being replaced.</param>
+        /// <param name="modelMaterial">The material on the replacing model.</param>
+        /// <returns>The replacement material created from the <see cref="gameMaterial"/> and the <see cref="modelMaterial"/></returns>
+        protected virtual Material GetReplacementMaterial(Material gameMaterial, Material modelMaterial)
         {
             if (shaderPrefixWhitelist.Any(prefix => modelMaterial.shader.name.StartsWith(prefix)))
             {
                 return modelMaterial;
-			}
+            }
             else
-			{
-				Material replacementMat = new Material(gameMaterial);
-				replacementMat.color = modelMaterial.color;
-				replacementMat.mainTexture = modelMaterial.mainTexture;
-				replacementMat.mainTextureOffset = modelMaterial.mainTextureOffset;
-				replacementMat.mainTextureScale = modelMaterial.mainTextureScale;
+            {
+                // XXX Ideally this material would be manually destroyed when the replacement model is destroyed.
+                Material replacementMat = new Material(gameMaterial);
+                replacementMat.color = modelMaterial.color;
+                replacementMat.mainTexture = modelMaterial.mainTexture;
+                replacementMat.mainTextureOffset = modelMaterial.mainTextureOffset;
+                replacementMat.mainTextureScale = modelMaterial.mainTextureScale;
                 return replacementMat;
-			}
-		}
+            }
+        }
 
         public void ReparentModel()
         {
