@@ -13,7 +13,7 @@ using UnityEngine;
 namespace ModelReplacement
 {
 
-    internal static class PluginInfo
+    public static class PluginInfo
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
