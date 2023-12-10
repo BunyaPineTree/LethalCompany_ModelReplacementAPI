@@ -41,9 +41,6 @@
       <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
     </Reference>
-    <Reference Include="MoreCompany">
-      <HintPath>..\Libraries\MoreCompany.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.InputSystem">
       <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Unity.InputSystem.dll</HintPath>
     </Reference>

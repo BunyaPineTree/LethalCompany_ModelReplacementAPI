@@ -31,7 +31,7 @@ namespace ModelReplacement
 
         private void Awake()
         {
-            Logger = BepInEx.Logging.Logger.CreateLogSource("ModelReplacementAPI");
+            Logger = BepInEx.Logging.Logger.CreateLogSource(PluginInfo.GUID);
             // Plugin startup logic
             bool flag = ModelReplacementAPI.Instance == null;
             if (flag)
@@ -44,9 +44,9 @@ namespace ModelReplacement
             LCthirdPersonPresent = Chainloader.PluginInfos.ContainsKey("LCThirdPerson");
 
 
-            Harmony harmony = new Harmony("meow.ModelReplacementAPI");
+            Harmony harmony = new Harmony(PluginInfo.GUID);
             harmony.PatchAll();
-            Logger.LogInfo($"Plugin {"meow.ModelReplacementAPI"} is loaded!");
+            Logger.LogInfo($"Plugin {PluginInfo.GUID} is loaded!");
         }
         //soft dependencies
         public static bool moreCompanyPresent;
