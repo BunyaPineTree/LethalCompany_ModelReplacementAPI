@@ -61,7 +61,7 @@
     </Reference>
   </ItemGroup>
   
-  <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
       <Exec Command="copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(ProjDir)Build&quot; &#xD;&#xA;copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\plugins\BunyaPineTree-ModelReplacementAPI&quot;     " />
-  </Target>-->
+  </Target>
 </Project>

@@ -19,7 +19,8 @@ namespace HatsuneMikuModelReplacement
 
         public override GameObject LoadAssetsAndReturnModel()
         {
-            string model_name = "HatsuneMikuNT 1";
+            string model_name = "HatsuneMikuNT";
+            //string model_name = "HatsuneMikuNT 1";
             return Assets.MainAssetBundle.LoadAsset<GameObject>(model_name);
         }
 

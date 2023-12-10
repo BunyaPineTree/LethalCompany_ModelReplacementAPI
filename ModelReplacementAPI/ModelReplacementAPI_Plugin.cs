@@ -6,6 +6,7 @@ using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 //using System.Numerics;
 //using static System.Net.Mime.MediaTypeNames;
 //using System.Numerics;
@@ -157,8 +158,12 @@ namespace ModelReplacement
                 {
                     if(a.renderLocalDebug && !a.renderModel) { return; }
 
-                    Transform parentObject = a.Map.ItemHolder();
-                    Vector3 positionOffset = a.Map.ItemHolderPositionOffset();
+                    //Transform parentObject = a.Map.ItemHolder();
+                    //Vector3 positionOffset = a.Map.ItemHolderPositionOffset();
+
+                    Transform parentObject = a.avatarUpdater.itemHolderTransform;
+                    Vector3 positionOffset = a.avatarUpdater.itemHolderPositionOffset / 50 ;
+                    Quaternion rotationOffset = a.avatarUpdater.itemHolderRotationOffset;
 
                     __instance.transform.rotation = parentObject.rotation;
                     __instance.transform.Rotate(__instance.itemProperties.rotationOffset);
@@ -166,6 +171,7 @@ namespace ModelReplacement
                     Vector3 vector = __instance.itemProperties.positionOffset + positionOffset;
                     vector = parentObject.rotation * vector;
                     __instance.transform.position += vector;
+                    __instance.transform.rotation *= rotationOffset;
 
 
                 }

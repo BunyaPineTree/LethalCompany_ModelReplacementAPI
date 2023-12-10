@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Text;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
+using ModelReplacement.AvatarBodyUpdater;
 
 namespace ModelReplacement
 {
@@ -48,6 +49,7 @@ namespace ModelReplacement
         public string boneMapJsonStr;
         public string jsonPath;
 
+        public AvatarUpdater avatarUpdater;
         public BoneMap Map;
         public PlayerControllerB controller;
         public GameObject replacementModel;
@@ -108,7 +110,7 @@ namespace ModelReplacement
             deadBody = bodyinfo.gameObject;
             SkinnedMeshRenderer deadBodyRenderer = deadBody.GetComponentInChildren<SkinnedMeshRenderer>();
             replacementDeadBody = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
-            
+            replacementDeadBody.name += $"(Ragdoll)";
             //Enable all renderers in replacement ragdoll and disable renderer for original
             foreach (Renderer renderer in replacementDeadBody.GetComponentsInChildren<Renderer>())
             {
@@ -201,6 +203,7 @@ namespace ModelReplacement
 
 
             //Fix Materials
+            
             Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
             Material gameMat = controller.thisPlayerModel.GetComponent<SkinnedMeshRenderer>().material;
             foreach (Renderer renderer in renderers)
@@ -215,6 +218,7 @@ namespace ModelReplacement
                 renderer.SetMaterials(mats);
 
             }
+            
 
             //Set scripts missing from assetBundle
             try
@@ -229,6 +233,7 @@ namespace ModelReplacement
 
             //Instantiate model
             replacementModel = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
+            replacementModel.name += $"({controller.playerUsername})";
             SetRenderers(false); //Initializing with renderers disabled prevents model flickering for local player
             replacementModel.transform.localPosition = new Vector3(0, 0, 0);
             replacementModel.SetActive(true);
@@ -252,9 +257,14 @@ namespace ModelReplacement
             Map = BoneMap.DeserializeFromJson(boneMapJsonStr);
 
             //Map bones and parent mdodel
-            Map.MapBones(controller.thisPlayerModel.bones, GetMappedBones());
-            Map.SetBodyReplacement(this);
-            ReparentModel();
+            avatarUpdater = new AvatarUpdater();
+            avatarUpdater.AssignModelReplacement(controller.gameObject, replacementModel);
+
+            //Map.MapBones(controller.thisPlayerModel.bones, GetMappedBones());
+            //Map.SetBodyReplacement(this);
+            //ReparentModel();
+
+
 
             //Misc fixes
             var gameObjects = controller.gameObject.GetComponentsInChildren<MeshRenderer>();
@@ -374,13 +384,14 @@ namespace ModelReplacement
 
         void Update()
         {
+            /*
             if (Map.CompletelyDestroyed())
             {
                 Console.WriteLine("Map gone destroy");
                 Destroy(this);
                 return;
             }
-
+            */
             
             //Local/Nonlocal player logic
             if (!renderLocalDebug)
@@ -411,7 +422,8 @@ namespace ModelReplacement
 
 
             //Update replacement model
-            Map.UpdateModelbones();
+            avatarUpdater.LateUpdate();
+            //Map.UpdateModelbones();
             AttemptReparentMoreCompanyCosmetics();
 
             //Ragdoll
