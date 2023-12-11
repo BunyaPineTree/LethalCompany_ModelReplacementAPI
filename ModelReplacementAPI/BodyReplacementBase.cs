@@ -20,7 +20,7 @@ namespace ModelReplacement
 {
     public abstract class BodyReplacementBase : MonoBehaviour
     {
-        public bool localPlayer => (ulong)StartOfRound.Instance.thisClientPlayerId == controller.playerClientId;
+        private bool localPlayer => (ulong)StartOfRound.Instance.thisClientPlayerId == controller.playerClientId;
 
         //Debug variables, if renderLocalDebug is true, renderBase and renderModel will decide what to render
         public bool renderLocalDebug = false;
@@ -28,35 +28,32 @@ namespace ModelReplacement
         public bool renderModel = false;
 
         //Base components
-        public AvatarUpdater avatar;
-        public PlayerControllerB controller;
-        public GameObject replacementModel;
+        public AvatarUpdater avatar { get; private set; }
+        public PlayerControllerB controller { get; private set; }
+        protected GameObject replacementModel;
 
         //Ragdoll components
-        public AvatarUpdater ragdollAvatar;
-        public GameObject deadBody = null;
-        public GameObject replacementDeadBody = null;
+        public AvatarUpdater ragdollAvatar { get; private set; }
+        protected GameObject deadBody = null;
+        protected GameObject replacementDeadBody = null;
 
         //Misc components
         private MeshRenderer nameTagObj = null;
         private MeshRenderer nameTagObj2 = null;
-        public bool moreCompanyCosmeticsReparented = false;
+        private bool moreCompanyCosmeticsReparented = false;
 
-        //Settings
-        internal bool ragdollEnabled = true;
-        internal bool bloodDecalsEnabled = true;
 
         /// <summary>
         /// Loads necessary assets from assetBundle, perform any necessary modifications on the replacement character model and return it.
         /// </summary>
         /// <returns>Model replacement GameObject</returns>
-        public abstract GameObject LoadAssetsAndReturnModel();
+        protected abstract GameObject LoadAssetsAndReturnModel();
 
 
         /// <summary>
         /// AssetBundles do not supply scripts that are not supported by the base game. Override to set custom scripts. 
         /// </summary>
-        public virtual void AddModelScripts()
+        protected virtual void AddModelScripts()
         {
 
         }
@@ -125,6 +122,7 @@ namespace ModelReplacement
 
             // Assign the avatar
             avatar = new AvatarUpdater();
+            ragdollAvatar = new AvatarUpdater();
             avatar.AssignModelReplacement(controller.gameObject, replacementModel);
 
 
@@ -164,7 +162,6 @@ namespace ModelReplacement
                 }
                 SetRenderers(renderModel);
             }
-            Console.WriteLine("upa");
 
             // Handle Ragdoll creation and destruction
             GameObject deadBody = null;
@@ -182,14 +179,12 @@ namespace ModelReplacement
                 Destroy(replacementDeadBody);
                 replacementDeadBody = null;
             }
-            Console.WriteLine("upb");
 
             // Update replacement models
             avatar.UpdateModel();
             ragdollAvatar.UpdateModel();
             AttemptReparentMoreCompanyCosmetics();
 
-            Console.WriteLine("upc");
 
             AfterUpdate();
         }
@@ -240,6 +235,9 @@ namespace ModelReplacement
                 replacementMat.mainTexture = modelMaterial.mainTexture;
                 replacementMat.mainTextureOffset = modelMaterial.mainTextureOffset;
                 replacementMat.mainTextureScale = modelMaterial.mainTextureScale;
+                replacementMat.SetShaderKeywords(modelMaterial.GetShaderKeywords());
+                replacementMat.SetEnabledKeywords(modelMaterial.GetEnabledKeywords());
+
                 return replacementMat;
             }
         }
@@ -285,6 +283,10 @@ namespace ModelReplacement
             }
         }
 
+        /// <summary>
+        /// Returns whether the local client can render the body replacement. This is a factor of whether the body replacement belongs to their player, and whether they are using a third person mod. 
+        /// </summary>
+        /// <returns></returns>
         public bool RenderBodyReplacement()
         {
             if (!localPlayer) { return true; }
@@ -317,11 +319,11 @@ namespace ModelReplacement
         }
 
         #region Third Person Mods Logic
-        public bool DangerousViewState()
+        private bool DangerousViewState()
         {
             return ThirdPersonCamera.ViewState;
         }
-        public bool DangerousLCViewState()
+        private bool DangerousLCViewState()
         {
             return ThirdPersonPlugin.Instance.Enabled;
         }

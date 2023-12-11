@@ -148,6 +148,13 @@ namespace ModelReplacement
             }
         }
 
+        public static void RefreshAllModelReplacements()
+        {
+
+
+
+        }
+
 
         [HarmonyPatch(typeof(GrabbableObject))]
         public class LocateHeldObjectsOnModelReplacementPatch

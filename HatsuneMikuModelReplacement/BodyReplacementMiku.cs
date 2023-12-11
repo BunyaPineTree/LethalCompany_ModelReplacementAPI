@@ -9,7 +9,7 @@ namespace HatsuneMikuModelReplacement
     public class BodyReplacementMiku : BodyReplacementBase
     {
         //Required universally
-        public override GameObject LoadAssetsAndReturnModel()
+        protected override GameObject LoadAssetsAndReturnModel()
         {
             string model_name = "HatsuneMikuNT";
             //string model_name = "HatsuneMikuNT 1";
@@ -17,7 +17,7 @@ namespace HatsuneMikuModelReplacement
         }
 
         //Miku mod specific scripts. 
-        public override void AddModelScripts()
+        protected override void AddModelScripts()
         {
             //Set dynamic bones
             var skirtBones = replacementModel.GetComponentsInChildren<Transform>().Where(x => x.name.Contains("Skirt")).Where(x => x.name.Contains("001"));

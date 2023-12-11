@@ -17,7 +17,7 @@ namespace ModelReplacement.AvatarBodyUpdater
         public Quaternion itemHolderRotationOffset { get; private set; } = Quaternion.identity;
         public Transform itemHolderTransform { get; private set; } = null;
 
-        bool hasUpperChest = false;
+        private bool hasUpperChest = false;
 
 
         public void AssignModelReplacement(GameObject player ,GameObject replacement)
@@ -69,7 +69,7 @@ namespace ModelReplacement.AvatarBodyUpdater
                 var offset = modelBone.GetComponent<RotationOffset>();
                 if (offset) { modelBone.rotation *= offset.offset; }
 
-                if(playerBone.name == "spine")
+                if((playerBone.name == "spine") || (playerBone.name.Contains("PlayerRagdoll")))
                 {
                     modelBone.position = playerBone.position;
                     var offset2 = modelBone.GetComponent<TranslationOffset>();
@@ -92,10 +92,14 @@ namespace ModelReplacement.AvatarBodyUpdater
                 if (hasUpperChest) { return replacementAnimator.GetBoneTransform(HumanBodyBones.Chest); }
                 else { return null; }
             }
-            if (boneName == "spine.003")
+            if (boneName == "spine.003") 
             {
                 if (hasUpperChest) { return replacementAnimator.GetBoneTransform(HumanBodyBones.UpperChest); }
                 else { return replacementAnimator.GetBoneTransform(HumanBodyBones.Chest); }
+            }
+            if (boneName.Contains("PlayerRagdoll")) // Ragdoll Hips
+            {
+                return replacementAnimator.GetBoneTransform(HumanBodyBones.Hips);
             }
             if (modelToAvatarBone.ContainsKey(boneName))
             {
