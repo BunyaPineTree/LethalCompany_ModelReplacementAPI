@@ -21,14 +21,13 @@ namespace ModelReplacement
     public abstract class BodyReplacementBase : MonoBehaviour
     {
         public bool localPlayer => (ulong)StartOfRound.Instance.thisClientPlayerId == controller.playerClientId;
+
+        //Debug variables, if renderLocalDebug is true, renderBase and renderModel will decide what to render
         public bool renderLocalDebug = false;
         public bool renderBase = false;
         public bool renderModel = false;
 
-        // public bool alive = true;
-        public string boneMapJsonStr;
-        public string jsonPath;
-
+        //Base components
         public AvatarUpdater avatar;
         public PlayerControllerB controller;
         public GameObject replacementModel;
@@ -57,22 +56,24 @@ namespace ModelReplacement
         /// <summary>
         /// AssetBundles do not supply scripts that are not supported by the base game. Override to set custom scripts. 
         /// </summary>
+        public virtual void AddModelScripts()
+        {
 
-        public virtual void AddModelScripts(){}
+        }
 
 
         void Awake()
         {
             
             controller = base.GetComponent<PlayerControllerB>();
-            Console.WriteLine($"Awake {controller.playerUsername}");
+            ModelReplacementAPI.Instance.Logger.LogInfo($"Awake {controller.playerUsername}");
 
-            //Load model
+            // Load model
             replacementModel = LoadAssetsAndReturnModel();
 
             if(replacementModel == null)
             {
-                Console.WriteLine("LoadAssetsAndReturnModel() returned null. Verify that your assetbundle works and your asset name is correct. ");
+                ModelReplacementAPI.Instance.Logger.LogFatal("LoadAssetsAndReturnModel() returned null. Verify that your assetbundle works and your asset name is correct. ");
             }
 
 
@@ -98,7 +99,7 @@ namespace ModelReplacement
             }
             ListPool<Material>.Release(materials);
 
-            //Set scripts missing from assetBundle
+            // Set scripts missing from assetBundle
             try
             {
                 AddModelScripts();
@@ -109,32 +110,105 @@ namespace ModelReplacement
             }
             
 
-            //Instantiate model
+            // Instantiate model
             replacementModel = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
             replacementModel.name += $"({controller.playerUsername})";
             SetRenderers(false); //Initializing with renderers disabled prevents model flickering for local player
             replacementModel.transform.localPosition = new Vector3(0, 0, 0);
             replacementModel.SetActive(true);
 
-            //sets y extents to the same size for player body and extents.
+            // Sets y extents to the same size for player body and extents.
             var playerBodyExtents = controller.thisPlayerModel.bounds.extents;
             float scale = playerBodyExtents.y / GetBounds().extents.y;
             replacementModel.transform.localScale *= scale;
 
 
-            //Assign the avatar
+            // Assign the avatar
             avatar = new AvatarUpdater();
             avatar.AssignModelReplacement(controller.gameObject, replacementModel);
 
 
-            //Misc fixes
+            // Misc fixes
             var gameObjects = controller.gameObject.GetComponentsInChildren<MeshRenderer>();
             nameTagObj = gameObjects.Where(x => x.gameObject.name == "LevelSticker").First();
             nameTagObj2 = gameObjects.Where(x => x.gameObject.name == "BetaBadge").First();
-            Console.WriteLine($"AwakeEnd {controller.playerUsername}");
+            ModelReplacementAPI.Instance.Logger.LogInfo($"AwakeEnd {controller.playerUsername}");
 
             AfterAwake();
         }
+
+		void Update()
+        {
+            // Local/Nonlocal renderer logic
+            if (!renderLocalDebug)
+            {
+
+                if (RenderBodyReplacement()) {
+                    SetRenderers(true);
+                    controller.thisPlayerModel.enabled = false; // Don't render original body if non-local player
+                    controller.thisPlayerModelLOD1.enabled = false;
+                    controller.thisPlayerModelLOD2.enabled = false;
+                    nameTagObj.enabled = false;
+                    nameTagObj2.enabled = false;
+                }
+                else
+                {
+                    SetRenderers(false); // Don't render model replacement if local player
+                }
+            }
+            else
+            {
+                foreach (Renderer renderer in controller.gameObject.GetComponentsInChildren<SkinnedMeshRenderer>())
+                {
+                    renderer.enabled = renderBase;
+                }
+                SetRenderers(renderModel);
+            }
+            Console.WriteLine("upa");
+
+            // Handle Ragdoll creation and destruction
+            GameObject deadBody = null;
+            try
+            {
+                deadBody = controller.deadBody.gameObject;
+            }
+            catch { }
+            if ((deadBody) && (replacementDeadBody == null))
+            {
+                CreateAndParentRagdoll(controller.deadBody);
+            }
+            if ((replacementDeadBody) && (deadBody == null))
+            {
+                Destroy(replacementDeadBody);
+                replacementDeadBody = null;
+            }
+            Console.WriteLine("upb");
+
+            // Update replacement models
+            avatar.UpdateModel();
+            ragdollAvatar.UpdateModel();
+            AttemptReparentMoreCompanyCosmetics();
+
+            Console.WriteLine("upc");
+
+            AfterUpdate();
+        }
+
+        void OnDestroy()
+        {
+            ModelReplacementAPI.Instance.Logger.LogInfo($"Destroy body component for {controller.playerUsername}");
+            controller.thisPlayerModel.enabled = true;
+            controller.thisPlayerModelLOD1.enabled = true;
+            controller.thisPlayerModelLOD2.enabled = true;
+           
+            nameTagObj.enabled = true;
+            nameTagObj2.enabled = true;
+            AttemptUnparentMoreCompanyCosmetics();
+
+            Destroy(replacementModel);
+            Destroy(replacementDeadBody);
+        }
+
 
         /// <summary> Shaders with any of these prefixes won't be automatically converted. </summary>
         private static readonly string[] shaderPrefixWhitelist =
@@ -168,77 +242,6 @@ namespace ModelReplacement
                 replacementMat.mainTextureScale = modelMaterial.mainTextureScale;
                 return replacementMat;
             }
-        }
-
-		void Update()
-        {
-            //Local/Nonlocal renderer logic
-            if (!renderLocalDebug)
-            {
-
-                if (RenderBodyReplacement()) {
-                    SetRenderers(true);
-                    controller.thisPlayerModel.enabled = false; //Don't render original body if non-local player
-                    controller.thisPlayerModelLOD1.enabled = false;
-                    controller.thisPlayerModelLOD2.enabled = false;
-                    nameTagObj.enabled = false;
-                    nameTagObj2.enabled = false;
-                }
-                else
-                {
-                    SetRenderers(false); // Don't render model replacement if local player
-                }
-            }
-            else
-            {
-                foreach (Renderer renderer in controller.gameObject.GetComponentsInChildren<SkinnedMeshRenderer>())
-                {
-                    renderer.enabled = renderBase;
-                }
-                SetRenderers(renderModel);
-            }
-
-
-            //Handle Ragdoll creation and destruction
-            GameObject deadBody = null;
-            try
-            {
-                deadBody = controller.deadBody.gameObject;
-            }
-            catch { }
-            if ((deadBody) && (replacementDeadBody == null))
-            {
-                CreateAndParentRagdoll(controller.deadBody);
-            }
-            if ((replacementDeadBody) && (deadBody == null))
-            {
-                Destroy(replacementDeadBody);
-                replacementDeadBody = null;
-            }
-
-
-            //Update replacement models
-            avatar.UpdateModel();
-            ragdollAvatar.UpdateModel();
-            AttemptReparentMoreCompanyCosmetics();
-            
-
-            AfterUpdate();
-        }
-
-        void OnDestroy()
-        {
-            Console.WriteLine($"Destroy body component for {controller.playerUsername}");
-            controller.thisPlayerModel.enabled = true;
-            controller.thisPlayerModelLOD1.enabled = true;
-            controller.thisPlayerModelLOD2.enabled = true;
-           
-            nameTagObj.enabled = true;
-            nameTagObj2.enabled = true;
-            AttemptUnparentMoreCompanyCosmetics();
-
-            Destroy(replacementModel);
-            Destroy(replacementDeadBody);
         }
 
         private void CreateAndParentRagdoll(DeadBodyInfo bodyinfo)
@@ -351,8 +354,6 @@ namespace ModelReplacement
                     moreCompanyCosmeticsReparented = false;
                 }
             }
-            Console.WriteLine(" unparent done");
-
         }
         private void DangerousParent()
         {
@@ -361,7 +362,6 @@ namespace ModelReplacement
             {
                 foreach (var application in applications)
                 {
-                    Console.WriteLine($"{application.GetType().Name} parent");
                     Transform mappedHead = avatar.GetAvatarTransformFromBoneName("spine.004");
                     Transform mappedChest = avatar.GetAvatarTransformFromBoneName("spine.003");
                     Transform mappedLowerArmRight = avatar.GetAvatarTransformFromBoneName("arm.R_lower");
@@ -377,34 +377,7 @@ namespace ModelReplacement
                     application.shinLeft = mappedShinLeft;
                     application.shinRight = mappedShinRight;
 
-                    foreach (var cosmeticInstance in application.spawnedCosmetics)
-                    {
-                        Transform transform = null;
-                        switch (cosmeticInstance.cosmeticType)
-                        {
-                            case CosmeticType.HAT:
-                                transform = application.head;
-                                break;
-                            case CosmeticType.CHEST:
-                                transform = application.chest;
-                                break;
-                            case CosmeticType.R_LOWER_ARM:
-                                transform = application.lowerArmRight;
-                                break;
-                            case CosmeticType.HIP:
-                                transform = application.hip;
-                                break;
-                            case CosmeticType.L_SHIN:
-                                transform = application.shinLeft;
-                                break;
-                            case CosmeticType.R_SHIN:
-                                transform = application.shinRight;
-                                break;
-                        }
-                        cosmeticInstance.transform.position = transform.position;
-                        cosmeticInstance.transform.rotation = transform.rotation;
-                        cosmeticInstance.transform.parent = transform;
-                    }
+                    application.RefreshAllCosmeticPositions();
                     moreCompanyCosmeticsReparented = true;
                 }
                 Console.WriteLine(" reparent done");
@@ -417,7 +390,7 @@ namespace ModelReplacement
         {
 
         }
-        void Start()
+        void Start() //Only exists for posterity
         {
             AfterStart();
         }

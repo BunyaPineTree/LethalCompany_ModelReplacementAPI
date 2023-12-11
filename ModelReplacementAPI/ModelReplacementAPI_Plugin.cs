@@ -18,7 +18,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "1.2.4";
+        public const string VERSION = "1.4.1";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 

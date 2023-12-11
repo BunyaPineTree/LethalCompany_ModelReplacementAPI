@@ -1,16 +1,7 @@
 ﻿using BepInEx;
-using System.Linq;
-using System.Runtime.InteropServices;
-using Zeekerss;
-using Zeekerss.Core;
-using Zeekerss.Core.Singletons;
-using System;
 using HarmonyLib;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using System.Reflection;
-using GameNetcodeStuff;
 using ModelReplacement;
 using BepInEx.Configuration;
 
@@ -28,9 +19,11 @@ namespace HatsuneMikuModelReplacement
     {
         public static ConfigFile config;
 
+        // Universal config options 
         public static ConfigEntry<bool> enableMikuForAllSuits { get; private set; }
         public static ConfigEntry<string> suitNamesToEnableMiku { get; private set; }
         
+        // Miku model specific config options
         public static ConfigEntry<float> UpdateRate { get; private set; }
         public static ConfigEntry<float> distanceDisablePhysics { get; private set; }
         public static ConfigEntry<bool> disablePhysicsAtRange { get; private set; }
@@ -39,11 +32,11 @@ namespace HatsuneMikuModelReplacement
         {
             enableMikuForAllSuits = config.Bind<bool>("Suits to Replace Settings", "Enable Miku for all Suits", false, "Enable to replace every suit with Miku. Set to false to specify suits");
             suitNamesToEnableMiku = config.Bind<string>("Suits to Replace Settings", "Suits to enable Miku for", "Default,Orange suit", "Enter a comma separated list of suit names.(Additionally, [Green suit,Pajama suit,Hazard suit])");
+
             UpdateRate = config.Bind<float>("Dynamic Bone Settings", "Update rate", 60, "Refreshes dynamic bones more times per second the higher the number");
             disablePhysicsAtRange = config.Bind<bool>("Dynamic Bone Settings", "Disable physics at range", false, "Enable to disable physics past the specified range");
             distanceDisablePhysics = config.Bind<float>("Dynamic Bone Settings", "Distance to disable physics", 20, "If Disable physics at range is enabled, this is the range after which physics is disabled.");
             
-
         }
         private void Awake()
         {
