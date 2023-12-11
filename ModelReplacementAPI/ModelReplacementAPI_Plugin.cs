@@ -161,9 +161,9 @@ namespace ModelReplacement
                     //Transform parentObject = a.Map.ItemHolder();
                     //Vector3 positionOffset = a.Map.ItemHolderPositionOffset();
 
-                    Transform parentObject = a.avatarUpdater.itemHolderTransform;
-                    Vector3 positionOffset = a.avatarUpdater.itemHolderPositionOffset / 50 ;
-                    Quaternion rotationOffset = a.avatarUpdater.itemHolderRotationOffset;
+                    Transform parentObject = a.avatar.itemHolderTransform;
+                    Vector3 positionOffset = a.avatar.itemHolderPositionOffset / 50 ;
+                    Quaternion rotationOffset = a.avatar.itemHolderRotationOffset;
 
                     __instance.transform.rotation = parentObject.rotation;
                     __instance.transform.Rotate(__instance.itemProperties.rotationOffset);

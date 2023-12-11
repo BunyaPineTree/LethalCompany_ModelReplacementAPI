@@ -15,8 +15,6 @@ namespace HatsuneMikuModelReplacement
 {
     public class BodyReplacementMiku : BodyReplacementBase
     {
-        public override string boneMapFileName => "boneMapMiku.json";
-
         public override GameObject LoadAssetsAndReturnModel()
         {
             string model_name = "HatsuneMikuNT";

@@ -22,172 +22,44 @@ namespace ModelReplacement
         public bool renderBase = false;
         public bool renderModel = false;
 
-        public bool DangerousViewState()
-        {
-            return ThirdPersonCamera.ViewState;
-        }
-        public bool DangerousLCViewState()
-        {
-            return ThirdPersonPlugin.Instance.Enabled;
-        }
-        public bool RenderBodyReplacement()
-        {
-            if(!localPlayer) { return true; }
-            if (ModelReplacementAPI.thirdPersonPresent)
-            {
-                return DangerousViewState();
-            }
-            if(ModelReplacementAPI.LCthirdPersonPresent)
-            {
-                return DangerousLCViewState();
-            }
-            return false;
-        }
-
-
         // public bool alive = true;
         public string boneMapJsonStr;
         public string jsonPath;
 
-        public AvatarUpdater avatarUpdater;
-        public BoneMap Map;
+        public AvatarUpdater avatar;
         public PlayerControllerB controller;
         public GameObject replacementModel;
 
         //Ragdoll components
+        public AvatarUpdater ragdollAvatar;
         public GameObject deadBody = null;
         public GameObject replacementDeadBody = null;
-        public BoneMap ragDollMap;
 
         //Misc components
         private MeshRenderer nameTagObj = null;
         private MeshRenderer nameTagObj2 = null;
-        public bool flagReparentObject = false;
         public bool moreCompanyCosmeticsReparented = false;
 
         //Settings
         internal bool ragdollEnabled = true;
         internal bool bloodDecalsEnabled = true;
-        
 
-
-        //Abstract methods 
-        /// <summary>
-        /// the name of this model replacement's bone mapping .json. Can be anywhere in the bepinex/plugins folder
-        /// </summary>
-        public abstract string boneMapFileName { get; }
         /// <summary>
         /// Loads necessary assets from assetBundle, perform any necessary modifications on the replacement character model and return it.
         /// </summary>
         /// <returns>Model replacement GameObject</returns>
         public abstract GameObject LoadAssetsAndReturnModel();
 
+
         /// <summary>
-        /// AssetBundles do not supply scripts that are not supported by the base game. Programmatically set custom scripts here. 
+        /// AssetBundles do not supply scripts that are not supported by the base game. Override to set custom scripts. 
         /// </summary>
-        public abstract void AddModelScripts();
-
-
-        //Virtual methods
-        /// <summary>
-        /// An array containing at least the bone transforms mapped in boneMap.json. By base it returns all bones in a model. Override if your model has multiple armatures with duplicate bone names.  
-        /// </summary>
-        /// <returns></returns>
-        public virtual Transform[] GetMappedBones()
-        {
-            List<Transform> result = new List<Transform>();
-            foreach (SkinnedMeshRenderer renderer in replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>())
-            {
-                result.AddRange(renderer.bones);
-            }
-            return result.ToArray();
-        }
-
-        private void CreateAndParentRagdoll(DeadBodyInfo bodyinfo)
-        {
-            Console.WriteLine($"Death on {controller.playerUsername}");
-
-            deadBody = bodyinfo.gameObject;
-            SkinnedMeshRenderer deadBodyRenderer = deadBody.GetComponentInChildren<SkinnedMeshRenderer>();
-            replacementDeadBody = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
-            replacementDeadBody.name += $"(Ragdoll)";
-            //Enable all renderers in replacement ragdoll and disable renderer for original
-            foreach (Renderer renderer in replacementDeadBody.GetComponentsInChildren<Renderer>())
-            {
-                renderer.enabled = true;
-            }
-            deadBodyRenderer.enabled = false;
-
-
-            //Get all bones in the replacement model and select the ones whose names are in GetMappedBones
-            List<Transform> replacementDeadBodyBones = new List<Transform>();
-            foreach (SkinnedMeshRenderer renderer in replacementDeadBody.GetComponentsInChildren<SkinnedMeshRenderer>())
-            {
-                replacementDeadBodyBones.AddRange(renderer.bones);
-            }
-            Transform[] originalMappedBones = this.GetMappedBones();
-            Transform[] replacementMappedBones = new Transform[originalMappedBones.Length];
-            for (int i = 0; i < originalMappedBones.Length; i++)
-			{
-                replacementMappedBones[i] = replacementDeadBodyBones.Where((Transform bone) => bone.name == originalMappedBones[i].name).First();
-
-            }
-
-            //Make the replacement ragdoll bonemap and parent it
-            ragDollMap = BoneMap.DeserializeFromJson(boneMapJsonStr);
-            ragDollMap.MapBones(deadBodyRenderer.bones, replacementMappedBones);
-            ragDollMap.RootBone().parent = deadBodyRenderer.rootBone;
-            ragDollMap.RootBone().localPosition = Vector3.zero + Map.PositionOffset();
-
-            //blood decals not working
-            foreach (var item in bodyinfo.bodyBloodDecals)
-            {
-                Transform bloodParentTransform = item.transform.parent;
-
-                Transform mappedTranform = ragDollMap.GetMappedTransform(bloodParentTransform.name);
-                if (mappedTranform)
-                {
-                    UnityEngine.Object.Instantiate<GameObject>(item, mappedTranform);
-                }
-
-
-            }
-
-        }
-
-        public virtual void AfterAwake()
+        public virtual void AddModelScripts()
         {
 
         }
-        public void RepairModel()
-        {
-            if (controller == null)
-            {
-                ModelReplacementAPI.Instance.Logger.LogFatal($" {GetType()} PlayerControllerB is null");
-                Destroy(this);
-            }
-            if (controller.thisPlayerModel == null)
-            {
-                ModelReplacementAPI.Instance.Logger.LogFatal($"{controller.name} {GetType()} base player model is null");
-                Destroy(this);
-            }
-            if (replacementModel == null)
-            {
-                ModelReplacementAPI.Instance.Logger.LogFatal($"{controller.name} {GetType()} replacementModel is null");
-                Destroy(this);
-            }
-   
-            Map = BoneMap.DeserializeFromJson(boneMapJsonStr);
-            Map.MapBones(controller.thisPlayerModel.bones, GetMappedBones());
-            Map.SetBodyReplacement(this);
-            ReparentModel();
-            moreCompanyCosmeticsReparented = false;
 
-
-        }
-
-
-        internal void Awake()
+        void Awake()
         {
             
             controller = base.GetComponent<PlayerControllerB>();
@@ -198,7 +70,7 @@ namespace ModelReplacement
 
             if(replacementModel == null)
             {
-                Console.WriteLine("LoadAssetsAndReturnModel returned null");
+                Console.WriteLine("LoadAssetsAndReturnModel() returned null. Verify that your assetbundle works and your asset name is correct. ");
             }
 
 
@@ -243,27 +115,10 @@ namespace ModelReplacement
             float scale = playerBodyExtents.y / GetBounds().extents.y;
             replacementModel.transform.localScale *= scale;
 
-            //Get all .jsons in plugins and select the matching boneMap.json, deserialize bone map
-            string pluginsPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            while (true)
-            {
-                string folder = new DirectoryInfo(pluginsPath).Name;
-                if(folder == "plugins") { break; }
-                pluginsPath = Path.Combine(pluginsPath, "..");
-            }
-            string[] allfiles = Directory.GetFiles(pluginsPath, "*.json", SearchOption.AllDirectories);
-            jsonPath = allfiles.Where(f => Path.GetFileName(f) == boneMapFileName).First();
-            boneMapJsonStr = File.ReadAllText(jsonPath);
-            Map = BoneMap.DeserializeFromJson(boneMapJsonStr);
 
-            //Map bones and parent mdodel
-            avatarUpdater = new AvatarUpdater();
-            avatarUpdater.AssignModelReplacement(controller.gameObject, replacementModel);
-
-            //Map.MapBones(controller.thisPlayerModel.bones, GetMappedBones());
-            //Map.SetBodyReplacement(this);
-            //ReparentModel();
-
+            //Assign the avatar
+            avatar = new AvatarUpdater();
+            avatar.AssignModelReplacement(controller.gameObject, replacementModel);
 
 
             //Misc fixes
@@ -275,26 +130,160 @@ namespace ModelReplacement
             AfterAwake();
         }
 
-        public void ReparentModel()
+        void Update()
         {
-            Map.RootBone().parent = controller.thisPlayerModel.rootBone;
-            Map.RootBone().localPosition = Vector3.zero + Map.PositionOffset();
+            //Local/Nonlocal renderer logic
+            if (!renderLocalDebug)
+            {
+
+                if (RenderBodyReplacement()) {
+                    SetRenderers(true);
+                    controller.thisPlayerModel.enabled = false; //Don't render original body if non-local player
+                    controller.thisPlayerModelLOD1.enabled = false;
+                    controller.thisPlayerModelLOD2.enabled = false;
+                    nameTagObj.enabled = false;
+                    nameTagObj2.enabled = false;
+                }
+                else
+                {
+                    SetRenderers(false); // Don't render model replacement if local player
+                }
+            }
+            else
+            {
+                foreach (Renderer renderer in controller.gameObject.GetComponentsInChildren<SkinnedMeshRenderer>())
+                {
+                    renderer.enabled = renderBase;
+                }
+                SetRenderers(renderModel);
+            }
+
+
+            //Handle Ragdoll creation and destruction
+            GameObject deadBody = null;
+            try
+            {
+                deadBody = controller.deadBody.gameObject;
+            }
+            catch { }
+            if ((deadBody) && (replacementDeadBody == null))
+            {
+                CreateAndParentRagdoll(controller.deadBody);
+            }
+            if ((replacementDeadBody) && (deadBody == null))
+            {
+                Destroy(replacementDeadBody);
+                replacementDeadBody = null;
+            }
+
+
+            //Update replacement models
+            avatar.UpdateModel();
+            ragdollAvatar.UpdateModel();
+            AttemptReparentMoreCompanyCosmetics();
+            
+
+            AfterUpdate();
         }
 
-        public virtual void AfterStart()
+        void OnDestroy()
         {
+            Console.WriteLine($"Destroy body component for {controller.playerUsername}");
+            controller.thisPlayerModel.enabled = true;
+            controller.thisPlayerModelLOD1.enabled = true;
+            controller.thisPlayerModelLOD2.enabled = true;
+           
+            nameTagObj.enabled = true;
+            nameTagObj2.enabled = true;
+            AttemptUnparentMoreCompanyCosmetics();
+
+            Destroy(replacementModel);
+            Destroy(replacementDeadBody);
+        }
+
+        private void CreateAndParentRagdoll(DeadBodyInfo bodyinfo)
+        {
+            deadBody = bodyinfo.gameObject;
+
+            //Instantiate replacement Ragdoll and assign the avatar
+            SkinnedMeshRenderer deadBodyRenderer = deadBody.GetComponentInChildren<SkinnedMeshRenderer>();
+            replacementDeadBody = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
+            replacementDeadBody.name += $"(Ragdoll)";
+            ragdollAvatar.AssignModelReplacement(deadBody, replacementDeadBody);
+
+
+            //Enable all renderers in replacement ragdoll and disable renderer for original
+            foreach (Renderer renderer in replacementDeadBody.GetComponentsInChildren<Renderer>())
+            {
+                renderer.enabled = true;
+            }
+            deadBodyRenderer.enabled = false;
+
+  
+            //blood decals not working
+            foreach (var item in bodyinfo.bodyBloodDecals)
+            {
+                Transform bloodParentTransform = item.transform.parent;
+
+                Transform mappedTranform = ragdollAvatar.GetAvatarTransformFromBoneName(bloodParentTransform.name);
+                if (mappedTranform)
+                {
+                    UnityEngine.Object.Instantiate<GameObject>(item, mappedTranform);
+                }
+            }
 
         }
-        void Start()
+
+        private void SetRenderers(bool enabled)
         {
-            AfterStart();
+            foreach (Renderer renderer in replacementModel.GetComponentsInChildren<Renderer>())
+            {
+                renderer.enabled = enabled;
+            }
         }
 
-        public virtual void AfterUpdate()
+        public bool RenderBodyReplacement()
         {
-
+            if (!localPlayer) { return true; }
+            if (ModelReplacementAPI.thirdPersonPresent)
+            {
+                return DangerousViewState();
+            }
+            if (ModelReplacementAPI.LCthirdPersonPresent)
+            {
+                return DangerousLCViewState();
+            }
+            return false;
         }
-        
+
+        private Bounds GetBounds()
+        {
+            Bounds bounds = new Bounds();
+            var allBounds = replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>().Select(r => r.bounds);
+
+            float maxX = allBounds.OrderByDescending(x => x.max.x).First().max.x;
+            float maxY = allBounds.OrderByDescending(x => x.max.y).First().max.y;
+            float maxZ = allBounds.OrderByDescending(x => x.max.z).First().max.z;
+
+            float minX = allBounds.OrderBy(x => x.min.x).First().min.x;
+            float minY = allBounds.OrderBy(x => x.min.y).First().min.y;
+            float minZ = allBounds.OrderBy(x => x.min.z).First().min.z;
+
+            bounds.SetMinMax(new Vector3(minX, minY, minZ), new Vector3(maxZ, maxY, maxZ));
+            return bounds;
+        }
+
+        #region Third Person Mods Logic
+        public bool DangerousViewState()
+        {
+            return ThirdPersonCamera.ViewState;
+        }
+        public bool DangerousLCViewState()
+        {
+            return ThirdPersonPlugin.Instance.Enabled;
+        }
+        #endregion
+        #region MoreCompany Cosmetics Logic
         private void AttemptUnparentMoreCompanyCosmetics()
         {
             if (!ModelReplacementAPI.moreCompanyPresent) { return; }
@@ -333,12 +322,12 @@ namespace ModelReplacement
                 foreach (var application in applications)
                 {
                     Console.WriteLine($"{application.GetType().Name} parent");
-                    Transform mappedHead = Map.GetMappedTransform("spine.004");
-                    Transform mappedChest = Map.GetMappedTransform("spine.003");
-                    Transform mappedLowerArmRight = Map.GetMappedTransform("arm.R_lower");
-                    Transform mappedHip = Map.GetMappedTransform("spine");
-                    Transform mappedShinLeft = Map.GetMappedTransform("shin.L");
-                    Transform mappedShinRight = Map.GetMappedTransform("shin.R");
+                    Transform mappedHead = avatar.GetAvatarTransformFromBoneName("spine.004");
+                    Transform mappedChest = avatar.GetAvatarTransformFromBoneName("spine.003");
+                    Transform mappedLowerArmRight = avatar.GetAvatarTransformFromBoneName("arm.R_lower");
+                    Transform mappedHip = avatar.GetAvatarTransformFromBoneName("spine");
+                    Transform mappedShinLeft = avatar.GetAvatarTransformFromBoneName("shin.L");
+                    Transform mappedShinRight = avatar.GetAvatarTransformFromBoneName("shin.R");
 
 
                     application.head = mappedHead;
@@ -381,126 +370,26 @@ namespace ModelReplacement
                 Console.WriteLine(" reparent done");
             }
         }
+        #endregion
 
-        void Update()
+        // Optional user methods
+        protected virtual void AfterStart()
         {
-            /*
-            if (Map.CompletelyDestroyed())
-            {
-                Console.WriteLine("Map gone destroy");
-                Destroy(this);
-                return;
-            }
-            */
-            
-            //Local/Nonlocal player logic
-            if (!renderLocalDebug)
-            {
 
-                if (RenderBodyReplacement()) {
-                    SetRenderers(true);
-                    controller.thisPlayerModel.enabled = false; //Don't render original body if non-local player
-                    controller.thisPlayerModelLOD1.enabled = false;
-                    controller.thisPlayerModelLOD2.enabled = false;
-                    nameTagObj.enabled = false;
-                    nameTagObj2.enabled = false;
-                    
-                }
-                else
-                {
-                    SetRenderers(false); // Don't render model replacement if local player
-                }
-            }
-            else
-            {
-                foreach (Renderer renderer in controller.gameObject.GetComponentsInChildren<SkinnedMeshRenderer>())
-                {
-                    renderer.enabled = renderBase;
-                }
-                SetRenderers(renderModel);
-            }
-
-
-            //Update replacement model
-            avatarUpdater.LateUpdate();
-            //Map.UpdateModelbones();
-            AttemptReparentMoreCompanyCosmetics();
-
-            //Ragdoll
-            if (ragdollEnabled)
-            {
-                GameObject deadBody = null;
-                try
-                {
-                    deadBody = controller.deadBody.gameObject;
-                }
-                catch { }
-
-                if ((deadBody) && (replacementDeadBody == null))
-                {
-                    CreateAndParentRagdoll(controller.deadBody);
-                }
-                if (replacementDeadBody)
-                {
-                    if (deadBody == null)
-                    {
-                        Destroy(replacementDeadBody);
-                        replacementDeadBody = null;
-                        ragDollMap = null;
-                    }
-                    else
-                    {
-                        ragDollMap.UpdateModelbones();
-                    }
-                }
-            }
-                
-            //HeldItem handled through patch
-            
-            AfterUpdate();
         }
-
-        void OnDestroy()
+        void Start()
         {
-            Console.WriteLine($"Destroy body component for {controller.playerUsername}");
-            controller.thisPlayerModel.enabled = true;
-            controller.thisPlayerModelLOD1.enabled = true;
-            controller.thisPlayerModelLOD2.enabled = true;
-           
-            nameTagObj.enabled = true;
-            nameTagObj2.enabled = true;
-            AttemptUnparentMoreCompanyCosmetics();
-
-            Destroy(replacementModel);
-            Destroy(replacementDeadBody);
+            AfterStart();
         }
-
-        private void SetRenderers(bool enabled)
+        protected virtual void AfterAwake()
         {
-            foreach (Renderer renderer in replacementModel.GetComponentsInChildren<Renderer>())
-            {
-                renderer.enabled = enabled;
-            }
-        }
 
-        private Bounds GetBounds()
+        }
+        protected virtual void AfterUpdate()
         {
-            Bounds bounds = new Bounds();
-            var allBounds = replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>().Select(r => r.bounds);
 
-            float maxX = allBounds.OrderByDescending(x => x.max.x).First().max.x;
-            float maxY = allBounds.OrderByDescending(x => x.max.y).First().max.y;
-            float maxZ = allBounds.OrderByDescending(x => x.max.z).First().max.z;
-
-            float minX = allBounds.OrderBy(x => x.min.x).First().min.x;
-            float minY = allBounds.OrderBy(x => x.min.y).First().min.y;
-            float minZ = allBounds.OrderBy(x => x.min.z).First().min.z;
-
-            bounds.SetMinMax(new Vector3(minX, minY, minZ), new Vector3(maxZ, maxY, maxZ));
-            return bounds;
         }
-
-
+       
 
     }
 }

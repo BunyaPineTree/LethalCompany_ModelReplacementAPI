@@ -7,33 +7,17 @@ using UnityEngine;
 
 namespace ModelReplacement.AvatarBodyUpdater
 {
-    public class TranslationOffset: MonoBehaviour
-    {
-        public Vector3 offset = Vector3.zero;
-
-    }
-    public class RotationOffset : MonoBehaviour
-    {
-        public Quaternion offset = Quaternion.identity;
-
-    }
-    public class ItemOffset : MonoBehaviour
-    {
-        public Quaternion rOffset = Quaternion.identity;
-        public Vector3 pOffset = Vector3.zero;
-    }
 
     public class AvatarUpdater
     {
         private SkinnedMeshRenderer playerModelRenderer = null;
         private Animator replacementAnimator = null;
 
-        public Vector3 itemHolderPositionOffset = Vector3.zero;
-        public Quaternion itemHolderRotationOffset = Quaternion.identity;
-        public Transform itemHolderTransform = null;
+        public Vector3 itemHolderPositionOffset { get; private set; } = Vector3.zero;
+        public Quaternion itemHolderRotationOffset { get; private set; } = Quaternion.identity;
+        public Transform itemHolderTransform { get; private set; } = null;
 
         bool hasUpperChest = false;
-        bool isDeadBody = false;
 
 
         public void AssignModelReplacement(GameObject player ,GameObject replacement)
@@ -42,12 +26,10 @@ namespace ModelReplacement.AvatarBodyUpdater
             if (controller)
             {
                 playerModelRenderer = controller.thisPlayerModel;
-                isDeadBody = false;
             }
             else
             {
                 playerModelRenderer = player.GetComponentInChildren<SkinnedMeshRenderer>();
-                isDeadBody = true;
             }
 
             if (playerModelRenderer == null)
@@ -55,8 +37,6 @@ namespace ModelReplacement.AvatarBodyUpdater
                 Console.WriteLine("failed to start AvatarBodyUpdater");
                 return;
             }
-
-
 
             replacementAnimator = replacement.GetComponentInChildren<Animator>();
 
@@ -69,10 +49,16 @@ namespace ModelReplacement.AvatarBodyUpdater
             hasUpperChest = (upperChestTransform != null);
         }
 
-        public void LateUpdate()
+
+        public bool CanUpdateModel()
         {
-            if(playerModelRenderer == null) { return; }
-            if(replacementAnimator == null) { return; }
+            if (playerModelRenderer == null) { return false; }
+            if (replacementAnimator == null) { return false; }
+            return true;
+        }
+        public void UpdateModel()
+        {
+            if (!CanUpdateModel()) { return; }
 
             foreach(Transform playerBone in playerModelRenderer.bones)
             {
@@ -92,10 +78,9 @@ namespace ModelReplacement.AvatarBodyUpdater
                 }
             }
 
-            
         }
 
-        private Transform GetAvatarTransformFromBoneName(string boneName)
+        public Transform GetAvatarTransformFromBoneName(string boneName)
         {
             //Special logic is required here. The player model has 5 central bones.
             // Spine, spine.001, spine.002, spine.003,   spine.004, corresponding to 
@@ -171,4 +156,22 @@ namespace ModelReplacement.AvatarBodyUpdater
                 {"toe.R" , HumanBodyBones.RightToes},
         };
     }
+
+    #region model setup classes
+    public class TranslationOffset : MonoBehaviour
+    {
+        public Vector3 offset = Vector3.zero;
+
+    }
+    public class RotationOffset : MonoBehaviour
+    {
+        public Quaternion offset = Quaternion.identity;
+
+    }
+    public class ItemOffset : MonoBehaviour
+    {
+        public Quaternion rOffset = Quaternion.identity;
+        public Vector3 pOffset = Vector3.zero;
+    }
+    #endregion
 }
