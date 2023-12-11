@@ -4,14 +4,17 @@ using LCThirdPerson;
 using ModelReplacement;
 using MoreCompany.Cosmetics;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using ModelReplacement.AvatarBodyUpdater;
+using UnityEngine.Pool;
 
 namespace ModelReplacement
 {
@@ -54,10 +57,9 @@ namespace ModelReplacement
         /// <summary>
         /// AssetBundles do not supply scripts that are not supported by the base game. Override to set custom scripts. 
         /// </summary>
-        public virtual void AddModelScripts()
-        {
 
-        }
+        public virtual void AddModelScripts(){}
+
 
         void Awake()
         {
@@ -74,23 +76,27 @@ namespace ModelReplacement
             }
 
 
-            //Fix Materials
-            
+            // Fix Materials
             Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
-            Material gameMat = controller.thisPlayerModel.GetComponent<SkinnedMeshRenderer>().material;
+            Material gameMat = controller.thisPlayerModel.GetComponent<SkinnedMeshRenderer>().sharedMaterial;
+            gameMat = new Material(gameMat); // Copy so that shared material isn't accidently changed by overriders of GetReplacementMaterial()
+            Dictionary<Material, Material> matMap = new();
+            List<Material> materials = ListPool<Material>.Get();
             foreach (Renderer renderer in renderers)
             {
-                List<Material> mats = new List<Material>();
-                foreach (Material material in renderer.materials)
+                renderer.GetSharedMaterials(materials);
+                for (int i = 0; i < materials.Count; i++)
                 {
-                    Material mat = new Material(gameMat);
-                    mat.mainTexture = material.mainTexture;
-                    mats.Add(mat);
+                    Material mat = materials[i];
+                    if (!matMap.TryGetValue(mat, out var replacementMat))
+                    {
+                        matMap[mat] = replacementMat = GetReplacementMaterial(gameMat, mat);
+                    }
+                    materials[i] = replacementMat;
                 }
-                renderer.SetMaterials(mats);
-
+                renderer.SetMaterials(materials);
             }
-            
+            ListPool<Material>.Release(materials);
 
             //Set scripts missing from assetBundle
             try
@@ -130,7 +136,41 @@ namespace ModelReplacement
             AfterAwake();
         }
 
-        void Update()
+        /// <summary> Shaders with any of these prefixes won't be automatically converted. </summary>
+        private static readonly string[] shaderPrefixWhitelist =
+        {
+            "HDRP/",
+            "GUI/",
+            "Sprites/",
+            "UI/",
+            "Unlit/",
+        };
+
+        /// <summary>
+        /// Get a replacement material based on the original game material, and the material found on the replacing model.
+        /// </summary>
+        /// <param name="gameMaterial">The equivalent material on the model being replaced.</param>
+        /// <param name="modelMaterial">The material on the replacing model.</param>
+        /// <returns>The replacement material created from the <see cref="gameMaterial"/> and the <see cref="modelMaterial"/></returns>
+        protected virtual Material GetReplacementMaterial(Material gameMaterial, Material modelMaterial)
+        {
+            if (shaderPrefixWhitelist.Any(prefix => modelMaterial.shader.name.StartsWith(prefix)))
+            {
+                return modelMaterial;
+            }
+            else
+            {
+                // XXX Ideally this material would be manually destroyed when the replacement model is destroyed.
+                Material replacementMat = new Material(gameMaterial);
+                replacementMat.color = modelMaterial.color;
+                replacementMat.mainTexture = modelMaterial.mainTexture;
+                replacementMat.mainTextureOffset = modelMaterial.mainTextureOffset;
+                replacementMat.mainTextureScale = modelMaterial.mainTextureScale;
+                return replacementMat;
+            }
+        }
+
+		void Update()
         {
             //Local/Nonlocal renderer logic
             if (!renderLocalDebug)

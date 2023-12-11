@@ -14,9 +14,16 @@ using UnityEngine.TextCore.Text;
 namespace ModelReplacement
 {
 
+    public static class PluginInfo
+    {
+        public const string GUID = "meow.ModelReplacementAPI";
+        public const string NAME = "ModelReplacementAPI";
+        public const string VERSION = "1.2.4";
+        public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
+    }
 
 
-    [BepInPlugin("meow.ModelReplacementAPI", "ModelReplacementAPI", "1.2.4")]
+    [BepInPlugin(PluginInfo.GUID, PluginInfo.NAME, PluginInfo.VERSION)]
     [BepInDependency("me.swipez.melonloader.morecompany", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("verity.3rdperson", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("LCThirdPerson", BepInDependency.DependencyFlags.SoftDependency)]
@@ -25,7 +32,7 @@ namespace ModelReplacement
 
         private void Awake()
         {
-            Logger = BepInEx.Logging.Logger.CreateLogSource("ModelReplacementAPI");
+            Logger = BepInEx.Logging.Logger.CreateLogSource(PluginInfo.GUID);
             // Plugin startup logic
             bool flag = ModelReplacementAPI.Instance == null;
             if (flag)
@@ -38,9 +45,9 @@ namespace ModelReplacement
             LCthirdPersonPresent = Chainloader.PluginInfos.ContainsKey("LCThirdPerson");
 
 
-            Harmony harmony = new Harmony("meow.ModelReplacementAPI");
+            Harmony harmony = new Harmony(PluginInfo.GUID);
             harmony.PatchAll();
-            Logger.LogInfo($"Plugin {"meow.ModelReplacementAPI"} is loaded!");
+            Logger.LogInfo($"Plugin {PluginInfo.GUID} is loaded!");
         }
         //soft dependencies
         public static bool moreCompanyPresent;
