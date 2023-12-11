@@ -59,7 +59,7 @@ namespace HatsuneMikuModelReplacement
                 ModelReplacementAPI.RegisterModelReplacementOverride(typeof(BodyReplacementMiku));
             }
 
-            
+                
 
             Harmony harmony = new Harmony("meow.MikuModelReplacement");
             harmony.PatchAll();
