@@ -223,6 +223,7 @@ namespace ModelReplacement
         /// <returns>The replacement material created from the <see cref="gameMaterial"/> and the <see cref="modelMaterial"/></returns>
         protected virtual Material GetReplacementMaterial(Material gameMaterial, Material modelMaterial)
         {
+        
             if (shaderPrefixWhitelist.Any(prefix => modelMaterial.shader.name.StartsWith(prefix)))
             {
                 return modelMaterial;

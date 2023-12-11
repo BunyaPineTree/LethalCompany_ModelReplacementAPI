@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3589347564
+CRC: 123615044
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6187793d7461cf492b0d2deb53dfe2f5
+    Hash: 4e1b5fc5ee55b609113787deb1bc26ce
   TypeTreeHash:
     serializedVersion: 2
-    Hash: af3d19039b6e89d70d9374c57540e8ef
+    Hash: 375c24a90765d26af3bd4f63bd58d818
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 6187793d7461cf492b0d2deb53dfe2f5
+    Hash: 4e1b5fc5ee55b609113787deb1bc26ce
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -29,6 +29,8 @@ ClassTypes:
 - Class: 95
   Script: {instanceID: 0}
 - Class: 114
+  Script: {fileID: 11500000, guid: 008ad30e5afb3544982e42aeba321a6d, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: f3e8d552d012afe4a894ad0a9837d2c1, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 28574ec56423b25449d582b628389c82, type: 3}
@@ -44,9 +46,9 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/HatsuneMikuNT.prefab
 - Assets/MikuModel/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_Outline_Opaque.shader
 - Assets/MikuModel/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_Transparent_Mask.shader
+- Assets/HatsuneMikuNT.prefab
 - Assets/MikuModel/HatsuneMikuNT 1.prefab
 - Assets/MikuModel/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_Outline_Transparent.shader
 - Assets/MikuModel/Unlit_WF_ShaderSuite/Shaders/Unlit_WF_UnToon_Opaque.shader
