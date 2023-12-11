@@ -1,28 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
-using Newtonsoft.Json;
 using System.Linq;
-using System.Xml;
-using System.IO;
-using GameNetcodeStuff;
-using UnityEngine.PlayerLoop;
-using System.Reflection;
 using ModelReplacement;
 
 namespace HatsuneMikuModelReplacement
 {
     public class BodyReplacementMiku : BodyReplacementBase
     {
-        public override string boneMapFileName => "boneMapMiku.json";
-
+        //Required universally
         public override GameObject LoadAssetsAndReturnModel()
         {
-            string model_name = "HatsuneMikuNT 1";
+            string model_name = "HatsuneMikuNT";
+            //string model_name = "HatsuneMikuNT 1";
             return Assets.MainAssetBundle.LoadAsset<GameObject>(model_name);
         }
 
+        //Miku mod specific scripts. 
         public override void AddModelScripts()
         {
             //Set dynamic bones

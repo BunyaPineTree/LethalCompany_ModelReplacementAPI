@@ -6,6 +6,7 @@ using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 //using System.Numerics;
 //using static System.Net.Mime.MediaTypeNames;
 //using System.Numerics;
@@ -17,7 +18,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "1.2.4";
+        public const string VERSION = "1.4.1";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
@@ -164,8 +165,12 @@ namespace ModelReplacement
                 {
                     if(a.renderLocalDebug && !a.renderModel) { return; }
 
-                    Transform parentObject = a.Map.ItemHolder();
-                    Vector3 positionOffset = a.Map.ItemHolderPositionOffset();
+                    //Transform parentObject = a.Map.ItemHolder();
+                    //Vector3 positionOffset = a.Map.ItemHolderPositionOffset();
+
+                    Transform parentObject = a.avatar.itemHolderTransform;
+                    Vector3 positionOffset = a.avatar.itemHolderPositionOffset / 50 ;
+                    Quaternion rotationOffset = a.avatar.itemHolderRotationOffset;
 
                     __instance.transform.rotation = parentObject.rotation;
                     __instance.transform.Rotate(__instance.itemProperties.rotationOffset);
@@ -173,6 +178,7 @@ namespace ModelReplacement
                     Vector3 vector = __instance.itemProperties.positionOffset + positionOffset;
                     vector = parentObject.rotation * vector;
                     __instance.transform.position += vector;
+                    __instance.transform.rotation *= rotationOffset;
 
 
                 }
