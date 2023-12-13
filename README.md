@@ -1,6 +1,6 @@
 # LethalCompany_ModelReplacementAPI
 
-Allows the user to create model replacement mods in Lethal Company
+Allows the user to create model replacement mods in Lethal Company NOTE OUTDATED. WILL BE UPDATED WITH UP TO DATE INFO SHORTLY
 
 Features
 -

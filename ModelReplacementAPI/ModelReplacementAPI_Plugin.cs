@@ -3,6 +3,7 @@ using BepInEx.Bootstrap;
 using BepInEx.Logging;
 using GameNetcodeStuff;
 using HarmonyLib;
+using ModelReplacement.AvatarBodyUpdater;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "1.4.1";
+        public const string VERSION = "1.5.0";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
@@ -121,19 +122,31 @@ namespace ModelReplacement
                 return;
             }
             var a = player.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+            int suitID = player.currentSuitID;
+            string suitName = StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName;
             if (a != null)
             {
-                if (a.GetType() == type)
+                if (a.GetType() == type) //Suit has not changed model
                 {
-                    return; //No need to add a body replacement, there is already a body replacement of this type
+                    
+                    if (a.suitName != suitName)
+                    {
+                        Console.WriteLine($"Suit name mismatch {a.suitName} =/ {suitName}, Destroying");
+                        Destroy(a); //Suit name changed, may represent change in skin of model replacement, destroy
+                    }
+                    else
+                    {
+                        return;//No need to add a body replacement, the suit has not changed and the model has not changed
+                    }
                 }
-                if (a)
+                else //Suit has changed model
                 {
                     Destroy(a); //Destroy the existing body replacement
                 }
             }
 
-            player.thisPlayerBody.gameObject.AddComponent(type);
+            var replacecment = player.thisPlayerBody.gameObject.AddComponent(type) as BodyReplacementBase;
+            replacecment.suitName = suitName;
         }
         /// <summary>
         /// Removes any existing body replacement 
@@ -172,23 +185,16 @@ namespace ModelReplacement
                 {
                     if(a.renderLocalDebug && !a.renderModel) { return; }
 
-                    //Transform parentObject = a.Map.ItemHolder();
-                    //Vector3 positionOffset = a.Map.ItemHolderPositionOffset();
+                    Transform parentObject = a.avatar.itemHolder;
 
-                    Transform parentObject = a.avatar.itemHolderTransform;
-                    Vector3 positionOffset = a.avatar.itemHolderPositionOffset / 50 ;
-                    Quaternion rotationOffset = a.avatar.itemHolderRotationOffset;
+                    parentObject.localPosition = a.avatar.itemHolderPositionOffset;
 
-                    __instance.transform.rotation = parentObject.rotation;
+                    __instance.transform.rotation = parentObject.rotation * a.avatar.itemHolderRotationOffset;
                     __instance.transform.Rotate(__instance.itemProperties.rotationOffset);
                     __instance.transform.position = parentObject.position;
-                    Vector3 vector = __instance.itemProperties.positionOffset + positionOffset;
+                    Vector3 vector = __instance.itemProperties.positionOffset;
                     vector = parentObject.rotation * vector;
                     __instance.transform.position += vector;
-                    __instance.transform.rotation *= rotationOffset;
-
-
-
 
                 }
 

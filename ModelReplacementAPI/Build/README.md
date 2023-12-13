@@ -1,4 +1,4 @@
-# ModelReplacementAPI v1.4.1
+# ModelReplacementAPI v1.5.0
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -6,6 +6,8 @@ For more info on making model replacements see https://github.com/BunyaPineTree/
 
 
 ## Changelog
+	- v1.5.0
+		- Overhauled BoneMap system, moved to unity-editor workflow with attached .unitypackage
 	- v1.4.1
 		- Added RegisterModelReplacementOverride(Type bodyReplacement) to the API to prevent body replacements from constantly being removed and put back on when you want every player to have the same body replacement. 
 	- v1.4.0

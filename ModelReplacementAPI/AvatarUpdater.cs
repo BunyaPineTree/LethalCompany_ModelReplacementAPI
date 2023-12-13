@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.LowLevel;
+using UnityEngine.TextCore.Text;
 
 namespace ModelReplacement.AvatarBodyUpdater
 {
@@ -15,10 +17,11 @@ namespace ModelReplacement.AvatarBodyUpdater
 
         public Vector3 itemHolderPositionOffset { get; private set; } = Vector3.zero;
         public Quaternion itemHolderRotationOffset { get; private set; } = Quaternion.identity;
-        public Transform itemHolderTransform { get; private set; } = null;
+        public Transform itemHolder { get; private set; } = null;
 
         private bool hasUpperChest = false;
-
+        private Vector3 rootPositionOffset = new Vector3(0, 0, 0);
+        private Vector3 rootScale = new Vector3(1, 1, 1);
 
         public void AssignModelReplacement(GameObject player ,GameObject replacement)
         {
@@ -40,10 +43,13 @@ namespace ModelReplacement.AvatarBodyUpdater
 
             replacementAnimator = replacement.GetComponentInChildren<Animator>();
 
-            itemHolderTransform = replacementAnimator.GetBoneTransform(HumanBodyBones.RightHand);
-            var ite = replacementAnimator.gameObject.GetComponent<ItemOffset>();
-            itemHolderPositionOffset = ite.pOffset;
-            itemHolderRotationOffset = ite.rOffset;
+            
+            var ite = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
+            itemHolderPositionOffset = ite.itemPositonOffset;
+            itemHolderRotationOffset = ite.itemRotationOffset;
+            itemHolder = ite.itemHolder.transform;
+            rootPositionOffset = ite.rootPositionOffset;
+            rootScale = ite.rootScale;
 
             Transform upperChestTransform = replacementAnimator.GetBoneTransform(HumanBodyBones.UpperChest);
             hasUpperChest = (upperChestTransform != null);
@@ -72,8 +78,7 @@ namespace ModelReplacement.AvatarBodyUpdater
                 if((playerBone.name == "spine") || (playerBone.name.Contains("PlayerRagdoll")))
                 {
                     modelBone.position = playerBone.position;
-                    var offset2 = modelBone.GetComponent<TranslationOffset>();
-                    if (offset2) { modelBone.position += offset2.offset/50; }
+                    modelBone.position += playerBone.TransformVector(rootPositionOffset);
 
                 }
             }
@@ -162,20 +167,19 @@ namespace ModelReplacement.AvatarBodyUpdater
     }
 
     #region model setup classes
-    public class TranslationOffset : MonoBehaviour
-    {
-        public Vector3 offset = Vector3.zero;
-
-    }
     public class RotationOffset : MonoBehaviour
     {
         public Quaternion offset = Quaternion.identity;
 
     }
-    public class ItemOffset : MonoBehaviour
+    public class OffsetBuilder : MonoBehaviour
     {
-        public Quaternion rOffset = Quaternion.identity;
-        public Vector3 pOffset = Vector3.zero;
+        public Vector3 rootPositionOffset;
+        public Vector3 rootScale;
+        public Vector3 itemPositonOffset;
+        public Quaternion itemRotationOffset;
+        public GameObject itemHolder;
+        public Transform rootTransform;
     }
-    #endregion
+        #endregion
 }

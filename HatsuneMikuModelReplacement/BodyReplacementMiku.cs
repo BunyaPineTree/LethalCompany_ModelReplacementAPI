@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using ModelReplacement;
+using ModelReplacement.Scripts;
+using GameNetcodeStuff;
 
 namespace HatsuneMikuModelReplacement
 {
@@ -12,13 +14,19 @@ namespace HatsuneMikuModelReplacement
         protected override GameObject LoadAssetsAndReturnModel()
         {
             string model_name = "HatsuneMikuNT";
-            //string model_name = "HatsuneMikuNT 1";
             return Assets.MainAssetBundle.LoadAsset<GameObject>(model_name);
         }
 
         //Miku mod specific scripts. 
         protected override void AddModelScripts()
         {
+            replacementModel.GetComponentsInChildren<DynamicBone>().ToList().ForEach(bone =>
+            {
+                bone.m_UpdateRate = Plugin.UpdateRate.Value;
+                bone.m_DistantDisable = Plugin.disablePhysicsAtRange.Value;
+                bone.m_DistanceToObject = Plugin.distanceDisablePhysics.Value;
+            });
+            return;
             //Set dynamic bones
             var skirtBones = replacementModel.GetComponentsInChildren<Transform>().Where(x => x.name.Contains("Skirt")).Where(x => x.name.Contains("001"));
             Console.WriteLine($"Dynamic bones {skirtBones.Count()}");

@@ -31,6 +31,7 @@ namespace ModelReplacement
         public AvatarUpdater avatar { get; private set; }
         public PlayerControllerB controller { get; private set; }
         protected GameObject replacementModel;
+        public string suitName { get; set; } = "";
 
         //Ragdoll components
         public AvatarUpdater ragdollAvatar { get; private set; }
