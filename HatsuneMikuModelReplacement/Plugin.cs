@@ -13,7 +13,7 @@ namespace HatsuneMikuModelReplacement
 
 
 
-    [BepInPlugin("meow.MikuModelReplacement", "Miku Model", "1.1.3")]
+    [BepInPlugin("meow.MikuModelReplacement", "Miku Model", "1.4.0")]
     [BepInDependency("meow.ModelReplacementAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class Plugin : BaseUnityPlugin
     {
@@ -68,6 +68,7 @@ namespace HatsuneMikuModelReplacement
     }
     public static class Assets
     {
+        // Replace mbundle with the Asset Bundle Name from your unity project 
         public static string mainAssetBundleName = "mbundle";
         public static AssetBundle MainAssetBundle = null;
 

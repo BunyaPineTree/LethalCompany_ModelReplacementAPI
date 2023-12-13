@@ -13,6 +13,7 @@ namespace HatsuneMikuModelReplacement
         //Required universally
         protected override GameObject LoadAssetsAndReturnModel()
         {
+            //Replace with the Asset Name from your unity project 
             string model_name = "HatsuneMikuNT";
             return Assets.MainAssetBundle.LoadAsset<GameObject>(model_name);
         }
@@ -20,6 +21,7 @@ namespace HatsuneMikuModelReplacement
         //Miku mod specific scripts. 
         protected override void AddModelScripts()
         {
+           
             replacementModel.GetComponentsInChildren<DynamicBone>().ToList().ForEach(bone =>
             {
                 bone.m_UpdateRate = Plugin.UpdateRate.Value;

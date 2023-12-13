@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.LowLevel;
@@ -82,9 +83,9 @@ namespace ModelReplacement.AvatarBodyUpdater
 
                 }
             }
-
         }
 
+       
         public Transform GetAvatarTransformFromBoneName(string boneName)
         {
             //Special logic is required here. The player model has 5 central bones.
@@ -112,6 +113,8 @@ namespace ModelReplacement.AvatarBodyUpdater
             }
             return null;
         }
+
+        
 
         //Remove spine.002 and .003 to implement logic
         private static Dictionary<string, HumanBodyBones> modelToAvatarBone = new Dictionary<string, HumanBodyBones>()

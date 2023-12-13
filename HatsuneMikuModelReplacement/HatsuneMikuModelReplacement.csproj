@@ -16,6 +16,7 @@
     <ReferencePath>$(ReferencePath);$(LethalCompanyPath)\BepinEx\plugins</ReferencePath>
   </PropertyGroup>
 
+  <!-- Replace mbundle with the Asset Bundle Name from your unity project -->
   <ItemGroup>
     <None Remove="mbundle" />
   </ItemGroup>
