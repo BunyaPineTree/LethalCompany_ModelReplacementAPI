@@ -43,7 +43,7 @@
       <Private>false</Private>
     </Reference>
     <Reference Include="ModelReplacementAPI">
-      <HintPath>..\ModelReplacementAPI\Build\ModelReplacementAPI.dll</HintPath>
+      <HintPath>ModelReplacementAPI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InputSystem">
       <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Unity.InputSystem.dll</HintPath>
