@@ -23,7 +23,7 @@
   <ItemGroup>
     <EmbeddedResource Include="mbundle" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
@@ -33,14 +33,17 @@
     <PackageReference Include="UnityEngine.Modules" Version="2022.3.9" IncludeAssets="compile" />
     <PackageReference Include="HarmonyX" Version="2.10.2" IncludeAssets="compile" />
   </ItemGroup>
-  
+  <!-- Uncomment this section ande delete the ModeReplacementAPI.dll reference if you plan on cloning ModeReplacementAPI alongside your mod
   <ItemGroup>
     <ProjectReference Include="..\ModelReplacementAPI\ModelReplacementAPI.csproj" />
-  </ItemGroup>
+  </ItemGroup>-->
   <ItemGroup>
     <Reference Include="Assembly-CSharp" Publicize="true">
       <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
+    </Reference>
+    <Reference Include="ModelReplacementAPI">
+      <HintPath>..\ModelReplacementAPI\Build\ModelReplacementAPI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InputSystem">
       <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Unity.InputSystem.dll</HintPath>

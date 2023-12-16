@@ -15,6 +15,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using ModelReplacement.AvatarBodyUpdater;
 using UnityEngine.Pool;
+using Unity.Netcode;
 
 namespace ModelReplacement
 {
@@ -43,6 +44,7 @@ namespace ModelReplacement
         private MeshRenderer nameTagObj2 = null;
         private bool moreCompanyCosmeticsReparented = false;
 
+        #region Virtual and Abstract Methods
 
         /// <summary>
         /// Loads necessary assets from assetBundle, perform any necessary modifications on the replacement character model and return it.
@@ -59,6 +61,38 @@ namespace ModelReplacement
 
         }
 
+        protected internal virtual void OnHitEnemy(bool dead)
+        {
+            Console.WriteLine($"PLAYER HIT ENEMY {controller.playerUsername}");
+        }
+
+        protected internal virtual void OnHitAlly(PlayerControllerB ally,  bool dead)
+        {
+            Console.WriteLine($"PLAYER HIT ALLY {controller.playerUsername}");
+        }
+
+        protected internal virtual void OnDamageTaken(bool dead)
+        {
+            Console.WriteLine($"PLAYER TAKE DAMAGE  {controller.playerUsername}");
+        }
+        protected internal virtual void OnDamageTakenByAlly(PlayerControllerB ally, bool dead)
+        {
+            Console.WriteLine($"PLAYER TAKE DAMAGE BY ALLY {controller.playerUsername}");
+        }
+
+        protected internal virtual void OnEmoteStart(int emoteId)
+        {
+            Console.WriteLine($"PLAYER EMOTE START {controller.playerUsername} ID {emoteId}");
+        }
+        protected internal virtual void OnEmoteEnd()
+        {
+            Console.WriteLine($"PLAYER EMOTE END {controller.playerUsername}");
+        }
+
+
+        #endregion
+
+        #region Base Logic
 
         void Awake()
         {
@@ -133,10 +167,9 @@ namespace ModelReplacement
             nameTagObj2 = gameObjects.Where(x => x.gameObject.name == "BetaBadge").First();
             ModelReplacementAPI.Instance.Logger.LogInfo($"AwakeEnd {controller.playerUsername}");
 
-            AfterAwake();
         }
 
-		void Update()
+        void Update()
         {
             // Local/Nonlocal renderer logic
             if (!renderLocalDebug)
@@ -186,9 +219,28 @@ namespace ModelReplacement
             ragdollAvatar.UpdateModel();
             AttemptReparentMoreCompanyCosmetics();
 
+            //Emotes
+            previousDanceNumber = danceNumber;
+            int danceHash = controller.playerBodyAnimator.GetCurrentAnimatorStateInfo(1).fullPathHash;
+            if (controller.performingEmote)
+            {
+               
+                if (danceHash == -462656950) { danceNumber = 1; }
+                else if (danceHash == 2103786480) { danceNumber = 2; }
+                else { danceNumber = 3; }
+            }
+            else { danceNumber = 0; }
+            if (danceNumber != previousDanceNumber)
+            {
+                if (danceNumber != 0) { OnEmoteStart(danceNumber); }
+                else { OnEmoteEnd(); }
+            }
+            //Console.WriteLine($"{danceNumber} {danceHash}");
 
-            AfterUpdate();
         }
+
+        int danceNumber = 0;
+        int previousDanceNumber = 0;
 
         void OnDestroy()
         {
@@ -205,7 +257,9 @@ namespace ModelReplacement
             Destroy(replacementDeadBody);
         }
 
+        #endregion
 
+        #region Helpers, Materials, Ragdolls, Rendering, etc...
         /// <summary> Shaders with any of these prefixes won't be automatically converted. </summary>
         private static readonly string[] shaderPrefixWhitelist =
         {
@@ -320,6 +374,8 @@ namespace ModelReplacement
             return bounds;
         }
 
+        #endregion
+
         #region Third Person Mods Logic
         private bool DangerousViewState()
         {
@@ -330,6 +386,7 @@ namespace ModelReplacement
             return ThirdPersonPlugin.Instance.Enabled;
         }
         #endregion
+
         #region MoreCompany Cosmetics Logic
         private void AttemptUnparentMoreCompanyCosmetics()
         {
@@ -389,23 +446,7 @@ namespace ModelReplacement
         }
         #endregion
 
-        // Optional user methods
-        protected virtual void AfterStart()
-        {
-
-        }
-        void Start() //Only exists for posterity
-        {
-            AfterStart();
-        }
-        protected virtual void AfterAwake()
-        {
-
-        }
-        protected virtual void AfterUpdate()
-        {
-
-        }
+       
        
 
     }

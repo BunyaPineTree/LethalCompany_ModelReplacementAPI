@@ -6,8 +6,16 @@ using HarmonyLib;
 using ModelReplacement.AvatarBodyUpdater;
 using System;
 using System.Collections.Generic;
+using BepInEx;
+using HarmonyLib;
+using UnityEngine;
+using System.Reflection;
+using ModelReplacement;
+using BepInEx.Configuration;
+
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using static UnityEngine.ParticleSystem.PlaybackState;
 //using System.Numerics;
 //using static System.Net.Mime.MediaTypeNames;
 //using System.Numerics;
@@ -58,33 +66,75 @@ namespace ModelReplacement
 
         public static ModelReplacementAPI Instance;
         public new ManualLogSource Logger;
+
+        #region Registry and API methods
+
+        private static List<Type> RegisteredModelReplacementExceptions = new List<Type>();
         private static Dictionary<string, Type> RegisteredModelReplacements = new Dictionary<string, Type>();
         private static Type RegisteredModelReplacementOverride = null;
-
+        private static Type RegisteredModelReplacementDefault = null;
 
         /// <summary>
-        /// Registers a body replacement class to override. All players will have their model replaced. 
+        /// Registers a body replacement class to default. All players with unregistered suits will appear with this body replacement, if not null. 
         /// </summary>
-        /// <param name="suitNameToReplace"></param>
         /// <param name="type"></param>
-        public static void RegisterModelReplacementOverride(Type type) 
+        public static void RegisterModelReplacementDefault(Type type)
         {
             if (!(type.IsSubclassOf(typeof(BodyReplacementBase))))
             {
-                Instance.Logger.LogError($"Cannot register body replacement override type {type.GetType()}, must inherit from BodyReplacementBase");
+                Instance.Logger.LogError($"Cannot register body replacement default type {type}, must inherit from BodyReplacementBase");
                 return;
             }
             if (RegisteredModelReplacementOverride != null)
             {
-                Instance.Logger.LogError($"Cannot register body replacement override, already registered to {RegisteredModelReplacementOverride.GetType()}.");
+                Instance.Logger.LogError($"Cannot register body replacement default, already registered to {RegisteredModelReplacementDefault}.");
                 return;
             }
 
-            Instance.Logger.LogInfo($"Registering body replacement override type {type.GetType()}.");
+            Instance.Logger.LogInfo($"Registering body replacement default type {type}.");
+
+            RegisteredModelReplacementDefault = type;
+        }
+        /// <summary>
+        /// Registers a body replacement class to override. All players will have their model replaced. 
+        /// </summary>
+        /// <param name="type"></param>
+        public static void RegisterModelReplacementOverride(Type type)
+        {
+            if (!(type.IsSubclassOf(typeof(BodyReplacementBase))))
+            {
+                Instance.Logger.LogError($"Cannot register body replacement override type {type}, must inherit from BodyReplacementBase");
+                return;
+            }
+            if (RegisteredModelReplacementOverride != null)
+            {
+                Instance.Logger.LogError($"Cannot register body replacement override, already registered to {RegisteredModelReplacementOverride}.");
+                return;
+            }
+
+            Instance.Logger.LogInfo($"Registering body replacement override type {type}.");
 
             RegisteredModelReplacementOverride = type;
         }
+        /// <summary>
+        /// Registers a body replacement class as an exception . Players who have their model set to this class will not have it automatically changed. 
+        /// </summary>
+        /// <param name="type"></param>
+        public static void RegisterModelReplacementException(Type type)
+        {
+            if (!(type.IsSubclassOf(typeof(BodyReplacementBase))))
+            {
+                Instance.Logger.LogError($"Cannot register body replacement exception type {type}, must inherit from BodyReplacementBase");
+                return;
+            }
 
+            Instance.Logger.LogInfo($"Registering body replacement exception type {type}.");
+
+            if (!RegisteredModelReplacementExceptions.Contains(type))
+            {
+                RegisteredModelReplacementExceptions.Add(type);
+            }
+        }
         /// <summary>
         /// Registers a specified body replacement class to a specified suit name. All players wearing a suit with the specified name will have their model replaced. 
         /// </summary>
@@ -95,17 +145,17 @@ namespace ModelReplacement
             suitNameToReplace = suitNameToReplace.ToLower().Replace(" ", "");
             if (!(type.IsSubclassOf(typeof(BodyReplacementBase))))
             {
-                Instance.Logger.LogError($"Cannot register body replacement type {type.GetType()}, must inherit from BodyReplacementBase");
+                Instance.Logger.LogError($"Cannot register body replacement type {type}, must inherit from BodyReplacementBase");
                 return;
             }
             if (RegisteredModelReplacements.ContainsKey(suitNameToReplace))
             {
-                Instance.Logger.LogError($"Cannot register body replacement type {type.GetType()}, suit name to replace {suitNameToReplace} is already registered.");
+                Instance.Logger.LogError($"Cannot register body replacement type {type}, suit name to replace {suitNameToReplace} is already registered.");
                 return;
             }
 
-            Instance.Logger.LogInfo($"Registering body replacement type {type.GetType()} to suit name {suitNameToReplace}.");
-            
+            Instance.Logger.LogInfo($"Registering body replacement type {type} to suit name {suitNameToReplace}.");
+
             RegisteredModelReplacements.Add(suitNameToReplace, type);
         }
 
@@ -128,7 +178,7 @@ namespace ModelReplacement
             {
                 if (a.GetType() == type) //Suit has not changed model
                 {
-                    
+
                     if (a.suitName != suitName)
                     {
                         Console.WriteLine($"Suit name mismatch {a.suitName} =/ {suitName}, Destroying");
@@ -160,14 +210,7 @@ namespace ModelReplacement
                 Destroy(a);
             }
         }
-
-        public static void RefreshAllModelReplacements()
-        {
-
-
-
-        }
-
+        #endregion
 
         [HarmonyPatch(typeof(GrabbableObject))]
         public class LocateHeldObjectsOnModelReplacementPatch
@@ -183,7 +226,7 @@ namespace ModelReplacement
                 if (a == null) { return; }
                 if (a.RenderBodyReplacement())
                 {
-                    if(a.renderLocalDebug && !a.renderModel) { return; }
+                    if (a.renderLocalDebug && !a.renderModel) { return; }
 
                     Transform parentObject = a.avatar.itemHolder;
 
@@ -228,18 +271,24 @@ namespace ModelReplacement
 
 
         [HarmonyPatch(typeof(PlayerControllerB))]
-        public class SetRegisteredBodyReplacements
+        public class PlayerControllerBPatch
         {
 
             [HarmonyPatch("Update")]
             [HarmonyPostfix]
-            public static void UpdatePatch(ref PlayerControllerB __instance)
+            public static void ManageRegistryBodyReplacements(ref PlayerControllerB __instance)
             {
                 try
                 {
-                    //return;
                     if (__instance.playerSteamId == 0) { return; }
-                    if(RegisteredModelReplacementOverride != null)
+
+                    var a = __instance.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+                    if ((a != null) && RegisteredModelReplacementExceptions.Contains(a.GetType()))
+                    {
+                        return;
+                    }
+
+                    if (RegisteredModelReplacementOverride != null)
                     {
                         SetPlayerModelReplacement(__instance, RegisteredModelReplacementOverride);
                         return;
@@ -248,10 +297,14 @@ namespace ModelReplacement
                     int suitID = __instance.currentSuitID;
                     string suitName = StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName;
                     suitName = suitName.ToLower().Replace(" ", "");
+
                     if (RegisteredModelReplacements.ContainsKey(suitName))
                     {
-                        Type type = RegisteredModelReplacements[suitName];
-                        SetPlayerModelReplacement(__instance, type);
+                        SetPlayerModelReplacement(__instance, RegisteredModelReplacements[suitName]);
+                    }
+                    else if (RegisteredModelReplacementDefault != null)
+                    {
+                        SetPlayerModelReplacement(__instance, RegisteredModelReplacementDefault);
                     }
                     else
                     {
@@ -259,13 +312,52 @@ namespace ModelReplacement
                     }
                 }
                 catch (Exception e) { }
-
-
             }
+
+            [HarmonyPatch("DamagePlayerFromOtherClientClientRpc")]
+            [HarmonyPrefix]
+            public static void DamagePlayerFromOtherClientClientRpc(ref PlayerControllerB __instance, int damageAmount, Vector3 hitDirection, int playerWhoHit, int newHealthAmount)
+            {
+                PlayerControllerB _playerWhoHit = __instance.playersManager.allPlayerScripts[playerWhoHit];
+                if (_playerWhoHit == null)
+                {
+                    return;
+                }
+                var a = _playerWhoHit.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+                if (a) { a.OnHitAlly(__instance, __instance.isPlayerDead); }
+            }
+
+            [HarmonyPatch("DamagePlayerClientRpc")]
+            [HarmonyPrefix]
+            public static void DamagePlayerClientRpc(ref PlayerControllerB __instance, int damageNumber, int newHealthAmount)
+            {
+                if (__instance == null)
+                {
+                    return;
+                }
+                var a = __instance.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+                Console.WriteLine($"PLAYER TAKE DAMAGE {__instance.playerUsername}");
+                if (a) { a.OnDamageTaken(__instance.isPlayerDead); }
+            }
+
         }
 
+        [HarmonyPatch(typeof(EnemyAI))]
+        public class EnemyAIPatch
+        {
+            [HarmonyPatch("HitEnemy")]
+            [HarmonyPrefix]
+            public static void HitEnemy(ref EnemyAI __instance, int force = 1, PlayerControllerB playerWhoHit = null, bool playHitSFX = false)
+            {
+                if (playerWhoHit == null)
+                {
+                    return;
+                }
 
+                var a = playerWhoHit.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+                if (a) { a.OnHitEnemy(__instance.isEnemyDead); }
+            }
 
-
+        }
     }
 }
