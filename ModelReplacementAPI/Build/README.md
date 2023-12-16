@@ -2,12 +2,16 @@
 ### Simplifies character model replacement for modders
 
 ## Instructions
-For more info on making model replacements see https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI , or message Bunya Pine Tree at the unofficial modding discord https://discord.gg/nYcQFEpXfU
+For more info on making model replacements see the wiki at https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI , or message Bunya Pine Tree at the unofficial modding discord https://discord.gg/nYcQFEpXfU
 
 
 ## Changelog
 	- v1.5.0
-		- Overhauled BoneMap system, moved to unity-editor workflow with attached .unitypackage
+		- Overhauled BoneMap system, moved to unity-editor workflow with .unitypackage
+		- Added the ability to set rotation offsets to items, 
+		- Added extra registry options. See the wiki for more info. 
+		- Changed how the model replacement is rendered. No more skeletons separating from bodies. 
+		- Thanks to Linkoid for refactoring and improving materials and adding support for materials that already utilize a setup HDRP shader. 
 	- v1.4.1
 		- Added RegisterModelReplacementOverride(Type bodyReplacement) to the API to prevent body replacements from constantly being removed and put back on when you want every player to have the same body replacement. 
 	- v1.4.0

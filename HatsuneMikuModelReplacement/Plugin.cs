@@ -21,6 +21,7 @@ namespace HatsuneMikuModelReplacement
 
         // Universal config options 
         public static ConfigEntry<bool> enableMikuForAllSuits { get; private set; }
+        public static ConfigEntry<bool> enableMikuAsDefault { get; private set; }
         public static ConfigEntry<string> suitNamesToEnableMiku { get; private set; }
         
         // Miku model specific config options
@@ -31,6 +32,7 @@ namespace HatsuneMikuModelReplacement
         private static void InitConfig()
         {
             enableMikuForAllSuits = config.Bind<bool>("Suits to Replace Settings", "Enable Miku for all Suits", false, "Enable to replace every suit with Miku. Set to false to specify suits");
+            enableMikuAsDefault = config.Bind<bool>("Suits to Replace Settings", "Enable Miku as default", false, "Enable to replace every suit that hasn't been otherwise registered with Miku.");
             suitNamesToEnableMiku = config.Bind<string>("Suits to Replace Settings", "Suits to enable Miku for", "Default,Orange suit", "Enter a comma separated list of suit names.(Additionally, [Green suit,Pajama suit,Hazard suit])");
 
             UpdateRate = config.Bind<float>("Dynamic Bone Settings", "Update rate", 60, "Refreshes dynamic bones more times per second the higher the number");
@@ -45,20 +47,24 @@ namespace HatsuneMikuModelReplacement
             Assets.PopulateAssets();
 
             // Plugin startup logic
-            if (!enableMikuForAllSuits.Value)
-            {
-                var commaSepList = suitNamesToEnableMiku.Value.Split(',');
-                foreach (var item in commaSepList)
-                {
-                    ModelReplacementAPI.RegisterSuitModelReplacement(item, typeof(BodyReplacementMiku));
-                }
 
-            }
-            else
+
+            if (enableMikuForAllSuits.Value)
             {
                 ModelReplacementAPI.RegisterModelReplacementOverride(typeof(BodyReplacementMiku));
+
+            }
+            if (enableMikuAsDefault.Value)
+            {
+                ModelReplacementAPI.RegisterModelReplacementDefault(typeof(BodyReplacementMiku));
+
             }
 
+            var commaSepList = suitNamesToEnableMiku.Value.Split(',');
+            foreach (var item in commaSepList)
+            {
+                ModelReplacementAPI.RegisterSuitModelReplacement(item, typeof(BodyReplacementMiku));
+            }
                 
 
             Harmony harmony = new Harmony("meow.MikuModelReplacement");
