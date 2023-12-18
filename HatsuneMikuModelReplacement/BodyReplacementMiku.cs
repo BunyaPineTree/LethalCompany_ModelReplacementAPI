@@ -7,7 +7,7 @@ using GameNetcodeStuff;
 using System.Numerics;
 using ModelReplacement.AvatarBodyUpdater;
 
-using ModelReplacement.Scripts;
+//using ModelReplacement.Scripts;
 
 namespace HatsuneMikuModelReplacement
 {
