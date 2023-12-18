@@ -54,6 +54,8 @@ namespace ModelReplacement.AvatarBodyUpdater
             itemHolder = ite.itemHolder.transform;
             rootPositionOffset = ite.rootPositionOffset;
             rootScale = ite.rootScale;
+            Vector3 baseScale = replacement.transform.localScale;
+            replacement.transform.localScale = ((new Vector3(1, 0, 0)) * baseScale.x * rootScale.x + (new Vector3(0, 1, 0)) * baseScale.y * rootScale.y + (new Vector3(0, 0, 1)) * baseScale.z * rootScale.z);
 
             Transform upperChestTransform = replacementAnimator.GetBoneTransform(HumanBodyBones.UpperChest);
             hasUpperChest = (upperChestTransform != null);

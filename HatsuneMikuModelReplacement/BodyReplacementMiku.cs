@@ -7,6 +7,7 @@ using GameNetcodeStuff;
 using System.Numerics;
 using ModelReplacement.AvatarBodyUpdater;
 
+using ModelReplacement.Scripts;
 
 namespace HatsuneMikuModelReplacement
 {
@@ -16,7 +17,7 @@ namespace HatsuneMikuModelReplacement
         protected override GameObject LoadAssetsAndReturnModel()
         {
             //Replace with the Asset Name from your unity project 
-            string model_name = "HatsuneMikuNT";
+            string model_name = "HatsuneMikuNTPrefab";
             return Assets.MainAssetBundle.LoadAsset<GameObject>(model_name);
         }
 
@@ -31,6 +32,7 @@ namespace HatsuneMikuModelReplacement
                 bone.m_DistanceToObject = Plugin.distanceDisablePhysics.Value;
             });
         }
+
 
         protected override void OnEmoteStart(int emoteId)
         {

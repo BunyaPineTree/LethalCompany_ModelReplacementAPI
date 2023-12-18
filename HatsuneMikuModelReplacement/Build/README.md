@@ -11,10 +11,14 @@
 - Miku might become a flashbang in bad lighting.  
 - Does not replace hands. You will only see Miku in multiplayer lobbies or with a third person mod. 
 
+## Note
+Version 1.4.0 and up will require ModelReplacementAPI minimum version 2.0.0 Be sure to download the latest update of that as well.  
+
 ## Changelog
 	- v1.4.0
 		- Graphics overhaul. 
 		- Added config option to set miku as default. Suits that have been registered to another model replacement will take priority. 
+		- Emote expressions
 	- v1.3.1
 		- Fixed the enable miku for all suits setting constantly putting on and removing the miku body replacement, make sure to download the latest version of ModelReplacementAPI 
 	- v1.3.0

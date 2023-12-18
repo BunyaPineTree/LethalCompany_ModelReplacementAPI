@@ -46,6 +46,8 @@ namespace ModelReplacement
         private MeshRenderer nameTagObj = null;
         private MeshRenderer nameTagObj2 = null;
         private bool moreCompanyCosmeticsReparented = false;
+        private int danceNumber = 0;
+        private int previousDanceNumber = 0;
 
         #region Virtual and Abstract Methods
 
@@ -247,16 +249,16 @@ namespace ModelReplacement
             }
             else { danceNumber = 0; }
             if (danceNumber != previousDanceNumber)
-            {
-                if (danceNumber != 0) { OnEmoteStart(danceNumber); }
-                else { OnEmoteEnd(); }
+            {   
+                if(previousDanceNumber == 0) { StartCoroutine(WaitForDanceNumberChange()); } //Start new animation, takes time to switch to new animation state
+                if (danceNumber == 0) { OnEmoteEnd(); } // No dance, where there was previously dance.
+                else { OnEmoteStart(danceNumber); } //An animation did not start nor end, go immediately into the different animation
             }
             //Console.WriteLine($"{danceNumber} {danceHash}");
 
         }
 
-        int danceNumber = 0;
-        int previousDanceNumber = 0;
+       
 
         protected virtual void OnDestroy()
         {
@@ -405,6 +407,24 @@ namespace ModelReplacement
         }
 
         #endregion
+
+        #region Coroutines
+        private IEnumerator WaitForDanceNumberChange()
+        {
+            int frame = 0;
+            while (frame < 20)
+            {
+                if (danceNumber == 0) { yield break; }
+                yield return new WaitForEndOfFrame();
+                frame++;
+            }
+            if(danceNumber != 0) { OnEmoteStart(danceNumber); }
+        }
+
+
+        #endregion
+
+
 
 
         #region MirrorDecor Logic
