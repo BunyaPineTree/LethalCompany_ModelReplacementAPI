@@ -40,6 +40,10 @@
       <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
     </Reference>
+	<Reference Include="MirrorDecor">
+      <HintPath>..\Libraries\MirrorDecor.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="3rdPerson">
       <HintPath>..\Libraries\3rdPerson.dll</HintPath>
       <Private>false</Private>
@@ -58,6 +62,10 @@
     </Reference>
     <Reference Include="Unity.Netcode.Runtime">
       <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Unity.Netcode.Runtime.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.HighDefinition.Runtime">
+      <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Unity.RenderPipelines.HighDefinition.Runtime.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>

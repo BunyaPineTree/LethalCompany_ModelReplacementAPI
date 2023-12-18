@@ -16,6 +16,9 @@ using UnityEngine.InputSystem.HID;
 using ModelReplacement.AvatarBodyUpdater;
 using UnityEngine.Pool;
 using Unity.Netcode;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
+
 
 namespace ModelReplacement
 {
@@ -60,6 +63,14 @@ namespace ModelReplacement
         {
 
         }
+        /// <summary>
+        /// Override this to return a derivative AvatarUpdater. Only do this if you really know what you are doing. 
+        /// </summary>
+        /// <returns></returns>
+        protected virtual AvatarUpdater GetAvatarUpdater()
+        {
+            return new AvatarUpdater();
+        }
 
         protected internal virtual void OnHitEnemy(bool dead)
         {
@@ -94,7 +105,7 @@ namespace ModelReplacement
 
         #region Base Logic
 
-        void Awake()
+        protected virtual void Awake()
         {
             
             controller = base.GetComponent<PlayerControllerB>();
@@ -156,7 +167,7 @@ namespace ModelReplacement
 
 
             // Assign the avatar
-            avatar = new AvatarUpdater();
+            avatar = GetAvatarUpdater();
             ragdollAvatar = new AvatarUpdater();
             avatar.AssignModelReplacement(controller.gameObject, replacementModel);
 
@@ -167,9 +178,14 @@ namespace ModelReplacement
             nameTagObj2 = gameObjects.Where(x => x.gameObject.name == "BetaBadge").First();
             ModelReplacementAPI.Instance.Logger.LogInfo($"AwakeEnd {controller.playerUsername}");
 
+            //Mirror patch
+            if (ModelReplacementAPI.mirrorDecorPresent)
+            {
+                MirrorPatch();
+            }
         }
 
-        void Update()
+        protected virtual void Update()
         {
             // Local/Nonlocal renderer logic
             if (!renderLocalDebug)
@@ -215,8 +231,8 @@ namespace ModelReplacement
             }
 
             // Update replacement models
-            avatar.UpdateModel();
-            ragdollAvatar.UpdateModel();
+            avatar.Update();
+            ragdollAvatar.Update();
             AttemptReparentMoreCompanyCosmetics();
 
             //Emotes
@@ -242,7 +258,7 @@ namespace ModelReplacement
         int danceNumber = 0;
         int previousDanceNumber = 0;
 
-        void OnDestroy()
+        protected virtual void OnDestroy()
         {
             ModelReplacementAPI.Instance.Logger.LogInfo($"Destroy body component for {controller.playerUsername}");
             controller.thisPlayerModel.enabled = true;
@@ -291,9 +307,23 @@ namespace ModelReplacement
                 replacementMat.mainTexture = modelMaterial.mainTexture;
                 replacementMat.mainTextureOffset = modelMaterial.mainTextureOffset;
                 replacementMat.mainTextureScale = modelMaterial.mainTextureScale;
-                replacementMat.SetShaderKeywords(modelMaterial.GetShaderKeywords());
-                replacementMat.SetEnabledKeywords(modelMaterial.GetEnabledKeywords());
 
+                /*
+            mesh.materials[0].shader = goodShader;
+
+            mesh.materials[0].EnableKeyword("_EMISSION");
+            mesh.materials[0].EnableKeyword("_SPECGLOSSMAP");
+            mesh.materials[0].EnableKeyword("_NORMALMAP");
+
+            mesh.materials[0].SetTexture("_BaseColorMap", TexBase01);
+            mesh.materials[0].SetTexture("_SpecularColorMap", TexSpec);
+            mesh.materials[0].SetFloat("_Smoothness", .30f);
+            mesh.materials[0].SetTexture("_EmissiveColorMap", TexEmit);
+            mesh.materials[0].SetTexture("_BumpMap", TexNorm);
+            mesh.materials[0].SetColor("_EmissiveColor", Color.white);
+            */
+
+                HDMaterial.ValidateMaterial(replacementMat);
                 return replacementMat;
             }
         }
@@ -376,7 +406,36 @@ namespace ModelReplacement
 
         #endregion
 
+
+        #region MirrorDecor Logic
+        private void MirrorPatch()
+        {
+            foreach (var item in replacementModel.GetComponentsInChildren<Renderer>())
+            {
+                item.shadowCastingMode = ShadowCastingMode.On;
+                item.gameObject.layer = 3;
+            }
+            if (localPlayer) { return; }
+            if (ModelReplacementAPI.thirdPersonPresent)
+            {
+                DangeroudFixCamera();
+            }
+            if (ModelReplacementAPI.LCthirdPersonPresent)
+            {
+            }
+        }
+        #endregion
+
         #region Third Person Mods Logic
+        private void DangeroudFixCamera()
+        {
+            ThirdPersonCamera.GetCamera.cullingMask = 557520887;
+        }
+        private void DangeroudFixCameraLC()
+        {
+            //LCThirdPerson .camera.Instance.game
+        }
+
         private bool DangerousViewState()
         {
             return ThirdPersonCamera.ViewState;

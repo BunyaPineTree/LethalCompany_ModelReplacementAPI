@@ -1,4 +1,5 @@
 ﻿using GameNetcodeStuff;
+using ModelReplacement;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,18 +14,20 @@ namespace ModelReplacement.AvatarBodyUpdater
 
     public class AvatarUpdater
     {
-        private SkinnedMeshRenderer playerModelRenderer = null;
-        private Animator replacementAnimator = null;
+        protected SkinnedMeshRenderer playerModelRenderer = null;
+        protected Animator replacementAnimator = null;
+        protected GameObject replacement = null;
 
         public Vector3 itemHolderPositionOffset { get; private set; } = Vector3.zero;
         public Quaternion itemHolderRotationOffset { get; private set; } = Quaternion.identity;
         public Transform itemHolder { get; private set; } = null;
 
-        private bool hasUpperChest = false;
-        private Vector3 rootPositionOffset = new Vector3(0, 0, 0);
-        private Vector3 rootScale = new Vector3(1, 1, 1);
+        protected bool hasUpperChest = false;
+        protected Vector3 rootPositionOffset = new Vector3(0, 0, 0);
+        protected Vector3 rootScale = new Vector3(1, 1, 1);
 
-        public void AssignModelReplacement(GameObject player ,GameObject replacement)
+
+        public virtual void AssignModelReplacement(GameObject player, GameObject replacement)
         {
             var controller = player.GetComponent<PlayerControllerB>();
             if (controller)
@@ -43,8 +46,8 @@ namespace ModelReplacement.AvatarBodyUpdater
             }
 
             replacementAnimator = replacement.GetComponentInChildren<Animator>();
+            this.replacement = replacement;
 
-            
             var ite = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
             itemHolderPositionOffset = ite.itemPositonOffset;
             itemHolderRotationOffset = ite.itemRotationOffset;
@@ -55,37 +58,37 @@ namespace ModelReplacement.AvatarBodyUpdater
             Transform upperChestTransform = replacementAnimator.GetBoneTransform(HumanBodyBones.UpperChest);
             hasUpperChest = (upperChestTransform != null);
         }
-
-
-        public bool CanUpdateModel()
+        protected virtual void UpdateModel()
         {
-            if (playerModelRenderer == null) { return false; }
-            if (replacementAnimator == null) { return false; }
-            return true;
-        }
-        public void UpdateModel()
-        {
-            if (!CanUpdateModel()) { return; }
-
-            foreach(Transform playerBone in playerModelRenderer.bones)
+            foreach (Transform playerBone in playerModelRenderer.bones)
             {
                 Transform modelBone = GetAvatarTransformFromBoneName(playerBone.name);
-                if(modelBone == null) { continue; }
+                if (modelBone == null) { continue; }
 
                 modelBone.rotation = playerBone.rotation;
                 var offset = modelBone.GetComponent<RotationOffset>();
                 if (offset) { modelBone.rotation *= offset.offset; }
-
-                if((playerBone.name == "spine") || (playerBone.name.Contains("PlayerRagdoll")))
+                /*
+                if ((playerBone.name == "spine") || (playerBone.name.Contains("PlayerRagdoll")))
                 {
                     modelBone.position = playerBone.position;
                     modelBone.position += playerBone.TransformVector(rootPositionOffset);
 
                 }
+                */
             }
+            Transform rootBone = GetAvatarTransformFromBoneName("spine");
+            Transform playerRootBone = GetPlayerTransformFromBoneName("spine");
+            rootBone.position = playerRootBone.position + playerRootBone.TransformVector(rootPositionOffset);
         }
 
-       
+        public virtual void Update()
+        {
+            if (playerModelRenderer == null) { return; }
+            if (replacementAnimator == null) { return; }
+            UpdateModel();
+        }
+
         public Transform GetAvatarTransformFromBoneName(string boneName)
         {
             //Special logic is required here. The player model has 5 central bones.
@@ -98,7 +101,7 @@ namespace ModelReplacement.AvatarBodyUpdater
                 if (hasUpperChest) { return replacementAnimator.GetBoneTransform(HumanBodyBones.Chest); }
                 else { return null; }
             }
-            if (boneName == "spine.003") 
+            if (boneName == "spine.003")
             {
                 if (hasUpperChest) { return replacementAnimator.GetBoneTransform(HumanBodyBones.UpperChest); }
                 else { return replacementAnimator.GetBoneTransform(HumanBodyBones.Chest); }
@@ -113,8 +116,20 @@ namespace ModelReplacement.AvatarBodyUpdater
             }
             return null;
         }
+        public Transform GetPlayerTransformFromBoneName(string boneName)
+        {
+            var a = playerModelRenderer.bones.Where(x => x.name == boneName);
+            if (a.Any()) { return a.First(); }
+            if(boneName == "spine")
+            {
+                var b = playerModelRenderer.bones.Where(x => x.name.Contains("PlayerRagdoll")); //For ragdoll and etc...
+                if (b.Any()) { return b.First(); }
+            }
+            return null;
+           
+        }
 
-        
+
 
         //Remove spine.002 and .003 to implement logic
         private static Dictionary<string, HumanBodyBones> modelToAvatarBone = new Dictionary<string, HumanBodyBones>()

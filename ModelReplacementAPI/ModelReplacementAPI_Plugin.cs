@@ -36,6 +36,7 @@ namespace ModelReplacement
     [BepInDependency("me.swipez.melonloader.morecompany", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("verity.3rdperson", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("LCThirdPerson", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("quackandcheese.mirrordecor", BepInDependency.DependencyFlags.SoftDependency)]
     public class ModelReplacementAPI : BaseUnityPlugin
     {
 
@@ -52,6 +53,7 @@ namespace ModelReplacement
             moreCompanyPresent = Chainloader.PluginInfos.ContainsKey("me.swipez.melonloader.morecompany");
             thirdPersonPresent = Chainloader.PluginInfos.ContainsKey("verity.3rdperson");
             LCthirdPersonPresent = Chainloader.PluginInfos.ContainsKey("LCThirdPerson");
+            mirrorDecorPresent = Chainloader.PluginInfos.ContainsKey("quackandcheese.mirrordecor");
 
 
             Harmony harmony = new Harmony(PluginInfo.GUID);
@@ -62,6 +64,7 @@ namespace ModelReplacement
         public static bool moreCompanyPresent;
         public static bool thirdPersonPresent;
         public static bool LCthirdPersonPresent;
+        public static bool mirrorDecorPresent;
 
 
         public static ModelReplacementAPI Instance;
