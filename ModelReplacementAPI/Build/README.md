@@ -4,8 +4,14 @@
 ## Instructions
 For more info on making model replacements see the wiki at https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI , or message Bunya Pine Tree at the unofficial modding discord https://discord.gg/nYcQFEpXfU
 
+## Known Issues
+- Does not work in LAN mode
+- More Company cosmetics behave strangely on ragdolls
 
 ## Changelog
+	- v2.0.2
+		- Known issues section
+		-
 	- v2.0.1
 		- MoreCompany cosmetic fixes
 	- v2.0.0
