@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Reflection;
 using ModelReplacement;
 using BepInEx.Configuration;
+using System;
 
 //using System.Numerics;
 
@@ -83,6 +84,7 @@ namespace HatsuneMikuModelReplacement
         {
             if (MainAssetBundle == null)
             {
+                Console.WriteLine(GetAssemblyName() + "." + mainAssetBundleName);
                 using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(GetAssemblyName() + "." + mainAssetBundleName))
                 {
                     MainAssetBundle = AssetBundle.LoadFromStream(assetStream);

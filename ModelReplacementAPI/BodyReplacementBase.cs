@@ -45,9 +45,13 @@ namespace ModelReplacement
         //Misc components
         private MeshRenderer nameTagObj = null;
         private MeshRenderer nameTagObj2 = null;
-        private bool moreCompanyCosmeticsReparented = false;
         private int danceNumber = 0;
         private int previousDanceNumber = 0;
+
+        //Mod Support components
+        private AvatarUpdater cosmeticAvatar = null;
+
+
 
         #region Virtual and Abstract Methods
 
@@ -170,6 +174,7 @@ namespace ModelReplacement
 
             // Assign the avatar
             avatar = GetAvatarUpdater();
+            cosmeticAvatar = avatar;
             ragdollAvatar = new AvatarUpdater();
             avatar.AssignModelReplacement(controller.gameObject, replacementModel);
 
@@ -222,12 +227,16 @@ namespace ModelReplacement
                 deadBody = controller.deadBody.gameObject;
             }
             catch { }
-            if ((deadBody) && (replacementDeadBody == null))
+            if ((deadBody) && (replacementDeadBody == null)) //Player died this frame
             {
+                Console.WriteLine("Set cosmeticAvatar to ragdoll");
+                cosmeticAvatar = ragdollAvatar;
                 CreateAndParentRagdoll(controller.deadBody);
             }
-            if ((replacementDeadBody) && (deadBody == null))
+            if ((replacementDeadBody) && (deadBody == null)) //Player returned to life this frame
             {
+                Console.WriteLine("Set cosmeticAvatar to living");
+                cosmeticAvatar = avatar;
                 Destroy(replacementDeadBody);
                 replacementDeadBody = null;
             }
@@ -235,7 +244,8 @@ namespace ModelReplacement
             // Update replacement models
             avatar.Update();
             ragdollAvatar.Update();
-            AttemptReparentMoreCompanyCosmetics();
+            if (ModelReplacementAPI.moreCompanyPresent) { SafeRenderCosmetics(true); }
+            
 
             //Emotes
             previousDanceNumber = danceNumber;
@@ -269,8 +279,8 @@ namespace ModelReplacement
            
             nameTagObj.enabled = true;
             nameTagObj2.enabled = true;
-            AttemptUnparentMoreCompanyCosmetics();
 
+            if (ModelReplacementAPI.moreCompanyPresent) { SafeRenderCosmetics(false); }
             Destroy(replacementModel);
             Destroy(replacementDeadBody);
         }
@@ -346,7 +356,7 @@ namespace ModelReplacement
             {
                 renderer.enabled = true;
             }
-            deadBodyRenderer.enabled = false;
+           // deadBodyRenderer.enabled = false;
 
   
             //blood decals not working
@@ -467,62 +477,62 @@ namespace ModelReplacement
         #endregion
 
         #region MoreCompany Cosmetics Logic
-        private void AttemptUnparentMoreCompanyCosmetics()
-        {
-            if (!ModelReplacementAPI.moreCompanyPresent) { return; }
-            if (!moreCompanyCosmeticsReparented) { return; } //no cosmetics parented
-            DangerousUnparent();
-        }
-        private void AttemptReparentMoreCompanyCosmetics()
-        {
-            if (!ModelReplacementAPI.moreCompanyPresent) { return; }
-            if (moreCompanyCosmeticsReparented) { return; } //cosmetics already parented
-            DangerousParent();
 
+        private void SafeRenderCosmetics(bool useAvatarTransforms)
+        {
+            DangerousRenderCosmetics(useAvatarTransforms);
         }
-        private void DangerousUnparent()
+
+        private void DangerousRenderCosmetics(bool useAvatarTransforms)
         {
             var applications = controller.gameObject.GetComponentsInChildren<CosmeticApplication>();
             if ((applications.Any()))
             {
                 foreach (var application in applications)
                 {
-                    foreach (var cosmeticInstance in application.spawnedCosmetics)
+                    if (useAvatarTransforms)
                     {
-                        cosmeticInstance.transform.parent = null;
+                        foreach (CosmeticInstance cosmeticInstance in application.spawnedCosmetics)
+                        {
+                            Transform transform = null;
+                            switch (cosmeticInstance.cosmeticType)
+                            {
+                                case CosmeticType.HAT:
+                                    transform = cosmeticAvatar.GetAvatarTransformFromBoneName("spine.004");
+                                    break;
+                                case CosmeticType.CHEST:
+                                    transform = cosmeticAvatar.GetAvatarTransformFromBoneName("spine.003");
+                                    break;
+                                case CosmeticType.R_LOWER_ARM:
+                                    transform = cosmeticAvatar.GetAvatarTransformFromBoneName("arm.R_lower");
+                                    break;
+                                case CosmeticType.HIP:
+                                    transform = cosmeticAvatar.GetAvatarTransformFromBoneName("spine");
+                                    break;
+                                case CosmeticType.L_SHIN:
+                                    transform = cosmeticAvatar.GetAvatarTransformFromBoneName("shin.L");
+                                    break;
+                                case CosmeticType.R_SHIN:
+                                    transform = cosmeticAvatar.GetAvatarTransformFromBoneName("shin.R");
+                                    break;
+                            }
+                            cosmeticInstance.transform.parent = null;
+                            cosmeticInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
+
+                        }
                     }
-                    moreCompanyCosmeticsReparented = false;
+                    else
+                    {
+                        application.RefreshAllCosmeticPositions();
+                    }
+                    
                 }
             }
+
+
+
         }
-        private void DangerousParent()
-        {
-            var applications = controller.gameObject.GetComponentsInChildren<CosmeticApplication>();
-            if ((applications.Any()))
-            {
-                foreach (var application in applications)
-                {
-                    Transform mappedHead = avatar.GetAvatarTransformFromBoneName("spine.004");
-                    Transform mappedChest = avatar.GetAvatarTransformFromBoneName("spine.003");
-                    Transform mappedLowerArmRight = avatar.GetAvatarTransformFromBoneName("arm.R_lower");
-                    Transform mappedHip = avatar.GetAvatarTransformFromBoneName("spine");
-                    Transform mappedShinLeft = avatar.GetAvatarTransformFromBoneName("shin.L");
-                    Transform mappedShinRight = avatar.GetAvatarTransformFromBoneName("shin.R");
 
-
-                    application.head = mappedHead;
-                    application.chest = mappedChest;
-                    application.lowerArmRight = mappedLowerArmRight;
-                    application.hip = mappedHip;
-                    application.shinLeft = mappedShinLeft;
-                    application.shinRight = mappedShinRight;
-
-                    application.RefreshAllCosmeticPositions();
-                    moreCompanyCosmeticsReparented = true;
-                }
-                Console.WriteLine(" reparent done");
-            }
-        }
         #endregion
 
        

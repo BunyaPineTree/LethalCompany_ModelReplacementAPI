@@ -12,7 +12,7 @@
 - Does not replace hands. You will only see Miku in multiplayer lobbies or with a third person mod. 
 
 ## Note
-Version 1.4.0 and up will require ModelReplacementAPI minimum version 2.0.0 Be sure to download the latest update of that as well.  
+Version 1.4.0 and up will require ModelReplacementAPI minimum version 2.0.0. Be sure to download the latest update of that as well.  
 
 ## Changelog
 	- v1.4.0
