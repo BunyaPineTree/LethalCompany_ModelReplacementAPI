@@ -42,11 +42,16 @@
     </Reference>
 	<Reference Include="MirrorDecor">
       <HintPath>..\Libraries\MirrorDecor.dll</HintPath>
+    <Private>false</Private>
+    </Reference>
+    <Reference Include="TooManyEmotes">
+      <HintPath>..\Libraries\TooManyEmotes_publicized.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="3rdPerson">
       <HintPath>..\Libraries\3rdPerson.dll</HintPath>
       <Private>false</Private>
+     
     </Reference>
     <Reference Include="LCThirdPerson">
       <HintPath>..\Libraries\LCThirdPerson.dll</HintPath>

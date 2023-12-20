@@ -27,7 +27,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "2.0.1";
+        public const string VERSION = "2.0.3";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
@@ -37,6 +37,7 @@ namespace ModelReplacement
     [BepInDependency("verity.3rdperson", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("LCThirdPerson", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("quackandcheese.mirrordecor", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("FlipMods.TooManyEmotes", BepInDependency.DependencyFlags.SoftDependency)]
     public class ModelReplacementAPI : BaseUnityPlugin
     {
 
@@ -54,7 +55,7 @@ namespace ModelReplacement
             thirdPersonPresent = Chainloader.PluginInfos.ContainsKey("verity.3rdperson");
             LCthirdPersonPresent = Chainloader.PluginInfos.ContainsKey("LCThirdPerson");
             mirrorDecorPresent = Chainloader.PluginInfos.ContainsKey("quackandcheese.mirrordecor");
-
+            tooManyEmotesPresent = Chainloader.PluginInfos.ContainsKey("FlipMods.TooManyEmotes");
 
             Harmony harmony = new Harmony(PluginInfo.GUID);
             harmony.PatchAll();
@@ -65,7 +66,7 @@ namespace ModelReplacement
         public static bool thirdPersonPresent;
         public static bool LCthirdPersonPresent;
         public static bool mirrorDecorPresent;
-
+        public static bool tooManyEmotesPresent;
 
         public static ModelReplacementAPI Instance;
         public new ManualLogSource Logger;

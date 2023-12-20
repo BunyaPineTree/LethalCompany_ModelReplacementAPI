@@ -124,7 +124,7 @@ namespace ModelReplacement
             {
                 ModelReplacementAPI.Instance.Logger.LogFatal("LoadAssetsAndReturnModel() returned null. Verify that your assetbundle works and your asset name is correct. ");
             }
-
+            
 
             // Fix Materials
             Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
@@ -134,6 +134,7 @@ namespace ModelReplacement
             List<Material> materials = ListPool<Material>.Get();
             foreach (Renderer renderer in renderers)
             {
+                
                 renderer.GetSharedMaterials(materials);
                 for (int i = 0; i < materials.Count; i++)
                 {
@@ -148,10 +149,14 @@ namespace ModelReplacement
             }
             ListPool<Material>.Release(materials);
 
-            // Set scripts missing from assetBundle
+            foreach (var item in replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                item.updateWhenOffscreen = true;
+            }       
+            
             try
             {
-                AddModelScripts();
+                AddModelScripts();  // Set scripts missing from assetBundle
             }
             catch (Exception e)
             {
@@ -263,11 +268,17 @@ namespace ModelReplacement
                 else { danceNumber = 3; }
             }
             else { danceNumber = 0; }
+            if (ModelReplacementAPI.tooManyEmotesPresent)
+            {
+                danceNumber = SafeGetEmoteID(danceNumber);
+            }
+
             if (danceNumber != previousDanceNumber)
-            {   
-                if(previousDanceNumber == 0) { StartCoroutine(WaitForDanceNumberChange()); } //Start new animation, takes time to switch to new animation state
-                if (danceNumber == 0) { OnEmoteEnd(); } // No dance, where there was previously dance.
-                else { OnEmoteStart(danceNumber); } //An animation did not start nor end, go immediately into the different animation
+            {
+                Console.WriteLine($"Dance change from {previousDanceNumber} to {danceNumber}");
+                if (previousDanceNumber == 0) { StartCoroutine(WaitForDanceNumberChange()); } //Start new animation, takes time to switch to new animation state
+                else if (danceNumber == 0) { OnEmoteEnd(); } // No dance, where there was previously dance.
+                else { if(!emoteOngoing) { OnEmoteStart(danceNumber); }} //An animation did not start nor end, go immediately into the different animation
             }
             //Console.WriteLine($"{danceNumber} {danceHash}");
 
@@ -424,16 +435,19 @@ namespace ModelReplacement
         #endregion
 
         #region Coroutines
+        private bool emoteOngoing = false;
         private IEnumerator WaitForDanceNumberChange()
         {
+            if(emoteOngoing) { yield break; }
+            emoteOngoing = true;
             int frame = 0;
             while (frame < 20)
             {
-                if (danceNumber == 0) { yield break; }
+                if (danceNumber == 0) { emoteOngoing = false; yield break; }
                 yield return new WaitForEndOfFrame();
                 frame++;
             }
-            if(danceNumber != 0) { OnEmoteStart(danceNumber); }
+            if(danceNumber != 0) { emoteOngoing = false; OnEmoteStart(danceNumber); }
         }
 
 
@@ -540,8 +554,27 @@ namespace ModelReplacement
 
         #endregion
 
-       
-       
+        #region TooManyEmotes
+
+        private int SafeGetEmoteID(int currentID)
+        {
+            return DangerousGetEmoteID(currentID);
+        }
+
+        private int DangerousGetEmoteID(int currentID)
+        {
+            var anim = TooManyEmotes.Patches.PlayerPatcher.GetCurrentlyPlayingEmote(controller);
+            if(anim == null) { return currentID; }
+            if(anim.emoteId == 1) { return -1; }
+            if(anim.emoteId == 2) { return -2; }
+            if(anim.emoteId == 3) { return -3; }
+            return anim.emoteId;
+
+        }
+
+        #endregion
+
+
 
     }
 }
