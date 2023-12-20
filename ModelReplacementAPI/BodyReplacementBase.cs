@@ -97,6 +97,11 @@ namespace ModelReplacement
             Console.WriteLine($"PLAYER TAKE DAMAGE BY ALLY {controller.playerUsername}");
         }
 
+        protected internal virtual void OnDeath()
+        {
+            Console.WriteLine($"PLAYER DEATH {controller.playerUsername} ");
+        }
+
         protected internal virtual void OnEmoteStart(int emoteId)
         {
             Console.WriteLine($"PLAYER EMOTE START {controller.playerUsername} ID {emoteId}");
@@ -242,6 +247,7 @@ namespace ModelReplacement
                 Console.WriteLine("Set cosmeticAvatar to ragdoll");
                 cosmeticAvatar = ragdollAvatar;
                 CreateAndParentRagdoll(controller.deadBody);
+                OnDeath();
             }
             if ((replacementDeadBody) && (deadBody == null)) //Player returned to life this frame
             {
