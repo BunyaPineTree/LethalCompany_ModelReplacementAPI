@@ -27,7 +27,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "2.0.3";
+        public const string VERSION = "2.0.4";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
@@ -185,7 +185,7 @@ namespace ModelReplacement
 
                     if (a.suitName != suitName)
                     {
-                        Console.WriteLine($"Suit name mismatch {a.suitName} =/ {suitName}, Destroying");
+                        Console.WriteLine($"Suit Change detected {a.suitName} => {suitName}, Replacing {type}.");
                         Destroy(a); //Suit name changed, may represent change in skin of model replacement, destroy
                     }
                     else
@@ -195,6 +195,7 @@ namespace ModelReplacement
                 }
                 else //Suit has changed model
                 {
+                    Console.WriteLine($"Model Replacement Change detected {a.GetType()} => {type}, changing model.");
                     Destroy(a); //Destroy the existing body replacement
                 }
             }
@@ -315,7 +316,7 @@ namespace ModelReplacement
                         RemovePlayerModelReplacement(__instance);
                     }
                 }
-                catch (Exception e) { }
+                catch (Exception e) { ModelReplacementAPI.Instance.Logger.LogWarning(e); }
             }
 
             [HarmonyPatch("DamagePlayerFromOtherClientClientRpc")]

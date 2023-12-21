@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.0.3
+# ModelReplacementAPI v2.0.4
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -9,6 +9,8 @@ For more info on making model replacements see the wiki at https://github.com/Bu
 - More Company cosmetics behave strangely on ragdolls
 
 ## Changelog
+	- v2.0.4
+		- Uncommented debug
 	- v2.0.3
 		- TooManyEmotes OnEmote command fix
 	- v2.0.2

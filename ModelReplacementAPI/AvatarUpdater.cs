@@ -70,14 +70,6 @@ namespace ModelReplacement.AvatarBodyUpdater
                 modelBone.rotation = playerBone.rotation;
                 var offset = modelBone.GetComponent<RotationOffset>();
                 if (offset) { modelBone.rotation *= offset.offset; }
-                /*
-                if ((playerBone.name == "spine") || (playerBone.name.Contains("PlayerRagdoll")))
-                {
-                    modelBone.position = playerBone.position;
-                    modelBone.position += playerBone.TransformVector(rootPositionOffset);
-
-                }
-                */
             }
             Transform rootBone = GetAvatarTransformFromBoneName("spine");
             Transform playerRootBone = GetPlayerTransformFromBoneName("spine");

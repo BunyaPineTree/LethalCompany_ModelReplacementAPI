@@ -378,7 +378,7 @@ namespace ModelReplacement
             {
                 renderer.enabled = true;
             }
-           // deadBodyRenderer.enabled = false;
+            deadBodyRenderer.enabled = false;
 
   
             //blood decals not working
