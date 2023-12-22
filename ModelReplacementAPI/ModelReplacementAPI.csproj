@@ -45,7 +45,7 @@
     <Private>false</Private>
     </Reference>
     <Reference Include="TooManyEmotes">
-      <HintPath>..\Libraries\TooManyEmotes_publicized.dll</HintPath>
+      <HintPath>..\Libraries\TooManyEmotes.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="3rdPerson">
