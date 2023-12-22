@@ -1,0 +1,4 @@
+[submodule "ModelReplacementAPI/UnityJigglePhysics"]
+	path = ModelReplacementAPI/UnityJigglePhysics
+	url = https://github.com/naelstrof/UnityJigglePhysics.git
+	branch = bcompat
