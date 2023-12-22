@@ -1,15 +1,16 @@
 # LethalCompany_ModelReplacementAPI
 
-Helps the user create model replacement mods in Lethal Company. [See the wiki](https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI/wiki) for more info on how this is done. 
+Helps the user create model replacement mods in Lethal Company. [See the wiki](https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI/wiki) for more info. Developers [see the SDK repo(in progress)](https://github.com/BunyaPineTree/LethalCompany_ModelReplacementSDK) if you want to contribute to its development.    
 
 Features
 -
 - A unitypackage based workflow to simplify model replacement and assetbundle creation.
-- A skin registry that allows the user to set specific skin names to specific models, or override that entirely and make all players the same model. 
+- A skin registry that allows the user to set specific skin names to specific models, default models replacements, or override that entirely and make all players the same model. It is also possible to except a model replacement from the registry entirely, and implement your own logic.  
 - Seemingly client side
 - More Company cosmetic support
 - 3rdPerson and LCThirdPerson support
-
+- TooManyEmotes support
+- MirrorDecor support in progress
 
 How it works
 -
