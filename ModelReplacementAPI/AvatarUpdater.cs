@@ -75,7 +75,6 @@ namespace ModelReplacement.AvatarBodyUpdater
             Transform playerRootBone = GetPlayerTransformFromBoneName("spine");
             rootBone.position = playerRootBone.position + playerRootBone.TransformVector(rootPositionOffset);
         }
-
         public virtual void Update()
         {
             if (playerModelRenderer == null) { return; }

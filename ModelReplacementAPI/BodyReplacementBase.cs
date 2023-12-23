@@ -434,7 +434,7 @@ namespace ModelReplacement
             float minY = allBounds.OrderBy(x => x.min.y).First().min.y;
             float minZ = allBounds.OrderBy(x => x.min.z).First().min.z;
 
-            bounds.SetMinMax(new Vector3(minX, minY, minZ), new Vector3(maxZ, maxY, maxZ));
+            bounds.SetMinMax(new Vector3(minX, minY, minZ), new Vector3(maxX, maxY, maxZ));
             return bounds;
         }
 
