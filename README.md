@@ -4,13 +4,14 @@ Helps the user create model replacement mods in Lethal Company. [See the wiki](h
 
 Features
 -
-- A unitypackage based workflow to simplify model replacement and assetbundle creation.
-- A skin registry that allows the user to set specific skin names to specific models, default models replacements, or override that entirely and make all players the same model. It is also possible to except a model replacement from the registry entirely, and implement your own logic.  
+- A unity package manager based workflow to simplify model replacement and assetbundle creation.
+- A skin registry that allows the user to set specific skin names to specific models, default models replacements, or override that entirely and make all players the same model. It is also possible to except a model replacement from the registry entirely, and implement your own logic.
+- Native support for [UnityJigglePhysics](https://github.com/naelstrof/UnityJigglePhysics) as a free and highly functional method to implement bone physics into your model without needing to struggle with Assembly Definitions. 
 - Seemingly client side
 - More Company cosmetic support
 - 3rdPerson and LCThirdPerson support
 - TooManyEmotes support
-- MirrorDecor support in progress
+- MirrorDecor support
 
 How it works
 -
@@ -24,10 +25,9 @@ Known issues
 * Blood decals are not currently visible on the ragdoll replacement.
 * Dying at the company may make the dead individual respawn without a model, but it may also return at a later point in time. 
 
-
 Unknown issues
 -
 * Many.
 
-And a special thanks to mina, linkoid, notnotnotswipez, and everybody else who has been a huge help. 
+And a special thanks to mina, linkoid, notnotnotswipez, naelstrof and everybody else who has been a huge help. 
 
