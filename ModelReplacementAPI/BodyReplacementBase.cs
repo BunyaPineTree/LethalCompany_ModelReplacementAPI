@@ -215,15 +215,12 @@ namespace ModelReplacement
 
                 if (RenderBodyReplacement()) {
                     SetRenderers(true);
-                    controller.thisPlayerModel.enabled = false; // Don't render original body if non-local player
-                    controller.thisPlayerModelLOD1.enabled = false;
-                    controller.thisPlayerModelLOD2.enabled = false;
-                    nameTagObj.enabled = false;
-                    nameTagObj2.enabled = false;
+                    SetPlayerControllerRenderers(false); // Don't render original body if non-local player
                 }
                 else
                 {
                     SetRenderers(false); // Don't render model replacement if local player
+                    SetPlayerControllerRenderers(true);
                 }
             }
             else
@@ -401,6 +398,15 @@ namespace ModelReplacement
             {
                 renderer.enabled = enabled;
             }
+        }
+
+        private void SetPlayerControllerRenderers(bool enabled)
+        {
+            controller.thisPlayerModel.enabled = enabled;
+            controller.thisPlayerModelLOD1.enabled = enabled;
+            controller.thisPlayerModelLOD2.enabled = enabled;
+            nameTagObj.enabled = enabled;
+            nameTagObj2.enabled = enabled;
         }
 
         /// <summary>

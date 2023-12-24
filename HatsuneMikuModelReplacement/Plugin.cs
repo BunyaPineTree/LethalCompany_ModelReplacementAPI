@@ -79,7 +79,7 @@ namespace HatsuneMikuModelReplacement
         public static string mainAssetBundleName = "mbundle";
         public static AssetBundle MainAssetBundle = null;
 
-        private static string GetAssemblyName() => Assembly.GetExecutingAssembly().FullName.Split(',')[0];
+        private static string GetAssemblyName() => Assembly.GetExecutingAssembly().GetName().Name;
         public static void PopulateAssets()
         {
             if (MainAssetBundle == null)
