@@ -1,6 +1,4 @@
 ﻿using ModelReplacement;
-using ModelReplacement.Scripts;
-using System.Linq;
 using UnityEngine;
 
 namespace HatsuneMikuModelReplacement
@@ -11,20 +9,13 @@ namespace HatsuneMikuModelReplacement
         protected override GameObject LoadAssetsAndReturnModel()
         {
             //Replace with the Asset Name from your unity project 
-            string model_name = "HatsuneMikuNTPrefab";
+            string model_name = "HatsuneMikuNT";
             return Assets.MainAssetBundle.LoadAsset<GameObject>(model_name);
         }
 
         //Miku mod specific scripts. Delete this if you have no custom scripts to add. 
         protected override void AddModelScripts()
         {
-            //Set dynamic bone options. DynamicBones is a paid for asset that I am unable to include in this repository. If this section causes errors and you don't have DynamicBones in your project, just remove it. 
-            replacementModel.GetComponentsInChildren<DynamicBone>().ToList().ForEach(bone =>
-            {
-                bone.m_UpdateRate = Plugin.UpdateRate.Value;
-                bone.m_DistantDisable = Plugin.disablePhysicsAtRange.Value;
-                bone.m_DistanceToObject = Plugin.distanceDisablePhysics.Value;
-            });
         }
 
 

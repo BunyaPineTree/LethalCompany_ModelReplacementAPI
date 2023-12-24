@@ -236,12 +236,13 @@ namespace ModelReplacement
                     Transform parentObject = a.avatar.itemHolder;
 
                     parentObject.localPosition = a.avatar.itemHolderPositionOffset;
+                    Transform playerItemHolder = a.avatar.GetPlayerItemHolder();
 
-                    __instance.transform.rotation = parentObject.rotation * a.avatar.itemHolderRotationOffset;
+                    __instance.transform.rotation = playerItemHolder.rotation;
                     __instance.transform.Rotate(__instance.itemProperties.rotationOffset);
                     __instance.transform.position = parentObject.position;
                     Vector3 vector = __instance.itemProperties.positionOffset;
-                    vector = parentObject.rotation * vector;
+                    vector = playerItemHolder.rotation * vector;
                     __instance.transform.position += vector;
 
                 }

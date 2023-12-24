@@ -16,6 +16,7 @@ namespace ModelReplacement.AvatarBodyUpdater
     {
         protected SkinnedMeshRenderer playerModelRenderer = null;
         protected Animator replacementAnimator = null;
+        protected GameObject player = null;
         protected GameObject replacement = null;
 
         public Vector3 itemHolderPositionOffset { get; private set; } = Vector3.zero;
@@ -44,6 +45,7 @@ namespace ModelReplacement.AvatarBodyUpdater
                 Console.WriteLine("failed to start AvatarBodyUpdater");
                 return;
             }
+            this.player = player;
 
             replacementAnimator = replacement.GetComponentInChildren<Animator>();
             this.replacement = replacement;
@@ -121,7 +123,12 @@ namespace ModelReplacement.AvatarBodyUpdater
             return null;
            
         }
-
+        public Transform GetPlayerItemHolder()
+        {
+            var tr = player.GetComponentsInChildren<Transform>().Where(x => (x.name == "ServerItemHolder") || (x.name == "ItemHolder"));
+            if (tr.Any()) { return tr.First(); }
+            return null;
+        }
 
 
         //Remove spine.002 and .003 to implement logic
@@ -190,7 +197,6 @@ namespace ModelReplacement.AvatarBodyUpdater
         public Vector3 itemPositonOffset;
         public Quaternion itemRotationOffset;
         public GameObject itemHolder;
-        public Transform rootTransform;
     }
         #endregion
 }

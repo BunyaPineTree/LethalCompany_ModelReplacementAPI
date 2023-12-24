@@ -335,12 +335,15 @@ namespace ModelReplacement
             }
             else
             {
+                ModelReplacementAPI.Instance.Logger.LogInfo($"Creating replacement material for material {modelMaterial.name} / shader {modelMaterial.shader.name}");
                 // XXX Ideally this material would be manually destroyed when the replacement model is destroyed.
                 Material replacementMat = new Material(gameMaterial);
                 replacementMat.color = modelMaterial.color;
                 replacementMat.mainTexture = modelMaterial.mainTexture;
                 replacementMat.mainTextureOffset = modelMaterial.mainTextureOffset;
                 replacementMat.mainTextureScale = modelMaterial.mainTextureScale;
+
+                
 
                 /*
             mesh.materials[0].shader = goodShader;
@@ -357,7 +360,7 @@ namespace ModelReplacement
             mesh.materials[0].SetColor("_EmissiveColor", Color.white);
             */
 
-                HDMaterial.ValidateMaterial(replacementMat);
+                //HDMaterial.ValidateMaterial(replacementMat);
                 return replacementMat;
             }
         }
