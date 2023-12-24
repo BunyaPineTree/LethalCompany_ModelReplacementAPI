@@ -212,7 +212,6 @@ namespace ModelReplacement
             // Local/Nonlocal renderer logic
             if (!renderLocalDebug)
             {
-
                 if (RenderBodyReplacement()) {
                     SetRenderers(true);
                     SetPlayerControllerRenderers(false); // Don't render original body if non-local player
@@ -416,6 +415,10 @@ namespace ModelReplacement
         public bool RenderBodyReplacement()
         {
             if (!localPlayer) { return true; }
+            if (ModelReplacementAPI.mirrorDecorPresent)
+            {
+                return true; // Can just render because Mirror Decor sets models in a different layer
+            }
             if (ModelReplacementAPI.thirdPersonPresent)
             {
                 return DangerousViewState();
@@ -471,12 +474,14 @@ namespace ModelReplacement
         #region MirrorDecor Logic
         private void MirrorPatch()
         {
-            foreach (var item in replacementModel.GetComponentsInChildren<Renderer>())
+            if (localPlayer) // Only set our model to different layer, we still want to see others' models!
             {
-                item.shadowCastingMode = ShadowCastingMode.On;
-                item.gameObject.layer = 3;
+                foreach (var item in replacementModel.GetComponentsInChildren<Renderer>())
+                {
+                    item.shadowCastingMode = ShadowCastingMode.On;
+                    item.gameObject.layer = 23;
+                }
             }
-            if (localPlayer) { return; }
             if (ModelReplacementAPI.thirdPersonPresent)
             {
                 DangeroudFixCamera();
@@ -490,7 +495,7 @@ namespace ModelReplacement
         #region Third Person Mods Logic
         private void DangeroudFixCamera()
         {
-            ThirdPersonCamera.GetCamera.cullingMask = 557520887;
+            ThirdPersonCamera.GetCamera.cullingMask = 565909495;
         }
         private void DangeroudFixCameraLC()
         {
