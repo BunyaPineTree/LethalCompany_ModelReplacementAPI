@@ -172,7 +172,7 @@ namespace ModelReplacement
             // Instantiate model
             replacementModel = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
             replacementModel.name += $"({controller.playerUsername})";
-            SetRenderers(false); //Initializing with renderers disabled prevents model flickering for local player
+            SetAvatarRenderers(false); //Initializing with renderers disabled prevents model flickering for local player
             replacementModel.transform.localPosition = new Vector3(0, 0, 0);
             replacementModel.SetActive(true);
 
@@ -213,12 +213,12 @@ namespace ModelReplacement
             if (!renderLocalDebug)
             {
                 if (RenderBodyReplacement()) {
-                    SetRenderers(true);
+                    SetAvatarRenderers(true);
                     SetPlayerControllerRenderers(false); // Don't render original body if non-local player
                 }
                 else
                 {
-                    SetRenderers(false); // Don't render model replacement if local player
+                    SetAvatarRenderers(false); // Don't render model replacement if local player
                     SetPlayerControllerRenderers(true);
                 }
             }
@@ -228,7 +228,7 @@ namespace ModelReplacement
                 {
                     renderer.enabled = renderBase;
                 }
-                SetRenderers(renderModel);
+                SetAvatarRenderers(renderModel);
             }
 
             // Handle Ragdoll creation and destruction
@@ -394,7 +394,7 @@ namespace ModelReplacement
 
         }
 
-        private void SetRenderers(bool enabled)
+        private void SetAvatarRenderers(bool enabled)
         {
             foreach (Renderer renderer in replacementModel.GetComponentsInChildren<Renderer>())
             {
