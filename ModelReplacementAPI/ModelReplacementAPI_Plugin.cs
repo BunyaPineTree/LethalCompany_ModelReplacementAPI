@@ -6,14 +6,11 @@ using HarmonyLib;
 using ModelReplacement.AvatarBodyUpdater;
 using System;
 using System.Collections.Generic;
-using BepInEx;
-using HarmonyLib;
 using UnityEngine;
 using System.Reflection;
 using ModelReplacement;
 using BepInEx.Configuration;
 
-using UnityEngine;
 using UnityEngine.TextCore.Text;
 using static UnityEngine.ParticleSystem.PlaybackState;
 //using System.Numerics;
@@ -286,8 +283,6 @@ namespace ModelReplacement
             {
                 try
                 {
-                    if (__instance.playerSteamId == 0) { return; }
-
                     var a = __instance.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
                     if ((a != null) && RegisteredModelReplacementExceptions.Contains(a.GetType()))
                     {
