@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.0.4
+# ModelReplacementAPI v2.1.0
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -7,8 +7,13 @@ For more info on making model replacements see the wiki at https://github.com/Bu
 ## Known Issues
 - Does not work in LAN mode
 - More Company cosmetics behave strangely on ragdolls
+- MirrorDecor and LCThirdPerson have a conflict that results in Model Replacements not being visible in third person
 
 ## Changelog
+	- v2.1.0
+		- Native UnityJigglePhysics support for modders. 
+		- Item rotation refactor to fix items not being held correctly. 
+		- MirrorDecor now supported with 3rdPerson and LCThirdPerson, thanks to Adamasnaldo for the fix. 
 	- v2.0.4
 		- Uncommented debug
 	- v2.0.3

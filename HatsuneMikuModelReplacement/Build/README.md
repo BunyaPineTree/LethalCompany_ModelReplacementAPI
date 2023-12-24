@@ -1,4 +1,4 @@
-# Miku Model Replacement v1.4.0
+# Miku Model Replacement v1.4.1
 ### Replaces suits with Hatsune Miku. This is the example mod for ModelReplacementAPI
 
 ## Instructions
@@ -7,7 +7,7 @@
 - For more info see https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI
 
 ## Known Issues
-- Cloth physics can be very laggy. It is recommended in larger lobbies that you lower the dynamic bone update rate and disable physics at range via the config. 
+- Cloth physics can be very laggy. ~~It is recommended in larger lobbies that you lower the dynamic bone update rate and disable physics at range via the config.~~ Physics configs temporarily do not function as a result of the switch away from Dynamic Bones.
 - Miku might become a flashbang in bad lighting.  
 - Does not replace hands. You will only see Miku in multiplayer lobbies or with a third person mod. 
 
@@ -15,6 +15,9 @@
 Version 1.4.0 and up will require ModelReplacementAPI minimum version 2.0.0. Be sure to download the latest update of that as well.  
 
 ## Changelog
+	- v1.4.1
+		- Switched away from Dynamic Bones.
+		- Items should be held correctly with the latest version of ModelReplacementAPI
 	- v1.4.0
 		- Graphics overhaul. 
 		- Added config option to set miku as default. Suits that have been registered to another model replacement will take priority. 
