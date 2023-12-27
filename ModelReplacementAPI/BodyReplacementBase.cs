@@ -315,6 +315,7 @@ namespace ModelReplacement
             "UI/",
             "Unlit/",
             "Toon",
+            "lilToon",
             "Shader Graphs/",
         };
 
