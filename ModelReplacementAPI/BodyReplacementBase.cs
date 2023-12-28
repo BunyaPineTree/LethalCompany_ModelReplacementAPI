@@ -1,5 +1,6 @@
 ﻿using _3rdPerson.Helper;
 using GameNetcodeStuff;
+using Steamworks;
 using LCThirdPerson;
 using ModelReplacement;
 using MoreCompany.Cosmetics;
@@ -47,6 +48,7 @@ namespace ModelReplacement
         private MeshRenderer nameTagObj2 = null;
         private int danceNumber = 0;
         private int previousDanceNumber = 0;
+        protected bool DontConvertUnsupportedShaders = false;
 
         //Mod Support components
         private AvatarUpdater cosmeticAvatar = null;
@@ -60,7 +62,6 @@ namespace ModelReplacement
         /// </summary>
         /// <returns>Model replacement GameObject</returns>
         protected abstract GameObject LoadAssetsAndReturnModel();
-
 
         /// <summary>
         /// AssetBundles do not supply scripts that are not supported by the base game. Override to set custom scripts. 
@@ -317,6 +318,7 @@ namespace ModelReplacement
             "Toon",
             "lilToon",
             "Shader Graphs/",
+            "Hidden/"
         };
 
         /// <summary>
@@ -328,7 +330,7 @@ namespace ModelReplacement
         protected virtual Material GetReplacementMaterial(Material gameMaterial, Material modelMaterial)
         {
         
-            if (shaderPrefixWhitelist.Any(prefix => modelMaterial.shader.name.StartsWith(prefix)))
+            if (DontConvertUnsupportedShaders || shaderPrefixWhitelist.Any(prefix => modelMaterial.shader.name.StartsWith(prefix)))
             {
                 return modelMaterial;
             }

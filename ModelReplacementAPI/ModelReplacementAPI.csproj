@@ -40,6 +40,10 @@
       <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="Facepunch.Steamworks.Win64" Publicize="true">
+      <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
 	<Reference Include="MirrorDecor">
       <HintPath>..\Libraries\MirrorDecor.dll</HintPath>
     <Private>false</Private>

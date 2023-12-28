@@ -68,6 +68,10 @@ namespace ModelReplacement
         public static ModelReplacementAPI Instance;
         public new ManualLogSource Logger;
 
+        //Other
+        private static int steamLobbyID => GameNetworkManager.Instance.currentLobby.HasValue ? (int)GameNetworkManager.Instance.currentLobby.Value.Id.Value : -1;
+        public static bool isLan => steamLobbyID == -1;
+
         #region Registry and API methods
 
         private static List<Type> RegisteredModelReplacementExceptions = new List<Type>();
@@ -172,11 +176,18 @@ namespace ModelReplacement
                 Instance.Logger.LogError($"Cannot set body replacement of type {type.Name}, must inherit from BodyReplacementBase");
                 return;
             }
+            if (!isLan && (player.playerSteamId == 0))
+            {
+                return;
+            }
             var a = player.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
             int suitID = player.currentSuitID;
             string suitName = StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName;
             if (a != null)
             {
+               
+
+
                 if (a.GetType() == type) //Suit has not changed model
                 {
 
@@ -283,11 +294,6 @@ namespace ModelReplacement
             {
                 try
                 {
-                    if (!__instance.isPlayerControlled)
-                    {
-                        RemovePlayerModelReplacement(__instance);
-                        return;
-                    }
                     var a = __instance.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
                     if ((a != null) && RegisteredModelReplacementExceptions.Contains(a.GetType()))
                     {
