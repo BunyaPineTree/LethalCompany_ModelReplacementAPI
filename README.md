@@ -10,8 +10,9 @@ Features
 - Seemingly client side
 - More Company cosmetic support
 - 3rdPerson and LCThirdPerson support
-- TooManyEmotes support
+- TooManyEmotes support(?)
 - MirrorDecor support
+- Recording Camera support
 
 How it works
 -
