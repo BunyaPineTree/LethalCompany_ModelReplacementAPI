@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.1.2
+# ModelReplacementAPI v2.2.0
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -6,10 +6,14 @@ For more info on making model replacements see the wiki at https://github.com/Bu
 
 ## Known Issues
 - More Company cosmetics behave strangely on ragdolls
-- MirrorDecor and LCThirdPerson have a conflict that results in Model Replacements not being visible in third person
-- Other third person mods not natively supported
+- Some third person mods may not be natively supported
+- Known issues with some emote mods. 
 
 ## Changelog
+	- v2.2.0
+		- Rendering changes to make models more robust to cameras. 
+		- Recording camera support, and third person mods should no longer have conflicts. 
+		- Models with converted standard materials will no longer have the crusty base game normal map
 	- v2.1.2
 		- Fixed ragdolls and death commands not activating
 	- v2.1.0

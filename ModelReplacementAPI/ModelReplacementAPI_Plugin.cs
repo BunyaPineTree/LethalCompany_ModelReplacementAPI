@@ -24,7 +24,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "2.1.2";
+        public const string VERSION = "2.2.0";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
@@ -35,6 +35,7 @@ namespace ModelReplacement
     [BepInDependency("LCThirdPerson", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("quackandcheese.mirrordecor", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("FlipMods.TooManyEmotes", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.graze.gorillatag.placeablecamera", BepInDependency.DependencyFlags.SoftDependency)]
     public class ModelReplacementAPI : BaseUnityPlugin
     {
 
@@ -53,6 +54,8 @@ namespace ModelReplacement
             LCthirdPersonPresent = Chainloader.PluginInfos.ContainsKey("LCThirdPerson");
             mirrorDecorPresent = Chainloader.PluginInfos.ContainsKey("quackandcheese.mirrordecor");
             tooManyEmotesPresent = Chainloader.PluginInfos.ContainsKey("FlipMods.TooManyEmotes");
+            recordingCameraPresent = Chainloader.PluginInfos.ContainsKey("com.graze.gorillatag.placeablecamera");
+
 
             Harmony harmony = new Harmony(PluginInfo.GUID);
             harmony.PatchAll();
@@ -64,6 +67,9 @@ namespace ModelReplacement
         public static bool LCthirdPersonPresent;
         public static bool mirrorDecorPresent;
         public static bool tooManyEmotesPresent;
+        public static bool recordingCameraPresent;
+
+
 
         public static ModelReplacementAPI Instance;
         public new ManualLogSource Logger;
@@ -368,6 +374,19 @@ namespace ModelReplacement
 
                 var a = playerWhoHit.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
                 if (a) { a.OnHitEnemy(__instance.isEnemyDead); }
+            }
+
+        }
+        [HarmonyPatch(typeof(MaskedPlayerEnemy))]
+        public class MaskedPlayerEnemyPatch
+        {
+            [HarmonyPatch("SetSuit")]
+            [HarmonyPrefix]
+            public static void SetModelReplacement(ref MaskedPlayerEnemy __instance, int suitId)
+            {
+                var a = __instance.mimickingPlayer.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+                if(a == null) { return; }
+
             }
 
         }

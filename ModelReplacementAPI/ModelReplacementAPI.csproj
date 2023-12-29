@@ -52,13 +52,16 @@
       <HintPath>..\Libraries\TooManyEmotes.dll</HintPath>
       <Private>false</Private>
     </Reference>
-    <Reference Include="3rdPerson">
-      <HintPath>..\Libraries\3rdPerson.dll</HintPath>
-      <Private>false</Private>
-     
-    </Reference>
     <Reference Include="LCThirdPerson">
       <HintPath>..\Libraries\LCThirdPerson.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="3rdPerson">
+    <HintPath>..\Libraries\3rdPerson.dll</HintPath>
+    <Private>false</Private>
+    </Reference>
+    <Reference Include="RecordingCamera">
+      <HintPath>..\Libraries\RecordingCamera.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="MoreCompany">
