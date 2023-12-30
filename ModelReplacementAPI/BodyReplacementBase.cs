@@ -1,25 +1,16 @@
 ﻿using _3rdPerson.Helper;
 using GameNetcodeStuff;
-using Steamworks;
 using LCThirdPerson;
-using ModelReplacement;
+using ModelReplacement.AvatarBodyUpdater;
 using MoreCompany.Cosmetics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.HID;
-using ModelReplacement.AvatarBodyUpdater;
 using UnityEngine.Pool;
-using Unity.Netcode;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
-using Steamworks.Ugc;
 
 
 namespace ModelReplacement
@@ -35,33 +26,26 @@ namespace ModelReplacement
     public abstract class BodyReplacementBase : MonoBehaviour
     {
 
-
-
-        private bool localPlayer => (ulong)StartOfRound.Instance.thisClientPlayerId == controller.playerClientId;
-
-        //Debug variables, if renderLocalDebug is true, renderBase and renderModel will decide what to render
-        public bool renderLocalDebug = false;
-        public bool renderBase = false;
-        public bool renderModel = false;
-
-        //Rendering
-        //MainCamera  557520895 100001001110110001011111111111 model, no arm
-        //Mirror                100001101110110001011101011111 model, no arm
-        //ship camera           000000000110000000001101001001 model, no arm
-        //Current first person 1100001001110110001011111110111 arm, no model = > 1631262711
+        //==================================================================== Rendering Logic ====================================================================
+        //MainCamera          00100001001110110001011111111111 model, no arm = > 557520895
+        //Mirror              00100001101110110001011101011111 model, no arm
+        //ship camera         00000000000110000000001101001001 model, no arm
+        //First Person        01100001001110110001011111110111 arm, no model = > 1631262711
 
         //Body  3                                         x
         //Arms  30             x                                                  
+        //Visible 0                                          x
+        //Invisible 31        x
 
-        public ViewState viewState = ViewState.None;
-        private int CullingMaskThirdPerson = 557520895; //Base game MainCamera culling mask                                 
-        private int CullingMaskFirstPerson = 1631262711; //Modified base game to provide layers for arms and body 
-                                                                                                                            
-        //private int CullingMaskAdjusted = 557520895; //Same as base game culling mask, but doesn't render layer 3                  
+        public static int CullingMaskThirdPerson = 557520895; //Base game MainCamera culling mask                                 
+        public static int CullingMaskFirstPerson = 1631262711; //Modified base game to provide layers for arms and body 
 
-        private int visibleLayer = 0; //I don't think this layer matters so it will be 0
-        private int modelLayer = 3; //Layer 3
-        private int armsLayer = 30;
+        public static int modelLayer = 3; //Arbitrarily decided by MirrorDecor
+        public static int armsLayer = 30; //Most cullingMasks shouldn't have a 30 slot, so I will use that one to place arms. 
+
+        public static int visibleLayer = 0; // Likely all culling masks show layer 0
+        public static int invisibleLayer = 31; //Most culling masks probably do not show layer 31
+        //=========================================================================================================================================================
 
         //Base components
         public AvatarUpdater avatar { get; private set; }
@@ -113,7 +97,7 @@ namespace ModelReplacement
             Console.WriteLine($"PLAYER HIT ENEMY {controller.playerUsername}");
         }
 
-        protected internal virtual void OnHitAlly(PlayerControllerB ally,  bool dead)
+        protected internal virtual void OnHitAlly(PlayerControllerB ally, bool dead)
         {
             Console.WriteLine($"PLAYER HIT ALLY {controller.playerUsername}");
         }
@@ -145,24 +129,24 @@ namespace ModelReplacement
         #endregion
 
         #region Base Logic
-      
+
 
 
 
         protected virtual void Awake()
         {
-            
+
             controller = base.GetComponent<PlayerControllerB>();
             ModelReplacementAPI.Instance.Logger.LogInfo($"Awake {controller.playerUsername}");
 
             // Load model
             replacementModel = LoadAssetsAndReturnModel();
 
-            if(replacementModel == null)
+            if (replacementModel == null)
             {
                 ModelReplacementAPI.Instance.Logger.LogFatal("LoadAssetsAndReturnModel() returned null. Verify that your assetbundle works and your asset name is correct. ");
             }
-            
+
 
             // Fix Materials
             Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
@@ -172,7 +156,7 @@ namespace ModelReplacement
             List<Material> materials = ListPool<Material>.Get();
             foreach (Renderer renderer in renderers)
             {
-                
+
                 renderer.GetSharedMaterials(materials);
                 for (int i = 0; i < materials.Count; i++)
                 {
@@ -201,12 +185,11 @@ namespace ModelReplacement
             {
                 ModelReplacementAPI.Instance.Logger.LogError($"Could not set all model scripts.\n Error: {e.Message}");
             }
-            
+
 
             // Instantiate model
             replacementModel = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
             replacementModel.name += $"({controller.playerUsername})";
-            SetAvatarRenderers(true); //Initializing with renderers disabled prevents model flickering for local player
             replacementModel.transform.localPosition = new Vector3(0, 0, 0);
             replacementModel.SetActive(true);
 
@@ -240,14 +223,9 @@ namespace ModelReplacement
         }
         protected virtual void Update()
         {
-            // Local/Nonlocal renderer logic
+            // Renderer logic
             SetAvatarRenderers(true);
             SetPlayerRenderers(false);
-            if (renderBase || renderModel)
-            {
-                SetPlayerRenderers(renderBase);
-                SetAvatarRenderers(renderModel);
-            }
             SetAllLayers(true);
 
             // Handle Ragdoll creation and destruction
@@ -262,7 +240,6 @@ namespace ModelReplacement
                 Console.WriteLine("Set cosmeticAvatar to ragdoll");
                 cosmeticAvatar = ragdollAvatar;
                 CreateAndParentRagdoll(controller.deadBody);
-                //SetAvatarRenderers(false );
                 OnDeath();
             }
             if ((replacementDeadBody) && (deadBody == null)) //Player returned to life this frame
@@ -271,14 +248,13 @@ namespace ModelReplacement
                 cosmeticAvatar = avatar;
                 Destroy(replacementDeadBody);
                 replacementDeadBody = null;
-                //SetAvatarRenderers(true);
             }
 
             // Update replacement models
             avatar.Update();
             ragdollAvatar.Update();
             if (ModelReplacementAPI.moreCompanyPresent) { SafeRenderCosmetics(true); }
-            
+
 
             //Emotes
             previousDanceNumber = danceNumber;
@@ -300,13 +276,11 @@ namespace ModelReplacement
                 Console.WriteLine($"Dance change from {previousDanceNumber} to {danceNumber}");
                 if (previousDanceNumber == 0) { StartCoroutine(WaitForDanceNumberChange()); } //Start new animation, takes time to switch to new animation state
                 else if (danceNumber == 0) { OnEmoteEnd(); } // No dance, where there was previously dance.
-                else { if(!emoteOngoing) { OnEmoteStart(danceNumber); }} //An animation did not start nor end, go immediately into the different animation
+                else { if (!emoteOngoing) { OnEmoteStart(danceNumber); } } //An animation did not start nor end, go immediately into the different animation
             }
-            //Console.WriteLine($"{danceNumber} {danceHash}");
-
         }
 
-       
+
 
         protected virtual void OnDestroy()
         {
@@ -314,7 +288,7 @@ namespace ModelReplacement
             controller.thisPlayerModel.enabled = true;
             controller.thisPlayerModelLOD1.enabled = true;
             controller.thisPlayerModelLOD2.enabled = true;
-           
+
             nameTagObj.enabled = true;
             nameTagObj2.enabled = true;
 
@@ -328,30 +302,39 @@ namespace ModelReplacement
         #region Helpers, Materials, Ragdolls, Rendering, etc...
         private void SetAllLayers(bool useAdjustedMask)
         {
+            ViewState state = GetViewState();
             Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
-
-            if (GameNetworkManager.Instance.localPlayerController == controller)
+            controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
+            if (state == ViewState.None)
             {
-                controller.gameplayCamera.cullingMask = useAdjustedMask ? CullingMaskFirstPerson : CullingMaskThirdPerson;
+                controller.thisPlayerModelArms.gameObject.layer = invisibleLayer;
+                foreach (Renderer renderer in renderers)
+                {
+                    renderer.shadowCastingMode = ShadowCastingMode.Off;
+                    renderer.gameObject.layer = invisibleLayer;
+                }
+            }
+            else if (state == ViewState.FirstPerson)
+            {
                 controller.thisPlayerModelArms.gameObject.layer = armsLayer;
                 foreach (Renderer renderer in renderers)
                 {
                     renderer.shadowCastingMode = ShadowCastingMode.On;
-                    int modelLayer = this.modelLayer;
-                    if (ModelReplacementAPI.LCthirdPersonPresent) { modelLayer = SafeGetLayer(); }
                     renderer.gameObject.layer = modelLayer;
                 }
-
             }
-            else
+            else if (state == ViewState.ThirdPerson)
             {
                 foreach (Renderer renderer in renderers)
                 {
                     renderer.shadowCastingMode = ShadowCastingMode.On;
                     renderer.gameObject.layer = visibleLayer;
                 }
+                if(ModelReplacementAPI.LCthirdPersonPresent)
+                {
+                    controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
+                }
             }
-
         }
 
         /// <summary> Shaders with any of these prefixes won't be automatically converted. </summary>
@@ -376,7 +359,7 @@ namespace ModelReplacement
         /// <returns>The replacement material created from the <see cref="gameMaterial"/> and the <see cref="modelMaterial"/></returns>
         protected virtual Material GetReplacementMaterial(Material gameMaterial, Material modelMaterial)
         {
-        
+
             if (DontConvertUnsupportedShaders || shaderPrefixWhitelist.Any(prefix => modelMaterial.shader.name.StartsWith(prefix)))
             {
                 return modelMaterial;
@@ -385,7 +368,7 @@ namespace ModelReplacement
             {
                 ModelReplacementAPI.Instance.Logger.LogInfo($"Creating replacement material for material {modelMaterial.name} / shader {modelMaterial.shader.name}");
                 // XXX Ideally this material would be manually destroyed when the replacement model is destroyed.
-                
+
                 Material replacementMat = new Material(gameMaterial);
                 replacementMat.color = modelMaterial.color;
                 replacementMat.mainTexture = modelMaterial.mainTexture;
@@ -427,7 +410,7 @@ namespace ModelReplacement
                 replacementMat.SetFloat("_NormalScale", 0);
 
                 HDMaterial.ValidateMaterial(replacementMat);
-                
+
                 return replacementMat;
             }
         }
@@ -447,10 +430,13 @@ namespace ModelReplacement
             foreach (Renderer renderer in replacementDeadBody.GetComponentsInChildren<Renderer>())
             {
                 renderer.enabled = true;
+                renderer.shadowCastingMode = ShadowCastingMode.On;
+                renderer.gameObject.layer = visibleLayer;
             }
             deadBodyRenderer.enabled = false;
 
-  
+
+
             //blood decals not working
             foreach (var item in bodyinfo.bodyBloodDecals)
             {
@@ -482,28 +468,6 @@ namespace ModelReplacement
             nameTagObj2.enabled = enabled;
         }
 
-        /// <summary>
-        /// Returns whether the local client can render the body replacement. This is a factor of whether the body replacement belongs to their player, and whether they are using a third person mod. 
-        /// </summary>
-        /// <returns></returns>
-        public bool RenderBodyReplacement()
-        {
-            if (!localPlayer) { return true; }
-            if (ModelReplacementAPI.mirrorDecorPresent)
-            {
-                return true; // Can just render because Mirror Decor sets models in a different layer
-            }
-            if (ModelReplacementAPI.thirdPersonPresent)
-            {
-                return DangerousViewState();
-            }
-            if (ModelReplacementAPI.LCthirdPersonPresent)
-            {
-                return DangerousLCViewState();
-            }
-            return false;
-        }
-
         private Bounds GetBounds()
         {
             Bounds bounds = new Bounds();
@@ -528,7 +492,7 @@ namespace ModelReplacement
         private bool emoteOngoing = false;
         private IEnumerator WaitForDanceNumberChange()
         {
-            if(emoteOngoing) { yield break; }
+            if (emoteOngoing) { yield break; }
             emoteOngoing = true;
             int frame = 0;
             while (frame < 20)
@@ -537,20 +501,10 @@ namespace ModelReplacement
                 yield return new WaitForEndOfFrame();
                 frame++;
             }
-            if(danceNumber != 0) { emoteOngoing = false; OnEmoteStart(danceNumber); }
+            if (danceNumber != 0) { emoteOngoing = false; OnEmoteStart(danceNumber); }
         }
 
-        private IEnumerator DangerousFixRecordingCamera()
-        {
-            int frame = 0;
-            while (frame < 20)
-            {
-                yield return new WaitForEndOfFrame();
-                frame++;
-            }
-            var a = GameObject.FindObjectsOfType<Camera>().Where(x => x.gameObject.name == "ThridPersonCam");
-            a.First().cullingMask = CullingMaskThirdPerson;
-        }
+       
 
         #endregion
 
@@ -558,15 +512,30 @@ namespace ModelReplacement
 
 
         #region Third Person Mods Logic
-
-
-        private int SafeGetLayer()
+        public ViewState GetViewState()
         {
-            return DangerousGetLayer();
-        }
-        private int DangerousGetLayer()
-        {
-            return ThirdPersonPlugin.Instance.Enabled ? visibleLayer : modelLayer;
+            if (controller.isPlayerDead) //Dead, render nothing
+            {
+                return ViewState.None;
+            }
+            if (GameNetworkManager.Instance.localPlayerController != controller) //Other player, render third person
+            {
+                return ViewState.ThirdPerson;
+            }
+            if(ModelReplacementAPI.thirdPersonPresent && Safe3rdPersonActive()) //If any of these are true, we are in third person mode and must render third person
+            {
+                return ViewState.ThirdPerson;
+            }
+            if (ModelReplacementAPI.LCthirdPersonPresent && SafeLCActive())
+            {
+                return ViewState.ThirdPerson;
+            }
+            if (ModelReplacementAPI.recordingCameraPresent && SafeRecCamActive())
+            {
+                return ViewState.ThirdPerson;
+            }
+            return ViewState.FirstPerson; //Because none of the above triggered, we are in first person
+            
         }
         private void rendererPatches()
         {
@@ -583,33 +552,44 @@ namespace ModelReplacement
             {
             }
         }
+
+        public bool Safe3rdPersonActive()
+        {
+            return DangerousViewState3rdPerson();
+        }
+        private bool DangerousViewState3rdPerson() { return ThirdPersonCamera.ViewState; }
+        public bool SafeLCActive()
+        {
+            return DangerousLCViewState();
+        }
+        private bool DangerousLCViewState() { return ThirdPersonPlugin.Instance.Enabled; }
+        public bool SafeRecCamActive()
+        {
+            var a = GameObject.FindObjectsOfType<Camera>().Where(x => x.gameObject.name == "ThridPersonCam");
+            if(!a.Any()) { return false; }
+            return a.First().enabled;
+        }
         private void SafeFixRecordingCamera()
         {
             StartCoroutine(DangerousFixRecordingCamera());
+        }
+        private IEnumerator DangerousFixRecordingCamera()
+        {
+            int frame = 0;
+            while (frame < 20)
+            {
+                yield return new WaitForEndOfFrame();
+                frame++;
+            }
+            var a = GameObject.FindObjectsOfType<Camera>().Where(x => x.gameObject.name == "ThridPersonCam");
+            a.First().cullingMask = CullingMaskThirdPerson;
         }
         private void SafeFix3rdPerson()
         {
             DangerousFix3rdPerson();
         }
+        private void DangerousFix3rdPerson() { ThirdPersonCamera.GetCamera.cullingMask = CullingMaskThirdPerson; }
 
-        
-        private void DangerousFix3rdPerson()
-        {
-            ThirdPersonCamera.GetCamera.cullingMask = CullingMaskThirdPerson; // 565909495;
-        }
-        private void DangeroudFixCameraLC()
-        {
-            //LCThirdPerson .camera.Instance.game
-        }
-
-        private bool DangerousViewState()
-        {
-            return ThirdPersonCamera.ViewState;
-        }
-        private bool DangerousLCViewState()
-        {
-            return ThirdPersonPlugin.Instance.Enabled;
-        }
         #endregion
 
         #region MoreCompany Cosmetics Logic
@@ -661,7 +641,7 @@ namespace ModelReplacement
                     {
                         application.RefreshAllCosmeticPositions();
                     }
-                    
+
                 }
             }
 
@@ -681,10 +661,10 @@ namespace ModelReplacement
         private int DangerousGetEmoteID(int currentID)
         {
             var anim = TooManyEmotes.Patches.PlayerPatcher.GetCurrentlyPlayingEmote(controller);
-            if(anim == null) { return currentID; }
-            if(anim.emoteId == 1) { return -1; }
-            if(anim.emoteId == 2) { return -2; }
-            if(anim.emoteId == 3) { return -3; }
+            if (anim == null) { return currentID; }
+            if (anim.emoteId == 1) { return -1; }
+            if (anim.emoteId == 2) { return -2; }
+            if (anim.emoteId == 3) { return -3; }
             return anim.emoteId;
 
         }

@@ -13,6 +13,7 @@ using BepInEx.Configuration;
 
 using UnityEngine.TextCore.Text;
 using static UnityEngine.ParticleSystem.PlaybackState;
+using UnityEngine.Rendering;
 //using System.Numerics;
 //using static System.Net.Mime.MediaTypeNames;
 //using System.Numerics;
@@ -243,10 +244,8 @@ namespace ModelReplacement
                 if (__instance.playerHeldBy == null) { return; }
                 var a = __instance.playerHeldBy.gameObject.GetComponent<BodyReplacementBase>();
                 if (a == null) { return; }
-                if (a.RenderBodyReplacement())
+                if (a.GetViewState() == ViewState.ThirdPerson)
                 {
-                    if (a.renderLocalDebug && !a.renderModel) { return; }
-
                     Transform parentObject = a.avatar.itemHolder;
 
                     parentObject.localPosition = a.avatar.itemHolderPositionOffset;
@@ -365,6 +364,8 @@ namespace ModelReplacement
         {
             [HarmonyPatch("HitEnemy")]
             [HarmonyPrefix]
+
+            [HarmonyAfter()]
             public static void HitEnemy(ref EnemyAI __instance, int force = 1, PlayerControllerB playerWhoHit = null, bool playHitSFX = false)
             {
                 if (playerWhoHit == null)
@@ -389,6 +390,24 @@ namespace ModelReplacement
 
             }
 
+        }
+
+        [HarmonyPatch(typeof(PlayerControllerB), "SpawnPlayerAnimation")]
+        internal class PlayerPatch
+        {
+            // Token: 0x0600000D RID: 13 RVA: 0x00002370 File Offset: 0x00000570
+            [HarmonyAfter(new string[] { "quackandcheese.mirrordecor" })]
+            private static void Postfix(ref PlayerControllerB __instance)
+            {
+                if (__instance == GameNetworkManager.Instance.localPlayerController)
+                {
+                    PlayerControllerB playerControllerB = __instance;
+                    playerControllerB.thisPlayerModel.shadowCastingMode = ShadowCastingMode.On;
+                    playerControllerB.thisPlayerModel.gameObject.layer = BodyReplacementBase.modelLayer;
+                    playerControllerB.thisPlayerModelArms.gameObject.layer = BodyReplacementBase.armsLayer;
+                    playerControllerB.gameplayCamera.cullingMask = BodyReplacementBase.CullingMaskFirstPerson;
+                }
+            }
         }
     }
 }

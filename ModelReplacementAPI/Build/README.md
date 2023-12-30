@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.2.0
+# ModelReplacementAPI v2.2.1
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -6,10 +6,14 @@ For more info on making model replacements see the wiki at https://github.com/Bu
 
 ## Known Issues
 - More Company cosmetics behave strangely on ragdolls
-- Some third person mods may not be natively supported
-- Known issues with some emote mods. 
 
 ## Changelog
+	- v2.2.1
+		- More rendering changes that should fix items not being held at the correct location.
+		- MirrorDecor, LCThirdPerson, and emote mods should no longer have conflicts.
+		- There should no longer be models visible in first person when you look down
+		- You should be able to see the base game suit now after removing a model replacement. 
+		- Thanks to Naelstrof for changing the execution order of UnityJigglePhysics LateUpdate, which should remove jitter in the ship. 
 	- v2.2.0
 		- Rendering changes to make models more robust to cameras. 
 		- Recording camera support, and third person mods should no longer have conflicts. 
