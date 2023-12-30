@@ -9,10 +9,8 @@ Features
 - Native support for [UnityJigglePhysics](https://github.com/naelstrof/UnityJigglePhysics) as a free and highly functional method to implement bone physics into your model without needing to struggle with Assembly Definitions. 
 - Seemingly client side
 - More Company cosmetic support
-- 3rdPerson and LCThirdPerson support
-- TooManyEmotes support(?)
-- MirrorDecor support
-- Recording Camera support
+- TooManyEmotes, MoreEmotes, TooManyEmotes support
+- MirrorDecor, 3rdPerson, LCThirdPerson, Recording Camera support
 
 How it works
 -
