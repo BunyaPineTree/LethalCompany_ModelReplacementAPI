@@ -35,46 +35,37 @@ namespace ModelReplacement.Modules
             DangerousRenderCosmetics(useAvatarTransforms);
         }
 
-        private CosmeticApplication application = null;
-        private List<Tuple<CosmeticInstance, Transform>> cosmeticTransformPairs = new List<Tuple<CosmeticInstance, Transform>>();
+        // Token: 0x02000034 RID: 52
+        public enum CosmeticType2
+        {
+            // Token: 0x04000028 RID: 40
+            HAT,
+            // Token: 0x04000029 RID: 41
+            WRIST,
+            // Token: 0x0400002A RID: 42
+            CHEST,
+            // Token: 0x0400002B RID: 43
+            R_LOWER_ARM,
+            // Token: 0x0400002C RID: 44
+            HIP,
+            // Token: 0x0400002D RID: 45
+            L_SHIN,
+            // Token: 0x0400002E RID: 46
+            R_SHIN
+        }
+
+        private Dictionary<CosmeticType2, Transform> cosmeticTransformPairs = new Dictionary<CosmeticType2, Transform>();
         private void RefreshCosmetics()
         {
-            if(application != null) { return; }
-            CosmeticApplication[] applications = controller.gameObject.GetComponentsInChildren<CosmeticApplication>();
-            if (applications.Any())
-            {
-                application = applications.First();
-            }
-            cosmeticTransformPairs.Clear();
+            if(cosmeticTransformPairs.Count != 0) { return; }
 
-            foreach (CosmeticInstance cosmeticInstance in application.spawnedCosmetics)
-            {
-                Transform transform = null;
-                switch (cosmeticInstance.cosmeticType)
-                {
-                    case CosmeticType.HAT:
-                        transform = cosmeticAvatar.GetAvatarTransformFromBoneName("spine.004");
-                        break;
-                    case CosmeticType.CHEST:
-                        transform = cosmeticAvatar.GetAvatarTransformFromBoneName("spine.003");
-                        break;
-                    case CosmeticType.R_LOWER_ARM:
-                        transform = cosmeticAvatar.GetAvatarTransformFromBoneName("arm.R_lower");
-                        break;
-                    case CosmeticType.HIP:
-                        transform = cosmeticAvatar.GetAvatarTransformFromBoneName("spine");
-                        break;
-                    case CosmeticType.L_SHIN:
-                        transform = cosmeticAvatar.GetAvatarTransformFromBoneName("shin.L");
-                        break;
-                    case CosmeticType.R_SHIN:
-                        transform = cosmeticAvatar.GetAvatarTransformFromBoneName("shin.R");
-                        break;
-                }
 
-                cosmeticTransformPairs.Add(new Tuple<CosmeticInstance,Transform>(cosmeticInstance, transform));
-
-            }
+            cosmeticTransformPairs.Add(CosmeticType2.HAT, cosmeticAvatar.GetAvatarTransformFromBoneName("spine.004"));
+            cosmeticTransformPairs.Add(CosmeticType2.CHEST, cosmeticAvatar.GetAvatarTransformFromBoneName("spine.003"));
+            cosmeticTransformPairs.Add(CosmeticType2.R_LOWER_ARM, cosmeticAvatar.GetAvatarTransformFromBoneName("arm.R_lower"));
+            cosmeticTransformPairs.Add(CosmeticType2.HIP, cosmeticAvatar.GetAvatarTransformFromBoneName("spine"));
+            cosmeticTransformPairs.Add(CosmeticType2.L_SHIN, cosmeticAvatar.GetAvatarTransformFromBoneName("shin.L"));
+            cosmeticTransformPairs.Add(CosmeticType2.R_SHIN, cosmeticAvatar.GetAvatarTransformFromBoneName("shin.R"));
 
 
         }
@@ -83,14 +74,37 @@ namespace ModelReplacement.Modules
         {
             RefreshCosmetics();
 
+            var application = controller.gameObject.GetComponentInChildren<CosmeticApplication>();
+            if(application == null) { return; }
             if (useAvatarTransforms)
             {
-                foreach (var pair in cosmeticTransformPairs)
+                foreach (CosmeticInstance cosmeticInstance in application.spawnedCosmetics)
                 {
-                    CosmeticInstance cosmeticInstance = pair.Item1;
-                    Transform transform = pair.Item2;
+                    Transform transform = null;
+                    switch (cosmeticInstance.cosmeticType)
+                    {
+                        case CosmeticType.HAT:
+                            transform = cosmeticTransformPairs[CosmeticType2.HAT];
+                            break;
+                        case CosmeticType.CHEST:
+                            transform = cosmeticTransformPairs[CosmeticType2.CHEST];
+                            break;
+                        case CosmeticType.R_LOWER_ARM:
+                            transform = cosmeticTransformPairs[CosmeticType2.R_LOWER_ARM];
+                            break;
+                        case CosmeticType.HIP:
+                            transform = cosmeticTransformPairs[CosmeticType2.HIP];
+                            break;
+                        case CosmeticType.L_SHIN:
+                            transform = cosmeticTransformPairs[CosmeticType2.L_SHIN];
+                            break;
+                        case CosmeticType.R_SHIN:
+                            transform = cosmeticTransformPairs[CosmeticType2.R_SHIN];
+                            break;
+                    }
                     cosmeticInstance.transform.parent = null;
                     cosmeticInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
+
                 }
             }
             else

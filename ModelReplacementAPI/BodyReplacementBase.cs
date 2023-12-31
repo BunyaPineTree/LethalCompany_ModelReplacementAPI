@@ -177,8 +177,10 @@ namespace ModelReplacement
             ragdollAvatar = new AvatarUpdater();
             avatar.AssignModelReplacement(controller.gameObject, replacementModel);
             viewState = new ViewStateManager(this);
-            cosmeticManager = new MoreCompanyCosmeticManager(this);
-
+            if (ModelReplacementAPI.moreCompanyPresent)
+            {
+                cosmeticManager = new MoreCompanyCosmeticManager(this);
+            }
             // Misc fixes
             MeshRenderer[] gameObjects = controller.gameObject.GetComponentsInChildren<MeshRenderer>();
             nameTagObj = gameObjects.Where(x => x.gameObject.name == "LevelSticker").First();
@@ -223,7 +225,11 @@ namespace ModelReplacement
             // Update replacement models
             avatar.Update();
             ragdollAvatar.Update();
-            cosmeticManager.Update(true);
+            if (ModelReplacementAPI.moreCompanyPresent)
+            {
+                cosmeticManager.Update(true);
+            }
+            
 
 
             //Emotes
@@ -255,7 +261,10 @@ namespace ModelReplacement
         {
             ModelReplacementAPI.Instance.Logger.LogInfo($"Destroy body component for {controller.playerUsername}");
             SetPlayerRenderers(true);
-            cosmeticManager.Update(false);
+            if (ModelReplacementAPI.moreCompanyPresent)
+            {
+                cosmeticManager.Update(false);
+            }
             Destroy(replacementModel);
             Destroy(replacementDeadBody);
         }
