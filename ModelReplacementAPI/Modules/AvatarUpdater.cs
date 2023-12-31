@@ -1,13 +1,8 @@
 ﻿using GameNetcodeStuff;
-using ModelReplacement;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
-using UnityEngine.LowLevel;
-using UnityEngine.TextCore.Text;
 
 namespace ModelReplacement.AvatarBodyUpdater
 {
@@ -30,7 +25,7 @@ namespace ModelReplacement.AvatarBodyUpdater
 
         public virtual void AssignModelReplacement(GameObject player, GameObject replacement)
         {
-            var controller = player.GetComponent<PlayerControllerB>();
+            PlayerControllerB controller = player.GetComponent<PlayerControllerB>();
             if (controller)
             {
                 playerModelRenderer = controller.thisPlayerModel;
@@ -50,17 +45,17 @@ namespace ModelReplacement.AvatarBodyUpdater
             replacementAnimator = replacement.GetComponentInChildren<Animator>();
             this.replacement = replacement;
 
-            var ite = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
+            OffsetBuilder ite = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
             itemHolderPositionOffset = ite.itemPositonOffset;
             itemHolderRotationOffset = ite.itemRotationOffset;
             itemHolder = ite.itemHolder.transform;
             rootPositionOffset = ite.rootPositionOffset;
             rootScale = ite.rootScale;
             Vector3 baseScale = replacement.transform.localScale;
-            replacement.transform.localScale = ((new Vector3(1, 0, 0)) * baseScale.x * rootScale.x + (new Vector3(0, 1, 0)) * baseScale.y * rootScale.y + (new Vector3(0, 0, 1)) * baseScale.z * rootScale.z);
+            replacement.transform.localScale = new Vector3(1, 0, 0) * baseScale.x * rootScale.x + new Vector3(0, 1, 0) * baseScale.y * rootScale.y + new Vector3(0, 0, 1) * baseScale.z * rootScale.z;
 
             Transform upperChestTransform = replacementAnimator.GetBoneTransform(HumanBodyBones.UpperChest);
-            hasUpperChest = (upperChestTransform != null);
+            hasUpperChest = upperChestTransform != null;
         }
         protected virtual void UpdateModel()
         {
@@ -70,7 +65,7 @@ namespace ModelReplacement.AvatarBodyUpdater
                 if (modelBone == null) { continue; }
 
                 modelBone.rotation = playerBone.rotation;
-                var offset = modelBone.GetComponent<RotationOffset>();
+                RotationOffset offset = modelBone.GetComponent<RotationOffset>();
                 if (offset) { modelBone.rotation *= offset.offset; }
             }
             Transform rootBone = GetAvatarTransformFromBoneName("spine");
@@ -113,19 +108,19 @@ namespace ModelReplacement.AvatarBodyUpdater
         }
         public Transform GetPlayerTransformFromBoneName(string boneName)
         {
-            var a = playerModelRenderer.bones.Where(x => x.name == boneName);
+            IEnumerable<Transform> a = playerModelRenderer.bones.Where(x => x.name == boneName);
             if (a.Any()) { return a.First(); }
-            if(boneName == "spine")
+            if (boneName == "spine")
             {
-                var b = playerModelRenderer.bones.Where(x => x.name.Contains("PlayerRagdoll")); //For ragdoll and etc...
+                IEnumerable<Transform> b = playerModelRenderer.bones.Where(x => x.name.Contains("PlayerRagdoll")); //For ragdoll and etc...
                 if (b.Any()) { return b.First(); }
             }
             return null;
-           
+
         }
         public Transform GetPlayerItemHolder()
         {
-            var tr = player.GetComponentsInChildren<Transform>().Where(x => (x.name == "ServerItemHolder") || (x.name == "ItemHolder"));
+            IEnumerable<Transform> tr = player.GetComponentsInChildren<Transform>().Where(x => x.name == "ServerItemHolder" || x.name == "ItemHolder");
             if (tr.Any()) { return tr.First(); }
             return null;
         }
@@ -198,5 +193,5 @@ namespace ModelReplacement.AvatarBodyUpdater
         public Quaternion itemRotationOffset;
         public GameObject itemHolder;
     }
-        #endregion
+    #endregion
 }

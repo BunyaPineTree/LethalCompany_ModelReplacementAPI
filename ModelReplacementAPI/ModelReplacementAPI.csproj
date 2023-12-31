@@ -19,7 +19,12 @@
     <ReferencePath>$(ReferencePath);$(LethalCompanyPath)\Lethal Company_Data\Managed</ReferencePath>
     <ReferencePath>$(ReferencePath);$(LethalCompanyPath)\Lethal Company_Data\Plugins</ReferencePath>
     <ReferencePath>$(ReferencePath);$(LethalCompanyPath)\BepinEx\plugins</ReferencePath>
+    <RootNamespace>ModelReplacement</RootNamespace>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <None Remove="culling Analysis.txt" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1" PrivateAssets="all" />

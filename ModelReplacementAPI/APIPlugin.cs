@@ -3,20 +3,8 @@ using BepInEx.Bootstrap;
 using BepInEx.Logging;
 using GameNetcodeStuff;
 using HarmonyLib;
-using ModelReplacement.AvatarBodyUpdater;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System.Reflection;
-using ModelReplacement;
-using BepInEx.Configuration;
-
-using UnityEngine.TextCore.Text;
-using static UnityEngine.ParticleSystem.PlaybackState;
-using UnityEngine.Rendering;
-//using System.Numerics;
-//using static System.Net.Mime.MediaTypeNames;
-//using System.Numerics;
 
 namespace ModelReplacement
 {
@@ -37,6 +25,8 @@ namespace ModelReplacement
     [BepInDependency("quackandcheese.mirrordecor", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("FlipMods.TooManyEmotes", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.graze.gorillatag.placeablecamera", BepInDependency.DependencyFlags.SoftDependency)]
+
+
     public class ModelReplacementAPI : BaseUnityPlugin
     {
 
@@ -62,6 +52,7 @@ namespace ModelReplacement
             harmony.PatchAll();
             Logger.LogInfo($"Plugin {PluginInfo.GUID} is loaded!");
         }
+
         //soft dependencies
         public static bool moreCompanyPresent;
         public static bool thirdPersonPresent;
@@ -71,11 +62,9 @@ namespace ModelReplacement
         public static bool recordingCameraPresent;
 
 
-
+        //Other
         public static ModelReplacementAPI Instance;
         public new ManualLogSource Logger;
-
-        //Other
         private static int steamLobbyID => GameNetworkManager.Instance.currentLobby.HasValue ? (int)GameNetworkManager.Instance.currentLobby.Value.Id.Value : -1;
         public static bool isLan => steamLobbyID == -1;
 
@@ -92,7 +81,7 @@ namespace ModelReplacement
         /// <param name="type"></param>
         public static void RegisterModelReplacementDefault(Type type)
         {
-            if (!(type.IsSubclassOf(typeof(BodyReplacementBase))))
+            if (!type.IsSubclassOf(typeof(BodyReplacementBase)))
             {
                 Instance.Logger.LogError($"Cannot register body replacement default type {type}, must inherit from BodyReplacementBase");
                 return;
@@ -113,7 +102,7 @@ namespace ModelReplacement
         /// <param name="type"></param>
         public static void RegisterModelReplacementOverride(Type type)
         {
-            if (!(type.IsSubclassOf(typeof(BodyReplacementBase))))
+            if (!type.IsSubclassOf(typeof(BodyReplacementBase)))
             {
                 Instance.Logger.LogError($"Cannot register body replacement override type {type}, must inherit from BodyReplacementBase");
                 return;
@@ -134,7 +123,7 @@ namespace ModelReplacement
         /// <param name="type"></param>
         public static void RegisterModelReplacementException(Type type)
         {
-            if (!(type.IsSubclassOf(typeof(BodyReplacementBase))))
+            if (!type.IsSubclassOf(typeof(BodyReplacementBase)))
             {
                 Instance.Logger.LogError($"Cannot register body replacement exception type {type}, must inherit from BodyReplacementBase");
                 return;
@@ -155,7 +144,7 @@ namespace ModelReplacement
         public static void RegisterSuitModelReplacement(string suitNameToReplace, Type type)
         {
             suitNameToReplace = suitNameToReplace.ToLower().Replace(" ", "");
-            if (!(type.IsSubclassOf(typeof(BodyReplacementBase))))
+            if (!type.IsSubclassOf(typeof(BodyReplacementBase)))
             {
                 Instance.Logger.LogError($"Cannot register body replacement type {type}, must inherit from BodyReplacementBase");
                 return;
@@ -178,7 +167,7 @@ namespace ModelReplacement
         /// <param name="type">typeof body replacement class. Must inherit from BodyReplacementBase</param>
         public static void SetPlayerModelReplacement(PlayerControllerB player, Type type)
         {
-            if (!(type.IsSubclassOf(typeof(BodyReplacementBase))))
+            if (!type.IsSubclassOf(typeof(BodyReplacementBase)))
             {
                 Instance.Logger.LogError($"Cannot set body replacement of type {type.Name}, must inherit from BodyReplacementBase");
                 return;
@@ -187,12 +176,12 @@ namespace ModelReplacement
             {
                 return;
             }
-            var a = player.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+            BodyReplacementBase a = player.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
             int suitID = player.currentSuitID;
             string suitName = StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName;
             if (a != null)
             {
-               
+
 
 
                 if (a.GetType() == type) //Suit has not changed model
@@ -215,7 +204,7 @@ namespace ModelReplacement
                 }
             }
 
-            var replacecment = player.thisPlayerBody.gameObject.AddComponent(type) as BodyReplacementBase;
+            BodyReplacementBase replacecment = player.thisPlayerBody.gameObject.AddComponent(type) as BodyReplacementBase;
             replacecment.suitName = suitName;
         }
         /// <summary>
@@ -224,7 +213,7 @@ namespace ModelReplacement
         /// <param name="player"></param>
         public static void RemovePlayerModelReplacement(PlayerControllerB player)
         {
-            var a = player.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+            BodyReplacementBase a = player.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
             if (a)
             {
                 Destroy(a);
@@ -232,63 +221,7 @@ namespace ModelReplacement
         }
         #endregion
 
-        [HarmonyPatch(typeof(GrabbableObject))]
-        public class LocateHeldObjectsOnModelReplacementPatch
-        {
-
-            [HarmonyPatch("LateUpdate")]
-            [HarmonyPostfix]
-            public static void LateUpdatePatch(ref GrabbableObject __instance)
-            {
-                if (__instance.parentObject == null) { return; }
-                if (__instance.playerHeldBy == null) { return; }
-                var a = __instance.playerHeldBy.gameObject.GetComponent<BodyReplacementBase>();
-                if (a == null) { return; }
-                if (a.GetViewState() == ViewState.ThirdPerson)
-                {
-                    Transform parentObject = a.avatar.itemHolder;
-
-                    parentObject.localPosition = a.avatar.itemHolderPositionOffset;
-                    Transform playerItemHolder = a.avatar.GetPlayerItemHolder();
-
-                    __instance.transform.rotation = playerItemHolder.rotation;
-                    __instance.transform.Rotate(__instance.itemProperties.rotationOffset);
-                    __instance.transform.position = parentObject.position;
-                    Vector3 vector = __instance.itemProperties.positionOffset;
-                    vector = playerItemHolder.rotation * vector;
-                    __instance.transform.position += vector;
-
-                }
-
-            }
-        }
-
-
-
-        [HarmonyPatch(typeof(StartOfRound))]
-        public class RepairBrokenBodyReplacementsPatch
-        {
-
-            [HarmonyPatch("ReviveDeadPlayers")]
-            [HarmonyPostfix]
-            public static void ReviveDeadPlayersPatch(ref StartOfRound __instance)
-            {
-
-                foreach (var item in __instance.allPlayerScripts)
-                {
-                    if (!item.isPlayerDead) { continue; } //player isn't dead
-                    if (item.gameObject.GetComponent<BodyReplacementBase>() == null) { continue; } //player doesn't have a body replacement
-
-                    Console.WriteLine($"Reinstantiating model replacement for {item.playerUsername} ");
-                    Type BodyReplacementType = item.gameObject.GetComponent<BodyReplacementBase>().GetType();
-                    Destroy(item.gameObject.GetComponent<BodyReplacementBase>());
-                    item.gameObject.AddComponent(BodyReplacementType);
-                }
-            }
-        }
-
-
-
+        #region Registry Patch
         [HarmonyPatch(typeof(PlayerControllerB))]
         public class PlayerControllerBPatch
         {
@@ -299,7 +232,7 @@ namespace ModelReplacement
             {
                 try
                 {
-                    var a = __instance.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+                    BodyReplacementBase a = __instance.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
                     if ((a != null) && RegisteredModelReplacementExceptions.Contains(a.GetType()))
                     {
                         return;
@@ -330,84 +263,9 @@ namespace ModelReplacement
                 }
                 catch (Exception e) { ModelReplacementAPI.Instance.Logger.LogWarning(e); }
             }
-
-            [HarmonyPatch("DamagePlayerFromOtherClientClientRpc")]
-            [HarmonyPrefix]
-            public static void DamagePlayerFromOtherClientClientRpc(ref PlayerControllerB __instance, int damageAmount, Vector3 hitDirection, int playerWhoHit, int newHealthAmount)
-            {
-                PlayerControllerB _playerWhoHit = __instance.playersManager.allPlayerScripts[playerWhoHit];
-                if (_playerWhoHit == null)
-                {
-                    return;
-                }
-                var a = _playerWhoHit.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
-                if (a) { a.OnHitAlly(__instance, __instance.isPlayerDead); }
-            }
-
-            [HarmonyPatch("DamagePlayerClientRpc")]
-            [HarmonyPrefix]
-            public static void DamagePlayerClientRpc(ref PlayerControllerB __instance, int damageNumber, int newHealthAmount)
-            {
-                if (__instance == null)
-                {
-                    return;
-                }
-                var a = __instance.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
-                Console.WriteLine($"PLAYER TAKE DAMAGE {__instance.playerUsername}");
-                if (a) { a.OnDamageTaken(__instance.isPlayerDead); }
-            }
-
         }
+        #endregion
 
-        [HarmonyPatch(typeof(EnemyAI))]
-        public class EnemyAIPatch
-        {
-            [HarmonyPatch("HitEnemy")]
-            [HarmonyPrefix]
 
-            [HarmonyAfter()]
-            public static void HitEnemy(ref EnemyAI __instance, int force = 1, PlayerControllerB playerWhoHit = null, bool playHitSFX = false)
-            {
-                if (playerWhoHit == null)
-                {
-                    return;
-                }
-
-                var a = playerWhoHit.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
-                if (a) { a.OnHitEnemy(__instance.isEnemyDead); }
-            }
-
-        }
-        [HarmonyPatch(typeof(MaskedPlayerEnemy))]
-        public class MaskedPlayerEnemyPatch
-        {
-            [HarmonyPatch("SetSuit")]
-            [HarmonyPrefix]
-            public static void SetModelReplacement(ref MaskedPlayerEnemy __instance, int suitId)
-            {
-                var a = __instance.mimickingPlayer.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
-                if(a == null) { return; }
-
-            }
-
-        }
-
-        [HarmonyPatch(typeof(PlayerControllerB), "SpawnPlayerAnimation")]
-        internal class PlayerPatch
-        {
-            // Token: 0x0600000D RID: 13 RVA: 0x00002370 File Offset: 0x00000570
-            [HarmonyAfter(new string[] { "quackandcheese.mirrordecor" })]
-            private static void Postfix(ref PlayerControllerB __instance)
-            {
-                if (__instance == GameNetworkManager.Instance.localPlayerController)
-                {
-                    PlayerControllerB playerControllerB = __instance;
-                    playerControllerB.thisPlayerModel.shadowCastingMode = ShadowCastingMode.On;
-                    playerControllerB.thisPlayerModel.gameObject.layer = BodyReplacementBase.modelLayer;
-                    playerControllerB.thisPlayerModelArms.gameObject.layer = BodyReplacementBase.armsLayer;
-                    playerControllerB.gameplayCamera.cullingMask = BodyReplacementBase.CullingMaskFirstPerson;
-                }
-            }
-        }
     }
 }

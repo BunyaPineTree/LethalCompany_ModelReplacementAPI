@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.2.1
+# ModelReplacementAPI v2.3.0
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -6,8 +6,12 @@ For more info on making model replacements see the wiki at https://github.com/Bu
 
 ## Known Issues
 - More Company cosmetics behave strangely on ragdolls
+- Due to the implementation of post processing removal, some circumstances will prevent a noPostProcessing enabled model from appearing on cameras. An example of this is MirrorDecor, which will not immediately show your model. As of this moment this can be fixed by taking off your model replacement, and putting it back on. 
 
 ## Changelog
+	- v2.3.0
+		- Modders can now exclude their model replacements from Lethal Company's post processing to improve custom shader quality. 
+		- Minor performance improvements
 	- v2.2.1
 		- More rendering changes that should fix items not being held at the correct location.
 		- MirrorDecor, LCThirdPerson, and emote mods should no longer have conflicts.

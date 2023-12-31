@@ -5,6 +5,7 @@ namespace HatsuneMikuModelReplacement
 {
     public class BodyReplacementMiku : BodyReplacementBase
     {
+        
         //Required universally
         protected override GameObject LoadAssetsAndReturnModel()
         {
@@ -12,12 +13,14 @@ namespace HatsuneMikuModelReplacement
             string model_name = "HatsuneMikuNT";
             return Assets.MainAssetBundle.LoadAsset<GameObject>(model_name);
         }
-
+        
+        
+    
         //Miku mod specific scripts. Delete this if you have no custom scripts to add. 
         protected override void AddModelScripts()
         {
+            UseNoPostProcessing = true;
         }
-
 
         protected override void OnEmoteStart(int emoteId)
         {
@@ -31,6 +34,7 @@ namespace HatsuneMikuModelReplacement
             replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(84, 0);
             replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(25, 0);
             replacementModel.GetComponentInChildren<SkinnedMeshRenderer>().SetBlendShapeWeight(45, 0);
+
 
             if (emoteId == 1) {
                

@@ -1,6 +1,7 @@
 ﻿using _3rdPerson.Helper;
 using GameNetcodeStuff;
 using LCThirdPerson;
+using ModelReplacement.Modules;
 using ModelReplacement.AvatarBodyUpdater;
 using MoreCompany.Cosmetics;
 using System;
@@ -12,46 +13,18 @@ using UnityEngine.Pool;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 
-
 namespace ModelReplacement
 {
-    public enum ViewState
-    {
-        None,
-        ThirdPerson,
-        FirstPerson,
-        Debug
-    }
-
     public abstract class BodyReplacementBase : MonoBehaviour
     {
-
-        //==================================================================== Rendering Logic ====================================================================
-        //MainCamera          00100001001110110001011111111111 model, no arm = > 557520895
-        //Mirror              00100001101110110001011101011111 model, no arm
-        //ship camera         00000000000110000000001101001001 model, no arm
-        //First Person        01100001001110110001011111110111 arm, no model = > 1631262711
-
-        //Body  3                                         x
-        //Arms  30             x                                                  
-        //Visible 0                                          x
-        //Invisible 31        x
-
-        public static int CullingMaskThirdPerson = 557520895; //Base game MainCamera culling mask                                 
-        public static int CullingMaskFirstPerson = 1631262711; //Modified base game to provide layers for arms and body 
-
-        public static int modelLayer = 3; //Arbitrarily decided by MirrorDecor
-        public static int armsLayer = 30; //Most cullingMasks shouldn't have a 30 slot, so I will use that one to place arms. 
-
-        public static int visibleLayer = 0; // Likely all culling masks show layer 0
-        public static int invisibleLayer = 31; //Most culling masks probably do not show layer 31
-        //=========================================================================================================================================================
-
+        
         //Base components
         public AvatarUpdater avatar { get; private set; }
+        public ViewStateManager viewState = null;
+        public MoreCompanyCosmeticManager cosmeticManager = null;
+        public MaterialHelper materialHelper = null;
         public PlayerControllerB controller { get; private set; }
-        protected GameObject replacementModel;
-        public string suitName { get; set; } = "";
+        public GameObject replacementModel;
 
         //Ragdoll components
         public AvatarUpdater ragdollAvatar { get; private set; }
@@ -63,10 +36,15 @@ namespace ModelReplacement
         private MeshRenderer nameTagObj2 = null;
         private int danceNumber = 0;
         private int previousDanceNumber = 0;
-        protected bool DontConvertUnsupportedShaders = false;
+        public string suitName { get; set; } = "";
 
         //Mod Support components
-        private AvatarUpdater cosmeticAvatar = null;
+        public AvatarUpdater cosmeticAvatar = null;
+
+        //Settings
+        public bool UseNoPostProcessing = false;
+        public bool DontConvertUnsupportedShaders = false;
+
 
         #region Virtual and Abstract Methods
 
@@ -130,9 +108,6 @@ namespace ModelReplacement
 
         #region Base Logic
 
-
-
-
         protected virtual void Awake()
         {
 
@@ -141,14 +116,13 @@ namespace ModelReplacement
 
             // Load model
             replacementModel = LoadAssetsAndReturnModel();
-
             if (replacementModel == null)
             {
                 ModelReplacementAPI.Instance.Logger.LogFatal("LoadAssetsAndReturnModel() returned null. Verify that your assetbundle works and your asset name is correct. ");
             }
 
-
-            // Fix Materials
+            // Fix Materials and renderers
+            materialHelper = new MaterialHelper(this);
             Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
             Material gameMat = controller.thisPlayerModel.GetComponent<SkinnedMeshRenderer>().sharedMaterial;
             gameMat = new Material(gameMat); // Copy so that shared material isn't accidently changed by overriders of GetReplacementMaterial()
@@ -156,30 +130,27 @@ namespace ModelReplacement
             List<Material> materials = ListPool<Material>.Get();
             foreach (Renderer renderer in renderers)
             {
-
                 renderer.GetSharedMaterials(materials);
                 for (int i = 0; i < materials.Count; i++)
                 {
                     Material mat = materials[i];
-                    if (!matMap.TryGetValue(mat, out var replacementMat))
+                    if (!matMap.TryGetValue(mat, out Material replacementMat))
                     {
-                        matMap[mat] = replacementMat = GetReplacementMaterial(gameMat, mat);
+                        matMap[mat] = replacementMat = materialHelper.GetReplacementMaterial(gameMat, mat);
                     }
                     materials[i] = replacementMat;
                 }
                 renderer.SetMaterials(materials);
             }
             ListPool<Material>.Release(materials);
-
-            foreach (var item in replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>())
+            foreach (SkinnedMeshRenderer item in replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>())
             {
                 item.updateWhenOffscreen = true;
             }
-            SetAllLayers(true);
-
+            // Set scripts missing from assetBundle
             try
             {
-                AddModelScripts();  // Set scripts missing from assetBundle
+                AddModelScripts();  
             }
             catch (Exception e)
             {
@@ -195,7 +166,7 @@ namespace ModelReplacement
 
 
             // Sets y extents to the same size for player body and extents.
-            var playerBodyExtents = controller.thisPlayerModel.bounds.extents;
+            Vector3 playerBodyExtents = controller.thisPlayerModel.bounds.extents;
             float scale = playerBodyExtents.y / GetBounds().extents.y;
             replacementModel.transform.localScale *= scale;
 
@@ -205,28 +176,27 @@ namespace ModelReplacement
             cosmeticAvatar = avatar;
             ragdollAvatar = new AvatarUpdater();
             avatar.AssignModelReplacement(controller.gameObject, replacementModel);
-
+            viewState = new ViewStateManager(this);
+            cosmeticManager = new MoreCompanyCosmeticManager(this);
 
             // Misc fixes
-            var gameObjects = controller.gameObject.GetComponentsInChildren<MeshRenderer>();
+            MeshRenderer[] gameObjects = controller.gameObject.GetComponentsInChildren<MeshRenderer>();
             nameTagObj = gameObjects.Where(x => x.gameObject.name == "LevelSticker").First();
             nameTagObj2 = gameObjects.Where(x => x.gameObject.name == "BetaBadge").First();
+            
+            viewState.RendererPatches();
+            SetAvatarRenderers(true);
+            viewState.SetAllLayers();
+
             ModelReplacementAPI.Instance.Logger.LogInfo($"AwakeEnd {controller.playerUsername}");
-            rendererPatches();
-
-
         }
 
-        protected virtual void Start()
-        {
-
-        }
-        protected virtual void Update()
+        protected virtual void Start() { viewState.RendererPatches(); }
+        protected virtual void LateUpdate()
         {
             // Renderer logic
-            SetAvatarRenderers(true);
             SetPlayerRenderers(false);
-            SetAllLayers(true);
+            viewState.SetAllLayers();
 
             // Handle Ragdoll creation and destruction
             GameObject deadBody = null;
@@ -235,14 +205,14 @@ namespace ModelReplacement
                 deadBody = controller.deadBody.gameObject;
             }
             catch { }
-            if ((deadBody) && (replacementDeadBody == null)) //Player died this frame
+            if (deadBody && (replacementDeadBody == null)) //Player died this frame
             {
                 Console.WriteLine("Set cosmeticAvatar to ragdoll");
                 cosmeticAvatar = ragdollAvatar;
                 CreateAndParentRagdoll(controller.deadBody);
                 OnDeath();
             }
-            if ((replacementDeadBody) && (deadBody == null)) //Player returned to life this frame
+            if (replacementDeadBody && (deadBody == null)) //Player returned to life this frame
             {
                 Console.WriteLine("Set cosmeticAvatar to living");
                 cosmeticAvatar = avatar;
@@ -253,7 +223,7 @@ namespace ModelReplacement
             // Update replacement models
             avatar.Update();
             ragdollAvatar.Update();
-            if (ModelReplacementAPI.moreCompanyPresent) { SafeRenderCosmetics(true); }
+            cosmeticManager.Update(true);
 
 
             //Emotes
@@ -273,7 +243,6 @@ namespace ModelReplacement
 
             if (danceNumber != previousDanceNumber)
             {
-                Console.WriteLine($"Dance change from {previousDanceNumber} to {danceNumber}");
                 if (previousDanceNumber == 0) { StartCoroutine(WaitForDanceNumberChange()); } //Start new animation, takes time to switch to new animation state
                 else if (danceNumber == 0) { OnEmoteEnd(); } // No dance, where there was previously dance.
                 else { if (!emoteOngoing) { OnEmoteStart(danceNumber); } } //An animation did not start nor end, go immediately into the different animation
@@ -285,14 +254,8 @@ namespace ModelReplacement
         protected virtual void OnDestroy()
         {
             ModelReplacementAPI.Instance.Logger.LogInfo($"Destroy body component for {controller.playerUsername}");
-            controller.thisPlayerModel.enabled = true;
-            controller.thisPlayerModelLOD1.enabled = true;
-            controller.thisPlayerModelLOD2.enabled = true;
-
-            nameTagObj.enabled = true;
-            nameTagObj2.enabled = true;
-
-            if (ModelReplacementAPI.moreCompanyPresent) { SafeRenderCosmetics(false); }
+            SetPlayerRenderers(true);
+            cosmeticManager.Update(false);
             Destroy(replacementModel);
             Destroy(replacementDeadBody);
         }
@@ -300,121 +263,6 @@ namespace ModelReplacement
         #endregion
 
         #region Helpers, Materials, Ragdolls, Rendering, etc...
-        private void SetAllLayers(bool useAdjustedMask)
-        {
-            ViewState state = GetViewState();
-            Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
-            controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
-            if (state == ViewState.None)
-            {
-                controller.thisPlayerModelArms.gameObject.layer = invisibleLayer;
-                foreach (Renderer renderer in renderers)
-                {
-                    renderer.shadowCastingMode = ShadowCastingMode.Off;
-                    renderer.gameObject.layer = invisibleLayer;
-                }
-            }
-            else if (state == ViewState.FirstPerson)
-            {
-                controller.thisPlayerModelArms.gameObject.layer = armsLayer;
-                foreach (Renderer renderer in renderers)
-                {
-                    renderer.shadowCastingMode = ShadowCastingMode.On;
-                    renderer.gameObject.layer = modelLayer;
-                }
-            }
-            else if (state == ViewState.ThirdPerson)
-            {
-                foreach (Renderer renderer in renderers)
-                {
-                    renderer.shadowCastingMode = ShadowCastingMode.On;
-                    renderer.gameObject.layer = visibleLayer;
-                }
-                if(ModelReplacementAPI.LCthirdPersonPresent)
-                {
-                    controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
-                }
-            }
-        }
-
-        /// <summary> Shaders with any of these prefixes won't be automatically converted. </summary>
-        private static readonly string[] shaderPrefixWhitelist =
-        {
-            "HDRP/",
-            "GUI/",
-            "Sprites/",
-            "UI/",
-            "Unlit/",
-            "Toon",
-            "lilToon",
-            "Shader Graphs/",
-            "Hidden/"
-        };
-
-        /// <summary>
-        /// Get a replacement material based on the original game material, and the material found on the replacing model.
-        /// </summary>
-        /// <param name="gameMaterial">The equivalent material on the model being replaced.</param>
-        /// <param name="modelMaterial">The material on the replacing model.</param>
-        /// <returns>The replacement material created from the <see cref="gameMaterial"/> and the <see cref="modelMaterial"/></returns>
-        protected virtual Material GetReplacementMaterial(Material gameMaterial, Material modelMaterial)
-        {
-
-            if (DontConvertUnsupportedShaders || shaderPrefixWhitelist.Any(prefix => modelMaterial.shader.name.StartsWith(prefix)))
-            {
-                return modelMaterial;
-            }
-            else
-            {
-                ModelReplacementAPI.Instance.Logger.LogInfo($"Creating replacement material for material {modelMaterial.name} / shader {modelMaterial.shader.name}");
-                // XXX Ideally this material would be manually destroyed when the replacement model is destroyed.
-
-                Material replacementMat = new Material(gameMaterial);
-                replacementMat.color = modelMaterial.color;
-                replacementMat.mainTexture = modelMaterial.mainTexture;
-                replacementMat.mainTextureOffset = modelMaterial.mainTextureOffset;
-                replacementMat.mainTextureScale = modelMaterial.mainTextureScale;
-
-                /*
-                if (modelMaterial.HasTexture("_BaseColorMap"))
-                {
-                    replacementMat.SetTexture("_BaseColorMap", modelMaterial.GetTexture("_BaseColorMap"));
-                }
-                if (modelMaterial.HasTexture("_SpecularColorMap"))
-                {
-                    replacementMat.SetTexture("_SpecularColorMap", modelMaterial.GetTexture("_SpecularColorMap"));
-                    replacementMat.EnableKeyword("_SPECGLOSSMAP");
-                }
-                if (modelMaterial.HasFloat("_Smoothness"))
-                {
-                    replacementMat.SetFloat("_Smoothness", modelMaterial.GetFloat("_Smoothness"));
-                }
-                if (modelMaterial.HasTexture("_EmissiveColorMap"))
-                {
-                    replacementMat.SetTexture("_EmissiveColorMap", modelMaterial.GetTexture("_EmissiveColorMap"));
-                }
-                if (modelMaterial.HasTexture("_BumpMap"))
-                {
-                    replacementMat.SetTexture("_BumpMap", modelMaterial.GetTexture("_BumpMap"));
-                    replacementMat.EnableKeyword("_NORMALMAP");
-                }
-                if (modelMaterial.HasColor("_EmissiveColor"))
-                {
-                    replacementMat.SetColor("_EmissiveColor", modelMaterial.GetColor("_EmissiveColor"));
-                    replacementMat.EnableKeyword("_EMISSION");
-                }
-                */
-                replacementMat.EnableKeyword("_EMISSION");
-                replacementMat.EnableKeyword("_NORMALMAP");
-                replacementMat.EnableKeyword("_SPECGLOSSMAP");
-                replacementMat.SetFloat("_NormalScale", 0);
-
-                HDMaterial.ValidateMaterial(replacementMat);
-
-                return replacementMat;
-            }
-        }
-
         private void CreateAndParentRagdoll(DeadBodyInfo bodyinfo)
         {
             deadBody = bodyinfo.gameObject;
@@ -431,14 +279,14 @@ namespace ModelReplacement
             {
                 renderer.enabled = true;
                 renderer.shadowCastingMode = ShadowCastingMode.On;
-                renderer.gameObject.layer = visibleLayer;
+                renderer.gameObject.layer = viewState.VisibleLayer;
             }
             deadBodyRenderer.enabled = false;
 
 
 
             //blood decals not working
-            foreach (var item in bodyinfo.bodyBloodDecals)
+            foreach (GameObject item in bodyinfo.bodyBloodDecals)
             {
                 Transform bloodParentTransform = item.transform.parent;
 
@@ -471,7 +319,7 @@ namespace ModelReplacement
         private Bounds GetBounds()
         {
             Bounds bounds = new Bounds();
-            var allBounds = replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>().Select(r => r.bounds);
+            IEnumerable<Bounds> allBounds = replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>().Select(r => r.bounds);
 
             float maxX = allBounds.OrderByDescending(x => x.max.x).First().max.x;
             float maxY = allBounds.OrderByDescending(x => x.max.y).First().max.y;
@@ -504,152 +352,13 @@ namespace ModelReplacement
             if (danceNumber != 0) { emoteOngoing = false; OnEmoteStart(danceNumber); }
         }
 
-       
+
 
         #endregion
 
 
 
 
-        #region Third Person Mods Logic
-        public ViewState GetViewState()
-        {
-            if (controller.isPlayerDead) //Dead, render nothing
-            {
-                return ViewState.None;
-            }
-            if (GameNetworkManager.Instance.localPlayerController != controller) //Other player, render third person
-            {
-                return ViewState.ThirdPerson;
-            }
-            if(ModelReplacementAPI.thirdPersonPresent && Safe3rdPersonActive()) //If any of these are true, we are in third person mode and must render third person
-            {
-                return ViewState.ThirdPerson;
-            }
-            if (ModelReplacementAPI.LCthirdPersonPresent && SafeLCActive())
-            {
-                return ViewState.ThirdPerson;
-            }
-            if (ModelReplacementAPI.recordingCameraPresent && SafeRecCamActive())
-            {
-                return ViewState.ThirdPerson;
-            }
-            return ViewState.FirstPerson; //Because none of the above triggered, we are in first person
-            
-        }
-        private void rendererPatches()
-        {
-            if (ModelReplacementAPI.recordingCameraPresent)
-            {
-                SafeFixRecordingCamera();
-            }
-
-            if (ModelReplacementAPI.thirdPersonPresent)
-            {
-                SafeFix3rdPerson();
-            }
-            if (ModelReplacementAPI.LCthirdPersonPresent)
-            {
-            }
-        }
-
-        public bool Safe3rdPersonActive()
-        {
-            return DangerousViewState3rdPerson();
-        }
-        private bool DangerousViewState3rdPerson() { return ThirdPersonCamera.ViewState; }
-        public bool SafeLCActive()
-        {
-            return DangerousLCViewState();
-        }
-        private bool DangerousLCViewState() { return ThirdPersonPlugin.Instance.Enabled; }
-        public bool SafeRecCamActive()
-        {
-            var a = GameObject.FindObjectsOfType<Camera>().Where(x => x.gameObject.name == "ThridPersonCam");
-            if(!a.Any()) { return false; }
-            return a.First().enabled;
-        }
-        private void SafeFixRecordingCamera()
-        {
-            StartCoroutine(DangerousFixRecordingCamera());
-        }
-        private IEnumerator DangerousFixRecordingCamera()
-        {
-            int frame = 0;
-            while (frame < 20)
-            {
-                yield return new WaitForEndOfFrame();
-                frame++;
-            }
-            var a = GameObject.FindObjectsOfType<Camera>().Where(x => x.gameObject.name == "ThridPersonCam");
-            a.First().cullingMask = CullingMaskThirdPerson;
-        }
-        private void SafeFix3rdPerson()
-        {
-            DangerousFix3rdPerson();
-        }
-        private void DangerousFix3rdPerson() { ThirdPersonCamera.GetCamera.cullingMask = CullingMaskThirdPerson; }
-
-        #endregion
-
-        #region MoreCompany Cosmetics Logic
-
-        private void SafeRenderCosmetics(bool useAvatarTransforms)
-        {
-            DangerousRenderCosmetics(useAvatarTransforms);
-        }
-
-        private void DangerousRenderCosmetics(bool useAvatarTransforms)
-        {
-            var applications = controller.gameObject.GetComponentsInChildren<CosmeticApplication>();
-            if ((applications.Any()))
-            {
-                foreach (var application in applications)
-                {
-                    if (useAvatarTransforms)
-                    {
-                        foreach (CosmeticInstance cosmeticInstance in application.spawnedCosmetics)
-                        {
-                            Transform transform = null;
-                            switch (cosmeticInstance.cosmeticType)
-                            {
-                                case CosmeticType.HAT:
-                                    transform = cosmeticAvatar.GetAvatarTransformFromBoneName("spine.004");
-                                    break;
-                                case CosmeticType.CHEST:
-                                    transform = cosmeticAvatar.GetAvatarTransformFromBoneName("spine.003");
-                                    break;
-                                case CosmeticType.R_LOWER_ARM:
-                                    transform = cosmeticAvatar.GetAvatarTransformFromBoneName("arm.R_lower");
-                                    break;
-                                case CosmeticType.HIP:
-                                    transform = cosmeticAvatar.GetAvatarTransformFromBoneName("spine");
-                                    break;
-                                case CosmeticType.L_SHIN:
-                                    transform = cosmeticAvatar.GetAvatarTransformFromBoneName("shin.L");
-                                    break;
-                                case CosmeticType.R_SHIN:
-                                    transform = cosmeticAvatar.GetAvatarTransformFromBoneName("shin.R");
-                                    break;
-                            }
-                            cosmeticInstance.transform.parent = null;
-                            cosmeticInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
-
-                        }
-                    }
-                    else
-                    {
-                        application.RefreshAllCosmeticPositions();
-                    }
-
-                }
-            }
-
-
-
-        }
-
-        #endregion
 
         #region TooManyEmotes
 
@@ -660,7 +369,7 @@ namespace ModelReplacement
 
         private int DangerousGetEmoteID(int currentID)
         {
-            var anim = TooManyEmotes.Patches.PlayerPatcher.GetCurrentlyPlayingEmote(controller);
+            TooManyEmotes.UnlockableEmote anim = TooManyEmotes.Patches.PlayerPatcher.GetCurrentlyPlayingEmote(controller);
             if (anim == null) { return currentID; }
             if (anim.emoteId == 1) { return -1; }
             if (anim.emoteId == 2) { return -2; }

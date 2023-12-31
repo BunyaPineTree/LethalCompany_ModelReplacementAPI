@@ -1,4 +1,4 @@
-# Miku Model Replacement v1.4.1
+# Miku Model Replacement v1.4.2
 ### Replaces suits with Hatsune Miku. This is the example mod for ModelReplacementAPI
 
 ## Instructions
@@ -8,13 +8,15 @@
 
 ## Known Issues
 - Cloth physics can be very laggy. ~~It is recommended in larger lobbies that you lower the dynamic bone update rate and disable physics at range via the config.~~ Physics configs temporarily do not function as a result of the switch away from Dynamic Bones.
-- Miku might become a flashbang in bad lighting.  
+- Miku is a flashbang as a result of the toon shader currently used. 
 - Does not replace hands. You will only see Miku in multiplayer lobbies or with a third person mod. 
 
 ## Note
-Version 1.4.0 and up will require ModelReplacementAPI minimum version 2.0.0. Be sure to download the latest update of that as well.  
+ModelReplacementAPI versison 2.3.0 required for post processing changes to work. 
 
 ## Changelog
+	- v1.4.2
+		- Additional graphics changes. Removal of post processing. 
 	- v1.4.1
 		- Switched away from Dynamic Bones.
 		- Items should be held correctly with the latest version of ModelReplacementAPI
