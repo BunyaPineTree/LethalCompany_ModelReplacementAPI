@@ -23,6 +23,13 @@ namespace ModelReplacement.Modules
     }
     public class ViewStateManager
     {
+        //Environment/HangarShip/Player/PlayerNameCanvas
+
+
+
+
+
+
         //==================================================================== NoPost Analysis ====================================================================
         //ALL CULLINGMASKS IN USE IN GAME
         //0000000000000000000000000100000
@@ -91,6 +98,8 @@ namespace ModelReplacement.Modules
         private PlayerControllerB controller;
         private GameObject replacementModel;
         private bool UseNoPostProcessing => bodyReplacement.UseNoPostProcessing;
+        private bool DebugRenderPlayer => bodyReplacement.DebugRenderPlayer;
+        private bool DebugRenderModel => bodyReplacement.DebugRenderModel;
 
         public ViewStateManager(BodyReplacementBase bodyreplacement)
         {
@@ -174,11 +183,35 @@ namespace ModelReplacement.Modules
 
                 
             }
+            else if(state == ViewState.Debug)
+            {
+                if (DebugRenderModel)
+                {
+                    foreach (Renderer renderer in renderers)
+                    {
+                        renderer.shadowCastingMode = ShadowCastingMode.On;
+                        renderer.gameObject.layer = VisibleLayer;
+                    }
+                    if (ModelReplacementAPI.LCthirdPersonPresent)
+                    {
+                        controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
+                    }
+                }
+                if(DebugRenderPlayer)
+                {
+                    bodyReplacement.SetPlayerRenderers(true);
+                }
+
+            }
             
         }
 
         public ViewState GetViewState()
         {
+            if(DebugRenderModel || DebugRenderPlayer)
+            {
+                return ViewState.Debug;
+            }
             if (controller.isPlayerDead) //Dead, render nothing
             {
                 return ViewState.None;
@@ -285,7 +318,7 @@ namespace ModelReplacement.Modules
 
             var b = GameObject.FindObjectsOfType<GameObject>();
             HashSet<int> layers = new HashSet<int>();
-            b.ToList().ForEach(l => { layers.Add(l.layer); if (l.layer == 27) { Console.WriteLine(GetGameObjectPath(l)); } });
+            b.ToList().ForEach(l => { layers.Add(l.layer); if (l.layer == 8) { Console.WriteLine(GetGameObjectPath(l)); } });
 
             int layerRep = 0;
 
@@ -295,7 +328,6 @@ namespace ModelReplacement.Modules
                 if (layers.Contains(i))
                 {
                     layerRep += c;
-                    Console.WriteLine($"Adding {c} for i={i}");
                 }
 
             }

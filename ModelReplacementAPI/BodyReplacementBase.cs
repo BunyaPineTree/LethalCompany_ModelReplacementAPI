@@ -45,6 +45,9 @@ namespace ModelReplacement
         public bool UseNoPostProcessing = false;
         public bool DontConvertUnsupportedShaders = false;
 
+        //Debug
+        public bool DebugRenderPlayer = false;
+        public bool DebugRenderModel = false;
 
         #region Virtual and Abstract Methods
 
@@ -176,6 +179,13 @@ namespace ModelReplacement
             cosmeticAvatar = avatar;
             ragdollAvatar = new AvatarUpdater();
             avatar.AssignModelReplacement(controller.gameObject, replacementModel);
+
+            //Offset Builder Data
+            var replacementAnimator = replacementModel.GetComponentInChildren<Animator>();
+            OffsetBuilder ite = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
+            UseNoPostProcessing = ite.UseNoPostProcessing;
+
+
             viewState = new ViewStateManager(this);
             if (ModelReplacementAPI.moreCompanyPresent)
             {
@@ -308,7 +318,7 @@ namespace ModelReplacement
 
         }
 
-        private void SetAvatarRenderers(bool enabled)
+        public void SetAvatarRenderers(bool enabled)
         {
             foreach (Renderer renderer in replacementModel.GetComponentsInChildren<Renderer>())
             {
@@ -316,7 +326,7 @@ namespace ModelReplacement
             }
         }
 
-        private void SetPlayerRenderers(bool enabled)
+        public void SetPlayerRenderers(bool enabled)
         {
             controller.thisPlayerModel.enabled = enabled;
             controller.thisPlayerModelLOD1.enabled = enabled;

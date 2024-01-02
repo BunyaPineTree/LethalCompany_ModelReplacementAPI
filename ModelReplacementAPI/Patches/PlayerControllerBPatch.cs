@@ -39,6 +39,32 @@ namespace ModelReplacement.Patches
                 if (a) { a.OnDamageTaken(__instance.isPlayerDead); }
             }
 
+            /*
+            [HarmonyPatch("SetHoverTipAndCurrentInteractTrigger")]
+            [HarmonyPostfix]
+            public static void SetHoverTipAndCurrentInteractTriggerPatch(ref PlayerControllerB __instance)
+            {
+                if (!__instance.isGrabbingObjectAnimation)
+                {
+                    if (!__instance.isFreeCamera && Physics.Raycast(__instance.interactRay, out __instance.hit, 5f))
+                    {
+                        PlayerControllerB component3 = this.hit.collider.gameObject.GetComponent<PlayerControllerB>();
+                        if (component3 != null)
+                        {
+                            component3.ShowNameBillboard();
+                        }
+                    }
+
+                }
+
+            }
+            */
+
+
+
+
+
+
         }
 
         // Token: 0x0600000D RID: 13 RVA: 0x00002370 File Offset: 0x00000570

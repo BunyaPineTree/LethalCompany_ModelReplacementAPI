@@ -22,7 +22,6 @@ namespace ModelReplacement.AvatarBodyUpdater
         protected Vector3 rootPositionOffset = new Vector3(0, 0, 0);
         protected Vector3 rootScale = new Vector3(1, 1, 1);
 
-
         public virtual void AssignModelReplacement(GameObject player, GameObject replacement)
         {
             PlayerControllerB controller = player.GetComponent<PlayerControllerB>();
@@ -192,6 +191,7 @@ namespace ModelReplacement.AvatarBodyUpdater
         public Vector3 itemPositonOffset;
         public Quaternion itemRotationOffset;
         public GameObject itemHolder;
+        public bool UseNoPostProcessing;
     }
     #endregion
 }
