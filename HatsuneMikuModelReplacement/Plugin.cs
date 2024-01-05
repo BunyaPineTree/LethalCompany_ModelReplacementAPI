@@ -14,7 +14,7 @@ namespace HatsuneMikuModelReplacement
 
 
 
-    [BepInPlugin("meow.MikuModelReplacement", "Miku Model", "1.4.1")]
+    [BepInPlugin("meow.MikuModelReplacement", "Miku Model", "1.5.0")]
     [BepInDependency("meow.ModelReplacementAPI", BepInDependency.DependencyFlags.HardDependency)]
     public class Plugin : BaseUnityPlugin
     {
@@ -24,7 +24,7 @@ namespace HatsuneMikuModelReplacement
         public static ConfigEntry<bool> enableMikuForAllSuits { get; private set; }
         public static ConfigEntry<bool> enableMikuAsDefault { get; private set; }
         public static ConfigEntry<string> suitNamesToEnableMiku { get; private set; }
-        
+        public static ConfigEntry<string> suitNamesToEnableEvilMiku { get; private set; }
         // Miku model specific config options
         public static ConfigEntry<float> UpdateRate { get; private set; }
         public static ConfigEntry<float> distanceDisablePhysics { get; private set; }
@@ -35,6 +35,7 @@ namespace HatsuneMikuModelReplacement
             enableMikuForAllSuits = config.Bind<bool>("Suits to Replace Settings", "Enable Miku for all Suits", false, "Enable to replace every suit with Miku. Set to false to specify suits");
             enableMikuAsDefault = config.Bind<bool>("Suits to Replace Settings", "Enable Miku as default", false, "Enable to replace every suit that hasn't been otherwise registered with Miku.");
             suitNamesToEnableMiku = config.Bind<string>("Suits to Replace Settings", "Suits to enable Miku for", "Default,Orange suit", "Enter a comma separated list of suit names.(Additionally, [Green suit,Pajama suit,Hazard suit])");
+            suitNamesToEnableEvilMiku = config.Bind<string>("Suits to Replace Settings", "Suits to enable Evil Miku for", "Green suit", "Enter a comma separated list of suit names.(Additionally, [Green suit,Pajama suit,Hazard suit])");
 
             UpdateRate = config.Bind<float>("Dynamic Bone Settings", "Update rate", 60, "Refreshes dynamic bones more times per second the higher the number");
             disablePhysicsAtRange = config.Bind<bool>("Dynamic Bone Settings", "Disable physics at range", false, "Enable to disable physics past the specified range");
@@ -66,7 +67,12 @@ namespace HatsuneMikuModelReplacement
             {
                 ModelReplacementAPI.RegisterSuitModelReplacement(item, typeof(BodyReplacementMiku));
             }
-                
+            var commaSepList2 = suitNamesToEnableEvilMiku.Value.Split(',');
+            foreach (var item in commaSepList2)
+            {
+                ModelReplacementAPI.RegisterSuitModelReplacement(item, typeof(BodyReplacementMiku));
+            }
+            ModelReplacementAPI.RegisterSuitModelReplacement("Green Suit", typeof(BodyReplacementMiku));
 
             Harmony harmony = new Harmony("meow.MikuModelReplacement");
             harmony.PatchAll();

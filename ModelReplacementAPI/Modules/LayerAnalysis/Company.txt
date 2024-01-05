@@ -1,0 +1,2266 @@
+---------------------------------- Check Layer 0-------------------------------------
+/ChangableSuit(Clone)/metarig/spine/thigh.R/shin.R/shin.R_end
+/ChangableSuit(Clone)/metarig/spine/thigh.R/shin.R
+/ChangableSuit(Clone)/metarig/spine/thigh.R
+/ChangableSuit(Clone)/metarig/spine/thigh.L/shin.L/shin.L_end
+/ChangableSuit(Clone)/metarig/spine/thigh.L/shin.L
+/ChangableSuit(Clone)/metarig/spine/thigh.L
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/arm.R_lower_end
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/arm.L_lower_end
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002
+/ChangableSuit(Clone)/metarig/spine/spine.001
+/ChangableSuit(Clone)/metarig/spine
+/ChangableSuit(Clone)/metarig
+/ChangableSuit(Clone)/SuitRenderer
+/ChangableSuit(Clone)/SuitHook
+/ChangableSuit(Clone)/metarig/spine/thigh.R/shin.R/shin.R_end
+/ChangableSuit(Clone)/metarig/spine/thigh.R/shin.R
+/ChangableSuit(Clone)/metarig/spine/thigh.R
+/ChangableSuit(Clone)/metarig/spine/thigh.L/shin.L/shin.L_end
+/ChangableSuit(Clone)/metarig/spine/thigh.L/shin.L
+/ChangableSuit(Clone)/metarig/spine/thigh.L
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/arm.R_lower_end
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/arm.L_lower_end
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002
+/ChangableSuit(Clone)/metarig/spine/spine.001
+/ChangableSuit(Clone)/metarig/spine
+/ChangableSuit(Clone)/metarig
+/ChangableSuit(Clone)/SuitRenderer
+/ChangableSuit(Clone)/SuitHook
+/ChangableSuit(Clone)/metarig/spine/thigh.R/shin.R/shin.R_end
+/ChangableSuit(Clone)/metarig/spine/thigh.R/shin.R
+/ChangableSuit(Clone)/metarig/spine/thigh.R
+/ChangableSuit(Clone)/metarig/spine/thigh.L/shin.L/shin.L_end
+/ChangableSuit(Clone)/metarig/spine/thigh.L/shin.L
+/ChangableSuit(Clone)/metarig/spine/thigh.L
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/arm.R_lower_end
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/arm.L_lower_end
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002
+/ChangableSuit(Clone)/metarig/spine/spine.001
+/ChangableSuit(Clone)/metarig/spine
+/ChangableSuit(Clone)/metarig
+/ChangableSuit(Clone)/SuitRenderer
+/ChangableSuit(Clone)/SuitHook
+/ChangableSuit(Clone)/metarig/spine/thigh.R/shin.R/shin.R_end
+/ChangableSuit(Clone)/metarig/spine/thigh.R/shin.R
+/ChangableSuit(Clone)/metarig/spine/thigh.R
+/ChangableSuit(Clone)/metarig/spine/thigh.L/shin.L/shin.L_end
+/ChangableSuit(Clone)/metarig/spine/thigh.L/shin.L
+/ChangableSuit(Clone)/metarig/spine/thigh.L
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/arm.R_lower_end
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.R
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/arm.L_lower_end
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003/shoulder.L
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002/spine.003
+/ChangableSuit(Clone)/metarig/spine/spine.001/spine.002
+/ChangableSuit(Clone)/metarig/spine/spine.001
+/ChangableSuit(Clone)/metarig/spine
+/ChangableSuit(Clone)/metarig
+/ChangableSuit(Clone)/SuitRenderer
+/ChangableSuit(Clone)/SuitHook
+/PlayerSettingsObject
+/NetworkManager
+/Systems/GameSystems/QuickMenuManager
+/Systems/SpecialPositions/notSpawnedPlatform (1)
+/Environment/HangarShip/Nodes/outsideShipSpawn
+/Systems/Audios/SFX
+/Systems/GameSystems/ShipBuildMode/SelectedObjectOutline
+/Systems/UI/UICamera
+/Systems/GameSystems/RoundManager
+/Environment/HangarShip/ShipInnerRoomBoundsTrigger
+/Environment/HangarShip/SmallDetails/BatterySingle (1)
+/Environment/HangarShip/PlacementBlockers
+/Environment/HangarShip/SmallDetails/Cameras/TinyCamera (1)
+/Systems/SpectateCameraPivot
+/Environment/HangarShip/ShipModels2b/Cube.005 (2)
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel/ElevatorPanelScreen/Image/doorHydraulics
+/Systems/Rendering/BlackSkyVolume
+/Systems/Rendering
+/Environment/HangarShip/Cameras/FrontDoorSecurityCam/SecurityCamera
+/Systems/GameSystems/QuickMenuManager/SpawnItemDebugPos
+/Environment/HangarShip/ShipModels2b/ChargeStation/ChargeStationTrigger
+/Systems/Rendering/InsanityFilter
+/Environment/HangarShip/ShipElectricLights/Area Light (7)
+/Environment/HangarShip/AnimatedShipDoor
+/Environment/HangarShip/AnimatedShipDoor/Cube
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel/ButtonLights
+/Systems/SpecialPositions
+/Environment/HangarShip/ShipInsidePositions/InsideShipPos (8)
+/Environment
+/Systems/Rendering/VolumeMain
+/Environment/HangarShip/ShipElectricLights/HangingLamp (4)
+/Systems/GameSystems/PlayersManager / HUDManager/GlobalEffects
+/Systems/Audios/UnderwaterAudio
+/Environment/HangarShip/ShipElectricLights/Area Light (4)
+/Systems/SpecialPositions/ShipSpawnPath/ShipPathPointB
+/Environment/HangarShip/ThrusterAmbientAudio
+/Systems/SpecialPositions/ShipSpawnPath/ShipPathPoint (2)
+/Environment/Lighting/Point Light (1)
+/FreeCinematicCameraTarget
+/Environment/HangarShip/ShipElectricLights/Area Light (3)
+/Systems/SpectateCameraPivot/SpectateCamera
+/Systems/GameSystems/ItemSystems
+/Systems/GameSystems/SoundManager
+/Environment/TestRoomPosition/InsideEnemySpawnPosition (1)
+/Environment/HangarShip/ShipElectricLights/Area Light (8)
+/FreeCameraCinematic
+/Systems/GameSystems/TimeAndWeather
+/Environment/HangarShip/Terminal/TerminalTrigger
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel/StartButton
+/Environment/Props/Local
+/Systems/SpecialPositions/ShipSpawnPath/ShipPathPoint (3)
+/Environment/HangarShip/ShipElectricLights/Area Light (9)
+/Systems/GameSystems/ShipBuildMode
+/Environment/HangarShip/ShipModels2b/ShipLightsPost/Floodlight2/Floodlight2Light
+/Systems/SpecialPositions/ShipSpawnPath/ShipPathPoint
+/Systems/GameSystems/SoundManager/Heartbeat
+/Systems/GameSystems/TimeAndWeather/TimeOfDayCue
+/Environment/HangarShip/ShipModels2b/ShipLightsPost
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel/ElevatorPanelScreen
+/Environment/HangarShip/ShipInsidePositions/InsideShipPos (11)
+/Systems/GameSystems/SoundManager/HighAction2
+/Environment/HangarShip/ShipModels2b/ChargeStation/ZapLight
+/Systems/GameSystems/SoundManager/HighAction1
+/Systems/Audios/UIAudio
+/Environment/HangarShip/ShipModels2b/MonitorWall/Cube.001/CameraMonitorSwitchButton
+/Systems/SpecialPositions/ShipSpawnPath/ShipPathPoint (1)
+/Systems/SpecialPositions/notSpawnedPosition
+/Systems/UI
+/Systems/SpawnHangar/SpawnRoom
+/Systems/EventSystem
+/Environment/HangarShip/ShipModels2b/MonitorWall/Cube.001/CameraMonitorScript
+/Environment/HangarShip/FogExclusionZone
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel/Audio
+/Environment/HangarShip/SmallDetails/BatterySingle (2)
+/Systems/SpecialPositions/ShipSpawnPath
+/Environment/HangarShip/LandingShipNavObstacle
+/Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers
+/StaticLightingSky
+/Environment/HangarShip/Cameras
+/Systems/Rendering/UnderwaterFilter
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel/ElevatorPanelScreen/Image/meter
+/Environment/HangarShip/Nodes/Spawn1
+/Systems/Rendering/DrunknessFilter
+/Environment/HangarShip/ShipModels2b/Cube.005 (2)/SpeakerAudio
+/PlayersContainer/PhysicsColliders
+/PlayersContainer/BloodObjectContainer
+/Environment/HangarShip/ShipInsidePositions/InsideShipPos (10)
+/Environment/HangarShip/Nodes/Spawn2
+/Environment/Lighting
+/Environment/HangarShip/Nodes/Spawn3
+/Systems/GameSystems/SoundManager/TempAudio1
+/Systems/GameSystems/RoundManager/TempTransform
+/Environment/HangarShip/ShipCamera
+/Environment/HangarShip/ShipElectricLights/HangingLamp (3)
+/Environment/HangarShip/PositionNodes
+/Environment/HangarShip/PositionNodes/ShipMiddle
+/Environment/HangarShip/PositionNodes/DoorPos
+/Environment/HangarShip/ShipInsidePositions/InsideShipPos (1)
+/Environment/HangarShip/ShipModels2b/ShipLightsPost/Floodlight1/Floodlight1Light
+/Environment/HangarShip/ShipInsidePositions/InsideShipPos (4)
+/Environment/HangarShip/AnimatedShipDoor/WindParticleStrong
+/Environment/HangarShip/ShipInsidePositions/InsideShipPos (9)
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel
+/Environment/MapPropsContainerForTesting
+/Environment/HangarShip/SmallDetails/Cameras
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel/ElevatorPanelScreen/Image
+/Environment/HangarShip/Nodes
+/Environment/HangarShip/ShipModels2b/MonitorWall/SingleScreen/Point Light
+/Environment/HangarShip/PositionNodes/BackOfShip
+/Environment/HangarShip/LampSqueakAudio
+/Environment/Interactables
+/Environment/TestRoomPosition/OutsideEnemySpawnPosition (1)
+/Systems/GameSystems/SoundManager/EarsRingingAudio
+/Environment/SpaceProps/Planets
+/Environment/HangarShip/ShipInsidePositions/InsideShipPos (3)
+/Environment/HangarShip/SmallDetails
+/Systems/Rendering/FlashbangFilter
+/Environment/HangarShip/Nodes/Spawn4
+/Systems/GameSystems/SoundManager/OutsideMusic
+/Environment/HangarShip/ShipModels2b/MonitorWall/Cube.001/CameraMonitorOnButton
+/Systems/Audios/DiageticBackground
+/Systems/GameSystems
+/Systems/Audios/Music1
+/Environment/HangarShip/ShipInsidePositions/InsideShipPos (2)
+/Systems/GameSystems/SoundManager/AmbienceSource
+/Environment/HangarShip/ShipModels2b/Cube.005 (1)
+/Environment/HangarShip/ShipInsidePositions/InsideShipPos (5)
+/Systems/SpecialPositions/ShipSpawnPath/ShipPathPoint (4)
+/Environment/HangarShip/ShipBoundsTrigger
+/Systems/Audios/Music2
+/Environment/Props
+/Systems/SpawnHangar
+/Systems/GameSystems/SoundManager/LowAction
+/Environment/HangarShip/Cameras/ShipCamera
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel/StopButton
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel/ButtonLights/DoorButtonLight (1)
+/Environment/HangarShip/ShipInsidePositions/InsideShipPos (7)
+/Environment/HangarShip/HangarDoorAudioSource
+/Systems/SpecialPositions/notSpawnedPlatform
+/PlayersContainer
+/Environment/HangarShip/ShipModels2b/MonitorWall/Cube.001/Point Light
+/Environment/HangarShip/StorageCloset/LockerAudio
+/Systems/Audios
+/Environment/HangarShip/OutsideShipRoom
+/Systems/GameSystems/ShipBuildMode/GhostObject/Mesh
+/Environment/HangarShip/ShipInsidePositions
+/Environment/HangarShip/Terminal/terminalLight
+/Environment/HangarShip/ShipElectricLights/Area Light (5)
+/Systems/Rendering/CustomPass
+/Systems
+/Environment/HangarShip/ShipInsidePositions/InsideShipPos (6)
+/Systems/GameSystems/ShipBuildMode/GhostObject
+/Environment/HangarShip/ShipElectricLights/HangingLamp (2)
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel/ButtonLights/DoorButtonLight
+/Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera/PlayerAudioListener
+/Systems/Audios/LevellingAudio
+/Environment/HangarShip/PositionNodes/MiddleOfSpace
+/Environment/TestRoomPosition/DaytimeEnemySpawnPosition (1)
+/Environment/HangarShip/ShipElectricLights
+/Environment/HangarShip/ReverbTriggers/LeavingShipTriggers
+/Systems/GameSystems/SoundManager/AmbienceSourceNonDiagetic
+/Environment/TestRoomPosition
+/Environment/HangarShip/SmallDetails/Cameras/TinyCamera
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001/finger4.R.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001/finger4.R.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001/finger4.R.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001/finger4.R.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001/finger2.R.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001/finger2.R.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001/finger2.R.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001/finger2.R.001_end
+/Environment/HangarShip/Cube.008
+/Environment/HangarShip/BezierCurve
+/Environment/HangarShip/WallCords
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArm/RightArm_hint
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArm/RightArm_hint
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArm/RightArm_hint
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArm/RightArm_hint
+/Environment/HangarShip/VentEntrance
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001/finger3.R.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001/finger3.R.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001/finger3.R.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001/finger3.R.001_end
+/Systems/DissonanceSetup
+/Environment/HangarShip/Player/ScavengerModel/LOD1
+/PlayersContainer/Player (3)/ScavengerModel/LOD1
+/PlayersContainer/Player (1)/ScavengerModel/LOD1
+/PlayersContainer/Player (2)/ScavengerModel/LOD1
+/Environment/HangarShip/ShipModels2b/MonitorWall/Cube
+/Environment/HangarShip/ShipModels2b/ChargeStation/ChargeProng3
+/Environment/HangarShip
+/Environment/HangarShip/OutsideShipRoom/Ladder
+/Environment/SpaceProps
+/Environment/HangarShip/ShipModels2b
+/Environment/HangarShip/ShipModels2b/MonitorWall
+/Systems/Rendering/ScanSphere
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/LeftArm/LeftArm_hint
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/LeftArm/LeftArm_hint
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/LeftArm/LeftArm_hint
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/LeftArm/LeftArm_hint
+/Environment/HangarShip/Player/ScavengerModel/metarig/Rig 1/LeftLeg
+/PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+/PlayersContainer/Player (3)/ScavengerModel/metarig/Rig 1/RightLeg/RightLeg_target
+/PlayersContainer/Player (1)/ScavengerModel/metarig/Rig 1/RightLeg/RightLeg_hint
+/PlayersContainer/Player (3)/ScavengerModel/metarig/Rig 1/RightArm/RightArm_hint
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/hand.R.end
+/Environment/HangarShip/Player/ScavengerModel/metarig/Rig 1/RightArm
+/PlayersContainer/Player (2)/ScavengerModel/LOD2
+/Environment/HangarShip/Player/ScavengerModel/LOD3
+/Environment/HangarShip/Player/ScavengerModel/metarig/Rig 1
+/PlayersContainer/Player (3)/ScavengerModel/metarig/Rig 1/RightLeg
+/PlayersContainer/Player (2)/ScavengerModel/metarig/Rig 1/LeftLeg/LeftLeg_target
+/PlayersContainer/Player (3)/ScavengerModel/metarig/Rig 1/RightLeg/RightLeg_hint
+/PlayersContainer/Player (1)/ScavengerModel/metarig/Rig 1/RightArm/RightArm_hint
+/Environment/HangarShip/Player/ScavengerModel/metarig/Rig 1/LeftArm/LeftArm_hint
+/PlayersContainer/Player (1)/ScavengerModel/metarig/Rig 1/RightLeg/RightLeg_target
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/RightArm_target
+/PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+/Environment/HangarShip/Player/ScavengerModel/metarig/Rig 1/LookHead2
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/LeftArm_target
+/PlayersContainer/Player (1)/ScavengerModel/metarig/Rig 1/RightLeg
+/PlayersContainer/Player (1)/ScavengerModel/metarig/Rig 1/LeftLeg/LeftLeg_target
+/PlayersContainer/Player (1)/ScavengerModel/LOD2
+/Environment/HangarShip/Player/ScavengerModel/metarig/Rig 1/LeftLeg/LeftLeg_hint
+/PlayersContainer/Player (2)/ScavengerModel/metarig/Rig 1/RightLeg/RightLeg_hint
+/Environment/HangarShip/Player/ScavengerModel/metarig/Rig 1/LookHead
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/RightArm_target
+/PlayersContainer/Player (3)/ScavengerModel/LOD2
+/PlayersContainer/Player (3)/ScavengerModel/metarig/Rig 1/LeftLeg/LeftLeg_target
+/PlayersContainer/Player (2)/ScavengerModel/metarig/Rig 1/RightLeg
+/Environment/HangarShip/Player/ScavengerModel/metarig/Rig 1/LeftArm
+/PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/RightArm_target
+/PlayersContainer/Player (2)/ScavengerModel/metarig/Rig 1/RightArm/RightArm_hint
+/PlayersContainer/Player (2)/ScavengerModel/metarig/Rig 1/RightLeg/RightLeg_target
+/PlayersContainer/Player (1)/ScavengerModel/metarig/Rig 1/LeftLeg/LeftLeg_hint
+/PlayersContainer/Player (2)/ScavengerModel/metarig/Rig 1/LeftLeg
+/PlayersContainer/Player (1)/ScavengerModel/metarig/Rig 1/LookHead
+/PlayersContainer/Player (3)/ScavengerModel/metarig/Rig 1/LeftArm
+/PlayersContainer/Player (2)/ScavengerModel/metarig/Rig 1
+/PlayersContainer/Player (2)/ScavengerModel/LOD3
+/Environment/HangarShip/Player/ScavengerModel/metarig/Rig 1/LeftLeg/LeftLeg_target
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/hand.R.end
+/Environment/HangarShip/Player/ScavengerModel/LOD2
+/PlayersContainer/Player (2)/ScavengerModel/metarig/Rig 1/RightArm
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/RightArm_target
+/PlayersContainer/Player (1)/ScavengerModel/metarig/Rig 1/LeftArm
+/PlayersContainer/Player (3)/ScavengerModel/metarig/Rig 1/LookHead
+/PlayersContainer/Player (2)/ScavengerModel/metarig/Rig 1/LookHead2
+/PlayersContainer/Player (3)/ScavengerModel/metarig/Rig 1/LeftLeg/LeftLeg_hint
+/PlayersContainer/Player (2)/ScavengerModel/metarig/Rig 1/LeftArm/LeftArm_hint
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/LeftArm_target
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/hand.R.end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/Rig 1/RightArm
+/PlayersContainer/Player (1)/ScavengerModel/metarig/Rig 1
+/PlayersContainer/Player (1)/ScavengerModel/LOD3
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/LeftArm_target
+/PlayersContainer/Player (2)/ScavengerModel/metarig/Rig 1/LookHead
+/PlayersContainer/Player (1)/ScavengerModel/metarig/Rig 1/LeftLeg
+/PlayersContainer/Player (3)/ScavengerModel/metarig/Rig 1/LookHead2
+/PlayersContainer/Player (2)/ScavengerModel/metarig/Rig 1/LeftLeg/LeftLeg_hint
+/PlayersContainer/Player (3)/ScavengerModel/metarig/Rig 1/LeftArm/LeftArm_hint
+/Environment/HangarShip/Player/ScavengerModel/metarig/Rig 1/RightLeg/RightLeg_hint
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/LeftArm_target
+/PlayersContainer/Player (3)/ScavengerModel/metarig/Rig 1
+/Environment/HangarShip/Player/ScavengerModel/metarig/Rig 1/RightLeg
+/PlayersContainer/Player (3)/ScavengerModel/LOD3
+/PlayersContainer/Player (3)/ScavengerModel/metarig/Rig 1/RightArm
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/hand.R.end
+/Environment/HangarShip/Player/ScavengerModel/metarig/Rig 1/RightArm/RightArm_hint
+/PlayersContainer/Player (1)/ScavengerModel/metarig/Rig 1/LeftArm/LeftArm_hint
+/Environment/HangarShip/Player/ScavengerModel/metarig/Rig 1/RightLeg/RightLeg_target
+/Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+/PlayersContainer/Player (2)/ScavengerModel/metarig/Rig 1/LeftArm
+/PlayersContainer/Player (1)/ScavengerModel/metarig/Rig 1/LookHead2
+/PlayersContainer/Player (3)/ScavengerModel/metarig/Rig 1/LeftLeg
+/Environment/HangarShip/ThrusterFrontRight
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003
+/PlayersContainer/Player (3)/ScavengerModel/metarig
+/PlayersContainer/Player (1)/ScavengerModel/metarig
+/PlayersContainer/Player (2)/ScavengerModel/metarig
+/Environment/HangarShip/Player/ScavengerModel/metarig
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper
+/Environment/HangarShip/SmallDetails/BatteryPack
+/Environment/HangarShip/SideMachineryLeft
+/Environment/HangarShip/LadderShort
+/Environment/HangarShip/Pipework2.002
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001/finger1.L.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001/finger1.L.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001/finger1.L.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001/finger1.L.001_end
+/Environment/HangarShip/Cube.004
+/Environment/HangarShip/ShipModels2b/ShipLightsPost/Cube.004
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/ServerItemHolder
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/ServerItemHolder
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/ServerItemHolder
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/ServerItemHolder
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001/finger2.R.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001/finger2.R.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001/finger2.R.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001/finger2.R.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L
+/Environment/HangarShip/LadderShort (1)
+/Environment/HangarShip/ShipInside.001
+/Environment/HangarShip/ShipModels2b/ChargeStation
+/Environment/HangarShip/ShipModels2b/ChargeStation/ChargeProng1
+/Environment/HangarShip/ShipModels2b/ShipLightsPost/Cube.003
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/spine.004/spine.004_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/spine.004/spine.004_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/spine.004/spine.004_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/spine.004/spine.004_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera/ArmsRotationTarget
+/PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera/ArmsRotationTarget
+/PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera/ArmsRotationTarget
+/PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera/ArmsRotationTarget
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001/finger2.L.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001/finger2.L.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001/finger2.L.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001/finger2.L.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R
+/Environment/HangarShip/MeterBoxDevice.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001
+/Environment/HangarShip/Terminal/Terminal.003
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R/finger2.R.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R
+/Environment/HangarShip/warningStickers
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001/finger3.L.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001/finger3.L.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001/finger3.L.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001/finger3.L.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001
+/Environment/HangarShip/ShipModels2b/ChargeStation/ChargeProng4
+/Environment/HangarShip/ThrusterFrontLeft
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L
+/Environment/HangarShip/SmallDetails/BatterySingle
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/toe.R/toe.R_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/toe.R/toe.R_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/toe.R/toe.R_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/toe.R/toe.R_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArmClipboard/RightArm_hint
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArmClipboard/RightArm_hint
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArmClipboard/RightArm_hint
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArmClipboard/RightArm_hint
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig
+/Environment/HangarShip/VentEntrance/Hinge/VentCover
+/Environment/HangarShip/CatwalkRailLiningB
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/heel.02.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/heel.02.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/heel.02.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/heel.02.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera/LockHandToCameraPoint
+/PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera/LockHandToCameraPoint
+/PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera/LockHandToCameraPoint
+/PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera/LockHandToCameraPoint
+/Environment/HangarShip/ShipModels2b/ShipLightsPost/Floodlight1
+/Environment/HangarShip/HangarDoorLever
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001
+/Environment/HangarShip/ScavengerModelSuitParts
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R
+/Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer
+/PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer
+/PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer
+/PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer
+/Environment/HangarShip/VentEntrance/ventTunnel
+/Environment/HangarShip/Player/ScavengerModel/metarig/ThrowPropPosition
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ThrowPropPosition
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ThrowPropPosition
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ThrowPropPosition
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001/finger4.R.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001/finger4.R.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001/finger4.R.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001/finger4.R.001_end
+/Environment/HangarShip/ShipSupportBeams
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L
+/Environment/HangarShip/SpawnRoom
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L
+/Environment/HangarShip/ShipModels2b/ChargeStation/ChargeInductiveCoil
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001
+/Environment/HangarShip/warningStickers.003
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001/finger1.R.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001/finger1.R.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001/finger1.R.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001/finger1.R.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/heel.02.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/heel.02.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/heel.02.R
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/heel.02.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine
+/Environment/HangarShip/Plane.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001/finger1.R.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001/finger1.R.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001/finger1.R.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R/finger1.R.001/finger1.R.001_end
+/Environment/HangarShip/ScavengerModelSuitParts/Circle.002
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/LevelSticker
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/LevelSticker
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/LevelSticker
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/LevelSticker
+/PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights/flashlight
+/PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights/flashlight
+/PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights/flashlight
+/Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights/flashlight
+/Environment/HangarShip/warningStickers.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly
+/Environment/HangarShip/ThrusterBackLeft
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R
+/PlayersContainer/Player (3)/ScavengerModel
+/PlayersContainer/Player (1)/ScavengerModel
+/PlayersContainer/Player (2)/ScavengerModel
+/Environment/HangarShip/Player/ScavengerModel
+/Environment/HangarShip/VentEntrance/FloorNode
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/BetaBadge
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/BetaBadge
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/BetaBadge
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/BetaBadge
+/Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights
+/PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights
+/PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights
+/PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights
+/Environment/HangarShip/ShipModels2b/MonitorWall/SingleScreen
+/Environment/HangarShip/NurbsPath
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L
+/Environment/HangarShip/NurbsPath.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/heel.02.R/heel.02.R_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/heel.02.R/heel.02.R_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/heel.02.R/heel.02.R_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/heel.02.R/heel.02.R_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights/laserLight
+/PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights/laserLight
+/PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights/laserLight
+/PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights/laserLight
+/Environment/HangarShip/UnderbellyMachineParts
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArm
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArm
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArm
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArm
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/LocalItemHolder
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/LocalItemHolder
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/LocalItemHolder
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/LocalItemHolder
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArmClipboard
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArmClipboard
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArmClipboard
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArmClipboard
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R
+/Environment/HangarShip/Bunkbeds
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001/finger3.R.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001/finger3.R.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001/finger3.R.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger3.R/finger3.R.001/finger3.R.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger2.R
+/Environment/HangarShip/ThrusterBackRight
+/Environment/HangarShip/ShipModels2b/AirFilterThing
+/Environment/HangarShip/ShipModels2b/ChargeStation/ChargeProng2
+/Environment/HangarShip/Cameras/FrontDoorSecurityCam
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/toe.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/toe.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/toe.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/toe.L
+/Environment/HangarShip/CatwalkUnderneathSupports
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001/finger1.L.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001/finger1.L.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001/finger1.L.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger1.L/finger1.L.001/finger1.L.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001
+/Environment/HangarShip/CatwalkRailLining
+/PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights/bbBulbLight
+/PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights/bbBulbLight
+/PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights/bbBulbLight
+/Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera/HelmetLights/bbBulbLight
+/Environment/HangarShip/Terminal/BezierCurve.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001/finger5.L.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001/finger5.L.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001/finger5.L.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001/finger5.L.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger1.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001/finger3.L.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001/finger3.L.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001/finger3.L.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger3.L/finger3.L.001/finger3.L.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R
+/Environment/HangarShip/ShipSupportBeams.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001/finger5.R.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001/finger5.R.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001/finger5.R.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001/finger5.R.001_end
+/Environment/HangarShip/ShipRailPosts
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R/finger4.R.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R
+/Environment/HangarShip/Cube.005
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001/finger5.R.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001/finger5.R.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001/finger5.R.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger5.R/finger5.R.001/finger5.R.001_end
+/Environment/HangarShip/ScavengerModelSuitParts/Circle.004
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower/hand.R/finger4.R
+/Environment/HangarShip/LightSwitchContainer/LightSwitch/Switch
+/Environment/HangarShip/ScavengerModelSuitParts/Circle.001
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001/finger2.L.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001/finger2.L.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001/finger2.L.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger2.L/finger2.L.001/finger2.L.001_end
+/Environment/HangarShip/VentEntrance/Hinge
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/heel.02.L/heel.02.L_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/heel.02.L/heel.02.L_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/heel.02.L/heel.02.L_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/heel.02.L/heel.02.L_end
+/Environment/HangarShip/ShipModels2b/ShipLightsPost/Cube.002
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001/finger4.L.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001/finger4.L.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001/finger4.L.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001/finger4.L.001_end
+/Environment/HangarShip/ShipModels2b/ShipLightsPost/Floodlight2
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001/finger4.L.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001/finger4.L.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001/finger4.L.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger4.L/finger4.L.001/finger4.L.001_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/Circle
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/Circle
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/Circle
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/Circle
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001/finger5.L.001_end
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001/finger5.L.001_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001/finger5.L.001_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L/finger5.L.001/finger5.L.001_end
+/Environment/HangarShip/ReverbTriggers
+/Environment/HangarShip/ShipModels2b/MonitorWall/Cube.001
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/toe.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/toe.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/toe.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.R/shin.R/foot.R/toe.R
+/Environment/HangarShip/Cube.006
+/Environment/HangarShip/ShipModels2b/ShipLightsPost/Cube.006
+/Environment/HangarShip/DoorGenerator
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L/finger5.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/shoulder.L/arm.L_upper/arm.L_lower/hand.L
+/Environment/HangarShip/NurbsPath.002
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/toe.L/toe.L_end
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/toe.L/toe.L_end
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/toe.L/toe.L_end
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.L/shin.L/foot.L/toe.L/toe.L_end
+/Environment/HangarShip/Cube.007
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/LeftArm
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/LeftArm
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/LeftArm
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/LeftArm
+/Environment/HangarShip/StorageCloset/Cube.000
+/Environment/HangarShip/ShipHull
+/Environment/OutOfBounds
+/BellDinger/BellDingerAnimContainer
+/StoryLogs
+/NodesAndPoints/OutsideAIPoints/OutsideNode (13)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (49)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Rig/TentacleMove
+/NodesAndPoints/OutsideAIPoints/OutsideNode (16)
+/Environment/BoundsWalls/Cube (3)
+/Environment/Map/ShippingContainers/ShippingContainer (4)
+/Environment/LightsContainer/LEDHangingLight (2)/Light
+/NodesAndPoints/OutsideAIPoints/OutsideNode (41)
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (19)/Mesh
+/NodesAndPoints/OutsideAIPoints/OutsideNode (56)
+/Environment/LightsContainer/HangingLight (13)/Mesh
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (17)/Mesh
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Armature/Bone/Bone.001
+/Environment/BoundsWalls/Cube (1)
+/Environment/Map/ShippingContainers/ShippingContainer (9)
+/Systems
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Rig/TentacleMove/Root
+/Environment/Map/CompanyPlanet/CatwalkColliders
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (17)/Light
+/NodesAndPoints/OutsideAIPoints/OutsideNode (55)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (14)
+/Environment/LightsContainer/LEDHangingLight (3)/Light
+/NodesAndPoints/OutsideAIPoints/OutsideNode (6)
+/Environment/LightsContainer/HangingLight (14)/Mesh
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Armature/Bone/Bone.001/Bone.002/Bone.003/Bone.003_end/GrabPoint
+/Systems/Audio/HighAndLowAltitudeBG
+/NodesAndPoints/OutsideAIPoints/OutsideNode (23)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Rig/GrabPlayer/GrabPlayerTarget
+/NodesAndPoints/OutsideAIPoints/OutsideNode (2)
+/Environment/LightsContainer/HangingLight (15)
+/Systems/Audio
+/Systems/LevelGeneration/DungeonGenerator
+/NodesAndPoints/OutsideAIPoints/OutsideNode (5)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (30)
+/Environment/Map/CompanyPlanet/FrontRailing/SteelCatwalkChunk (4)/LongSteelCatwalkChunk_LOD0.001/LongSteelCatwalkChunk_LOD1
+/Environment/Map/CompanyPlanet/FrontRailing/SteelCatwalkChunk (3)/LongSteelCatwalkChunk_LOD0.001/LongSteelCatwalkChunk_LOD1
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Armature/Bone/Bone.001/Bone.002/Bone.003/Bone.003_end
+/Environment/LightsContainer/HangingLight (13)
+/Environment/Map/DiageticAmbiance
+/Environment/ReverbTriggers (1)/WindTriggers
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (20)/Mesh
+/NodesAndPoints/OutsideAIPoints/OutsideNode (40)
+/DepositCounter/Audios
+/Environment/Map/ShippingContainers/ShippingContainer (3)
+/Environment/LightsContainer/HangingLight (15)/Mesh
+/Environment/Lighting/BrightDay/Sun
+/Systems/Audio/Music1
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Armature/Bone
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Armature/Bone/Bone.001/Bone.002/Bone.003/Bone.003_end/GrabPoint
+/Environment/Map/CompanyPlanet/Cylinder.004 (1)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (43)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (11)
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (19)/Light
+/Environment/LightsContainer/LEDHangingLight (1)/Light
+/Environment/LightsContainer/DrillPlatformLights
+/CompanyMonstersAnims
+/Environment/Map/ShippingContainers/ShippingContainer (8)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Rig/GrabPlayer
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Rig
+/Systems/Audio/HighAndLowAltitudeBG/LowAudio
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Rig/TentacleMove/Root
+/Environment/LightsContainer/HangingLight (13)/Light
+/Systems/Audio/Music2
+/NodesAndPoints/OutsideAIPoints/OutsideNode (4)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (28)
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (18)/Mesh
+/StaticLightingSky
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Rig/TentacleMove/Tip
+/NodesAndPoints/OutsideAIPoints/OutsideNode (26)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (10)
+/DepositCounter/TinyCamera (1)
+/DepositCounter/Music
+/Environment/Map/CompanyPlanet/FrontRailing
+/NodesAndPoints/OutsideAIPoints/OutsideNode (37)
+/Environment/Lighting/BrightDay/Sun/SunAnimContainer/Indirect
+/Environment/NavMeshColliders/Modifiers
+/Environment/Map/CompanyPlanet/Cube.003/Colliders
+/NodesAndPoints/OutsideAIPoints/OutsideNode (35)
+/Systems/AudioReverbPresets
+/Environment/Map/ShippingContainers/ShippingContainer (7)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (54)
+/Cube
+/Environment/Map/CompanyPlanet/FrontRailing/SteelCatwalkChunk (3)/LongSteelCatwalkChunk_LOD0.001
+/Environment/Lighting/Misc
+/Environment/BoundsWalls/Cube
+/Environment/Map/CompanyPlanet/FrontRailing/SteelCatwalkChunk (6)/LongSteelCatwalkChunk_LOD0.001
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (16)/Mesh
+/Systems/NavMesh
+/Environment/Map
+/Environment/Map/CompanyPlanet/Cylinder.001 (1)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (18)
+/Environment/AnomalySpawnZones
+/NodesAndPoints/OutsideAIPoints/OutsideNode (32)
+/Environment/AnomalySpawnZones/Cube (1)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (53)
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (16)/Light
+/Systems/LevelGeneration/LevelGenerationRoot
+/NodesAndPoints/OutsideAIPoints/OutsideNode (29)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Rig/TentacleMove
+/NodesAndPoints/OutsideAIPoints/OutsideNode (39)
+/Systems/Audio/WaterSFX
+/DepositCounter/Light/Spot Light
+/Systems/FoliageLowDetail
+/Environment/Map/DrillWallMark
+/Environment/Map/CompanyPlanet/FrontRailing/SteelCatwalkChunk (5)/LongSteelCatwalkChunk_LOD0.001/LongSteelCatwalkChunk_LOD1
+/NodesAndPoints/OutsideAIPoints/OutsideNode (8)
+/Environment/Teleports
+/Environment/Map/CompanyPlanet/Cylinder.004 (4)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (52)
+/Environment/Map/CompanyPlanet/Cylinder.004 (3)
+/Environment/Map/CompanyPlanet/FrontRailing/SteelCatwalkChunk (5)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (47)
+/Environment/Map/Puddles
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (21)/Light
+/NodesAndPoints/OutsideAIPoints/OutsideNode (15)
+/DepositCounter/Audios/SpeakerAudio
+/Environment/Map/CompanyPlanet/Cube/Colliders
+/NodesAndPoints/OutsideAIPoints/OutsideNode (27)
+/Systems/Audio/Steam Audio Static Mesh
+/DepositCounter
+/NodesAndPoints/OutsideAIPoints/OutsideNode (59)
+/Environment/Lighting/BrightDay/Sun/SunAnimContainer/Sky and Fog Global Volume
+/Environment/Map/OutOfBoundsColliders
+/Environment/Map/CompanyPlanet/Cube.003 (2)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (3)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (22)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (60)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (17)
+/Environment/NavMeshColliders
+/NodesAndPoints/OutsideAIPoints/OutsideNode (34)
+/Systems/Rendering
+/Environment/LightsContainer/LEDHangingLight (4)/Light
+/NodesAndPoints/OutsideAIPoints/OutsideNode (20)
+/Environment/LightsContainer/HangingLight (14)/Light
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Rig/TentacleMove/Target
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Rig/GrabPlayer/Root
+/NodesAndPoints/OutsideAIPoints/OutsideNode (46)
+/Environment/LightsContainer/HangingLight (14)
+/Systems/Audio/HighAndLowAltitudeBG/HighAudio
+/Environment/LightsContainer
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Rig/GrabPlayer/GrabPlayerTarget
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2
+/Environment/OutOfBounds/KillTrigger (1)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (57)
+/NodesAndPoints
+/Environment/Interactables
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Rig/GrabPlayer/Tip
+/NodesAndPoints/OutsideAIPoints/OutsideNode (33)
+/Environment/Map/CompanyPlanet/FrontRailing/SteelCatwalkChunk (5)/LongSteelCatwalkChunk_LOD0.001
+/Environment/Map/ShippingContainers/ShippingContainer (2)
+/Environment/Map/CompanyPlanet/FrontRailing/SteelCatwalkChunk (4)
+/Systems/LevelGeneration
+/Environment/BoundsWalls/Cube (2)
+/Environment/Map/ShippingContainers/ShippingContainer (5)
+/Environment/AnomalySpawnZones/Cube
+/DepositCounter/Light/Spot Light (1)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Rig/GrabPlayer
+/Systems/Rendering/OcclusionAreas/OcclusionArea (1)
+/Environment/Map/ShippingContainers/ShippingContainer (10)
+/DepositCounter/Audios/WindowAudio
+/NodesAndPoints/OutsideAIPoints/OutsideNode (24)
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (17)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Rig/TentacleMove/Tip
+/Environment/Map/DiageticAmbiance/BigMachine
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (21)/Mesh
+/Environment/Cutscenes
+/Environment/Map/CompanyPlanet/Cube.003 (1)
+/Systems/Audio/DiageticBackground
+/Environment/Map/CompanyPlanet/FrontRailing/SteelCatwalkChunk (4)/LongSteelCatwalkChunk_LOD0.001
+/CompanyMonstersAnims/TentacleAnimContainer
+/Environment/BoundsWalls
+/NodesAndPoints/OutsideAIPoints/OutsideNode (31)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (44)
+/NodesAndPoints/OutsideAIPoints/OutsideNode
+/Environment/Map/CompanyPlanet/Cylinder.004 (2)
+/DepositCounter/SpeakerBox
+/Systems/Audio/MachineAmbience
+/NodesAndPoints/OutsideAIPoints/OutsideNode (42)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (25)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Armature/Bone/Bone.001/Bone.002/Bone.003
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill
+/Canvas
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Rig/GrabPlayer/Root
+/Plane
+/Environment/ScanNodes
+/NodesAndPoints/OutsideAIPoints/OutsideNode (51)
+/Environment/Map/ShippingContainers/ShippingContainer (1)
+/Environment/Map/CompanyPlanet/FrontRailing/SteelCatwalkChunk (6)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Rig/GrabPlayer/Tip
+/Systems/Rendering/OcclusionAreas
+/NodesAndPoints/OutsideAIPoints/OutsideNode (19)
+/Environment/Props/Local
+/Environment/Lighting/BrightDay/Sun/SunAnimContainer
+/Environment/Map/CompanyPlanet/TrapDoor/BottomCoverCollider
+/NodesAndPoints/OutsideAIPoints/OutsideNode (48)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Armature
+/Environment/Map/CompanyPlanet/FrontRailing/SteelCatwalkChunk (6)/LongSteelCatwalkChunk_LOD0.001/LongSteelCatwalkChunk_LOD1
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (21)
+/Environment/Map/ShippingContainers/ShippingContainer (6)
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (20)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (50)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (9)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (21)
+/DepositCounter/Audios/WallAudio
+/Environment/Lighting/BrightDay
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Armature/Bone/Bone.001/Bone.002
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (19)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (12)
+/NodesAndPoints/OutsideAIPoints
+/Canvas/Text (TMP)
+/DepositCounter/Audios/ConstantWallAudio
+/Environment/Map/CompanyPlanet/Cylinder.001 (2)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Rig/TentacleMove/Target
+/Environment/MapPropsContainer
+/Environment/Lighting
+/Environment/Lighting/BrightDay/Sun/SunAnimContainer/SunWithShadows
+/Environment/Interactables/Ladder1.5x (2) Tall/LadderMesh (2)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (7)
+/Environment/Test
+/Environment/Map/CompanyPlanet/Grid (1)
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (16)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Rig
+/NodesAndPoints/OutsideAIPoints/OutsideNode (58)
+/Environment/LightsContainer/HangingLight (15)/Light
+/DepositCounter/Audios/DeskAudio
+/Environment/Props
+/NodesAndPoints/OutsideAIPoints/OutsideNode (36)
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (20)/Light
+/Environment
+/DepositCounter/DoorAndHookAnim/DepositCounterDoor (1)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (45)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (38)
+/NodesAndPoints/OutsideAIPoints/OutsideNode (1)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/BezierCurve
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (18)
+/Environment/Map/ShippingContainers
+/Environment/Map/CompanyPlanet/FrontRailing/SteelCatwalkChunk (3)
+/Environment/LightsContainer/DrillPlatformLights/HangingLight (18)/Light
+/Environment/Map/CompanyPlanet/SteelCatwalkChunk
+/Environment/Map/GiantDrill/PullCordArmature/Bone/Bone.001/Bone.002/Bone.003
+/Environment/Map/CompanyPlanet/LargePipeSupportBeam.006
+/Environment/Map/CompanyPlanet/LargePipeSupportBeam.004
+/Environment/Map/CompanyPlanet/CatwalkStairTile
+/DepositCounter/Light
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Armature
+/Environment/Map/Puddles/Puddle2
+/Environment/Map/CompanyPlanet/Cube
+/Environment/Map/CompanyPlanet/Cylinder.004
+/DepositCounter/DoorAndHookAnim/GiantHook
+/Environment/LightsContainer/LEDHangingLight (3)
+/Environment/Map/CompanyPlanet
+/Environment/LightsContainer/LEDHangingLight (1)
+/Environment/LightsContainer/LEDHangingLight (4)
+/Environment/Props/MiscProps3
+/Environment/LightsContainer/LEDHangingLight (2)
+/Environment/Map/CompanyPlanet/Scaffolding.002
+/Environment/Map/CompanyPlanet/CatwalkChunk
+/Environment/Map/ShippingContainers/ShippingContainer
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitchCordBone2
+/Environment/Map/GiantDrill/DrillMainBody/DrillHeadSpinner
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitchCordBone1
+/Environment/Map/CompanyPlanet/Grid
+/Environment/Map/CompanyPlanet/Elbow Joint.002
+/Environment/Map/GiantDrill/PullCordArmature
+/Environment/Map/CompanyPlanet/Cube.003
+/Systems/ItemShipAnimContainer/ItemShip/Star/ChristmasLights
+/Environment/Map/CompanyPlanet/Cylinder.002
+/Environment/Map/CompanyPlanet/Scaffolding
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitchCordBone1/Bone
+/Environment/Map/CompanyPlanet/Cylinder.005
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitchCordBone1/Bone/Bone.001/Bone.002
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Armature/Bone/Bone.001/Bone.002
+/Environment/Map/GiantDrill/PullCordArmature/Bone/Bone.001/Bone.002/Bone.003/Bone.004
+/Environment/Map/CompanyPlanet/LargePipeSupportBeam.005
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitchCordAnimated1
+/Environment/Map/CompanyPlanet/Elbow Joint.001
+/Environment/Map/CompanyPlanet/LargePipeSupportBeam.003
+/BellDinger
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Armature/Bone/Bone.001/Bone.002/Bone.003/Bone.003_end
+/Environment/Map/CompanyPlanet/Cylinder
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitchCordBone1/Bone/Bone.001/Bone.002/Bone.002_end
+/Environment/Map/Puddles/Puddle3
+/Environment/Map/GiantDrill/PullCordArmature/Bone/Bone.001/Bone.002/Bone.003/Bone.004/Bone.005
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Armature/Bone
+/Environment/Map/CompanyPlanet/Scaffolding.001
+/Environment/Map/GiantDrill/PullCordArmature/Bone
+/Systems/ItemShipAnimContainer/ItemShipLandingPosition
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitchCordBone1/Bone/Bone.001
+/Environment/Map/CompanyPlanet/LargePipeSupportBeam.002
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitchCordBone2/Bone.003
+/Environment/Map/GiantDrill/PullCordArmature/Bone/Bone.001/Bone.002
+/Environment/Map/CompanyPlanet/LargePipeSupportBeam
+/Systems/ItemShipAnimContainer/ItemShip/ItemSpawnPositions
+/Systems/ItemShipAnimContainer/ItemShip/ItemSpawnPositions/DropshipSpawn (3)
+/Systems/ItemShipAnimContainer/ItemShip/ItemSpawnPositions/DropshipSpawn (1)
+/Systems/ItemShipAnimContainer/ItemShip/ItemSpawnPositions/DropshipSpawn (2)
+/Systems/ItemShipAnimContainer/ItemShip/ItemSpawnPositions/DropshipSpawn
+/Systems/ItemShipAnimContainer
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Armature/Bone/Bone.001/Bone.002/Bone.003
+/Environment/Map/CompanyPlanet/SteelCatwalkChunk/LongSteelCatwalkChunk_LOD0.001
+/Environment/Map/CompanyPlanet/SteelCatwalkChunk/LongSteelCatwalkChunk_LOD0.001/LongSteelCatwalkChunk_LOD1
+/Systems/ItemShipAnimContainer/ItemShip/Star/ChristmasLights/ChristmasLightsLOD1
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitchCordAnimated2
+/Environment/Map/GiantDrill/PullCordArmature/Bone/Bone.001
+/Environment/Map/GiantDrill/PullCordArmature/Bone/Bone.001/Bone.002/Bone.003/Bone.004/Bone.005/Bone.006
+/Systems/ItemShipAnimContainer/ItemShip/Star
+/Environment/Map/GiantDrill/DrillMainBody
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitchCordBone2/Bone.003/Bone.004/Bone.005/Bone.005_end
+/Environment/Map/GiantDrill/PullCord
+/Systems/ItemShipAnimContainer/ItemShip/Star/Cylinder
+/Environment/Map/GiantDrill/SteelBolt
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitchCordBone2/Bone.003/Bone.004
+/Environment/Map/CompanyPlanet/Cube.005
+/Environment/Map/CompanyPlanet/CatwalkChunk.001
+/Environment/Map/Puddles/Puddle
+/Environment/Interactables/Ladder1.5x (2) Tall
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/BezierCurve
+/Environment/Map/CompanyPlanet/LargePipeSupportBeam.007
+/Environment/Map/GiantDrill/PumpCord
+/BellDinger/BellDingerAnimContainer/Stand
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Armature/Bone/Bone.001
+/Environment/Map/GiantDrill
+/BellDinger/BellDingerAnimContainer/BellTop
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitchCordBone2/Bone.003/Bone.004/Bone.005
+/Environment/Map/CompanyPlanet/Cube.002
+/Environment/Map/GiantDrill/PumpCordBroken
+/Environment/Map/GiantDrill/DrillMainBody/BackTrunkLid
+/Environment/Map/Puddles/Puddle3 (1)
+/Environment/Map/Puddles/Puddle3 (2)
+/Environment/Map/CompanyPlanet/Cylinder.001
+/Environment/Map/CompanyPlanet/LargePipeSupportBeam.001
+/Environment/Map/GiantDrill/PullCordArmature/Bone/Bone.001/Bone.002/Bone.003/Bone.004/Bone.005/Bone.006/Bone.007/Bone.007_end
+/Environment/Map/CompanyPlanet/Cylinder.003
+/Environment/ReverbTriggers (1)
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitch/LeverSwitchHandle
+/Environment/Map/CompanyPlanet/LeverSwitchCordStatic
+/Environment/Map/GiantDrill/PullCordArmature/Bone/Bone.001/Bone.002/Bone.003/Bone.004/Bone.005/Bone.006/Bone.007
+
+SWAP
+- Cameras that see layer 0-------------------------------------
+Mask: 1
+Cull: 100110000000001101001001 /Environment/HangarShip/Cameras/FrontDoorSecurityCam/SecurityCamera
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 110000000001101001001 /Environment/HangarShip/Cameras/ShipCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 1-------------------------------------
+
+SWAP
+- Cameras that see layer 1-------------------------------------
+Mask: 10
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 2-------------------------------------
+
+SWAP
+- Cameras that see layer 2-------------------------------------
+Mask: 100
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 3-------------------------------------
+/PlayersContainer/Player (2)/CopyHeldProp
+/PlayersContainer/Player (3)/CopyHeldProp
+/PlayersContainer/Player (1)/CopyHeldProp
+/Environment/HangarShip/Player/CopyHeldProp
+/PlayersContainer/Player (1)/Misc/LineOfSightPivot
+/PlayersContainer/Player (3)/Misc/LineOfSightPivot
+/PlayersContainer/Player (2)/Misc/LineOfSightPivot
+/Environment/HangarShip/Player/Misc/LineOfSightPivot
+/Environment/HangarShip/Player/TurnCompass
+/PlayersContainer/Player (1)/TurnCompass
+/PlayersContainer/Player (3)/TurnCompass
+/PlayersContainer/Player (2)/TurnCompass
+/PlayersContainer/Player (1)
+/PlayersContainer/Player (3)
+/PlayersContainer/Player (2)
+/Environment/HangarShip/Player
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArmClipboard/ArmsRightArm_target
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArmClipboard/ArmsRightArm_target
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArmClipboard/ArmsRightArm_target
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArmClipboard/ArmsRightArm_target
+/Environment/HangarShip/Player/PlayerNameCanvas/Text (TMP)
+/Environment/HangarShip/Player/Audios
+/PlayersContainer/Player (1)/Audios
+/PlayersContainer/Player (3)/Audios
+/PlayersContainer/Player (2)/Audios
+/PlayersContainer/Player (1)/Audios/StatusEffectAudio
+/PlayersContainer/Player (3)/Audios/StatusEffectAudio
+/PlayersContainer/Player (2)/Audios/StatusEffectAudio
+/PlayersContainer/Player (1)/NightVision
+/PlayersContainer/Player (3)/NightVision
+/PlayersContainer/Player (2)/NightVision
+/Environment/HangarShip/Player/NightVision
+/Environment/HangarShip/Player/Misc/ParticleEffects
+/PlayersContainer/Player (3)/Misc/ParticleEffects
+/PlayersContainer/Player (1)/Misc/ParticleEffects
+/PlayersContainer/Player (2)/Misc/ParticleEffects
+/Environment/HangarShip/Player/Audios/MovementAudio
+/PlayersContainer/Player (2)/Audios/MovementAudio
+/PlayersContainer/Player (3)/Audios/MovementAudio
+/PlayersContainer/Player (1)/Audios/MovementAudio
+/Environment/HangarShip/Player/Misc/ParticleEffects/BeamOutRedBuildup
+/PlayersContainer/Player (3)/Misc/ParticleEffects/BeamOutRedBuildup
+/PlayersContainer/Player (1)/Misc/ParticleEffects/BeamOutRedBuildup
+/PlayersContainer/Player (2)/Misc/ParticleEffects/BeamOutRedBuildup
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArm/ArmsRightArm_target
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArm/ArmsRightArm_target
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArm/ArmsRightArm_target
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/RightArm/ArmsRightArm_target
+/JetpackTurnCompass
+/JetpackTurnCompass
+/JetpackTurnCompass
+/JetpackTurnCompass
+/Environment/HangarShip/Player/Audios/ItemAudio
+/PlayersContainer/Player (2)/Audios/ItemAudio
+/PlayersContainer/Player (3)/Audios/ItemAudio
+/PlayersContainer/Player (1)/Audios/ItemAudio
+/Environment/HangarShip/Player/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/LeftArm/ArmsLeftArm_target
+/PlayersContainer/Player (2)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/LeftArm/ArmsLeftArm_target
+/PlayersContainer/Player (3)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/LeftArm/ArmsLeftArm_target
+/PlayersContainer/Player (1)/ScavengerModel/metarig/ScavengerModelArmsOnly/metarig/spine.003/RigArms/LeftArm/ArmsLeftArm_target
+/Environment/HangarShip/Player/SmoothLookTurnCompass
+/PlayersContainer/Player (1)/SmoothLookTurnCompass
+/PlayersContainer/Player (3)/SmoothLookTurnCompass
+/PlayersContainer/Player (2)/SmoothLookTurnCompass
+/Environment/HangarShip/Player/Misc
+/PlayersContainer/Player (2)/Misc
+/PlayersContainer/Player (3)/Misc
+/PlayersContainer/Player (1)/Misc
+/PlayersContainer/Player (2)/Misc/ParticleEffects/BeamOutRed
+/PlayersContainer/Player (3)/Misc/ParticleEffects/BeamOutRed
+/PlayersContainer/Player (1)/Misc/ParticleEffects/BeamOutRed
+/Environment/HangarShip/Player/Misc/ParticleEffects/BeamOutRed
+/Environment/HangarShip/Player/Misc/ParticleEffects/BeamUp
+/PlayersContainer/Player (2)/Misc/ParticleEffects/BeamUp
+/PlayersContainer/Player (1)/Misc/ParticleEffects/BeamUp
+/PlayersContainer/Player (3)/Misc/ParticleEffects/BeamUp
+/PlayersContainer/Player (3)/PlayerEye
+/PlayersContainer/Player (1)/PlayerEye
+/PlayersContainer/Player (2)/PlayerEye
+/Environment/HangarShip/Player/PlayerEye
+/Environment/HangarShip/Player/PlayerNameCanvas
+
+SWAP
+- Cameras that see layer 3-------------------------------------
+Mask: 1000
+Cull: 100110000000001101001001 /Environment/HangarShip/Cameras/FrontDoorSecurityCam/SecurityCamera
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 110000000001101001001 /Environment/HangarShip/Cameras/ShipCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 4-------------------------------------
+
+SWAP
+- Cameras that see layer 4-------------------------------------
+Mask: 10000
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 5-------------------------------------
+/Systems/UI/Canvas/IngamePlayerHUD/Tutorials/ShockMinigame/ArrowRight
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot3/Notes
+/Systems/UI/Canvas/IngamePlayerHUD/BottomLeftCorner/ChatText
+/Systems/UI/Canvas/Panel
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container
+/Systems/UI/Canvas/EndgameStats/Penalty/Header
+/Systems/UI/Canvas/IngamePlayerHUD/Tutorials/ShockMinigame/ArrowRight/Image (1)
+/Systems/UI/Canvas/IngamePlayerHUD/BottomLeftCorner
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/RedGlowBodyParts/Side
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box1Container/Header
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot2/PlayerName2
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box2Container/Item/AnimContainer/MeshContainer
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot4
+/Systems/UI/Canvas/IngamePlayerHUD/ProfitQuota/Container/Box
+/Systems/UI/Canvas/IngamePlayerHUD/BottomLeftCorner/Image
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/BloodTex/Image (2)
+/Systems/UI/Canvas/GameOverScreen/DarkenScreen (1)
+/Systems/UI/Canvas/ObjectScanner/GlobalScanInfo/AnimContainer/Image
+/Systems/UI/Canvas/HudBaseRotation
+/Systems/UI/Canvas/SpecialGraphics/Misc/SignalTransmission/SignalAnimContainer
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box3Container/Item/AnimContainer/MeshContainer/HandBell
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot3/PlayerName3
+/Systems/UI/Canvas/DeathScreen/SpectateUI/EndGameEarly/Meter/Fill
+/Systems/UI/Canvas/IngamePlayerHUD/Inventory
+/Systems/UI/Canvas/IngamePlayerHUD/Tutorials/ShockMinigame/ArrowRight/Image
+/Systems/UI/Canvas/DeathScreen/SpectateUI/EndGameEarly/Header
+/Systems/GameSystems/PlayersManager / HUDManager
+/Systems/UI/Canvas/DeathScreen/TextTransition/TextTransition (2)
+/Systems/Rendering/ScanSphere/ScanVolume
+/Systems/UI/Canvas/DebugMessagesPanel
+/Systems/UI/Canvas/ObjectScanner
+/Systems/UI/Canvas/DeathScreen/SpectateUI/EndGameEarly
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/GlobalNotification/Image
+/Systems/UI/Canvas/IngamePlayerHUD/Tutorials/ShockMinigame
+/Systems/UI/Canvas/EndgameStats
+/Systems/UI/Canvas/IngamePlayerHUD/Inventory/Slot3
+/Systems/UI/Canvas/IngamePlayerHUD/Inventory/Slot2/icon (1)
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box1Container/Item
+/Systems/UI/Canvas/SpecialGraphics/Misc/SignalTransmission/SignalAnimContainer/SignalBG
+/Systems/UI/Canvas/DialogueBox/Text (TMP) (1)
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/HintPanelContainer/Image
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot3/Symbol
+/Systems/UI/Canvas/LoadingText/LoadText
+/Systems/UI/Canvas/IngamePlayerHUD/ProfitQuota/Container
+/Systems/UI/Canvas/SpecialGraphics/SavingIcon/SaveIcon
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot3
+/Systems/UI/Canvas/EndgameStats/Text/AllDead
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot4/Notes
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/PointTotalsContainer
+/Systems/UI/Canvas/IngamePlayerHUD/TopRightCorner/ControlTip2
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot1/Symbol
+/Systems/UI/Canvas/EndgameStats/Penalty/DividingLine
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RadiationIncrease/Panel
+/Systems/UI/Canvas/DeathScreen/SpectateUI
+/Systems/UI/Canvas/SpecialGraphics/Misc/ShipAlarmHorn
+/Systems/UI/Canvas/DialogueBox/Text (TMP)
+/Systems/UI/Canvas/EndgameStats/Penalty/PointTotalsContainer
+/Systems/UI/Canvas/Panel/GameObject/PlayerScreen
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/BloodTex
+/Systems/UI/Canvas/DeathScreen
+/Systems/UI/Canvas/GameOverScreen/DarkenScreen (2)
+/Systems/UI/Canvas/IngamePlayerHUD/TopRightCorner/ControlTip3
+/Systems/UI/Canvas/EndgameStats/BGBoxes
+/Systems/UI/Canvas/HelmetStatusEffects/GasInHelmet/Image (1)
+/Systems/UI/Canvas/EndgameStats/Lines
+/Systems/UI/Canvas/IngamePlayerHUD/TopRightCorner
+/Systems/UI/Canvas/EndgameStats/LevelUp/Image/Header
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot1/PlayerName1
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/CriticalInjury/CriticalHealthVolume
+/Systems/UI/Canvas/DialogueBox/HeaderBox
+/Systems/UI/Canvas/IngamePlayerHUD/ProfitQuota/Container/Box/Image
+/Systems/UI/Canvas/SpecialGraphics/Misc/SignalTransmission/SignalAnimContainer/SignalText
+/Systems/UI/Canvas/PlayerCursor
+/Systems/UI/Canvas/IngamePlayerHUD/BottomRightCorner/InstabilityCounterText
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box1Container/Frame
+/Systems/UI/Canvas/PlayerCursor/HoldInteraction/MeterOutline
+/Systems/UI/Canvas/GameOverScreen/MaskImage/HeaderText (1)
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/HintPanelContainer/Image/Header
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/CriticalInjury
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/PointTotalsContainer/Scroll View/Scrollbar Vertical/Sliding Area
+/Systems/UI/Canvas/GameOverScreen/MaskImage/HeaderText
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box3Container/Item/AnimContainer
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box2Container/Item/AnimContainer/MeshContainer/HandBell
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box2Container/Value
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/PointTotalsContainer/Scroll View/Viewport/Content
+/Systems/UI/Canvas/ObjectScanner/GlobalScanInfo/AnimContainer
+/Systems/UI/Canvas/IngamePlayerHUD/BottomMiddle
+/Systems/UI/Canvas/SpecialGraphics/SystemNotification
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/PointTotalsContainer/Scroll View/Scrollbar Vertical
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/PointTotalsContainer/Scroll View/Scrollbar Vertical/Sliding Area/Handle
+/Systems/UI/Canvas/SpecialGraphics/Misc
+/Systems/UI/Canvas/IngamePlayerHUD/BottomRightCorner
+/Systems/UI/Canvas/EndgameStats/LevelUp/LevelUpBox
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot2
+/Systems/UI/Canvas/LoadingText/DarkenScreen
+/Systems/UI/Canvas/PlayerCursor/Cursor
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/RedGlowBodyParts/Leg
+/Systems/UI/Canvas/EndgameStats/Penalty/PointTotalsContainer/Total
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/PointTotalsContainer/Scroll View
+/Systems/UI/Canvas/IngamePlayerHUD/Tutorials/ShockMinigame/ArrowLeft/Image (1)
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box3Container/Value
+/Systems/UI/Canvas/IngamePlayerHUD/BottomMiddle/ChatIndicator
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/HintPanelContainer
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RadiationIncrease
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/PointTotalsContainer/Total
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box3Container/Item
+/Systems/UI/Canvas/IngamePlayerHUD/Tutorials/PlacingObjectTip
+/Systems/UI/Canvas/IngamePlayerHUD/OpenEyes
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/HintPanelContainer/Image/BodyText
+/Systems/UI/Canvas/IngamePlayerHUD/BottomMiddle/PlayersTooFarText
+/Systems/UI/Canvas/EndgameStats/Penalty/Image
+/Systems/UI/Canvas/ObjectScanner/GlobalScanInfo/AnimContainer/Image/TotalNum
+/Systems/UI/Canvas/IngamePlayerHUD/BottomLeftCorner/InputField (TMP)/Text Area
+/Systems/UI/Canvas/DeathScreen/TextTransition/TextTransition (1)
+/Systems/UI/Canvas/ObjectScanner/GlobalScanInfo
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box1Container/Item/AnimContainer/MeshContainer
+/Systems/UI/Canvas/HelmetStatusEffects/GasInHelmet/Image
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box3Container
+/Systems/UI/Canvas/IngamePlayerHUD/Tutorials/ShockMinigame/ArrowLeft
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot2/Notes
+/Systems/UI/Canvas/DeathScreen/SpectateUI/PlayerIcons
+/Systems/UI/Canvas/EndgameStats/Penalty/Image (1)
+/Systems/UI/Canvas/EndgameStats/Penalty
+/Systems/UI/Canvas/SpecialGraphics/SinkingUnderCover/BlackCover
+/Systems/UI/Canvas/SpecialGraphics/SinkingUnderCover
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot4/PlayerName4
+/Systems/UI/Canvas/IngamePlayerHUD/BottomLeftCorner/InputField (TMP)
+/Systems/UI/Canvas/EndgameStats/Text/HeaderText
+/Systems/UI/Canvas
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box1Container
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/RedGlowBodyParts
+/Systems/GameSystems/PlayersManager / HUDManager/animator
+/Systems/UI/Canvas/DialogueBox/HeaderBox (1)
+/Systems/UI/Canvas/IngamePlayerHUD/TopRightCorner/ControlTip1
+/Systems/UI/Canvas/IngamePlayerHUD/BottomLeftCorner/InputField (TMP)/Text Area/Text
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/PointTotalsContainer/Scroll View/Viewport
+/Systems/UI/Canvas/IngamePlayerHUD/TopRightCorner/ControlTip4
+/Systems/UI/Canvas/SpecialGraphics/SavingIcon/Text (TMP)
+/Systems/UI/Canvas/EndgameStats/LevelUp
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot1/Notes
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot2/Symbol
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/CinematicGraphics
+/Systems/UI/Canvas/LoadingText
+/Systems/UI/Canvas/HelmetStatusEffects/GasInHelmet
+/Systems/UI/Canvas/IngamePlayerHUD
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box1Container/BG
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/SprintMeter
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/Self
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/PointTotalsContainer/Scroll View/Viewport/Content/PointAdditions
+/Systems/UI/Canvas/DeathScreen/SpectateUI/TipText
+/Systems/UI/Canvas/HelmetStatusEffects
+/Systems/UI/Canvas/EndgameStats/LevelUp/Image (2)
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box3Container/Frame
+/Systems/UI/Canvas/EndgameStats/Text
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box2Container/BG
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box2Container/Header
+/Systems/UI/Canvas/IngamePlayerHUD/BottomMiddle/PTTIcon
+/Systems/UI/Canvas/Panel/GameObject
+/Systems/UI/Canvas/GameOverScreen/MaskImage/SubText
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box2Container/Item
+/Systems/UI/Canvas/DeathScreen/GameOverText
+/Systems/UI/Canvas/SpecialGraphics/Misc/ShipAlarmHorn/Image
+/Systems/UI/Canvas/EndgameStats/Text/QuotaNumerator
+/Systems/UI/Canvas/IngamePlayerHUD/HandsFullText
+/Systems/UI/Canvas/IngamePlayerHUD/ProfitQuota/Container/Box/TimeNumber
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/WeightUI/Weight
+/Systems/UI/Canvas/IngamePlayerHUD/Inventory/Slot2
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/GlobalNotification/Image/BodyText
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/CriticalInjury/TipLeft1
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/Batteries
+/Systems/UI/Canvas/IngamePlayerHUD/ProfitQuota/ShipLeavingIcon
+/Systems/UI/Canvas/EndgameStats/Penalty/PointTotalsContainer/PointAdditions
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box3Container/Header
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/Header
+/Systems/UI/Canvas/IngamePlayerHUD/Tutorials
+/Systems/UI/Canvas/IngamePlayerHUD/Inventory/Slot0/icon
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/DividingLine
+/Systems/UI/Canvas/GameOverScreen
+/Systems/UI/Canvas/IngamePlayerHUD/Inventory/Slot0
+/Systems/UI/Canvas/EndgameStats/LevelUp/Image
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/Image
+/Systems/UI/Canvas/IngamePlayerHUD/Inventory/Slot1/icon
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/RedGlowBodyParts/Head
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/StatusEffects
+/Systems/UI/Canvas/DeathScreen/SpectateUI/Spectating
+/Systems/UI/Canvas/IngamePlayerHUD/ProfitQuota
+/Systems/UI/Canvas/SpecialGraphics/SystemNotification/SystemNotificationText
+/Systems/UI/Canvas/SpecialGraphics/SavingIcon
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/RedGlowBodyParts/ChestBurster
+/Systems/UI/Canvas/EndgameStats/Text/QuotaDenominator
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box1Container/Value
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/BloodTex/Image
+/Systems/UI/Canvas/EndgameStats/LevelUp/Header (1)
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box2Container
+/Systems/UI/Canvas/SpecialGraphics/Misc/SignalTransmission
+/Systems/UI/Canvas/SpecialGraphics
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/Image (1)
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box2Container/Item/AnimContainer
+/Systems/UI/Canvas/EndgameStats/LevelUp/Total
+/Systems/UI/Canvas/EndgameStats/LevelUp/LevelUpMeter
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2
+/Systems/UI/Canvas/DeathScreen/TextTransition
+/Systems/UI/Canvas/IngamePlayerHUD/TopRightCorner/Image
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box3Container/Item/AnimContainer/MeshContainer
+/Systems/UI/Canvas/SpecialGraphics/ProfitQuotaMet
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/StatusEffects/StatusEffectText
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot1
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box1Container/Item/AnimContainer
+/Systems/UI/Canvas/IngamePlayerHUD/Inventory/Slot3/icon (1)
+/Systems/UI/Canvas/GameOverScreen/MaskImage
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/GlobalNotification
+/Systems/UI/Canvas/SpecialGraphics/Misc/SignalTransmission/SignalAnimContainer/SignalText (1)
+/Systems/UI/Canvas/IngamePlayerHUD/BottomRightCorner/CounterNumber
+/Systems/UI/Canvas/SpecialGraphics/SystemNotification/SystemNotificationText/Image
+/Systems/UI/Canvas/DeathScreen/SpectateUI/EndGameEarly/Votes
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/RewardsScreen/Container/Container2/Image/ReflectiveShine
+/Systems/UI/Canvas/IngamePlayerHUD/TopRightCorner/DebugText
+/Systems/UI/Canvas/DeathScreen/SpectateUI/EndGameEarly/Meter/Fill/Frame
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box2Container/Frame
+/Systems/UI/Canvas/IngamePlayerHUD/Tutorials/ShockMinigame/ArrowLeft/Image
+/Systems/UI/Canvas/DialogueBox
+/Systems/UI/Canvas/PlayerCursor/HoldInteraction
+/Systems/UI/Canvas/PlayerCursor/InteractText
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/SelfRed
+/Systems/UI/Canvas/IngamePlayerHUD/BottomLeftCorner/InputField (TMP)/Text Area/Placeholder
+/Systems/UI/Canvas/ObjectScanner/GlobalScanInfo/AnimContainer/Image/TotalText
+/Systems/UI/Canvas/IngamePlayerHUD/Global Volume (1)
+/Systems/UI/Canvas/PlayerCursor/HoldInteraction/MeterFill
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box3Container/BG
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/Batteries/BatteryIcon
+/Systems/UI/Canvas/DeathScreen/SpectateUI/EndGameEarly/Meter
+/Systems/UI/Canvas/SpecialGraphics/Misc/SignalTransmission/SignalAnimContainer/SignalText (2)
+/Systems/UI/Canvas/DeathScreen/TextTransition/TextTransition (3)
+/Systems/UI/Canvas/IngamePlayerHUD/Inventory/Slot1
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo
+/Systems/UI/Canvas/EndgameStats/Text/PlayerSlot4/Symbol
+/Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner/WeightUI
+/Systems/UI/Canvas/DeathScreen/TextTransition/TextTransition
+/Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/CriticalInjury/Image (1)
+/Systems/UI/Canvas/SpecialGraphics/ScrapItemInfo/Box1Container/Item/AnimContainer/MeshContainer/HandBell
+
+SWAP
+- Cameras that see layer 5-------------------------------------
+Mask: 100000
+Cull: 100000 /Systems/UI/UICamera
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 6-------------------------------------
+/Environment/HangarShip/ClipboardManual/Paper3/Bone/Bone.001
+/Environment/HangarShip/ClipboardManual/Paper1/Bone/Bone.001/Bone.002/Bone.003/Bone.004/Bone.005/Bone.005_end
+/Environment/HangarShip/ClipboardManual/Plane
+/Environment/HangarShip/ClipboardManual/Paper1/Bone/Bone.001
+/Environment/HangarShip/ClipboardManual/Paper1/Bone/Bone.001/Bone.002/Bone.003/Bone.004/Bone.005
+/Environment/HangarShip/ClipboardManual/Paper4/Bone/Bone.001/Bone.002/Bone.003/Bone.004/Bone.005/Bone.005_end
+/Environment/HangarShip/ClipboardManual/Paper4/Bone/Bone.001/Bone.002
+/Environment/HangarShip/ClipboardManual/Cube
+/Environment/HangarShip/ClipboardManual/Paper2/Bone/Bone.001/Bone.002/Bone.003/Bone.004
+/Environment/HangarShip/ClipboardManual/Paper3/Bone/Bone.001/Bone.002/Bone.003/Bone.004
+/Environment/HangarShip/ClipboardManual
+/Environment/HangarShip/ClipboardManual/Paper4/Bone
+/Environment/HangarShip/ClipboardManual/Paper2/Bone/Bone.001/Bone.002
+/Environment/HangarShip/ClipboardManual/Paper1/Bone/Bone.001/Bone.002/Bone.003/Bone.004
+/Environment/HangarShip/ClipboardManual/Paper4/Bone/Bone.001/Bone.002/Bone.003/Bone.004
+/Environment/HangarShip/ClipboardManual/Paper1/Bone/Bone.001/Bone.002
+/Environment/HangarShip/ClipboardManual/Paper1/Bone/Bone.001/Bone.002/Bone.003
+/Environment/HangarShip/ClipboardManual/Paper2/Bone
+/Environment/HangarShip/ClipboardManual/Paper3/Bone/Bone.001/Bone.002
+/Environment/HangarShip/ClipboardManual/Paper4/Bone/Bone.001
+/Environment/HangarShip/ClipboardManual/Paper2/Bone/Bone.001
+/Environment/HangarShip/ClipboardManual/Paper1
+/Environment/HangarShip/ClipboardManual/Plane.002
+/Environment/HangarShip/ClipboardManual/Paper3/Bone
+/Environment/HangarShip/ClipboardManual/Paper2
+/Environment/HangarShip/ClipboardManual/Paper1/Bone
+/Environment/HangarShip/ClipboardManual/Plane.001
+/Environment/HangarShip/ClipboardManual/Paper3/Bone/Bone.001/Bone.002/Bone.003
+/Environment/HangarShip/ClipboardManual/Paper2/Bone/Bone.001/Bone.002/Bone.003/Bone.004/Bone.005
+/Environment/HangarShip/ClipboardManual/Paper3
+/Environment/HangarShip/ClipboardManual/Paper2/Bone/Bone.001/Bone.002/Bone.003/Bone.004/Bone.005/Bone.005_end
+/Environment/HangarShip/ClipboardManual/Paper3/Bone/Bone.001/Bone.002/Bone.003/Bone.004/Bone.005
+/Environment/HangarShip/ClipboardManual/Paper4/Bone/Bone.001/Bone.002/Bone.003/Bone.004/Bone.005
+/Environment/HangarShip/ClipboardManual/Paper2/Bone/Bone.001/Bone.002/Bone.003
+/Environment/HangarShip/ClipboardManual/Paper4
+/Environment/HangarShip/StickyNoteItem
+/Environment/HangarShip/ClipboardManual/Plane.003
+/Environment/HangarShip/ClipboardManual/Paper4/Bone/Bone.001/Bone.002/Bone.003
+/Environment/HangarShip/ClipboardManual/Paper3/Bone/Bone.001/Bone.002/Bone.003/Bone.004/Bone.005/Bone.005_end
+/Environment/Props/LungApparaticePosition
+
+SWAP
+- Cameras that see layer 6-------------------------------------
+Mask: 1000000
+Cull: 100110000000001101001001 /Environment/HangarShip/Cameras/FrontDoorSecurityCam/SecurityCamera
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 110000000001101001001 /Environment/HangarShip/Cameras/ShipCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 7-------------------------------------
+/Systems/Rendering/PlayerHUDHelmetModel/ScavengerHelmet/Plane
+/Systems/Rendering/PlayerHUDHelmetModel
+/Systems/Rendering/PlayerHUDHelmetModel/ScavengerHelmet
+/PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera/HUDHelmetPosition
+/PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera/HUDHelmetPosition
+/PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera/HUDHelmetPosition
+/Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera/HUDHelmetPosition
+
+SWAP
+- Cameras that see layer 7-------------------------------------
+Mask: 10000000
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 8-------------------------------------
+/Environment/HangarShip/ClimbOntoCatwalkHelper
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorLeft (1)
+/Environment/HangarShip/Cameras/ShipCamera/VolumeMain (1)
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorRight (1)
+/Environment/HangarShip/WallInsulator2
+/Environment/HangarShip/WallInsulator
+/Systems/GameSystems/ItemSystems/MapCamera/VolumeMain (1)
+/Environment/HangarShip/Cameras/FrontDoorSecurityCam/SecurityCamera/VolumeMain (1)
+/Environment/HangarShip/StorageCloset/ObjectPlacements
+/Environment/HangarShip/CatwalkShip
+/Environment/HangarShip/ControlDesk.001
+/Environment/HangarShip/SideMachineryRight
+/Environment/HangarShip/ShipInside
+/Environment/HangarShip/ControlDesk
+/Environment/HangarShip/StorageCloset
+/Environment/HangarShip/ShipRails
+/Environment/HangarShip/ControlPanelWTexture
+/Environment/HangarShip/FileCabinet
+/Environment/Map/CompanyPlanet/Cube.003/Colliders/Cube (3)
+/Environment/Map/CompanyPlanet/Cube/Colliders/Cube (1)
+/Environment/Map/CompanyPlanet/Cube.003/Colliders/Cube (1)
+/Environment/Map/CompanyPlanet/Cube.003/Colliders/Cube (2)
+/Environment/Map/CompanyPlanet/Cube.003/Colliders/Cube (5)
+/Environment/Map/CompanyPlanet/Cube.003/Colliders/Cube
+/Environment/Map/CompanyPlanet/Cube.003/Colliders/Cube (4)
+/Environment/Map/CompanyPlanet/DrillPlatform
+/Environment/Map/GiantDrill/PumpPedestal
+/Environment/Map/GiantDrill/DrillRail
+/Environment/Map/CompanyPlanet/Scaffolding.003
+/Systems/ItemShipAnimContainer/ItemShip
+/Environment/Map/CompanyPlanet/Cube.007
+
+SWAP
+- Cameras that see layer 8-------------------------------------
+Mask: 100000000
+Cull: 100110000000001101001001 /Environment/HangarShip/Cameras/FrontDoorSecurityCam/SecurityCamera
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 100000100000000 /Systems/GameSystems/ItemSystems/MapCamera
+Cull: 110000000001101001001 /Environment/HangarShip/Cameras/ShipCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 9-------------------------------------
+/ChangableSuit(Clone)
+/ChangableSuit(Clone)
+/ChangableSuit(Clone)
+/ChangableSuit(Clone)
+/Environment/HangarShip/StorageCloset/ObjectPlacements/Cube (1)
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel/StopButton/Cube (3)
+/Environment/HangarShip/StartGameLever/playerPos
+/Environment/HangarShip/StorageCloset/ObjectPlacements/Cube (2)
+/Environment/HangarShip/LightSwitchContainer
+/Environment/HangarShip/ShipModels2b/ChargeStation/ChargeStationTrigger/Trigger/playerPos
+/Environment/HangarShip/Terminal/TerminalTrigger/TerminalScript
+/Environment/HangarShip/StorageCloset/ObjectPlacements/Cube
+/Environment/HangarShip/Terminal/TerminalTrigger/playerPos
+/Environment/HangarShip/StorageCloset/Cube.002/Cube
+/Environment/HangarShip/OutsideShipRoom/Ladder/LadderTrigger
+/Environment/HangarShip/OutsideShipRoom/Ladder/LadderTrigger/TopPos
+/Environment/HangarShip/OutsideShipRoom/Ladder/LadderTrigger/PlayerPositionNode
+/Environment/HangarShip/Terminal/TerminalTrigger/TerminalScript/TerminalAudio
+/Environment/HangarShip/ShipModels2b/ChargeStation/ChargeStationTrigger/Trigger
+/Environment/HangarShip/RightmostSuitPlacement
+/Environment/HangarShip/ShipModels2b/MonitorWall/Cube.001/CameraMonitorSwitchButton/Cube (2)
+/Environment/HangarShip/ShipModels2b/Cube.005 (2)/Cube
+/Environment/HangarShip/StartGameLever
+/Environment/HangarShip/StorageCloset/Cube.000/Cube
+/Environment/HangarShip/StorageCloset/ObjectPlacements/Cube (3)
+/Environment/HangarShip/OutsideShipRoom/Ladder/LadderTrigger/HorizontalPosition
+/Environment/HangarShip/ShipModels2b/MonitorWall/Cube.001/CameraMonitorOnButton/Cube (2)
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel/StartButton/Cube (2)
+/Environment/HangarShip/OutsideShipRoom/Ladder/LadderTrigger/BottomPos
+/Environment/HangarShip/LadderShort (1)/LadderTrigger/BottomPos
+/Environment/HangarShip/LadderShort (1)/LadderTrigger/HorizontalPosition
+/Environment/HangarShip/LadderShort (1)/LadderTrigger/PlayerPositionNode
+/Environment/HangarShip/LadderShort (1)/LadderTrigger
+/Environment/HangarShip/LadderShort (1)/LadderTrigger/TopPos
+/Environment/HangarShip/LadderShort/LadderTrigger/BottomPos
+/Environment/HangarShip/LadderShort/LadderTrigger
+/Environment/HangarShip/LadderShort/LadderTrigger/TopPos
+/Environment/HangarShip/LadderShort/LadderTrigger/PlayerPositionNode
+/Environment/HangarShip/LadderShort/LadderTrigger/HorizontalPosition
+/Environment/HangarShip/StorageCloset/Cube.002
+/Environment/HangarShip/LightSwitchContainer/LightSwitch
+/BellDinger/Trigger
+/DepositCounter/DoorAndHookAnim/InteractCube
+/Environment/Map/CompanyPlanet/TrapDoor
+/StoryLogs/StoryLogCollectable
+/Environment/Map/CompanyPlanet/LeverSwitchForDrill/LeverSwitch
+/Environment/Interactables/Ladder1.5x (2) Tall/LadderTrigger/BottomPos
+/Environment/Interactables/Ladder1.5x (2) Tall/LadderTrigger/PlayerPositionNode
+/Environment/Interactables/Ladder1.5x (2) Tall/LadderTrigger/TopPos
+/Environment/Interactables/Ladder1.5x (2) Tall/LadderTrigger
+/Environment/Interactables/Ladder1.5x (2) Tall/LadderTrigger/HorizontalPosition
+
+SWAP
+- Cameras that see layer 9-------------------------------------
+Mask: 1000000000
+Cull: 100110000000001101001001 /Environment/HangarShip/Cameras/FrontDoorSecurityCam/SecurityCamera
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 110000000001101001001 /Environment/HangarShip/Cameras/ShipCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 10-------------------------------------
+
+SWAP
+- Cameras that see layer 10-------------------------------------
+Mask: 10000000000
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 11-------------------------------------
+/Environment/HangarShip/Cube
+/Environment/HangarShip/ShipBottomColliders/Cube (1)
+/Environment/HangarShip/ShipBottomColliders/Cube (3)
+/Environment/HangarShip/ShipBottomColliders/Cube (7)
+/Environment/HangarShip/ShipBottomColliders/Cube (2)
+/Environment/HangarShip/ShipBottomColliders/Cube (6)
+/Environment/HangarShip/Bunkbeds/Collider
+/Environment/HangarShip/ShipBottomColliders/Cube (8)
+/Environment/OutOfBoundsTrigger1
+/Environment/HangarShip/ShipBottomColliders/Cube (5)
+/Environment/HangarShip/ShipBottomColliders
+/Environment/HangarShip/ShipBottomColliders/Cube (4)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (18)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (16)
+/Environment/Map/CompanyPlanet/Cube/Colliders/Cube (2)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (41)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (6)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (28)
+/Environment/OutOfBounds/OutOfBoundsTriggerFactory
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (19)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (14)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (12)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (4)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (20)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Armature/Bone/Bone.001/Bone.002/Bone.003/Collider (2)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (24)
+/Environment/Map/CompanyPlanet/Cube/Colliders/Cube
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (11)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Armature/Bone/Bone.001/Bone.002/Collider (1)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (42)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (9)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Armature/Bone/Bone.001/Bone.002/Bone.003/Collider (2)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (22)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Armature/Bone/Bone.001/Collider
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (32)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (13)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (38)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle2/Armature/Bone/Bone.001/Bone.002/Collider (1)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (36)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (8)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (23)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (34)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (25)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (21)
+/CompanyMonstersAnims/TentacleAnimContainer/GrossTentacle/Armature/Bone/Bone.001/Collider
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (29)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (17)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (37)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (5)
+/Environment/Map/Puddles/Puddle2/Collider (2)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (10)
+/Environment/Map/CompanyPlanet/Cube/Colliders/Cube (3)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (39)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (44)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (3)
+/Environment/Map/CompanyPlanet/Cube/Colliders/Cube (4)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (40)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (26)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (45)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (35)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (33)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (2)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (43)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (1)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (15)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (31)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (27)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (7)
+/Environment/Map/CompanyPlanet/CatwalkColliders/Cube (30)
+/Environment/Map/Puddles/Puddle3/Collider (1)
+/Environment/Map/Puddles/Puddle2/Collider
+/Environment/Map/Puddles/Puddle3/Collider
+/Environment/Map/Puddles/Puddle2/Collider (1)
+/Environment/Map/Puddles/Puddle3 (1)/Collider (1)
+/Environment/Map/Puddles/Puddle3 (2)/Collider (1)
+/Environment/Map/Puddles/Puddle/Collider (1)
+/Environment/Map/Puddles/Puddle/Collider
+/Environment/Map/Puddles/Puddle3 (1)/Collider
+/Environment/Map/Puddles/Puddle3 (2)/Collider
+
+SWAP
+- Cameras that see layer 11-------------------------------------
+Mask: 100000000000
+
+---------------------------------- Check Layer 12-------------------------------------
+/PlayersContainer/PhysicsColliders/Player3PhysicsBox
+/PlayersContainer/PhysicsColliders/Player2PhysicsBox
+/PlayersContainer/PhysicsColliders/Player4PhysicsBox
+/Environment/HangarShip/Player/PlayerPhysicsBox
+/PlayersContainer/Player (1)/PlayerPhysicsBox
+/PlayersContainer/Player (3)/PlayerPhysicsBox
+/PlayersContainer/Player (2)/PlayerPhysicsBox
+
+SWAP
+- Cameras that see layer 12-------------------------------------
+Mask: 1000000000000
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 13-------------------------------------
+/Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/FallOffShip
+/Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/LeavingShip (2)
+/Environment/HangarShip/ReverbTriggers/OutsideShip (2)
+/Environment/HangarShip/ReverbTriggers/OutsideShip (3)
+/Environment/HangarShip/ReverbTriggers/OutsideShip (4)
+/Environment/HangarShip/ReverbTriggers/ShipDoorOpened
+/Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/LeavingShip (4)
+/Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/LeavingShip (1)
+/Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/LeavingShip (7)
+/Environment/HangarShip/ReverbTriggers/Ship3dSFX
+/Environment/HangarShip/StorageCloset/ObjectPlacements/PlacementBounds
+/Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/LeavingShip (5)
+/Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/LeavingShip (3)
+/Environment/HangarShip/ReverbTriggers/ShipBumpSFX
+/Environment/HangarShip/ReverbTriggers/LeavingShipTriggers/HorizontalTriggers/LeavingShip (6)
+/Environment/HangarShip/ReverbTriggers/OutsideShip (1)
+/Environment/HangarShip/ReverbTriggers/OutsideShip
+/Environment/HangarShip/ReverbTriggers/ShipDoorClosed
+/Environment/ReverbTriggers (1)/Cube (27)
+/Environment/ReverbTriggers (1)/WindTriggers/Cube (29)
+/Environment/ReverbTriggers (1)/WindTriggers/Cube (18)
+/Environment/ReverbTriggers (1)/WindTriggers/Cube (17)
+/Environment/ReverbTriggers (1)/WindTriggers/Cube (28)
+/Environment/ReverbTriggers (1)/Cube (15)
+/Environment/ReverbTriggers (1)/WindTriggers/shipWindTrigger2
+/Systems/AudioReverbPresets/OutsideShipAmbience
+/Systems/AudioReverbPresets/AlleyAmbience
+/Systems/AudioReverbPresets/InsideAmbience
+/Systems/AudioReverbPresets/HangarAmbience
+/Environment/ReverbTriggers (1)/WindTriggers/shipWindTrigger
+
+SWAP
+- Cameras that see layer 13-------------------------------------
+Mask: 10000000000000
+
+---------------------------------- Check Layer 14-------------------------------------
+/Systems/GameSystems/ItemSystems/MapScreenUI/PlayerBeingMonitored
+/Systems/GameSystems/ItemSystems/MapScreenUI
+/Systems/GameSystems/ItemSystems/MapCamera
+/Systems/GameSystems/ItemSystems/MapScreenUI/PlanetDescription
+/Systems/GameSystems/ItemSystems/MapScreenUIWorldSpace
+/Systems/GameSystems/ItemSystems/MapCamera/CameraGreenTransition
+/Systems/GameSystems/ItemSystems/MapCamera/RadarCamNightVision
+/Environment/HangarShip/Player/Misc/MapDot/MapDirectionIndicator
+/PlayersContainer/Player (2)/Misc/MapDot/MapDirectionIndicator
+/PlayersContainer/Player (1)/Misc/MapDot/MapDirectionIndicator
+/PlayersContainer/Player (3)/Misc/MapDot/MapDirectionIndicator
+/Environment/HangarShip/Player/Misc/MapDot
+/PlayersContainer/Player (2)/Misc/MapDot
+/PlayersContainer/Player (3)/Misc/MapDot
+/PlayersContainer/Player (1)/Misc/MapDot
+/StoryLogs/StoryLogCollectable/RadarCamBox
+
+SWAP
+- Cameras that see layer 14-------------------------------------
+Mask: 100000000000000
+Cull: 100000100000000 /Systems/GameSystems/ItemSystems/MapCamera
+
+---------------------------------- Check Layer 15-------------------------------------
+/Environment/HangarShip/AnimatedShipDoor/NavMeshObstacle
+/Environment/HangarShip/AnimatedShipDoor/NavMeshObstacle (1)
+/Environment/NavMeshColliders/OffMeshLinks/ShipLadder2
+/Environment/NavMeshColliders/PlayerShip/Cube (1)
+/Environment/NavMeshColliders/PlayerShip/Cube (6)
+/Environment/NavMeshColliders/OffMeshLinks/ShipLadder/A
+/Environment/NavMeshColliders/PlayerShip/Cube (2)
+/Environment/NavMeshColliders/PlayerShip/Cube (5)
+/Environment/NavMeshColliders/OffMeshLinks/ShipLadder
+/Environment/NavMeshColliders/OffMeshLinks
+/Environment/NavMeshColliders/PlayerShip/Cube
+/Environment/NavMeshColliders/PlayerShip/Cube (7)
+/Environment/NavMeshColliders/OffMeshLinks/ShipLadder2/B
+/Environment/NavMeshColliders/PlayerShip
+/Environment/NavMeshColliders/PlayerShip/Cube (9)
+/Environment/NavMeshColliders/PlayerShip/Cube (8)
+/Environment/NavMeshColliders/OffMeshLinks/ShipLadder2/A
+/Environment/NavMeshColliders/Modifiers/CrawlSpace
+/Environment/NavMeshColliders/OffMeshLinks/ShipLadder/B
+/Environment/NavMeshColliders/PlayerShip/Cube (3)
+/Environment/NavMeshColliders/PlayerShip/Cube (4)
+
+SWAP
+- Cameras that see layer 15-------------------------------------
+Mask: 1000000000000000
+
+---------------------------------- Check Layer 16-------------------------------------
+
+SWAP
+- Cameras that see layer 16-------------------------------------
+Mask: 10000000000000000
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 17-------------------------------------
+
+SWAP
+- Cameras that see layer 17-------------------------------------
+Mask: 100000000000000000
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 110001011111111111 /Environment/HangarShip/Player/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (2)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (1)/TurnCompass
+Cull: 110001011111111111 /PlayersContainer/Player (3)/TurnCompass
+
+---------------------------------- Check Layer 18-------------------------------------
+/Environment/HangarShip/Player/Misc/LineOfSight2
+/PlayersContainer/Player (3)/Misc/LineOfSight2
+/PlayersContainer/Player (1)/Misc/LineOfSight2
+/PlayersContainer/Player (2)/Misc/LineOfSight2
+/PlayersContainer/Player (2)/Misc/LineOfSightPivot/LineOfSightCube
+/PlayersContainer/Player (3)/Misc/LineOfSightPivot/LineOfSightCube
+/PlayersContainer/Player (1)/Misc/LineOfSightPivot/LineOfSightCube
+/Environment/HangarShip/Player/Misc/LineOfSightPivot/LineOfSightCube
+/Environment/HangarShip/Player/Misc/LineOfSightPivot/LineOfSightCubeSmall
+/PlayersContainer/Player (2)/Misc/LineOfSightPivot/LineOfSightCubeSmall
+/PlayersContainer/Player (1)/Misc/LineOfSightPivot/LineOfSightCubeSmall
+/PlayersContainer/Player (3)/Misc/LineOfSightPivot/LineOfSightCubeSmall
+
+SWAP
+- Cameras that see layer 18-------------------------------------
+Mask: 1000000000000000000
+
+---------------------------------- Check Layer 19-------------------------------------
+/DepositCounter/DoorAndHookAnim
+/Environment/Map/CompanyPlanet/Cube.003/Colliders/Cube (6)
+
+SWAP
+- Cameras that see layer 19-------------------------------------
+Mask: 10000000000000000000
+Cull: 100110000000001101001001 /Environment/HangarShip/Cameras/FrontDoorSecurityCam/SecurityCamera
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 110000000001101001001 /Environment/HangarShip/Cameras/ShipCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+
+---------------------------------- Check Layer 20-------------------------------------
+
+SWAP
+- Cameras that see layer 20-------------------------------------
+Mask: 100000000000000000000
+Cull: 100110000000001101001001 /Environment/HangarShip/Cameras/FrontDoorSecurityCam/SecurityCamera
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 110000000001101001001 /Environment/HangarShip/Cameras/ShipCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+
+---------------------------------- Check Layer 21-------------------------------------
+/Environment/HangarShip/Player/Audios/StatusEffectAudio
+/PlayersContainer/Player (2)/Audios/UnderwaterBubblesAudio
+/PlayersContainer/Player (3)/Audios/UnderwaterBubblesAudio
+/PlayersContainer/Player (1)/Audios/UnderwaterBubblesAudio
+/Environment/HangarShip/Player/Audios/UnderwaterBubblesAudio
+
+SWAP
+- Cameras that see layer 21-------------------------------------
+Mask: 1000000000000000000000
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+
+---------------------------------- Check Layer 22-------------------------------------
+/Environment/HangarShip/ShipModels2b/ChargeStation/ScanNode (1)
+/Environment/HangarShip/AnimatedShipDoor/HangarDoorButtonPanel/ScanNode (2)
+/Environment/HangarShip/StartGameLever/ScanNode
+/Environment/HangarShip/StartGameLever/ScanNode (1)
+/Environment/HangarShip/ClipboardManual/ScanNode
+/Environment/HangarShip/Terminal/ScanNode
+/Environment/ScanNodes/ScanNode
+/Environment/ScanNodes/ScanNode (1)
+/StoryLogs/StoryLogCollectable/ScanNode
+
+SWAP
+- Cameras that see layer 22-------------------------------------
+Mask: 10000000000000000000000
+
+---------------------------------- Check Layer 23-------------------------------------
+
+SWAP
+- Cameras that see layer 23-------------------------------------
+Mask: 100000000000000000000000
+Cull: 100110000000001101001001 /Environment/HangarShip/Cameras/FrontDoorSecurityCam/SecurityCamera
+
+---------------------------------- Check Layer 24-------------------------------------
+/Environment/HangarShip/ShipModels2b/Light (2)
+/Environment/HangarShip/ShipModels2b/Light/RedLight
+/Environment/HangarShip/ShipModels2b/Light (1)
+/Environment/HangarShip/ShipModels2b/Light (1)/RedLight
+/Environment/HangarShip/ShipModels2b/Light
+/Environment/HangarShip/ShipModels2b/Light (3)
+/Environment/HangarShip/ShipModels2b/Light (3)/RedLight
+/Environment/HangarShip/ShipModels2b/Light (2)/RedLight
+
+SWAP
+- Cameras that see layer 24-------------------------------------
+Mask: 1000000000000000000000000
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+
+---------------------------------- Check Layer 25-------------------------------------
+
+SWAP
+- Cameras that see layer 25-------------------------------------
+Mask: 10000000000000000000000000
+Cull: 11001110010001011111111111 /FreeCameraCinematic
+
+---------------------------------- Check Layer 26-------------------------------------
+/Environment/HangarShip/LightSwitchContainer/PlacementCollider
+/Environment/HangarShip/StorageCloset/PlacementCollider
+/Environment/HangarShip/FileCabinet/Cube (2)
+/Environment/HangarShip/Bunkbeds/PlacementCollider
+/Environment/HangarShip/Terminal/PlacementCollider
+/Environment/HangarShip/Player/Misc/Cube
+/PlayersContainer/Player (3)/Misc/Cube
+/PlayersContainer/Player (1)/Misc/Cube
+/PlayersContainer/Player (2)/Misc/Cube
+
+SWAP
+- Cameras that see layer 26-------------------------------------
+Mask: 100000000000000000000000000
+
+---------------------------------- Check Layer 27-------------------------------------
+/Environment/HangarShip/PlacementBlockers/PlacementBlocker (5)
+/Environment/HangarShip/PlacementBlockers/PlacementBlocker (4)
+/Environment/HangarShip/PlacementBlockers/PlacementBlocker (6)
+/Environment/HangarShip/PlacementBlockers/PlacementBlocker (1)
+/Environment/HangarShip/PlacementBlockers/PlacementBlocker (3)
+/Environment/HangarShip/PlacementBlockers/PlacementBlocker
+/Environment/HangarShip/PlacementBlockers/PlacementBlocker (2)
+
+SWAP
+- Cameras that see layer 27-------------------------------------
+Mask: 1000000000000000000000000000
+
+---------------------------------- Check Layer 28-------------------------------------
+
+SWAP
+- Cameras that see layer 28-------------------------------------
+Mask: 10000000000000000000000000000
+
+---------------------------------- Check Layer 29-------------------------------------
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper/arm.L_lower
+/Environment/HangarShip/Terminal
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.R/shin.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.R/shin.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.R/shin.R
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.R/shin.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.L/shin.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.L/shin.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.L/shin.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.L/shin.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.L
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.L
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.L
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.L
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.R/arm.R_upper/arm.R_lower
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/thigh.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/thigh.R
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/thigh.R
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/thigh.R
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/spine.004
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/spine.004
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/spine.004
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/spine.004
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003/shoulder.L/arm.L_upper
+/Environment/HangarShip/Player/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003
+/PlayersContainer/Player (1)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003
+/PlayersContainer/Player (3)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003
+/PlayersContainer/Player (2)/ScavengerModel/metarig/spine/spine.001/spine.002/spine.003
+
+SWAP
+- Cameras that see layer 29-------------------------------------
+Mask: 100000000000000000000000000000
+Cull: 100001001110010001011111111111 /Systems/SpectateCameraPivot/SpectateCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (3)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (1)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /PlayersContainer/Player (2)/ScavengerModel/metarig/CameraContainer/MainCamera
+Cull: 100001001110110001011111111111 /Environment/HangarShip/Player/ScavengerModel/metarig/CameraContainer/MainCamera
+
+---------------------------------- Check Layer 30-------------------------------------
+
+SWAP
+- Cameras that see layer 30-------------------------------------
+Mask: 1000000000000000000000000000000
+
+---------------------------------- Check Layer 31-------------------------------------
+
+SWAP
+- Cameras that see layer 31-------------------------------------
+Mask: 10000000000000000000000000000000
+

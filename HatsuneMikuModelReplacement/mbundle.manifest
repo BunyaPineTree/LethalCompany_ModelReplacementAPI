@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 2894382314
+CRC: 2145120515
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 97a182895f2f9b5085ecc8f8f661018f
+    Hash: c62edb5f211a89ebe2fc9ac7915c50b4
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 5a410963efc7ff878d4e96ff4592b8fb
+    Hash: 705bccc091307c2362fa7fd3717707eb
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 97a182895f2f9b5085ecc8f8f661018f
+    Hash: c62edb5f211a89ebe2fc9ac7915c50b4
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -44,5 +44,17 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/Tomarudo/HatsuneMikuNT/Material/Eye.mat
+- Assets/Tomarudo/HatsuneMikuNT/MaterialDark/HairD.mat
+- Assets/Tomarudo/HatsuneMikuNT/Material/Costume.mat
+- Assets/Tomarudo/HatsuneMikuNT/MaterialDark/TransparentD.mat
+- Assets/Tomarudo/HatsuneMikuNT/MaterialDark/HairFD.mat
+- Assets/Tomarudo/HatsuneMikuNT/MaterialDark/EyeD.mat
+- Assets/Tomarudo/HatsuneMikuNT/Material/Hair.mat
+- Assets/Tomarudo/HatsuneMikuNT/MaterialDark/CostumeD.mat
+- Assets/Tomarudo/HatsuneMikuNT/Material/Transparent.mat
+- Assets/Tomarudo/HatsuneMikuNT/Material/HairF.mat
 - Assets/ModelReplacementSDK/AssetsToBuild/HatsuneMikuNT.prefab
+- Assets/Tomarudo/HatsuneMikuNT/Material/Body.mat
+- Assets/Tomarudo/HatsuneMikuNT/MaterialDark/BodyD.mat
 Dependencies: []

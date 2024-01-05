@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.PlayerLoop;
 
 namespace ModelReplacement
 {
@@ -25,6 +26,7 @@ namespace ModelReplacement
         public MaterialHelper materialHelper = null;
         public PlayerControllerB controller { get; private set; }
         public GameObject replacementModel;
+        public BoxCollider nameTagCollider = null;
 
         //Ragdoll components
         public AvatarUpdater ragdollAvatar { get; private set; }
@@ -32,8 +34,6 @@ namespace ModelReplacement
         protected GameObject replacementDeadBody = null;
 
         //Misc components
-        private MeshRenderer nameTagObj = null;
-        private MeshRenderer nameTagObj2 = null;
         private int danceNumber = 0;
         private int previousDanceNumber = 0;
         public string suitName { get; set; } = "";
@@ -109,12 +109,14 @@ namespace ModelReplacement
 
         #endregion
 
-        #region Base Logic
+         #region Base Logic
 
         protected virtual void Awake()
         {
 
             controller = base.GetComponent<PlayerControllerB>();
+            viewState = base.GetComponent<ViewStateManager>();
+       
             ModelReplacementAPI.Instance.Logger.LogInfo($"Awake {controller.playerUsername}");
 
             // Load model
@@ -127,6 +129,7 @@ namespace ModelReplacement
             // Fix Materials and renderers
             materialHelper = new MaterialHelper(this);
             Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
+            SkinnedMeshRenderer[] skinnedRenderers = replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>();
             Material gameMat = controller.thisPlayerModel.GetComponent<SkinnedMeshRenderer>().sharedMaterial;
             gameMat = new Material(gameMat); // Copy so that shared material isn't accidently changed by overriders of GetReplacementMaterial()
             Dictionary<Material, Material> matMap = new();
@@ -146,7 +149,7 @@ namespace ModelReplacement
                 renderer.SetMaterials(materials);
             }
             ListPool<Material>.Release(materials);
-            foreach (SkinnedMeshRenderer item in replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>())
+            foreach (SkinnedMeshRenderer item in skinnedRenderers)
             {
                 item.updateWhenOffscreen = true;
             }
@@ -159,7 +162,6 @@ namespace ModelReplacement
             {
                 ModelReplacementAPI.Instance.Logger.LogError($"Could not set all model scripts.\n Error: {e.Message}");
             }
-
 
             // Instantiate model
             replacementModel = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
@@ -185,31 +187,34 @@ namespace ModelReplacement
             OffsetBuilder ite = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
             UseNoPostProcessing = ite.UseNoPostProcessing;
 
-
-            viewState = new ViewStateManager(this);
             if (ModelReplacementAPI.moreCompanyPresent)
             {
                 cosmeticManager = new MoreCompanyCosmeticManager(this);
             }
-            // Misc fixes
-            MeshRenderer[] gameObjects = controller.gameObject.GetComponentsInChildren<MeshRenderer>();
-            nameTagObj = gameObjects.Where(x => x.gameObject.name == "LevelSticker").First();
-            nameTagObj2 = gameObjects.Where(x => x.gameObject.name == "BetaBadge").First();
             
-            viewState.RendererPatches();
             SetAvatarRenderers(true);
-            viewState.SetAllLayers();
+            viewState.ReportBodyReplacementAddition(this);
+
+            //Colliders for nametag
+            GameObject colliderObj = new GameObject("MRAPINameCollider");
+            colliderObj.layer = 23;
+            colliderObj.transform.SetParent(replacementModel.transform);
+
+            nameTagCollider = colliderObj.AddComponent<BoxCollider>();
+            nameTagCollider.isTrigger = true;
+
+            var target = colliderObj.AddComponent<RaycastTarget>();
+            target.controller = controller;
+            target.bodyReplacement = this;
+
+
 
             ModelReplacementAPI.Instance.Logger.LogInfo($"AwakeEnd {controller.playerUsername}");
         }
 
-        protected virtual void Start() { viewState.RendererPatches(); }
-        protected virtual void LateUpdate()
+        protected virtual void Start() {}
+        protected virtual void Update()
         {
-            // Renderer logic
-            SetPlayerRenderers(false);
-            viewState.SetAllLayers();
-
             // Handle Ragdoll creation and destruction
             GameObject deadBody = null;
             try
@@ -239,8 +244,11 @@ namespace ModelReplacement
             {
                 cosmeticManager.Update(true);
             }
-            
 
+            //Bounding box calculation for nameTag
+            Bounds modelBounds = GetBounds();
+            nameTagCollider.center = modelBounds.center;
+            nameTagCollider.size = modelBounds.size;
 
             //Emotes
             previousDanceNumber = danceNumber;
@@ -270,7 +278,6 @@ namespace ModelReplacement
         protected virtual void OnDestroy()
         {
             ModelReplacementAPI.Instance.Logger.LogInfo($"Destroy body component for {controller.playerUsername}");
-            SetPlayerRenderers(true);
             if (ModelReplacementAPI.moreCompanyPresent)
             {
                 cosmeticManager.Update(false);
@@ -324,15 +331,6 @@ namespace ModelReplacement
             {
                 renderer.enabled = enabled;
             }
-        }
-
-        public void SetPlayerRenderers(bool enabled)
-        {
-            controller.thisPlayerModel.enabled = enabled;
-            controller.thisPlayerModelLOD1.enabled = enabled;
-            controller.thisPlayerModelLOD2.enabled = enabled;
-            nameTagObj.enabled = enabled;
-            nameTagObj2.enabled = enabled;
         }
 
         private Bounds GetBounds()
@@ -398,6 +396,14 @@ namespace ModelReplacement
         }
 
         #endregion
+
+
+        public class RaycastTarget:MonoBehaviour
+        {
+            public PlayerControllerB controller = null;
+            public BodyReplacementBase bodyReplacement = null;
+        }
+
 
 
 

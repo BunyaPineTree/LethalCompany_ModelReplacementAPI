@@ -1,0 +1,98 @@
+﻿---------Takeaway----------------------
+Layers with no objects or cameras
+30, 
+
+layers with no objects and some cameras
+25 - This has the cinematic camera, and is likely not a safe layer to touch
+20
+17
+4
+1
+23
+
+Note that just because there weren't objects at time of capture doesn't mean there will never be objects.
+
+
+
+---------Summary of layers-------------
+
+Moon
+0 Environment objects, most cameras
+1 Nothing, most cameras
+2 World Generation, most cameras
+3 first person arms and SFX, most cameras
+4 Nothing, most cameras
+5 HUD and UI, most cameras
+6 Clipboard and items,  some cameras
+7 Helmet stuff, most cameras
+8 Ship objects and map, most cameras
+9 Ship objects, most cameras
+10 Literally just bushes, most cameras
+11 all colliders, no cameras
+12 player physics boxes, most cameras
+13 Reverb Triggers, no cameras
+14 Map objects, MapCamera
+15 navMesh, no cameras
+16 map lights, most cameras
+17 no objects, most cameras
+18 line of sight objects, no cameras
+19 Enemies and the breaker box, most cameras
+20 no objects, most cameras
+21 Underwater bubble audio and dangers, player cameras
+22 scanNodes, no cameras
+23 WindParticle may not be necessary, security cameras
+24 ship lights and map objects, player cameras
+25 no objects, freeCameraCinematic
+26 Placecment Colliders cubes, no cameras
+27 placementBlockers, no cameras
+28 level colliders, no cameras
+29 Player model objects, player cameras
+30 No objects, no cameras
+31 no, no
+32 no, no
+
+In Ship
+0 Most Objects and cameras
+1 Nothing, most cameras
+2 Nothing, most cameras
+3 first person arms, most cameras
+4 Nothing, most cameras
+5 HUD, most cameras
+6 Clipboard,  some cameras
+7 Helmet stuff, most cameras
+8 Ship objects, most cameras
+9 Ship objects, most cameras
+10 Nothing, most cameras
+11 Ship colliders, no cameras
+12 player physics boxes, most cameras
+13 Reverb Triggers, no cameras
+14 Map objects, MapCamera
+15 Ship door navMesh Obstactle, no cameras
+16 no objects, most cameras
+17 no objects, most cameras
+18 line of sight objects, no cameras
+19 no objects, most cameras
+20 no objects, most cameras
+21 Underwater bubble audio, player cameras
+22 scanNodes, no cameras
+23 WindParticle, security cameras
+24 ship lights, player cameras
+25 no objects, freeCameraCinematic
+26 Colliders, cubes, no cameras
+27 placementBlockers, no cameras
+28 no objects, no cameras
+29 Player model objects, player cameras
+30 No objects, no cameras
+31 no, no
+32 no, no
+
+Dine
+23 -> no objects
+28 -> no objects
+
+Company
+2 -> no objects
+10 -> no object
+16 -> no objects
+23 -> no objects
+28 -> no objects

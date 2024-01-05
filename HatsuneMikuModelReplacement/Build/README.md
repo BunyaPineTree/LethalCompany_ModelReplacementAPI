@@ -1,20 +1,22 @@
-# Miku Model Replacement v1.4.2
+# Miku Model Replacement v1.5.0
 ### Replaces suits with Hatsune Miku. This is the example mod for ModelReplacementAPI
 
 ## Instructions
 - Place contents in plugins folder. Ensure that ModelReplacementAPI is also installed. 
 - Set your preferred replacement suits in the config, or enable miku for all suits. By default the starting suit is replaced. 
 - For more info see https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI
-
 ## Known Issues
 - Cloth physics can be very laggy. ~~It is recommended in larger lobbies that you lower the dynamic bone update rate and disable physics at range via the config.~~ Physics configs temporarily do not function as a result of the switch away from Dynamic Bones.
 - Miku is a flashbang as a result of the toon shader currently used. 
 - Does not replace hands. You will only see Miku in multiplayer lobbies or with a third person mod. 
 
 ## Note
-ModelReplacementAPI versison 2.3.0 required for post processing changes to work. 
+Note that in the config there are separate suit name lists for each miku skin. Every suit selected in both will be assigned a Miku model replacement, and every suit selected in the Evil Miku suit list will be assigned the alternate skin, regardless of the contents of the normal Miku suit list. 
 
 ## Changelog
+	- v1.5.0
+		- Addition of evil skin assigned by default to the green suit. A huge thanks to Lysbell for creating the textures.
+		- Shader fine tuning.
 	- v1.4.2
 		- Additional graphics changes. Removal of post processing. 
 	- v1.4.1

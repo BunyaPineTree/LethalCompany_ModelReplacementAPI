@@ -15,12 +15,7 @@ public class RepairBrokenBodyReplacementsPatch
         foreach (GameNetcodeStuff.PlayerControllerB item in __instance.allPlayerScripts)
         {
             if (!item.isPlayerDead) { continue; } //player isn't dead
-            if (item.gameObject.GetComponent<BodyReplacementBase>() == null) { continue; } //player doesn't have a body replacement
-
-            Console.WriteLine($"Reinstantiating model replacement for {item.playerUsername} ");
-            Type BodyReplacementType = item.gameObject.GetComponent<BodyReplacementBase>().GetType();
-            UnityEngine.Object.Destroy(item.gameObject.GetComponent<BodyReplacementBase>());
-            item.gameObject.AddComponent(BodyReplacementType);
+            ModelReplacementAPI.ResetPlayerModelReplacement(item);
         }
     }
 

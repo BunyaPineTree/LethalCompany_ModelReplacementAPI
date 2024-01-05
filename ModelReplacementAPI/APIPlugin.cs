@@ -3,6 +3,7 @@ using BepInEx.Bootstrap;
 using BepInEx.Logging;
 using GameNetcodeStuff;
 using HarmonyLib;
+using Steamworks.Ugc;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +14,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "2.2.0";
+        public const string VERSION = "2.3.2";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
@@ -50,7 +51,7 @@ namespace ModelReplacement
 
             Harmony harmony = new Harmony(PluginInfo.GUID);
             harmony.PatchAll();
-            Logger.LogInfo($"Plugin {PluginInfo.GUID} is loaded!");
+            Logger.LogInfo($"Plugin {PluginInfo.GUID} is loadeEEEEEEEEEd!");
         }
 
         //soft dependencies
@@ -74,6 +75,7 @@ namespace ModelReplacement
         private static Dictionary<string, Type> RegisteredModelReplacements = new Dictionary<string, Type>();
         private static Type RegisteredModelReplacementOverride = null;
         private static Type RegisteredModelReplacementDefault = null;
+        private static HashSet<ulong> blackListedSteamIDs = new HashSet<ulong>();
 
         /// <summary>
         /// Registers a body replacement class to default. All players with unregistered suits will appear with this body replacement, if not null. 
@@ -161,6 +163,47 @@ namespace ModelReplacement
         }
 
         /// <summary>
+        /// Registers a steamID to be blacklisted from SetPlayerModelReplacement
+        /// </summary>
+        /// <param name="steamID"></param>
+        /// <param name="blackListed"></param>
+        public static void RegisterPlayerBlackList(ulong steamID, bool blackListed)
+        {
+            if (blackListed) { blackListedSteamIDs.Add(steamID); return; }
+            if (blackListedSteamIDs.Contains(steamID))
+            {
+                blackListedSteamIDs.Remove(steamID);
+                return;
+            }
+        }
+        /// <summary>
+        /// Registers a player's steamID to be blacklisted from SetPlayerModelReplacement, and removes any active model replacement
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="blackListed"></param>
+        public static void RegisterPlayerBlackList(PlayerControllerB player, bool blackListed)
+        {
+            RegisterPlayerBlackList(player.playerSteamId, blackListed);
+            RemovePlayerModelReplacement(player);
+        }
+
+        /// <summary>
+        /// Destroys and Reinstantiates a player's model replacement. Does nothing if they did not have a model replacement.
+        /// </summary>
+        /// <param name="player"></param>
+        public static void ResetPlayerModelReplacement(PlayerControllerB player)
+        {
+            if (player.gameObject.GetComponent<BodyReplacementBase>() == null) { return; } //player doesn't have a body replacement
+
+            Console.WriteLine($"Reinstantiating model replacement for {player.playerUsername} ");
+            Type BodyReplacementType = player.gameObject.GetComponent<BodyReplacementBase>().GetType();
+            UnityEngine.Object.Destroy(player.gameObject.GetComponent<BodyReplacementBase>());
+            player.gameObject.AddComponent(BodyReplacementType);
+        }
+
+
+
+        /// <summary>
         /// Sets a body replacement for the specified player, removes existing body replacement if it is a different type than the specified
         /// </summary>
         /// <param name="player"></param>
@@ -176,17 +219,17 @@ namespace ModelReplacement
             {
                 return;
             }
+            if (blackListedSteamIDs.Contains(player.playerSteamId))
+            {
+                return;
+            }
             BodyReplacementBase a = player.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
             int suitID = player.currentSuitID;
             string suitName = StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName;
             if (a != null)
             {
-
-
-
                 if (a.GetType() == type) //Suit has not changed model
                 {
-
                     if (a.suitName != suitName)
                     {
                         Console.WriteLine($"Suit Change detected {a.suitName} => {suitName}, Replacing {type}.");
@@ -203,7 +246,6 @@ namespace ModelReplacement
                     Destroy(a); //Destroy the existing body replacement
                 }
             }
-
             BodyReplacementBase replacecment = player.thisPlayerBody.gameObject.AddComponent(type) as BodyReplacementBase;
             replacecment.suitName = suitName;
         }
@@ -245,6 +287,8 @@ namespace ModelReplacement
                     }
 
                     int suitID = __instance.currentSuitID;
+                    var suitList = StartOfRound.Instance.unlockablesList.unlockables;
+                    if(suitID >= suitList.Count) { suitID = 0; }
                     string suitName = StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName;
                     suitName = suitName.ToLower().Replace(" ", "");
 

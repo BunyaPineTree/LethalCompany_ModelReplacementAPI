@@ -1,10 +1,12 @@
 ﻿using BepInEx.Bootstrap;
 using HarmonyLib;
+using ModelReplacement.Modules;
 using MoreCompany.Cosmetics;
 using UnityEngine;
 
 namespace ModelReplacement.Patches
 {
+    
     // Token: 0x02000005 RID: 5
     [HarmonyPatch(typeof(HUDManager), "AddPlayerChatMessageClientRpc")]
     internal class CosmeticPatch
@@ -24,7 +26,7 @@ namespace ModelReplacement.Patches
                     foreach (CosmeticInstance cosmeticInstance in cosmeticApplication.spawnedCosmetics)
                     {
                         cosmeticInstance.transform.localScale *= 0.38f;
-                        SetAllChildrenLayer(cosmeticInstance.transform, 3);
+                        SetAllChildrenLayer(cosmeticInstance.transform, ViewStateManager.modelLayer);
                     }
                 }
             }
@@ -51,4 +53,5 @@ namespace ModelReplacement.Patches
             }
         }
     }
+    
 }
