@@ -236,6 +236,10 @@ namespace ModelReplacement
                 Destroy(replacementDeadBody);
                 replacementDeadBody = null;
             }
+            if(deadBody && !deadBody.activeInHierarchy)
+            {
+                replacementDeadBody.SetActive(false);
+            }
 
             // Update replacement models
             avatar.Update();
@@ -292,6 +296,8 @@ namespace ModelReplacement
         private void CreateAndParentRagdoll(DeadBodyInfo bodyinfo)
         {
             deadBody = bodyinfo.gameObject;
+
+            Console.WriteLine($"Dead body active? {deadBody.activeInHierarchy}");
 
             //Instantiate replacement Ragdoll and assign the avatar
             SkinnedMeshRenderer deadBodyRenderer = deadBody.GetComponentInChildren<SkinnedMeshRenderer>();

@@ -185,19 +185,20 @@ namespace ModelReplacement
             SetPlayerRenderers(true);
             controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
             controller.gameplayCamera.clearFlags = CameraClearFlags.Nothing;
-            controller.thisPlayerModel.gameObject.layer = modelLayer;
-            controller.thisPlayerModelLOD1.gameObject.layer = modelLayer;
-            controller.thisPlayerModelLOD2.gameObject.layer = modelLayer;
             if (state == ViewState.None)
             {
                 controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
+                SetPlayerLayers(invisibleLayer);
             }
             else if (state == ViewState.FirstPerson)
             {
                 controller.thisPlayerModelArms.gameObject.layer = ArmsLayer;
+                SetPlayerLayers(modelLayer);
             }
             else if (state == ViewState.ThirdPerson)
             {
+                SetPlayerLayers(visibleLayer);
+                controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
                 if (ModelReplacementAPI.LCthirdPersonPresent)
                 {
                     controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
@@ -208,65 +209,51 @@ namespace ModelReplacement
         {
             ViewState state = GetViewState();
             SetPlayerRenderers(false);
-            Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
+            SetPlayerLayers(modelLayer);
             controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
             controller.gameplayCamera.clearFlags = CameraClearFlags.Nothing;
-            controller.thisPlayerModel.gameObject.layer = modelLayer;
-            controller.thisPlayerModelLOD1.gameObject.layer = modelLayer;
-            controller.thisPlayerModelLOD2.gameObject.layer = modelLayer;
             if (state == ViewState.None)
             {
                 controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
-                foreach (Renderer renderer in renderers)
-                {
-                    renderer.shadowCastingMode = ShadowCastingMode.Off;
-                    renderer.gameObject.layer = InvisibleLayer;
-                }
+                SetAvatarLayers(InvisibleLayer, ShadowCastingMode.Off);
             }
             else if (state == ViewState.FirstPerson)
             {
                 controller.thisPlayerModelArms.gameObject.layer = ArmsLayer;
-                foreach (Renderer renderer in renderers)
-                {
-                    renderer.shadowCastingMode = ShadowCastingMode.On;
-                    renderer.gameObject.layer = ModelLayer;
-                }
+                SetAvatarLayers(ModelLayer, ShadowCastingMode.On);
             }
             else if (state == ViewState.ThirdPerson)
             {
-                foreach (Renderer renderer in renderers)
-                {
-                    renderer.shadowCastingMode = ShadowCastingMode.On;
-                    renderer.gameObject.layer = VisibleLayer;
-                }
+                SetAvatarLayers(VisibleLayer, ShadowCastingMode.On);
+                controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
                 if (ModelReplacementAPI.LCthirdPersonPresent)
                 {
                     controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
                 }
-
-
             }
             else if (state == ViewState.Debug)
             {
                 if (DebugRenderModel)
                 {
-                    foreach (Renderer renderer in renderers)
-                    {
-                        renderer.shadowCastingMode = ShadowCastingMode.On;
-                        renderer.gameObject.layer = VisibleLayer;
-                    }
-                    if (ModelReplacementAPI.LCthirdPersonPresent)
-                    {
-                        controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
-                    }
+                    SetAvatarLayers(VisibleLayer, ShadowCastingMode.On);
+                }
+                else
+                {
+                    SetAvatarLayers(InvisibleLayer, ShadowCastingMode.Off);
                 }
                 if (DebugRenderPlayer)
                 {
                     SetPlayerRenderers(true);
+                    SetPlayerLayers(visibleLayer);
                 }
                 else
                 {
                     SetPlayerRenderers(false);
+                    SetPlayerLayers(invisibleLayer);
+                }
+                if (ModelReplacementAPI.LCthirdPersonPresent)
+                {
+                    controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
                 }
 
             }
@@ -313,12 +300,33 @@ namespace ModelReplacement
         public void SetPlayerRenderers(bool enabled)
         {
             controller.thisPlayerModel.enabled = enabled;
-            nameTagObj.enabled = enabled;
-            nameTagObj2.enabled = enabled;
             controller.thisPlayerModelLOD1.enabled = enabled;
             controller.thisPlayerModelLOD2.enabled = enabled;
 
+            controller.thisPlayerModel.shadowCastingMode = enabled ? ShadowCastingMode.On:  ShadowCastingMode.Off;
+            controller.thisPlayerModelLOD1.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
+            controller.thisPlayerModelLOD2.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
 
+            nameTagObj.enabled = enabled;
+            nameTagObj2.enabled = enabled;
+        }
+        public void SetPlayerLayers(int layer)
+        {
+            controller.thisPlayerModel.gameObject.layer = layer;
+            controller.thisPlayerModelLOD1.gameObject.layer = layer;
+            controller.thisPlayerModelLOD2.gameObject.layer = layer;
+            nameTagObj.gameObject.layer = layer;
+            nameTagObj2.gameObject.layer = layer;
+        }
+        public void SetAvatarLayers(int layer, ShadowCastingMode mode)
+        {
+            if(replacementModel == null) { return; }
+            Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                renderer.shadowCastingMode = mode;
+                renderer.gameObject.layer = layer;
+            }
         }
         public void RendererPatches()
         {
