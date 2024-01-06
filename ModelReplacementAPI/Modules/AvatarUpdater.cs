@@ -36,7 +36,7 @@ namespace ModelReplacement.AvatarBodyUpdater
 
             if (playerModelRenderer == null)
             {
-                Console.WriteLine("failed to start AvatarBodyUpdater");
+                ModelReplacementAPI.Instance.Logger.LogFatal("failed to start AvatarBodyUpdater");
                 return;
             }
             this.player = player;

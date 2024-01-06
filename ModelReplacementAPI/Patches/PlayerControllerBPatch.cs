@@ -44,7 +44,7 @@ namespace ModelReplacement.Patches
                 return;
             }
             BodyReplacementBase a = __instance.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
-            Console.WriteLine($"PLAYER TAKE DAMAGE {__instance.playerUsername}");
+   
             if (a) { a.OnDamageTaken(__instance.isPlayerDead); }
         }
 
@@ -58,11 +58,9 @@ namespace ModelReplacement.Patches
                 RaycastHit hit;
                 if (!__instance.isFreeCamera && Physics.Raycast(__instance.interactRay, out hit, 5, 8388608))
                 {
-                    //Console.WriteLine(hit.collider.gameObject.name );
                     var component3 = hit.collider.gameObject.GetComponent<BodyReplacementBase.RaycastTarget>();
                     if (component3 != null)
                     {
-                        //Console.WriteLine($"{component3.controller.playerUsername}");
                         component3.controller.ShowNameBillboard();
                     }
                 }

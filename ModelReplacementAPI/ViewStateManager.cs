@@ -134,6 +134,7 @@ namespace ModelReplacement
             bodyReplacement = replacement;
             replacementModel = replacement.replacementModel;
             bodyReplacementExists = true;
+            PatchViewState();
         }
         public void ReportBodyReplacementRemoval()
         {
@@ -184,7 +185,6 @@ namespace ModelReplacement
             ViewState state = GetViewState();
             SetPlayerRenderers(true);
             controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
-            controller.gameplayCamera.clearFlags = CameraClearFlags.Nothing;
             if (state == ViewState.None)
             {
                 controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
@@ -211,7 +211,6 @@ namespace ModelReplacement
             SetPlayerRenderers(false);
             SetPlayerLayers(modelLayer);
             controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
-            controller.gameplayCamera.clearFlags = CameraClearFlags.Nothing;
             if (state == ViewState.None)
             {
                 controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
@@ -271,11 +270,6 @@ namespace ModelReplacement
             }
             if (!controller.isPlayerControlled) //Dead, render nothing
             {
-                if(controller.playerSteamId != 0)
-                {
-                    Console.WriteLine($"Controller player is dead {controller.playerUsername}");
-                }
-                
                 return ViewState.None;
             }
             if (GameNetworkManager.Instance.localPlayerController != controller) //Other player, render third person

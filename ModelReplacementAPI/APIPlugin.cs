@@ -14,7 +14,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "2.3.2";
+        public const string VERSION = "2.3.4";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
@@ -51,7 +51,7 @@ namespace ModelReplacement
 
             Harmony harmony = new Harmony(PluginInfo.GUID);
             harmony.PatchAll();
-            Logger.LogInfo($"Plugin {PluginInfo.GUID} is loadeEEEEEEEEEd!");
+            Logger.LogInfo($"Plugin {PluginInfo.GUID} is loaded!");
         }
 
         //soft dependencies
@@ -64,7 +64,7 @@ namespace ModelReplacement
 
 
         //Other
-        public static ModelReplacementAPI Instance;
+        public static ModelReplacementAPI Instance = null;
         public new ManualLogSource Logger;
         private static int steamLobbyID => GameNetworkManager.Instance.currentLobby.HasValue ? (int)GameNetworkManager.Instance.currentLobby.Value.Id.Value : -1;
         public static bool isLan => steamLobbyID == -1;
@@ -195,7 +195,7 @@ namespace ModelReplacement
         {
             if (player.gameObject.GetComponent<BodyReplacementBase>() == null) { return; } //player doesn't have a body replacement
 
-            Console.WriteLine($"Reinstantiating model replacement for {player.playerUsername} ");
+            Instance.Logger.LogInfo($"Reinstantiating model replacement for {player.playerUsername} ");
             Type BodyReplacementType = player.gameObject.GetComponent<BodyReplacementBase>().GetType();
             UnityEngine.Object.Destroy(player.gameObject.GetComponent<BodyReplacementBase>());
             player.gameObject.AddComponent(BodyReplacementType);
@@ -232,7 +232,7 @@ namespace ModelReplacement
                 {
                     if (a.suitName != suitName)
                     {
-                        Console.WriteLine($"Suit Change detected {a.suitName} => {suitName}, Replacing {type}.");
+                        Instance.Logger.LogInfo($"Suit Change detected {a.suitName} => {suitName}, Replacing {type}.");
                         Destroy(a); //Suit name changed, may represent change in skin of model replacement, destroy
                     }
                     else
@@ -242,7 +242,7 @@ namespace ModelReplacement
                 }
                 else //Suit has changed model
                 {
-                    Console.WriteLine($"Model Replacement Change detected {a.GetType()} => {type}, changing model.");
+                    Instance.Logger.LogInfo($"Model Replacement Change detected {a.GetType()} => {type}, changing model.");
                     Destroy(a); //Destroy the existing body replacement
                 }
             }

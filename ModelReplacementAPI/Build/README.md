@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.3.2
+# ModelReplacementAPI v2.3.4
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -13,6 +13,11 @@ For more info on making model replacements see the wiki at https://github.com/Bu
 
 
 ## Changelog
+	- v2.3.4
+		- Fixed no post processing for models that set it via script instead of SDK
+		- Fixed TooManyEmotes camera smearing
+	- v2.3.3
+		- Can actually see players now
 	- v2.3.2
 		- Fixed the looking down bug this time? 
 		- Fixed the purple rails

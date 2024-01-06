@@ -153,6 +153,12 @@ namespace ModelReplacement
             {
                 item.updateWhenOffscreen = true;
             }
+
+            //Offset Builder Data
+            var replacementAnimator = replacementModel.GetComponentInChildren<Animator>();
+            OffsetBuilder ite = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
+            UseNoPostProcessing = ite.UseNoPostProcessing;
+
             // Set scripts missing from assetBundle
             try
             {
@@ -182,10 +188,7 @@ namespace ModelReplacement
             ragdollAvatar = new AvatarUpdater();
             avatar.AssignModelReplacement(controller.gameObject, replacementModel);
 
-            //Offset Builder Data
-            var replacementAnimator = replacementModel.GetComponentInChildren<Animator>();
-            OffsetBuilder ite = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
-            UseNoPostProcessing = ite.UseNoPostProcessing;
+            
 
             if (ModelReplacementAPI.moreCompanyPresent)
             {
@@ -224,14 +227,12 @@ namespace ModelReplacement
             catch { }
             if (deadBody && (replacementDeadBody == null)) //Player died this frame
             {
-                Console.WriteLine("Set cosmeticAvatar to ragdoll");
                 cosmeticAvatar = ragdollAvatar;
                 CreateAndParentRagdoll(controller.deadBody);
                 OnDeath();
             }
             if (replacementDeadBody && (deadBody == null)) //Player returned to life this frame
             {
-                Console.WriteLine("Set cosmeticAvatar to living");
                 cosmeticAvatar = avatar;
                 Destroy(replacementDeadBody);
                 replacementDeadBody = null;
@@ -296,8 +297,6 @@ namespace ModelReplacement
         private void CreateAndParentRagdoll(DeadBodyInfo bodyinfo)
         {
             deadBody = bodyinfo.gameObject;
-
-            Console.WriteLine($"Dead body active? {deadBody.activeInHierarchy}");
 
             //Instantiate replacement Ragdoll and assign the avatar
             SkinnedMeshRenderer deadBodyRenderer = deadBody.GetComponentInChildren<SkinnedMeshRenderer>();
