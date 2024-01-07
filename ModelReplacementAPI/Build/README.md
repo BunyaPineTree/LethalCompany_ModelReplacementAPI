@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.3.4
+# ModelReplacementAPI v2.3.5
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -13,6 +13,9 @@ For more info on making model replacements see the wiki at https://github.com/Bu
 
 
 ## Changelog
+	- v2.3.5
+		- LODS no longer show in third person
+		- First person arms no longer appear with TooManyEmotes emotes
 	- v2.3.4
 		- Fixed no post processing for models that set it via script instead of SDK
 		- Fixed TooManyEmotes camera smearing
