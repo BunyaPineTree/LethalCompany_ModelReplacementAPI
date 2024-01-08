@@ -301,7 +301,7 @@ namespace ModelReplacement
                 }
                 catch (Exception e)
                 {
-                    ModelReplacementAPI.Instance.Logger.LogWarning(e.ToString());
+                    Instance.Logger.LogError($"Exception in ManageRegistryBodyReplacements: {e}");
                 }
             }
 
