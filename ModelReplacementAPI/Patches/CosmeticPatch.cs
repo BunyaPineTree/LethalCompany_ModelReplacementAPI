@@ -14,9 +14,9 @@ namespace ModelReplacement.Patches
         // Token: 0x06000005 RID: 5 RVA: 0x00002100 File Offset: 0x00000300
         private static void Postfix()
         {
-            if (Chainloader.PluginInfos.ContainsKey("me.swipez.melonloader.morecompany"))
+            if (ModelReplacementAPI.moreCompanyPresent)
             {
-                CosmeticApplication cosmeticApplication = UnityEngine.Object.FindObjectOfType<CosmeticApplication>();
+                CosmeticApplication cosmeticApplication = Object.FindObjectOfType<CosmeticApplication>();
                 if (CosmeticRegistry.locallySelectedCosmetics.Count > 0 && cosmeticApplication.spawnedCosmetics.Count <= 0)
                 {
                     foreach (string text in CosmeticRegistry.locallySelectedCosmetics)
