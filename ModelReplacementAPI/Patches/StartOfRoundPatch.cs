@@ -1,7 +1,5 @@
 ﻿using HarmonyLib;
 using ModelReplacement;
-using ModelReplacement.Modules;
-using System;
 
 [HarmonyPatch(typeof(StartOfRound))]
 public class RepairBrokenBodyReplacementsPatch
@@ -14,10 +12,8 @@ public class RepairBrokenBodyReplacementsPatch
 
         foreach (GameNetcodeStuff.PlayerControllerB item in __instance.allPlayerScripts)
         {
-            if (!item.isPlayerDead) { continue; } //player isn't dead
+            if (!item.isPlayerDead) continue;
             ModelReplacementAPI.ResetPlayerModelReplacement(item);
         }
     }
-
-
 }

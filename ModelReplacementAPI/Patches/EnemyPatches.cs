@@ -13,13 +13,13 @@ namespace ModelReplacement.Patches
         [HarmonyAfter()]
         public static void HitEnemy(ref EnemyAI __instance, int force = 1, PlayerControllerB playerWhoHit = null, bool playHitSFX = false)
         {
-            if (playerWhoHit == null)
-            {
-                return;
-            }
+            if (playerWhoHit == null) return;
 
-            BodyReplacementBase a = playerWhoHit.gameObject.GetComponent<BodyReplacementBase>();
-            if (a) { a.OnHitEnemy(__instance.isEnemyDead); }
+            BodyReplacementBase bodyReplacement = playerWhoHit.gameObject.GetComponent<BodyReplacementBase>();
+            if (bodyReplacement)
+            {
+                bodyReplacement.OnHitEnemy(__instance.isEnemyDead);
+            }
         }
 
     }
@@ -30,9 +30,8 @@ namespace ModelReplacement.Patches
         [HarmonyPrefix]
         public static void SetModelReplacement(ref MaskedPlayerEnemy __instance, int suitId)
         {
-            BodyReplacementBase a = __instance.mimickingPlayer.gameObject.GetComponent<BodyReplacementBase>();
-            if (a == null) { return; }
-
+            BodyReplacementBase bodyReplacement = __instance.mimickingPlayer.gameObject.GetComponent<BodyReplacementBase>();
+            if (!bodyReplacement) return;
         }
 
     }

@@ -1,13 +1,7 @@
 ﻿using GameNetcodeStuff;
 using HarmonyLib;
-using System;
 using UnityEngine.Rendering;
 using UnityEngine;
-using LCThirdPerson;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using UnityEngine.Events;
 
 namespace ModelReplacement.Patches
 {
@@ -27,25 +21,26 @@ namespace ModelReplacement.Patches
         public static void DamagePlayerFromOtherClientClientRpc(ref PlayerControllerB __instance, int damageAmount, Vector3 hitDirection, int playerWhoHit, int newHealthAmount)
         {
             PlayerControllerB _playerWhoHit = __instance.playersManager.allPlayerScripts[playerWhoHit];
-            if (_playerWhoHit == null)
+            if (!_playerWhoHit) return;
+
+            BodyReplacementBase bodyReplacement = _playerWhoHit.gameObject.GetComponent<BodyReplacementBase>();
+            if (bodyReplacement)
             {
-                return;
+                bodyReplacement.OnHitAlly(__instance, __instance.isPlayerDead);
             }
-            BodyReplacementBase a = _playerWhoHit.gameObject.GetComponent<BodyReplacementBase>();
-            if (a) { a.OnHitAlly(__instance, __instance.isPlayerDead); }
         }
 
         [HarmonyPatch("DamagePlayerClientRpc")]
         [HarmonyPrefix]
         public static void DamagePlayerClientRpc(ref PlayerControllerB __instance, int damageNumber, int newHealthAmount)
         {
-            if (__instance == null)
+            if (!__instance) return;
+
+            BodyReplacementBase bodyReplacement = __instance.gameObject.GetComponent<BodyReplacementBase>();
+            if (bodyReplacement)
             {
-                return;
+                bodyReplacement.OnDamageTaken(__instance.isPlayerDead);
             }
-            BodyReplacementBase a = __instance.gameObject.GetComponent<BodyReplacementBase>();
-   
-            if (a) { a.OnDamageTaken(__instance.isPlayerDead); }
         }
 
 
@@ -58,18 +53,14 @@ namespace ModelReplacement.Patches
                 RaycastHit hit;
                 if (!__instance.isFreeCamera && Physics.Raycast(__instance.interactRay, out hit, 5, 8388608))
                 {
-                    var component3 = hit.collider.gameObject.GetComponent<BodyReplacementBase.RaycastTarget>();
-                    if (component3 != null)
-                    {
-                        component3.controller.ShowNameBillboard();
-                    }
+                    BodyReplacementBase.RaycastTarget rayTarget = hit.collider.gameObject.GetComponent<BodyReplacementBase.RaycastTarget>();
+                    if (!rayTarget) return;
+                    rayTarget.controller.ShowNameBillboard();
                 }
-
             }
-
         }
-
     }
+
     [HarmonyPatch(typeof(PlayerControllerB), "SpawnPlayerAnimation")]
     internal class PlayerPatch
     {

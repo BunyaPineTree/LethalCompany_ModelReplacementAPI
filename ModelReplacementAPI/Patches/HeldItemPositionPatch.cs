@@ -10,16 +10,17 @@ public class LocateHeldObjectsOnModelReplacementPatch
     [HarmonyPostfix]
     public static void LateUpdatePatch(ref GrabbableObject __instance)
     {
-        if (__instance.parentObject == null) { return; }
-        if (__instance.playerHeldBy == null) { return; }
-        BodyReplacementBase a = __instance.playerHeldBy.gameObject.GetComponent<BodyReplacementBase>();
-        if (a == null) { return; }
-        if (a.viewState.GetViewState() == ViewState.ThirdPerson)
-        {
-            Transform parentObject = a.avatar.itemHolder;
+        if (__instance.parentObject == null || __instance.playerHeldBy == null) return;
 
-            parentObject.localPosition = a.avatar.itemHolderPositionOffset;
-            Transform playerItemHolder = a.avatar.GetPlayerItemHolder();
+        BodyReplacementBase bodyReplacement = __instance.playerHeldBy.gameObject.GetComponent<BodyReplacementBase>();
+        if (!bodyReplacement) return;
+
+        if (bodyReplacement.viewState.GetViewState() == ViewState.ThirdPerson)
+        {
+            Transform parentObject = bodyReplacement.avatar.ItemHolder;
+
+            parentObject.localPosition = bodyReplacement.avatar.ItemHolderPositionOffset;
+            Transform playerItemHolder = bodyReplacement.avatar.GetPlayerItemHolder();
 
             __instance.transform.rotation = playerItemHolder.rotation;
             __instance.transform.Rotate(__instance.itemProperties.rotationOffset);
@@ -27,8 +28,6 @@ public class LocateHeldObjectsOnModelReplacementPatch
             Vector3 vector = __instance.itemProperties.positionOffset;
             vector = playerItemHolder.rotation * vector;
             __instance.transform.position += vector;
-
         }
-
     }
 }

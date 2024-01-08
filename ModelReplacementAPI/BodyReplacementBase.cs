@@ -1,9 +1,6 @@
-﻿using _3rdPerson.Helper;
-using GameNetcodeStuff;
-using LCThirdPerson;
+﻿using GameNetcodeStuff;
 using ModelReplacement.Modules;
 using ModelReplacement.AvatarBodyUpdater;
-using MoreCompany.Cosmetics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,8 +8,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.HighDefinition;
-using UnityEngine.PlayerLoop;
 
 namespace ModelReplacement
 {
@@ -415,16 +410,9 @@ namespace ModelReplacement
             {
                 if((bodyReplacement == null) && (modelObj != null))
                 {
-                    //Console.WriteLine("Detected floater");
+                    
                 }
-
-
-
             }
         }
-
-
-
-
     }
 }
