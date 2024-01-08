@@ -96,7 +96,7 @@ namespace ModelReplacement.AvatarBodyUpdater
 
             return modelToAvatarBone.TryGetValue(boneName, out HumanBodyBones avatarBone)
                 ? replacementAnimator.GetBoneTransform(avatarBone)
-                : throw new Exception($"Failed to find bone {boneName}");
+                : null; // throw new Exception($"Failed to find bone {boneName}");
         }
 
         public Transform GetPlayerTransformFromBoneName(string boneName)
