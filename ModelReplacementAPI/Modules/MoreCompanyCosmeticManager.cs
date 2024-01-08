@@ -32,7 +32,15 @@ namespace ModelReplacement.Modules
 
         private void SafeRenderCosmetics(bool useAvatarTransforms)
         {
-            DangerousRenderCosmetics(useAvatarTransforms);
+            try
+            {
+                DangerousRenderCosmetics(useAvatarTransforms);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception in MoreCompanyRenderCosmetcs on {controller.name}  {e}");
+            }
+            
         }
 
         // Token: 0x02000034 RID: 52
@@ -104,7 +112,7 @@ namespace ModelReplacement.Modules
                     }
                     cosmeticInstance.transform.parent = null;
                     cosmeticInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
-
+                    SetAllChildrenLayer(cosmeticInstance.transform, ViewStateManager.modelLayer);
                 }
             }
             else
@@ -112,6 +120,15 @@ namespace ModelReplacement.Modules
                 application.RefreshAllCosmeticPositions();
             }
 
+        }
+
+        private static void SetAllChildrenLayer(Transform transform, int layer)
+        {
+            transform.gameObject.layer = layer;
+            foreach (object obj in transform)
+            {
+                SetAllChildrenLayer((Transform)obj, layer);
+            }
         }
 
     }

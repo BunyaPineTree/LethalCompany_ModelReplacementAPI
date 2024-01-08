@@ -6,6 +6,7 @@ using HarmonyLib;
 using Steamworks.Ugc;
 using System;
 using System.Collections.Generic;
+using ModelReplacement.Patches;
 
 namespace ModelReplacement
 {
@@ -14,7 +15,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "2.3.5";
+        public const string VERSION = "2.3.6";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
@@ -223,7 +224,7 @@ namespace ModelReplacement
             {
                 return;
             }
-            BodyReplacementBase a = player.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+            BodyReplacementBase a = player.gameObject.GetComponent<BodyReplacementBase>();
             int suitID = player.currentSuitID;
             string suitName = StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName;
             if (a != null)
@@ -258,8 +259,19 @@ namespace ModelReplacement
         /// <returns></returns>
         public static bool GetPlayerModelReplacement(PlayerControllerB player, out BodyReplacementBase modelReplacement)
         {
-            modelReplacement = player.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
-            return (modelReplacement == null);
+            try
+            {
+                modelReplacement = player.gameObject.GetComponent<BodyReplacementBase>();
+                return (modelReplacement == null);
+            }
+            catch(Exception e)
+            {
+                Instance.Logger.LogError($"Error in GetPlayerModelReplacement, returning false and null {e}");
+                modelReplacement = null;
+                return false;
+            }
+            
+            
         }
         /// <summary>
         /// Returns true if a player has an active model replacement.
@@ -269,7 +281,16 @@ namespace ModelReplacement
         /// <returns></returns>
         public static bool GetPlayerModelReplacement(PlayerControllerB player)
         {
-            return (player.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>() == null);
+            try
+            {
+                return (player.gameObject.GetComponent<BodyReplacementBase>() == null);
+            }
+            catch (Exception e)
+            {
+                Instance.Logger.LogError($"Error in GetPlayerModelReplacement, returning false {e}");
+
+                return false;
+            }
         }
 
         /// <summary>
@@ -278,7 +299,7 @@ namespace ModelReplacement
         /// <param name="player"></param>
         public static void RemovePlayerModelReplacement(PlayerControllerB player)
         {
-            BodyReplacementBase a = player.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+            BodyReplacementBase a = player.gameObject.GetComponent<BodyReplacementBase>();
             if (a)
             {
                 Destroy(a);
@@ -297,7 +318,7 @@ namespace ModelReplacement
             {
                 try
                 {
-                    BodyReplacementBase a = __instance.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+                    BodyReplacementBase a = __instance.gameObject.GetComponent<BodyReplacementBase>();
                     if ((a != null) && RegisteredModelReplacementExceptions.Contains(a.GetType()))
                     {
                         return;
