@@ -204,6 +204,7 @@ namespace ModelReplacement
             var target = colliderObj.AddComponent<RaycastTarget>();
             target.controller = controller;
             target.bodyReplacement = this;
+            target.modelObj = replacementModel;
 
 
 
@@ -278,12 +279,13 @@ namespace ModelReplacement
         protected virtual void OnDestroy()
         {
             ModelReplacementAPI.Instance.Logger.LogInfo($"Destroy body component for {controller.playerUsername}");
+            Destroy(replacementModel);
+            Destroy(replacementDeadBody);
             if (ModelReplacementAPI.moreCompanyPresent)
             {
                 cosmeticManager.Update(false);
             }
-            Destroy(replacementModel);
-            Destroy(replacementDeadBody);
+            
         }
 
         #endregion
@@ -402,6 +404,18 @@ namespace ModelReplacement
         {
             public PlayerControllerB controller = null;
             public BodyReplacementBase bodyReplacement = null;
+            public GameObject modelObj = null;
+
+            private void Update()
+            {
+                if((bodyReplacement == null) && (modelObj != null))
+                {
+                    //Console.WriteLine("Detected floater");
+                }
+
+
+
+            }
         }
 
 

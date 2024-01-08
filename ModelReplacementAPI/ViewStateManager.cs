@@ -63,8 +63,7 @@ namespace ModelReplacement
         //ThirdPerson        0101001101110110001011111111111 model, no arm => 700127231
         //First Person       1101001001010110001011111111111 arm, no model => 1764431871
         //Mirror             0100001101110110001011101011111 model, no arm
-        //ship camera        0000000000110000000001101001001 model, no arm
-
+        //ship camera        0000000000110000000001101001001 model, no arm 
         //Model  23                 x
         //Arms  30           x                                                  
         //Visible 0                                        x
@@ -327,9 +326,19 @@ namespace ModelReplacement
         }
         public void SetPlayerRenderers(bool enabled)
         {
-            controller.thisPlayerModel.enabled = enabled;
-            controller.thisPlayerModelLOD1.enabled = false;
-            controller.thisPlayerModelLOD2.enabled = false;
+            if (localPlayer)
+            {
+                controller.thisPlayerModel.enabled = enabled;
+                controller.thisPlayerModelLOD1.enabled = false;
+                controller.thisPlayerModelLOD2.enabled = false;
+            }
+            else
+            {
+                controller.thisPlayerModel.enabled = enabled;
+                controller.thisPlayerModelLOD1.enabled = enabled;
+                controller.thisPlayerModelLOD2.enabled = enabled;
+            }
+            
 
             controller.thisPlayerModel.shadowCastingMode = enabled ? ShadowCastingMode.On:  ShadowCastingMode.Off;
             controller.thisPlayerModelLOD1.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;

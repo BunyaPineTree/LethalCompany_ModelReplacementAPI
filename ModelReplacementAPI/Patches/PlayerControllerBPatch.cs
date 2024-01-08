@@ -31,7 +31,7 @@ namespace ModelReplacement.Patches
             {
                 return;
             }
-            BodyReplacementBase a = _playerWhoHit.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+            BodyReplacementBase a = _playerWhoHit.gameObject.GetComponent<BodyReplacementBase>();
             if (a) { a.OnHitAlly(__instance, __instance.isPlayerDead); }
         }
 
@@ -43,7 +43,7 @@ namespace ModelReplacement.Patches
             {
                 return;
             }
-            BodyReplacementBase a = __instance.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+            BodyReplacementBase a = __instance.gameObject.GetComponent<BodyReplacementBase>();
    
             if (a) { a.OnDamageTaken(__instance.isPlayerDead); }
         }

@@ -18,7 +18,7 @@ namespace ModelReplacement.Patches
                 return;
             }
 
-            BodyReplacementBase a = playerWhoHit.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+            BodyReplacementBase a = playerWhoHit.gameObject.GetComponent<BodyReplacementBase>();
             if (a) { a.OnHitEnemy(__instance.isEnemyDead); }
         }
 
@@ -30,7 +30,7 @@ namespace ModelReplacement.Patches
         [HarmonyPrefix]
         public static void SetModelReplacement(ref MaskedPlayerEnemy __instance, int suitId)
         {
-            BodyReplacementBase a = __instance.mimickingPlayer.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
+            BodyReplacementBase a = __instance.mimickingPlayer.gameObject.GetComponent<BodyReplacementBase>();
             if (a == null) { return; }
 
         }
