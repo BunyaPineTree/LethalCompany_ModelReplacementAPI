@@ -180,8 +180,10 @@ namespace ModelReplacement
             if (blackListed)
             {
                 blackListedSteamIDs.Add(steamID);
+                return;
             }
-            else if (blackListedSteamIDs.Contains(steamID))
+            
+            if (blackListedSteamIDs.Contains(steamID))
             {
                 blackListedSteamIDs.Remove(steamID);
             }
