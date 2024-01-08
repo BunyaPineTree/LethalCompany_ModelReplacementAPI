@@ -401,7 +401,7 @@ FodyWeavers.xsd
 BAModelReplacement
 MinahoshiModelReplacement
 Uploads
-Libraries
+Libraries/*.dll
 **/DynamicBoneScripts
 CharacterModelReplacementPersonal.sln
 PSModelReplacement
