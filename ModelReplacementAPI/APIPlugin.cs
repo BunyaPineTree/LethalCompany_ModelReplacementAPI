@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Bootstrap;
+using BepInEx.Logging;
 using GameNetcodeStuff;
 using HarmonyLib;
 using System;
@@ -57,14 +58,7 @@ namespace ModelReplacement
         //Other
         public static ModelReplacementAPI Instance = null;
 
-        public new Logger Logger = new Logger(
-            PluginInfo.NAME,
-            #if DEBUG
-            LogLevel.Debug
-            #else
-            LogLevel.Info
-            #endif
-        );
+        public new ManualLogSource Logger = new ManualLogSource(PluginInfo.NAME);
 
 
         private static int steamLobbyID => GameNetworkManager.Instance.currentLobby.HasValue ? (int)GameNetworkManager.Instance.currentLobby.Value.Id.Value : -1;
