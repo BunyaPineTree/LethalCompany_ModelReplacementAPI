@@ -14,48 +14,46 @@ namespace ModelReplacement.AvatarBodyUpdater
         protected GameObject player = null;
         protected GameObject replacement = null;
 
-        public Vector3 itemHolderPositionOffset { get; private set; } = Vector3.zero;
-        public Quaternion itemHolderRotationOffset { get; private set; } = Quaternion.identity;
-        public Transform itemHolder { get; private set; } = null;
+        public Vector3 ItemHolderPositionOffset { get; private set; } = Vector3.zero;
+        public Quaternion ItemHolderRotationOffset { get; private set; } = Quaternion.identity;
+        public Transform ItemHolder { get; private set; } = null;
 
         protected bool hasUpperChest = false;
-        protected Vector3 rootPositionOffset = new Vector3(0, 0, 0);
-        protected Vector3 rootScale = new Vector3(1, 1, 1);
+        protected Vector3 rootPositionOffset = Vector3.zero;
+        protected Vector3 rootScale = Vector3.one;
 
         public virtual void AssignModelReplacement(GameObject player, GameObject replacement)
         {
             PlayerControllerB controller = player.GetComponent<PlayerControllerB>();
-            if (controller)
-            {
-                playerModelRenderer = controller.thisPlayerModel;
-            }
-            else
-            {
-                playerModelRenderer = player.GetComponentInChildren<SkinnedMeshRenderer>();
-            }
+            playerModelRenderer = controller ? controller.thisPlayerModel : player.GetComponentInChildren<SkinnedMeshRenderer>();
 
             if (playerModelRenderer == null)
             {
-                ModelReplacementAPI.Instance.Logger.LogFatal("failed to start AvatarBodyUpdater");
+                ModelReplacementAPI.Instance.Logger.LogFatal("Failed to start AvatarBodyUpdater");
                 return;
             }
-            this.player = player;
 
+            this.player = player;
             replacementAnimator = replacement.GetComponentInChildren<Animator>();
             this.replacement = replacement;
 
-            OffsetBuilder ite = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
-            itemHolderPositionOffset = ite.itemPositonOffset;
-            itemHolderRotationOffset = ite.itemRotationOffset;
-            itemHolder = ite.itemHolder.transform;
-            rootPositionOffset = ite.rootPositionOffset;
-            rootScale = ite.rootScale;
+            OffsetBuilder offsetBuilder = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
+            ItemHolderPositionOffset = offsetBuilder.itemPositonOffset;
+            ItemHolderRotationOffset = offsetBuilder.itemRotationOffset;
+            ItemHolder = offsetBuilder.itemHolder.transform;
+            rootPositionOffset = offsetBuilder.rootPositionOffset;
+            rootScale = offsetBuilder.rootScale;
+
             Vector3 baseScale = replacement.transform.localScale;
-            replacement.transform.localScale = new Vector3(1, 0, 0) * baseScale.x * rootScale.x + new Vector3(0, 1, 0) * baseScale.y * rootScale.y + new Vector3(0, 0, 1) * baseScale.z * rootScale.z;
+            replacement.transform.localScale =
+                new Vector3(1, 0, 0) * baseScale.x * rootScale.x +
+                new Vector3(0, 1, 0) * baseScale.y * rootScale.y +
+                new Vector3(0, 0, 1) * baseScale.z * rootScale.z;
 
             Transform upperChestTransform = replacementAnimator.GetBoneTransform(HumanBodyBones.UpperChest);
             hasUpperChest = upperChestTransform != null;
         }
+
         protected virtual void UpdateModel()
         {
             foreach (Transform playerBone in playerModelRenderer.bones)
@@ -67,61 +65,63 @@ namespace ModelReplacement.AvatarBodyUpdater
                 RotationOffset offset = modelBone.GetComponent<RotationOffset>();
                 if (offset) { modelBone.rotation *= offset.offset; }
             }
+
             Transform rootBone = GetAvatarTransformFromBoneName("spine");
             Transform playerRootBone = GetPlayerTransformFromBoneName("spine");
             rootBone.position = playerRootBone.position + playerRootBone.TransformVector(rootPositionOffset);
         }
+
         public virtual void Update()
         {
-            if (playerModelRenderer == null) { return; }
-            if (replacementAnimator == null) { return; }
+            if (playerModelRenderer == null || replacementAnimator == null) { return; }
             UpdateModel();
         }
 
         public Transform GetAvatarTransformFromBoneName(string boneName)
         {
-            //Special logic is required here. The player model has 5 central bones.
-            // Spine, spine.001, spine.002, spine.003,   spine.004, corresponding to 
-            // Hips   Spine      Chest      UpperChest   Head
-            //However spine.002 practically doesn't move, and I wish to support mods that don't have an UpperChest bone. 
-            //If they don't have an upperchest bone, instead map spine.003 to the Chest transform on the replacement model.
             if (boneName == "spine.002")
             {
-                if (hasUpperChest) { return replacementAnimator.GetBoneTransform(HumanBodyBones.Chest); }
-                else { return null; }
+                return hasUpperChest ? replacementAnimator.GetBoneTransform(HumanBodyBones.Chest) : null;
             }
+
             if (boneName == "spine.003")
             {
-                if (hasUpperChest) { return replacementAnimator.GetBoneTransform(HumanBodyBones.UpperChest); }
-                else { return replacementAnimator.GetBoneTransform(HumanBodyBones.Chest); }
+                return hasUpperChest ? replacementAnimator.GetBoneTransform(HumanBodyBones.UpperChest) : replacementAnimator.GetBoneTransform(HumanBodyBones.Chest);
             }
-            if (boneName.Contains("PlayerRagdoll")) // Ragdoll Hips
+
+            if (boneName.Contains("PlayerRagdoll"))
             {
                 return replacementAnimator.GetBoneTransform(HumanBodyBones.Hips);
             }
-            if (modelToAvatarBone.ContainsKey(boneName))
-            {
-                return replacementAnimator.GetBoneTransform(modelToAvatarBone[boneName]);
-            }
-            return null;
+
+            return modelToAvatarBone.TryGetValue(boneName, out HumanBodyBones avatarBone)
+                ? replacementAnimator.GetBoneTransform(avatarBone)
+                : throw new Exception($"Failed to find bone {boneName}");
         }
+
         public Transform GetPlayerTransformFromBoneName(string boneName)
         {
-            IEnumerable<Transform> a = playerModelRenderer.bones.Where(x => x.name == boneName);
-            if (a.Any()) { return a.First(); }
+            IEnumerable<Transform> playerBones = playerModelRenderer.bones.Where(x => x.name == boneName);
+
+            if (playerBones.Any())
+            {
+                return playerBones.First();
+            }
+
             if (boneName == "spine")
             {
-                IEnumerable<Transform> b = playerModelRenderer.bones.Where(x => x.name.Contains("PlayerRagdoll")); //For ragdoll and etc...
-                if (b.Any()) { return b.First(); }
+                IEnumerable<Transform> ragdollBones = playerModelRenderer.bones.Where(x => x.name.Contains("PlayerRagdoll"));
+                return ragdollBones.Any() ? ragdollBones.First() : null;
             }
-            return null;
 
+            return null;
         }
+
         public Transform GetPlayerItemHolder()
         {
-            IEnumerable<Transform> tr = player.GetComponentsInChildren<Transform>().Where(x => x.name == "ServerItemHolder" || x.name == "ItemHolder");
-            if (tr.Any()) { return tr.First(); }
-            return null;
+            IEnumerable<Transform> itemHolders = player.GetComponentsInChildren<Transform>().Where(x => x.name == "ServerItemHolder" || x.name == "ItemHolder");
+
+            return itemHolders.Any() ? itemHolders.First() : throw new Exception("Failed to find item holder");
         }
 
 
