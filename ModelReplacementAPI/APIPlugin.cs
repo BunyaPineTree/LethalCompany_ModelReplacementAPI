@@ -64,7 +64,7 @@ namespace ModelReplacement
             PluginInfo.NAME,
             #if DEBUG
             LogLevel.Debug
-            #elif RELEASE
+            #else
             LogLevel.Info
             #endif
         );
