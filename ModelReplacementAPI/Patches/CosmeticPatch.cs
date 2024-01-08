@@ -1,6 +1,4 @@
-﻿using BepInEx.Bootstrap;
-using HarmonyLib;
-using ModelReplacement.Modules;
+﻿using HarmonyLib;
 using MoreCompany.Cosmetics;
 using UnityEngine;
 

@@ -410,16 +410,9 @@ namespace ModelReplacement
             {
                 if((bodyReplacement == null) && (modelObj != null))
                 {
-                    //Console.WriteLine("Detected floater");
+                    
                 }
-
-
-
             }
         }
-
-
-
-
     }
 }
