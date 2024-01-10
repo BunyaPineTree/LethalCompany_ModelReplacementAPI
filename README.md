@@ -28,5 +28,5 @@ Unknown issues
 -
 * Many.
 
-And a special thanks to mina, linkoid, notnotnotswipez, naelstrof and everybody else who has been a huge help. 
+And a special thanks to squire, mina, linkoid, notnotnotswipez, naelstrof and everybody else who has been a huge help. 
 
