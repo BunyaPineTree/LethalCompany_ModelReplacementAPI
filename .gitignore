@@ -398,15 +398,9 @@ FodyWeavers.xsd
 *.sln.iml
 
 #Personal
-BAModelReplacement
-MinahoshiModelReplacement
 Uploads
 Libraries
-**/DynamicBoneScripts
-CharacterModelReplacementPersonal.sln
-PSModelReplacement
-2huModelReplacement
-HatsuneMikuModelReplacement
+
 
 
 
