@@ -55,11 +55,6 @@ namespace ModelReplacement.AvatarBodyUpdater
             hasUpperChest = upperChestTransform != null;
         }
 
-        public virtual void AssignViewModelReplacement(GameObject player, GameObject replacementViewModel)
-        {
-
-        }
-
         protected virtual void UpdateModel()
         {
             foreach (Transform playerBone in playerModelRenderer.bones)
@@ -75,6 +70,11 @@ namespace ModelReplacement.AvatarBodyUpdater
             Transform rootBone = GetAvatarTransformFromBoneName("spine");
             Transform playerRootBone = GetPlayerTransformFromBoneName("spine");
             rootBone.position = playerRootBone.position + playerRootBone.TransformVector(rootPositionOffset);
+        }
+
+        public virtual void AssignViewModelReplacement(GameObject player, GameObject replacementViewModel)
+        {
+
         }
 
         protected virtual void UpdateViewModel()
