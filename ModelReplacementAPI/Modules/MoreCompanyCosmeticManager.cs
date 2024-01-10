@@ -1,10 +1,7 @@
 ﻿using GameNetcodeStuff;
 using MoreCompany.Cosmetics;
-using Steamworks;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using ModelReplacement.AvatarBodyUpdater;
 
@@ -65,71 +62,62 @@ namespace ModelReplacement.Modules
         private Dictionary<CosmeticType2, Transform> cosmeticTransformPairs = new Dictionary<CosmeticType2, Transform>();
         private void RefreshCosmetics()
         {
-            if(cosmeticTransformPairs.Count != 0) { return; }
-
-
-            cosmeticTransformPairs.Add(CosmeticType2.HAT, cosmeticAvatar.GetAvatarTransformFromBoneName("spine.004"));
-            cosmeticTransformPairs.Add(CosmeticType2.CHEST, cosmeticAvatar.GetAvatarTransformFromBoneName("spine.003"));
-            cosmeticTransformPairs.Add(CosmeticType2.R_LOWER_ARM, cosmeticAvatar.GetAvatarTransformFromBoneName("arm.R_lower"));
-            cosmeticTransformPairs.Add(CosmeticType2.HIP, cosmeticAvatar.GetAvatarTransformFromBoneName("spine"));
-            cosmeticTransformPairs.Add(CosmeticType2.L_SHIN, cosmeticAvatar.GetAvatarTransformFromBoneName("shin.L"));
-            cosmeticTransformPairs.Add(CosmeticType2.R_SHIN, cosmeticAvatar.GetAvatarTransformFromBoneName("shin.R"));
-
-
+            if (cosmeticTransformPairs.Count > 0) {
+                cosmeticTransformPairs.Add(CosmeticType2.HAT, cosmeticAvatar.GetAvatarTransformFromBoneName("spine.004"));
+                cosmeticTransformPairs.Add(CosmeticType2.CHEST, cosmeticAvatar.GetAvatarTransformFromBoneName("spine.003"));
+                cosmeticTransformPairs.Add(CosmeticType2.R_LOWER_ARM, cosmeticAvatar.GetAvatarTransformFromBoneName("arm.R_lower"));
+                cosmeticTransformPairs.Add(CosmeticType2.HIP, cosmeticAvatar.GetAvatarTransformFromBoneName("spine"));
+                cosmeticTransformPairs.Add(CosmeticType2.L_SHIN, cosmeticAvatar.GetAvatarTransformFromBoneName("shin.L"));
+                cosmeticTransformPairs.Add(CosmeticType2.R_SHIN, cosmeticAvatar.GetAvatarTransformFromBoneName("shin.R"));
+            }
         }
 
         private void DangerousRenderCosmetics(bool useAvatarTransforms)
         {
             RefreshCosmetics();
 
-            var application = controller.gameObject.GetComponentInChildren<CosmeticApplication>();
-            if(application == null) { return; }
+            CosmeticApplication application = controller.gameObject.GetComponentInChildren<CosmeticApplication>();
+            if (application == null) 
+            { 
+                return; 
+            }
+
             if (useAvatarTransforms)
             {
                 foreach (CosmeticInstance cosmeticInstance in application.spawnedCosmetics)
                 {
-                    Transform transform = null;
-                    switch (cosmeticInstance.cosmeticType)
+                    Transform transform = GetCosmeticTransform(cosmeticInstance.cosmeticType);
+                    if (transform != null)
                     {
-                        case CosmeticType.HAT:
-                            transform = cosmeticTransformPairs[CosmeticType2.HAT];
-                            break;
-                        case CosmeticType.CHEST:
-                            transform = cosmeticTransformPairs[CosmeticType2.CHEST];
-                            break;
-                        case CosmeticType.R_LOWER_ARM:
-                            transform = cosmeticTransformPairs[CosmeticType2.R_LOWER_ARM];
-                            break;
-                        case CosmeticType.HIP:
-                            transform = cosmeticTransformPairs[CosmeticType2.HIP];
-                            break;
-                        case CosmeticType.L_SHIN:
-                            transform = cosmeticTransformPairs[CosmeticType2.L_SHIN];
-                            break;
-                        case CosmeticType.R_SHIN:
-                            transform = cosmeticTransformPairs[CosmeticType2.R_SHIN];
-                            break;
+                        ApplyTransformToCosmeticInstance(cosmeticInstance, transform);
                     }
-                    cosmeticInstance.transform.parent = null;
-                    cosmeticInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
-                    SetAllChildrenLayer(cosmeticInstance.transform, ViewStateManager.modelLayer);
                 }
             }
             else
             {
                 application.RefreshAllCosmeticPositions();
             }
+        }
 
+        private Transform GetCosmeticTransform(CosmeticType cosmeticType)
+        {
+            return cosmeticTransformPairs.TryGetValue((CosmeticType2)cosmeticType, out Transform transform) ? transform : throw new Exception($"Could not find the cosmetic transform");
+        }
+
+        private void ApplyTransformToCosmeticInstance(CosmeticInstance cosmeticInstance, Transform transform)
+        {
+            cosmeticInstance.transform.parent = null;
+            cosmeticInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
+            SetAllChildrenLayer(cosmeticInstance.transform, ViewStateManager.modelLayer);
         }
 
         private static void SetAllChildrenLayer(Transform transform, int layer)
         {
             transform.gameObject.layer = layer;
-            foreach (object obj in transform)
+            foreach (Transform childTransform in transform)
             {
-                SetAllChildrenLayer((Transform)obj, layer);
+                SetAllChildrenLayer(childTransform, layer);
             }
         }
-
     }
 }
