@@ -1,15 +1,12 @@
-﻿using Steamworks;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.Rendering;
 using UnityEngine;
 using _3rdPerson.Helper;
 using LCThirdPerson;
 using System.Collections;
-using UnityEngine.InputSystem.XR;
 using GameNetcodeStuff;
 using TooManyEmotes.Patches;
 //
