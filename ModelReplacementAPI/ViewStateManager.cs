@@ -96,6 +96,7 @@ namespace ModelReplacement
         private BodyReplacementBase bodyReplacement;
         private PlayerControllerB controller;
         private GameObject replacementModel;
+        private GameObject replacementViewModel;
 
         private MeshRenderer nameTagObj = null;
         private MeshRenderer nameTagObj2 = null;
@@ -136,6 +137,7 @@ namespace ModelReplacement
         {
             bodyReplacement = replacement;
             replacementModel = replacement.replacementModel;
+            replacementViewModel = replacement.replacementViewModel;
             bodyReplacementExists = true;
             PatchViewState();
         }
@@ -143,6 +145,7 @@ namespace ModelReplacement
         {
             bodyReplacement = null;
             replacementModel = null;
+            replacementViewModel = null;
             bodyReplacementExists = false;
         }
 
@@ -216,18 +219,18 @@ namespace ModelReplacement
             controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
             if (state == ViewState.None)
             {
-                controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
+                SetArmLayers(InvisibleLayer);
                 SetPlayerLayers(invisibleLayer);
             }
             else if (state == ViewState.FirstPerson)
             {
-                controller.thisPlayerModelArms.gameObject.layer = ArmsLayer;
+                SetArmLayers(ArmsLayer);
                 SetPlayerLayers(modelLayer);
             }
             else if (state == ViewState.ThirdPerson)
             {
+                SetArmLayers(InvisibleLayer);
                 SetPlayerLayers(visibleLayer);
-                controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
                 if (ModelReplacementAPI.LCthirdPersonPresent)
                 {
                     controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
@@ -242,18 +245,18 @@ namespace ModelReplacement
             controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
             if (state == ViewState.None)
             {
-                controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
+                SetArmLayers(InvisibleLayer);
                 SetAvatarLayers(InvisibleLayer, ShadowCastingMode.Off);
             }
             else if (state == ViewState.FirstPerson)
             {
-                controller.thisPlayerModelArms.gameObject.layer = ArmsLayer;
+                SetArmLayers(ArmsLayer);
                 SetAvatarLayers(ModelLayer, ShadowCastingMode.On);
             }
             else if (state == ViewState.ThirdPerson)
             {
+                SetArmLayers(InvisibleLayer);
                 SetAvatarLayers(VisibleLayer, ShadowCastingMode.On);
-                controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
                 if (ModelReplacementAPI.LCthirdPersonPresent)
                 {
                     controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
@@ -363,6 +366,18 @@ namespace ModelReplacement
             {
                 renderer.shadowCastingMode = mode;
                 renderer.gameObject.layer = layer;
+            }
+        }
+        public void SetArmLayers(int layer)
+        {
+            if (replacementViewModel)
+            {
+                controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
+                replacementViewModel.layer = ArmsLayer;
+            }
+            else
+            {
+                controller.thisPlayerModelArms.gameObject.layer = ArmsLayer;
             }
         }
         public void RendererPatches()

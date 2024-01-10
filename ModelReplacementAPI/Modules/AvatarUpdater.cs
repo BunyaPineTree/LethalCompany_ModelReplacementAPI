@@ -9,11 +9,11 @@ namespace ModelReplacement.AvatarBodyUpdater
 
     public class AvatarUpdater
     {
+        //Third Person Avatar
         protected SkinnedMeshRenderer playerModelRenderer = null;
         protected Animator replacementAnimator = null;
         protected GameObject player = null;
         protected GameObject replacement = null;
-
         public Vector3 ItemHolderPositionOffset { get; private set; } = Vector3.zero;
         public Quaternion ItemHolderRotationOffset { get; private set; } = Quaternion.identity;
         public Transform ItemHolder { get; private set; } = null;
@@ -21,6 +21,10 @@ namespace ModelReplacement.AvatarBodyUpdater
         protected bool hasUpperChest = false;
         protected Vector3 rootPositionOffset = Vector3.zero;
         protected Vector3 rootScale = Vector3.one;
+
+        //First Person Avatar
+        protected GameObject replacementViewModel = null;
+        protected Vector3 spinePositionOffset = Vector3.zero;
 
         public virtual void AssignModelReplacement(GameObject player, GameObject replacement)
         {
@@ -51,6 +55,11 @@ namespace ModelReplacement.AvatarBodyUpdater
             hasUpperChest = upperChestTransform != null;
         }
 
+        public virtual void AssignViewModelReplacement(GameObject player, GameObject replacementViewModel)
+        {
+
+        }
+
         protected virtual void UpdateModel()
         {
             foreach (Transform playerBone in playerModelRenderer.bones)
@@ -68,10 +77,17 @@ namespace ModelReplacement.AvatarBodyUpdater
             rootBone.position = playerRootBone.position + playerRootBone.TransformVector(rootPositionOffset);
         }
 
+        protected virtual void UpdateViewModel()
+        {
+
+        }
+
         public virtual void Update()
         {
             if (playerModelRenderer == null || replacementAnimator == null) { return; }
             UpdateModel();
+            if(replacementViewModel  == null) { return; }
+            UpdateViewModel();
         }
 
         public Transform GetAvatarTransformFromBoneName(string boneName)

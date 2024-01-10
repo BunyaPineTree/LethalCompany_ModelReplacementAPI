@@ -21,6 +21,7 @@ namespace ModelReplacement
         public MaterialHelper materialHelper = null;
         public PlayerControllerB controller { get; private set; }
         public GameObject replacementModel;
+        public GameObject replacementViewModel;
         public BoxCollider nameTagCollider = null;
 
         //Ragdoll components
@@ -47,18 +48,20 @@ namespace ModelReplacement
         #region Virtual and Abstract Methods
 
         /// <summary>
-        /// Loads necessary assets from assetBundle, perform any necessary modifications on the replacement character model and return it.
+        /// Loads necessary assets from assetBundle, perform any necessary modifications on the replacement model and return it.
         /// </summary>
-        /// <returns>Model replacement GameObject</returns>
+        /// <returns>Replacement model GameObject</returns>
         protected abstract GameObject LoadAssetsAndReturnModel();
 
         /// <summary>
-        /// AssetBundles do not supply scripts that are not supported by the base game. Override to set custom scripts. 
+        /// Loads necessary assets from assetBundle, perform any necessary modifications on the replacement viewModel and return it. Override if you intend on implementing your own viewmodel. 
         /// </summary>
-        protected virtual void AddModelScripts()
+        /// <returns>Replacement viewModel GameObject</returns>
+        protected virtual GameObject LoadAssetsAndReturnViewModel()
         {
-
+            return null;
         }
+
         /// <summary>
         /// Override this to return a derivative AvatarUpdater. Only do this if you really know what you are doing. 
         /// </summary>
@@ -68,6 +71,13 @@ namespace ModelReplacement
             return new AvatarUpdater();
         }
 
+        /// <summary>
+        /// AssetBundles do not supply scripts that are not supported by the base game. Override to set custom scripts. 
+        /// </summary>
+        protected virtual void AddModelScripts()
+        {
+
+        }
         protected internal virtual void OnHitEnemy(bool dead)
         {
             Console.WriteLine($"PLAYER HIT ENEMY {controller.playerUsername}");
@@ -114,19 +124,26 @@ namespace ModelReplacement
        
             ModelReplacementAPI.Instance.Logger.LogInfo($"Awake {controller.playerUsername}");
 
-            // Load model
+            // Load models
             replacementModel = LoadAssetsAndReturnModel();
             if (replacementModel == null)
             {
                 ModelReplacementAPI.Instance.Logger.LogFatal("LoadAssetsAndReturnModel() returned null. Verify that your assetbundle works and your asset name is correct. ");
             }
+            replacementViewModel = LoadAssetsAndReturnViewModel();
+            if(replacementViewModel != null)
+            {
+                ModelReplacementAPI.Instance.Logger.LogFatal($"Loading custom viewmodel on {GetName(this)}");
+            }
+
 
             // Fix Materials and renderers
+            Material gameMat = controller.thisPlayerModel.GetComponent<SkinnedMeshRenderer>().sharedMaterial;
+            gameMat = new Material(gameMat); // Copy so that shared material isn't accidently changed by overriders of GetReplacementMaterial()
+
             materialHelper = new MaterialHelper(this);
             Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
             SkinnedMeshRenderer[] skinnedRenderers = replacementModel.GetComponentsInChildren<SkinnedMeshRenderer>();
-            Material gameMat = controller.thisPlayerModel.GetComponent<SkinnedMeshRenderer>().sharedMaterial;
-            gameMat = new Material(gameMat); // Copy so that shared material isn't accidently changed by overriders of GetReplacementMaterial()
             Dictionary<Material, Material> matMap = new();
             List<Material> materials = ListPool<Material>.Get();
             foreach (Renderer renderer in renderers)
@@ -148,11 +165,39 @@ namespace ModelReplacement
             {
                 item.updateWhenOffscreen = true;
             }
+            // Fix materials and renderers on ViewModel
+            if (replacementViewModel != null)
+            {
+                Renderer[] renderersViewModel = replacementViewModel.GetComponentsInChildren<Renderer>();
+                SkinnedMeshRenderer[] skinnedRenderersViewModel = replacementViewModel.GetComponentsInChildren<SkinnedMeshRenderer>();
+                Dictionary<Material, Material> matMapViewModel = new();
+                List<Material> materialsViewModel = ListPool<Material>.Get();
+                foreach (Renderer renderer in renderersViewModel)
+                {
+                    renderer.GetSharedMaterials(materialsViewModel);
+                    for (int i = 0; i < materialsViewModel.Count; i++)
+                    {
+                        Material mat = materialsViewModel[i];
+                        if (!matMapViewModel.TryGetValue(mat, out Material replacementMat))
+                        {
+                            matMapViewModel[mat] = replacementMat = materialHelper.GetReplacementMaterial(gameMat, mat);
+                        }
+                        materialsViewModel[i] = replacementMat;
+                    }
+                    renderer.SetMaterials(materialsViewModel);
+                }
+                ListPool<Material>.Release(materialsViewModel);
+                foreach (SkinnedMeshRenderer item in skinnedRenderersViewModel)
+                {
+                    item.updateWhenOffscreen = true;
+                }
+            }
+
 
             //Offset Builder Data
             var replacementAnimator = replacementModel.GetComponentInChildren<Animator>();
-            OffsetBuilder ite = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
-            UseNoPostProcessing = ite.UseNoPostProcessing;
+            OffsetBuilder offsetBuilder = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
+            UseNoPostProcessing = offsetBuilder.UseNoPostProcessing;
 
             // Set scripts missing from assetBundle
             try
@@ -169,6 +214,14 @@ namespace ModelReplacement
             replacementModel.name += $"({controller.playerUsername})";
             replacementModel.transform.localPosition = new Vector3(0, 0, 0);
             replacementModel.SetActive(true);
+            // Instantiate viewModel
+            if(replacementViewModel != null)
+            {
+                replacementViewModel = UnityEngine.Object.Instantiate<GameObject>(replacementViewModel);
+                replacementViewModel.name += $"({controller.playerUsername})";
+                replacementViewModel.transform.localPosition = new Vector3(0, 0, 0);
+                replacementViewModel.SetActive(true);
+            }
 
 
             // Sets y extents to the same size for player body and extents.
@@ -176,14 +229,22 @@ namespace ModelReplacement
             float scale = playerBodyExtents.y / GetBounds().extents.y;
             replacementModel.transform.localScale *= scale;
 
-
+            //Section for scaling viewModels
+            //
+            //Consider getting bone path length from spine to hand, and scaling it to the player bone path length
+            //
+            
             // Assign the avatar
             avatar = GetAvatarUpdater();
             cosmeticAvatar = avatar;
             ragdollAvatar = new AvatarUpdater();
             avatar.AssignModelReplacement(controller.gameObject, replacementModel);
-
+            if(replacementViewModel != null)
+            {
+                avatar.AssignViewModelReplacement(controller.gameObject, replacementViewModel);
+            }
             
+
 
             if (ModelReplacementAPI.moreCompanyPresent)
             {
@@ -280,6 +341,7 @@ namespace ModelReplacement
         {
             ModelReplacementAPI.Instance.Logger.LogInfo($"Destroy body component for {controller.playerUsername}");
             Destroy(replacementModel);
+            Destroy(replacementViewModel);
             Destroy(replacementDeadBody);
             if (ModelReplacementAPI.moreCompanyPresent)
             {
@@ -332,6 +394,13 @@ namespace ModelReplacement
             foreach (Renderer renderer in replacementModel.GetComponentsInChildren<Renderer>())
             {
                 renderer.enabled = enabled;
+            }
+            if(replacementViewModel != null)
+            {
+                foreach (Renderer renderer in replacementViewModel.GetComponentsInChildren<Renderer>())
+                {
+                    renderer.enabled = enabled;
+                }
             }
         }
 
