@@ -373,11 +373,15 @@ namespace ModelReplacement
             if (replacementViewModel)
             {
                 controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
-                replacementViewModel.layer = ArmsLayer;
+                Renderer[] renderers = replacementViewModel.GetComponentsInChildren<Renderer>();
+                foreach (Renderer renderer in renderers)
+                {
+                    renderer.gameObject.layer = layer;
+                }
             }
             else
             {
-                controller.thisPlayerModelArms.gameObject.layer = ArmsLayer;
+                controller.thisPlayerModelArms.gameObject.layer = layer;
             }
         }
         public void RendererPatches()
