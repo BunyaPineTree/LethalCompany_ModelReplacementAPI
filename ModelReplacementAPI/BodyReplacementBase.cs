@@ -130,8 +130,10 @@ namespace ModelReplacement
             {
                 ModelReplacementAPI.Instance.Logger.LogFatal("LoadAssetsAndReturnModel() returned null. Verify that your assetbundle works and your asset name is correct. ");
             }
-            replacementViewModel = LoadAssetsAndReturnViewModel();
-            if(replacementViewModel != null)
+
+            replacementViewModel = viewState.localPlayer ? LoadAssetsAndReturnViewModel() : null;
+
+            if (replacementViewModel != null)
             {
                 ModelReplacementAPI.Instance.Logger.LogFatal($"Loading custom viewmodel on {GetName(this)}");
             }
