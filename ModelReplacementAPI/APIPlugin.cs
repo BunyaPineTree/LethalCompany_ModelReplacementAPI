@@ -13,7 +13,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "2.3.6";
+        public const string VERSION = "2.3.7";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
@@ -230,11 +230,11 @@ namespace ModelReplacement
                 return;
             }
 
-            BodyReplacementBase existingReplacement = player.gameObject.GetComponent<BodyReplacementBase>();
+            bool hasExistingReplacement = player.gameObject.TryGetComponent(out BodyReplacementBase existingReplacement);
             int suitID = player.currentSuitID;
             string suitName = StartOfRound.Instance.unlockablesList.unlockables[suitID].unlockableName;
 
-            if (existingReplacement != null)
+            if (hasExistingReplacement)
             {
                 if (existingReplacement.GetType() == type && existingReplacement.suitName == suitName)
                 {
@@ -246,7 +246,7 @@ namespace ModelReplacement
             }
 
             Instance.Logger.LogInfo($"Suit Change detected {existingReplacement?.suitName} => {suitName}, Replacing {type}.");
-            BodyReplacementBase replacement = player.thisPlayerBody.gameObject.AddComponent(type) as BodyReplacementBase;
+            BodyReplacementBase replacement = player.gameObject.AddComponent(type) as BodyReplacementBase;
             replacement.suitName = suitName;
         }
 

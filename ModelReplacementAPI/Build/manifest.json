@@ -1,6 +1,6 @@
 {
     "name": "ModelReplacementAPI",
-    "version_number": "2.3.6",
+    "version_number": "2.3.7",
     "website_url": "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI",
     "description": "API to simplify model replacement",
     "dependencies": [

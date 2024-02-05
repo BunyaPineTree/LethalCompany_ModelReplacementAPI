@@ -13,9 +13,11 @@ For more info on making model replacements see the wiki at https://github.com/Bu
 
 
 ## Changelog
-	- v2.3.7
+	- v2.4.0
 		- Fixed item positions and rotations 
 		- ViewModel support added
+	- v2.3.7
+		- Invisible scav dead bodies made visible. Huge thanks to SylviBlossom for locating the problem and providing the solution. 
 	- v2.3.6
 		- Players should be visible further than a meter. 
 	- v2.3.5
