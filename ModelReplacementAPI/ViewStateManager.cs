@@ -57,18 +57,18 @@ namespace ModelReplacement
         //First Person       1100001001110110001011111110111 arm, no model = > 1631262711
 
         //Base CustomPass    1111111111111111111111111111111 => 2147483647   //FIND FIRST PERSON AND THIRD PERSON CULLING MASKS THAT SUPPORT A NOPOST LAYER
-        //Adj CustomPass     1110111111011111111111111111111 => 1744830463
-        //                      |      |
+        //Adj CustomPass     1110111111111011111111111111111 => 2013134847
+        //                      |         |
         //                      |  Adjusted with NoPost
         //ThirdPerson        0101001101110110001011111111111 model, no arm => 700127231
-        //First Person       1101001001010110001011111111111 arm, no model => 1764431871
+        //First Person       1101001001110010001011111111111 arm, no model => 1765349375
         //Mirror             0100001101110110001011101011111 model, no arm
         //ship camera        0000000000110000000001101001001 model, no arm 
         //Model  23                 x
         //Arms  30           x                                                  
         //Visible 0                                        x
         //FIX
-        //NoPostModel 20               x 
+        //NoPostModel 17                  x
         //NoPostArms 
         //NoPostVisible 27      x
 
@@ -76,8 +76,8 @@ namespace ModelReplacement
 
         //Using adjusted values here, other cameras will have their masks converted via patch.
         private static int CullingMaskThirdPerson = 700127231; //Base game MainCamera culling mask                                 
-        public static int CullingMaskFirstPerson = 1764431871; //Modified base game to provide layers for arms and body 
-        private static int CullingNoPostExcluded = 2012217343; //CustomPassVolume adjusted mask to remove postProcessing on designated layers.  
+        public static int CullingMaskFirstPerson = 1765349375; //Modified base game to provide layers for arms and body 
+        private static int CullingNoPostExcluded = 2013134847; //CustomPassVolume adjusted mask to remove postProcessing on designated layers.  
                                                                // public static int AllMask = (1 << visibleLayer) + (1 << NoPostVisibleLayer) + 1;
 
 
@@ -86,7 +86,7 @@ namespace ModelReplacement
         public static int visibleLayer = 0; // Likely all culling masks show layer 0
 
         //These layers behave identically to their corresponding layers, with the additional trait of being excluded from the CustomPassVolume postProcessing
-        public static int NoPostModelLayer = 20;
+        public static int NoPostModelLayer = 17;
         //private static int NoPostArmsLayer;
         public static int NoPostVisibleLayer = 27;
 
