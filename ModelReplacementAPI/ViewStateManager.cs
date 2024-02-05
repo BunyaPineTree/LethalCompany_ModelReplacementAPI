@@ -47,16 +47,13 @@ namespace ModelReplacement
         //Every camera that sees model must be able to see NoPostModel
 
 
-        //First Person Layer => arms visible, mode
-
-
         //==================================================================== Rendering Logic ====================================================================
         //ThirdPerson        0100001001110110001011111111111 model, no arm = > 557520895
         //Mirror             0100001101110110001011101011111 model, no arm
         //ship camera        0000000000110000000001101001001 model, no arm
         //First Person       1100001001110110001011111110111 arm, no model = > 1631262711
 
-        //Base CustomPass    1111111111111111111111111111111 => 2147483647   //FIND FIRST PERSON AND THIRD PERSON CULLING MASKS THAT SUPPORT A NOPOST LAYER
+        //Base CustomPass    1111111111111111111111111111111 => 2147483647 
         //Adj CustomPass     1110111111111011111111111111111 => 2013134847
         //                      |         |
         //                      |  Adjusted with NoPost
