@@ -17,7 +17,7 @@ namespace ModelReplacement.Patches
 
 
         [HarmonyPatch("DamagePlayerFromOtherClientClientRpc")]
-        [HarmonyPrefix]
+        [HarmonyPostfix]
         public static void DamagePlayerFromOtherClientClientRpc(ref PlayerControllerB __instance, int damageAmount, Vector3 hitDirection, int playerWhoHit, int newHealthAmount)
         {
             PlayerControllerB _playerWhoHit = __instance.playersManager.allPlayerScripts[playerWhoHit];
@@ -31,7 +31,7 @@ namespace ModelReplacement.Patches
         }
 
         [HarmonyPatch("DamagePlayerClientRpc")]
-        [HarmonyPrefix]
+        [HarmonyPostfix]
         public static void DamagePlayerClientRpc(ref PlayerControllerB __instance, int damageNumber, int newHealthAmount)
         {
             if (!__instance) return;
@@ -57,6 +57,16 @@ namespace ModelReplacement.Patches
                     if (!rayTarget) return;
                     rayTarget.controller.ShowNameBillboard();
                 }
+            }
+        }
+        [HarmonyPatch("SpawnDeadBody")]
+        [HarmonyPostfix]
+        public static void SpawnDeadBody(int playerId, Vector3 bodyVelocity, int causeOfDeath, PlayerControllerB deadPlayerController, int deathAnimation = 0, Transform overridePosition = null)
+        {
+            var renderers = deadPlayerController.deadBody.gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+            foreach (var renderer in renderers)
+            {
+                renderer.gameObject.layer = ViewStateManager.visibleLayer;
             }
         }
     }

@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.3.6
+# ModelReplacementAPI v2.3.7
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -13,6 +13,9 @@ For more info on making model replacements see the wiki at https://github.com/Bu
 
 
 ## Changelog
+	- v2.3.7
+		- Fixed item positions and rotations 
+		- ViewModel support added
 	- v2.3.6
 		- Players should be visible further than a meter. 
 	- v2.3.5

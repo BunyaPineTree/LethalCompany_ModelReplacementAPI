@@ -26,12 +26,25 @@ namespace ModelReplacement.Patches
     [HarmonyPatch(typeof(MaskedPlayerEnemy))]
     public class MaskedPlayerEnemyPatch
     {
-        [HarmonyPatch("SetSuit")]
+        [HarmonyPatch("FinishKillAnimation")]
         [HarmonyPrefix]
-        public static void SetModelReplacement(ref MaskedPlayerEnemy __instance, int suitId)
+        public static void SetModelReplacement(ref MaskedPlayerEnemy __instance, bool killedPlayer)
         {
-            BodyReplacementBase bodyReplacement = __instance.mimickingPlayer.gameObject.GetComponent<BodyReplacementBase>();
-            if (!bodyReplacement) return;
+            try
+            {
+                BodyReplacementBase bodyReplacement = __instance.mimickingPlayer.gameObject.GetComponent<BodyReplacementBase>();
+                if (!bodyReplacement) return;
+
+                bodyReplacement.CreateAndParentMasked(__instance);
+
+
+
+            }
+            catch
+            {
+
+            }
+            
         }
 
     }

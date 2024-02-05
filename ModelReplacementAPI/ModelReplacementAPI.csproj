@@ -23,6 +23,10 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <Compile Remove="ModelUpdateHandler.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <None Remove="culling Analysis.txt" />
   </ItemGroup>
 

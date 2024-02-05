@@ -32,7 +32,13 @@ namespace ModelReplacement
 
         private void Awake()
         {
-            Instance = this;
+            Logger = BepInEx.Logging.Logger.CreateLogSource(PluginInfo.GUID);
+            // Plugin startup logic
+            bool flag = ModelReplacementAPI.Instance == null;
+            if (flag)
+            {
+                ModelReplacementAPI.Instance = this;
+            }
 
             moreCompanyPresent = IsPluginPresent("me.swipez.melonloader.morecompany");
             thirdPersonPresent = IsPluginPresent("verity.3rdperson");
@@ -57,10 +63,7 @@ namespace ModelReplacement
 
         //Other
         public static ModelReplacementAPI Instance = null;
-
-        public new ManualLogSource Logger = new ManualLogSource(PluginInfo.NAME);
-
-
+        public new ManualLogSource Logger;
         private static int steamLobbyID => GameNetworkManager.Instance.currentLobby.HasValue ? (int)GameNetworkManager.Instance.currentLobby.Value.Id.Value : -1;
         public static bool IsLan => steamLobbyID == -1;
 
@@ -124,7 +127,7 @@ namespace ModelReplacement
                 return;
             }
 
-            Instance.Logger.LogDebug($"Registering body replacement type {type} to suit name {suitNameToReplace}.");
+            Instance.Logger.LogInfo($"Registering body replacement type {type} to suit name {suitNameToReplace}.");
             RegisteredModelReplacements.Add(suitNameToReplace, type);
         }
 
@@ -143,7 +146,7 @@ namespace ModelReplacement
                 return;
             }
 
-            Instance.Logger.LogDebug($"Registering body replacement {logType} type {type}.");
+            Instance.Logger.LogInfo($"Registering body replacement {logType} type {type}.");
             registeredType = type;
         }
 
