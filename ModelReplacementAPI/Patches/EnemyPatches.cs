@@ -23,16 +23,4 @@ namespace ModelReplacement.Patches
         }
 
     }
-    [HarmonyPatch(typeof(MaskedPlayerEnemy))]
-    public class MaskedPlayerEnemyPatch
-    {
-        [HarmonyPatch("SetSuit")]
-        [HarmonyPrefix]
-        public static void SetModelReplacement(ref MaskedPlayerEnemy __instance, int suitId)
-        {
-            BodyReplacementBase bodyReplacement = __instance.mimickingPlayer.gameObject.GetComponent<BodyReplacementBase>();
-            if (!bodyReplacement) return;
-        }
-
-    }
 }

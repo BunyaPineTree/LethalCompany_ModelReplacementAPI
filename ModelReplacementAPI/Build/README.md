@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.3.7
+# ModelReplacementAPI v2.3.8
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -8,11 +8,17 @@ For more info on making model replacements see the wiki at https://github.com/Bu
 - More Company cosmetics behave strangely on ragdolls
 - Due to the implementation of post processing removal, some circumstances will prevent a noPostProcessing enabled model from appearing on cameras. An example of this is MirrorDecor, which will not immediately show your model. As of this moment this can be fixed by taking off your model replacement, and putting it back on. 
 - At this moment, some cameras do not display the base player model
-- In response to shadows not appearing in first person in some circumstances, I have removed all shadows in first person as a preemptive measure to making shadows actually work in first person. 
+- In response to shadows not appearing in first person in some circumstances, I have removed all shadows in first person as a preemptive measure to making shadows actually work in first person.
+- Flashlights go through you as a result of not having a shadow.
 - Supporting no post process layers has required finding two layers that aren't used freqently, or ever, to render models without post process on. I have performed a thorough search this time to prevent purple rails, but just because nothing was on the layers I searched in doesn't mean nothing ever will be. If you find objects that don't look correct, please let me know.
 
 
 ## Changelog
+	- v2.3.8
+		- Removed MoreCompany Cosmetic errors from console.
+		- Removed debug line that occasionally caused masked errors.
+		- Fixed character sizing issue when in the middle of an emote. 
+		- Fixed rubberbanding
 	- v2.3.7
 		- Invisible scav dead bodies made visible. Huge thanks to SylviBlossom for locating the problem and providing the solution. 
 	- v2.3.6

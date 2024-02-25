@@ -36,6 +36,7 @@ namespace ModelReplacement
 
         //Mod Support components
         public AvatarUpdater cosmeticAvatar = null;
+        public bool IsActive = true;
 
         //Settings
         public bool UseNoPostProcessing = false;
@@ -227,15 +228,12 @@ namespace ModelReplacement
 
 
             // Sets y extents to the same size for player body and extents.
-            Vector3 playerBodyExtents = controller.thisPlayerModel.bounds.extents;
-            float scale = playerBodyExtents.y / GetBounds().extents.y;
+            //Vector3 playerBodyExtents = controller.thisPlayerModel.bounds.extents;
+            float playerHeight = 1.465f; //Hardcode player height to account for emote mods. 
+            float scale = playerHeight / GetBounds().extents.y;
             replacementModel.transform.localScale *= scale;
 
-            //Section for scaling viewModels
-            //
-            //Consider getting bone path length from spine to hand, and scaling it to the player bone path length
-            //
-            
+
             // Assign the avatar
             avatar = GetAvatarUpdater();
             cosmeticAvatar = avatar;
@@ -275,7 +273,7 @@ namespace ModelReplacement
         }
 
         protected virtual void Start() {}
-        protected virtual void Update()
+        protected virtual void LateUpdate()
         {
             // Handle Ragdoll creation and destruction
             GameObject deadBody = null;
