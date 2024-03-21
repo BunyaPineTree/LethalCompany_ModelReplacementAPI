@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.3.8
+# ModelReplacementAPI v2.3.9
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -14,6 +14,8 @@ For more info on making model replacements see the wiki at https://github.com/Bu
 
 
 ## Changelog
+	- v2.3.9
+		- Resolved Incompatability that appears when LCVR and TooManyEmotes are both present. 
 	- v2.3.8
 		- Removed MoreCompany Cosmetic errors from console.
 		- Removed debug line that occasionally caused masked errors.
