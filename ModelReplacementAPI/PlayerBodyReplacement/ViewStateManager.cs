@@ -445,6 +445,13 @@ namespace ModelReplacement
         {
             return DangerousTMEViewState();
         }
-        private bool DangerousTMEViewState() => ThirdPersonEmoteController.emoteCamera.enabled;
+        private bool DangerousTMEViewState()
+        {
+            try
+            {
+                return ThirdPersonEmoteController.emoteCamera.enabled;
+            }
+            catch { return false; }
+        }
     }
 }

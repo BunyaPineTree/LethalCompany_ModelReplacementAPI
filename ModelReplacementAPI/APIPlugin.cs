@@ -13,7 +13,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "2.3.7";
+        public const string VERSION = "2.3.9";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
@@ -205,6 +205,7 @@ namespace ModelReplacement
 
             Instance.Logger.LogInfo($"Reinstantiating model replacement for {player.playerUsername}");
             Type bodyReplacementType = bodyReplacement.GetType();
+            bodyReplacement.IsActive = false;
             Destroy(bodyReplacement);
             player.gameObject.AddComponent(bodyReplacementType);
         }
@@ -242,6 +243,7 @@ namespace ModelReplacement
                 }
 
                 Instance.Logger.LogInfo($"Model Replacement Change detected {existingReplacement.GetType()} => {type}, changing model.");
+                existingReplacement.IsActive = false;
                 Destroy(existingReplacement); // Destroy the existing body replacement
             }
 
@@ -293,6 +295,7 @@ namespace ModelReplacement
             BodyReplacementBase existingReplacement = player.gameObject.GetComponent<BodyReplacementBase>();
             if (existingReplacement)
             {
+                existingReplacement.IsActive = false;
                 Destroy(existingReplacement);
             }
         }

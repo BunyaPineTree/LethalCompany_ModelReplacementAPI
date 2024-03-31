@@ -23,29 +23,4 @@ namespace ModelReplacement.Patches
         }
 
     }
-    [HarmonyPatch(typeof(MaskedPlayerEnemy))]
-    public class MaskedPlayerEnemyPatch
-    {
-        [HarmonyPatch("FinishKillAnimation")]
-        [HarmonyPrefix]
-        public static void SetModelReplacement(ref MaskedPlayerEnemy __instance, bool killedPlayer)
-        {
-            try
-            {
-                BodyReplacementBase bodyReplacement = __instance.mimickingPlayer.gameObject.GetComponent<BodyReplacementBase>();
-                if (!bodyReplacement) return;
-
-                bodyReplacement.CreateAndParentMasked(__instance);
-
-
-
-            }
-            catch
-            {
-
-            }
-            
-        }
-
-    }
 }

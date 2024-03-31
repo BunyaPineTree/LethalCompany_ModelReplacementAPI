@@ -41,6 +41,7 @@ namespace ModelReplacement
 
         //Mod Support components
         public AvatarUpdater cosmeticAvatar = null;
+        public bool IsActive = true;
 
         //Settings
         public bool UseNoPostProcessing = false;
@@ -317,6 +318,7 @@ namespace ModelReplacement
         }
 
         protected virtual void Start() {}
+		
         public virtual void LateUpdate()
         {
             // Handle Ragdoll creation and destruction
