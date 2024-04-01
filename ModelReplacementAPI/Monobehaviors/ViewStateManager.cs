@@ -9,14 +9,23 @@ using LCThirdPerson;
 using System.Collections;
 using GameNetcodeStuff;
 using TooManyEmotes.Patches;
+using ModelReplacement.Monobehaviors;
 //
 //This component exists to manageand patch the layers and cullingMasks for players and cameras.
 //This is in an attempt to support all third person mods simultaneously without numerous individual patches, which historically are not a robust solution.
 //
 //
-namespace ModelReplacement.Enemies
+//        ModelReplacement, for backwards compat
+namespace ModelReplacement
 {
-    public class ViewStateManager : MonoBehaviour
+    public enum ViewState
+    {
+        None,
+        ThirdPerson,
+        FirstPerson,
+        Debug
+    }
+    public class ViewStateManager : ManagerBase
     {
         //Required logic
         //Layers:
@@ -40,28 +49,25 @@ namespace ModelReplacement.Enemies
         //Every camera that sees model must be able to see NoPostModel
 
 
-        //First Person Layer => arms visible, mode
-
-
         //==================================================================== Rendering Logic ====================================================================
         //ThirdPerson        0100001001110110001011111111111 model, no arm = > 557520895
         //Mirror             0100001101110110001011101011111 model, no arm
         //ship camera        0000000000110000000001101001001 model, no arm
         //First Person       1100001001110110001011111110111 arm, no model = > 1631262711
 
-        //Base CustomPass    1111111111111111111111111111111 => 2147483647   //FIND FIRST PERSON AND THIRD PERSON CULLING MASKS THAT SUPPORT A NOPOST LAYER
-        //Adj CustomPass     1110111111011111111111111111111 => 1744830463
-        //                      |      |
+        //Base CustomPass    1111111111111111111111111111111 => 2147483647 
+        //Adj CustomPass     1110111111111011111111111111111 => 2013134847
+        //                      |         |
         //                      |  Adjusted with NoPost
         //ThirdPerson        0101001101110110001011111111111 model, no arm => 700127231
-        //First Person       1101001001010110001011111111111 arm, no model => 1764431871
+        //First Person       1101001001110010001011111111111 arm, no model => 1765349375
         //Mirror             0100001101110110001011101011111 model, no arm
         //ship camera        0000000000110000000001101001001 model, no arm 
         //Model  23                 x
         //Arms  30           x                                                  
         //Visible 0                                        x
         //FIX
-        //NoPostModel 20               x 
+        //NoPostModel 17                  x
         //NoPostArms 
         //NoPostVisible 27      x
 
@@ -69,8 +75,8 @@ namespace ModelReplacement.Enemies
 
         //Using adjusted values here, other cameras will have their masks converted via patch.
         private static int CullingMaskThirdPerson = 700127231; //Base game MainCamera culling mask                                 
-        public static int CullingMaskFirstPerson = 1764431871; //Modified base game to provide layers for arms and body 
-        private static int CullingNoPostExcluded = 2012217343; //CustomPassVolume adjusted mask to remove postProcessing on designated layers.  
+        public static int CullingMaskFirstPerson = 1765349375; //Modified base game to provide layers for arms and body 
+        private static int CullingNoPostExcluded = 2013134847; //CustomPassVolume adjusted mask to remove postProcessing on designated layers.  
                                                                // public static int AllMask = (1 << visibleLayer) + (1 << NoPostVisibleLayer) + 1;
 
 
@@ -79,26 +85,26 @@ namespace ModelReplacement.Enemies
         public static int visibleLayer = 0; // Likely all culling masks show layer 0
 
         //These layers behave identically to their corresponding layers, with the additional trait of being excluded from the CustomPassVolume postProcessing
-        public static int noPostModelLayer = 20;
+        public static int NoPostModelLayer = 17;
         //private static int NoPostArmsLayer;
-        public static int noPostVisibleLayer = 27;
-        public static int invisibleLayer = 31; //No culling mask shows layer 31
+        public static int NoPostVisibleLayer = 27;
 
-        private bool bodyReplacementExists = false; 
-        private BodyReplacementBase bodyReplacement;
-        private PlayerControllerB controller;
-        private GameObject replacementModel;
-        private GameObject replacementViewModel;
+        private static int invisibleLayer = 31; //No culling mask shows layer 31
 
-        private bool UseNoPostProcessing => bodyReplacementExists? bodyReplacement.UseNoPostProcessing : false;
-        private bool DebugRenderPlayer => bodyReplacementExists ?  bodyReplacement.DebugRenderPlayer: false;
-        private bool DebugRenderModel => bodyReplacementExists ?  bodyReplacement.DebugRenderModel: false;
-
-        public bool localPlayer => GameNetworkManager.Instance.localPlayerController == controller;
+        private MeshRenderer nameTagObj = null;
+        private MeshRenderer nameTagObj2 = null;
         GameObject playerHUD = null;
-        public void Awake()
+        private bool UseNoPostProcessing => bodyReplacementExists ? bodyReplacement.UseNoPostProcessing : false;
+        private bool DebugRenderPlayer => bodyReplacementExists ? bodyReplacement.DebugRenderPlayer : false;
+        private bool DebugRenderModel => bodyReplacementExists ? bodyReplacement.DebugRenderModel : false;
+        public int ModelLayer => UseNoPostProcessing ? NoPostModelLayer : modelLayer;
+        public int ArmsLayer => armsLayer;
+        public int VisibleLayer => UseNoPostProcessing ? NoPostVisibleLayer : visibleLayer;
+        public int InvisibleLayer => invisibleLayer;
+
+        protected override void Awake()
         {
-            controller = base.GetComponent<PlayerControllerB>();
+            base.Awake();
             MeshRenderer[] gameObjects = controller.gameObject.GetComponentsInChildren<MeshRenderer>();
             nameTagObj = gameObjects.Where(x => x.gameObject.name == "LevelSticker").First();
             nameTagObj2 = gameObjects.Where(x => x.gameObject.name == "BetaBadge").First();
@@ -109,42 +115,69 @@ namespace ModelReplacement.Enemies
             RendererPatches();
         }
 
-        public void Update()
+        public override void ReportBodyReplacementAddition(BodyReplacementBase replacement)
         {
-            if (bodyReplacementExists && bodyReplacement == null) { ReportBodyReplacementRemoval(); }
-            if (bodyReplacementExists)
-            {
-                UpdateModelReplacement();
-            }
-            else
-            {
-                UpdatePlayer();
-            }
-
-
-        }
-
-        public void ReportBodyReplacementAddition(BodyReplacementBase replacement)
-        {
-            bodyReplacement = replacement;
-            replacementModel = replacement.replacementModel;
-            replacementViewModel = replacement.replacementViewModel;
-            bodyReplacementExists = true;
+            base.ReportBodyReplacementAddition(replacement);
             PatchViewState();
         }
-        public void ReportBodyReplacementRemoval()
+        public static void PatchViewState()
         {
-            bodyReplacement = null;
-            replacementModel = null;
-            replacementViewModel = null;
-            bodyReplacementExists = false;
-        }
+            var cpass = GameObject.Find("Systems/Rendering/CustomPass").GetComponent<CustomPassVolume>().customPasses.First();
+            (cpass as DrawRenderersCustomPass).layerMask = CullingNoPostExcluded;
 
-        public int ModelLayer => UseNoPostProcessing ? noPostModelLayer : modelLayer;
-        public int ArmsLayer => armsLayer;
-        public int VisibleLayer => UseNoPostProcessing ? noPostVisibleLayer : visibleLayer;
-        public int InvisibleLayer => invisibleLayer;
-        public void UpdatePlayer()
+            var a = FindObjectsOfType<Camera>();
+
+            int maskModel = 1 << modelLayer;
+            int maskVisible = 1 << visibleLayer;
+
+            int maskNoPassModel = 1 << NoPostModelLayer;
+            int maskNoPassVisible = 1 << NoPostVisibleLayer;
+            int maskArms = 1 << 3;  //1 << armsLayer; // 3 is by base the first person effects layer
+
+            foreach (Camera camera in a)
+            {
+                int cullingMask = camera.cullingMask;
+
+                if ((cullingMask & maskModel) != 0) //If the bitwise and is 0, then cullingMask does not contain the modelLayer bit, and can be ignored
+                {
+                    if ((cullingMask & maskNoPassModel) == 0) //If the bitwise and is 0, then cullingMask culls the NoPassModel layer, and needs to have NoPass added.
+                    {
+                        camera.cullingMask += maskNoPassModel;
+                    }
+                }
+                if ((cullingMask & maskVisible) != 0) //If the bitwise and is 0, then cullingMask does not contain the visibleLayer bit, and can be ignored
+                {
+                    if ((cullingMask & maskNoPassVisible) == 0) //If the bitwise and is 0, then cullingMask culls the NoPassVisible layer, and needs to have NoPass added.
+                    {
+                        camera.cullingMask += maskNoPassVisible;
+                    }
+                    /*
+                    if((cullingMask & maskArms) == 0)//If the bitwise and is 0, then cullingMask culls the Arms layer, and should see the model layer
+                    {
+                        camera.cullingMask += maskModel;
+                    }
+                    */
+
+                }
+
+
+
+
+
+            }
+            Camera cam1 = GameObject.Find("Environment/HangarShip/Cameras/FrontDoorSecurityCam/SecurityCamera").GetComponent<Camera>();
+            if ((cam1.cullingMask & 1 << modelLayer) == 0) //If the bitwise and is 0, then cullingMask culls the modelLayer, and needs to have modelLayer added.
+            {
+                cam1.cullingMask += 1 << modelLayer;
+            }
+
+            Camera cam2 = GameObject.Find("Environment/HangarShip/Cameras/ShipCamera").GetComponent<Camera>();
+            if ((cam2.cullingMask & 1 << modelLayer) == 0) //If the bitwise and is 0, then cullingMask culls the modelLayer, and needs to have modelLayer added.
+            {
+                cam2.cullingMask += 1 << modelLayer;
+            }
+        }
+        public override void UpdatePlayer()
         {
             ViewState state = GetViewState();
             SetPlayerRenderers(true);
@@ -171,26 +204,99 @@ namespace ModelReplacement.Enemies
                 }
             }
         }
-        public void UpdateModelReplacement()
+        public override void UpdateModelReplacement()
         {
             ViewState state = GetViewState();
             SetPlayerRenderers(false);
             SetPlayerLayers(modelLayer);
             controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
-
-            SetArmLayers(InvisibleLayer);
-            SetAvatarLayers(VisibleLayer, ShadowCastingMode.On);
-            playerHUD.SetActive(false);
-            if (ModelReplacementAPI.LCthirdPersonPresent)
+            if (state == ViewState.None)
             {
-                controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
+                SetArmLayers(InvisibleLayer);
+                SetAvatarLayers(InvisibleLayer, ShadowCastingMode.Off);
             }
+            else if (state == ViewState.FirstPerson)
+            {
+                SetArmLayers(ArmsLayer);
+                //SetAvatarLayers(ModelLayer, ShadowCastingMode.On);
+                SetAvatarLayers(VisibleLayer, ShadowCastingMode.ShadowsOnly);
+                playerHUD.SetActive(!bodyReplacement.RemoveHelmet);
+            }
+            else if (state == ViewState.ThirdPerson)
+            {
+                SetArmLayers(InvisibleLayer);
+                SetAvatarLayers(VisibleLayer, ShadowCastingMode.On);
+                playerHUD.SetActive(false);
+                if (ModelReplacementAPI.LCthirdPersonPresent)
+                {
+                    controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
+                }
+            }
+            else if (state == ViewState.Debug)
+            {
+                if (DebugRenderModel)
+                {
+                    SetAvatarLayers(VisibleLayer, ShadowCastingMode.On);
+                }
+                else
+                {
+                    SetAvatarLayers(InvisibleLayer, ShadowCastingMode.Off);
+                }
+                if (DebugRenderPlayer)
+                {
+                    SetPlayerRenderers(true);
+                    SetPlayerLayers(visibleLayer);
+                }
+                else
+                {
+                    SetPlayerRenderers(false);
+                    SetPlayerLayers(invisibleLayer);
+                }
+                if (ModelReplacementAPI.LCthirdPersonPresent)
+                {
+                    controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
+                }
 
+            }
 
         }
 
 
 
+
+        public ViewState GetViewState()
+        {
+            if (DebugRenderModel || DebugRenderPlayer)
+            {
+                return ViewState.Debug;
+            }
+            if (!controller.isPlayerControlled) //Dead, render nothing
+            {
+                return ViewState.None;
+            }
+            if (GameNetworkManager.Instance.localPlayerController != controller) //Other player, render third person
+            {
+                return ViewState.ThirdPerson;
+            }
+            if (ModelReplacementAPI.thirdPersonPresent && Safe3rdPersonActive()) //If any of these are true, we are in third person mode and must render third person
+            {
+                return ViewState.ThirdPerson;
+            }
+            if (ModelReplacementAPI.LCthirdPersonPresent && SafeLCActive())
+            {
+                return ViewState.ThirdPerson;
+            }
+            if (ModelReplacementAPI.recordingCameraPresent && SafeRecCamActive())
+            {
+                return ViewState.ThirdPerson;
+            }
+            if (ModelReplacementAPI.tooManyEmotesPresent && SafeTMEActive())
+            {
+                return ViewState.ThirdPerson;
+            }
+            return ViewState.FirstPerson; //Because none of the above triggered, we are in first person
+
+        }
         public void SetPlayerRenderers(bool enabled)
         {
             if (localPlayer)
@@ -205,9 +311,9 @@ namespace ModelReplacement.Enemies
                 controller.thisPlayerModelLOD1.enabled = enabled;
                 controller.thisPlayerModelLOD2.enabled = enabled;
             }
-            
 
-            controller.thisPlayerModel.shadowCastingMode = enabled ? ShadowCastingMode.On:  ShadowCastingMode.Off;
+
+            controller.thisPlayerModel.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
             controller.thisPlayerModelLOD1.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
             controller.thisPlayerModelLOD2.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
 
@@ -224,7 +330,7 @@ namespace ModelReplacement.Enemies
         }
         public void SetAvatarLayers(int layer, ShadowCastingMode mode)
         {
-            if(replacementModel == null) { return; }
+            if (replacementModel == null) { return; }
             Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
             foreach (Renderer renderer in renderers)
             {
@@ -241,6 +347,7 @@ namespace ModelReplacement.Enemies
                 foreach (Renderer renderer in renderers)
                 {
                     renderer.gameObject.layer = layer;
+                    renderer.shadowCastingMode = ShadowCastingMode.Off;
                 }
             }
             else
@@ -252,7 +359,7 @@ namespace ModelReplacement.Enemies
         {
             PatchViewState();
 
-            
+
 
             if (ModelReplacementAPI.recordingCameraPresent)
             {
@@ -309,6 +416,13 @@ namespace ModelReplacement.Enemies
         {
             return DangerousTMEViewState();
         }
-        private bool DangerousTMEViewState() => ThirdPersonEmoteController.emoteCamera.enabled;
+        private bool DangerousTMEViewState()
+        {
+            try
+            {
+                return ThirdPersonEmoteController.emoteCamera.enabled;
+            }
+            catch { return false; }
+        }
     }
 }

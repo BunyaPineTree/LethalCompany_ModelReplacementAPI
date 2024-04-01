@@ -3,11 +3,13 @@ using MoreCompany.Cosmetics;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using ModelReplacement.Scripts;
+using ModelReplacement.Scripts.Player;
 using ModelReplacement.AvatarBodyUpdater;
 
-namespace ModelReplacement.Modules
+namespace ModelReplacement.Monobehaviors
 {
-    public class MoreCompanyCosmeticManager
+    public class MoreCompanyCosmeticManager : ManagerBase
     {
         private BodyReplacementBase bodyReplacement;
         private PlayerControllerB controller;
@@ -15,16 +17,15 @@ namespace ModelReplacement.Modules
 
         private string lastException = "";
 
-        public MoreCompanyCosmeticManager(BodyReplacementBase bodyreplacement)
+
+        public override void UpdatePlayer()
         {
-            this.bodyReplacement = bodyreplacement;
-            controller = bodyreplacement.controller;
+            if (ModelReplacementAPI.moreCompanyPresent) { SafeRenderCosmetics(false); }
         }
 
-
-        public void Update(bool useAvatarTransforms)
+        public override void UpdateModelReplacement()
         {
-            if (ModelReplacementAPI.moreCompanyPresent) { SafeRenderCosmetics(useAvatarTransforms); }
+            if (ModelReplacementAPI.moreCompanyPresent) { SafeRenderCosmetics(true); }
         }
 
         private void SafeRenderCosmetics(bool useAvatarTransforms)
@@ -37,14 +38,15 @@ namespace ModelReplacement.Modules
             {
                 lastException = e.Message;
             }
-            
+
         }
 
         private Dictionary<CosmeticType2, Transform> cosmeticTransformPairs = new Dictionary<CosmeticType2, Transform>();
         private List<CosmeticInstance2> cosmeticInstances = new List<CosmeticInstance2>();
         private void RefreshCosmetics()
         {
-            if (cosmeticTransformPairs.Count == 0) {
+            if (cosmeticTransformPairs.Count == 0)
+            {
                 cosmeticTransformPairs.Add(CosmeticType2.HAT, cosmeticAvatar.GetAvatarTransformFromBoneName("spine.004"));
                 cosmeticTransformPairs.Add(CosmeticType2.CHEST, cosmeticAvatar.GetAvatarTransformFromBoneName("spine.003"));
                 cosmeticTransformPairs.Add(CosmeticType2.R_LOWER_ARM, cosmeticAvatar.GetAvatarTransformFromBoneName("arm.R_lower"));
@@ -53,7 +55,7 @@ namespace ModelReplacement.Modules
                 cosmeticTransformPairs.Add(CosmeticType2.R_SHIN, cosmeticAvatar.GetAvatarTransformFromBoneName("shin.R"));
             }
 
-            if(cosmeticInstances.Count == 0)
+            if (cosmeticInstances.Count == 0)
             {
                 CosmeticApplication application = controller.gameObject.GetComponentInChildren<CosmeticApplication>();
                 if (application == null)
@@ -95,13 +97,13 @@ namespace ModelReplacement.Modules
                 {
                     if (cosmeticInstance.DoRender)
                     {
-                        cosmeticInstance.cosmetic.SetActive(false);
+                        cosmeticInstance.cosmetic.SetActive(true);
                         cosmeticInstance.cosmetic.transform.parent = null;
                         cosmeticInstance.cosmetic.transform.localScale = cosmeticInstance.modelOffset.localScale;
 
                         Vector3 cosmeticPosition = cosmeticInstance.modelParent.transform.position + cosmeticInstance.modelOffset.position;
                         Quaternion cosmeticRotation = cosmeticInstance.modelParent.transform.rotation * cosmeticInstance.modelOffset.rotation;
-                        
+
 
                         cosmeticInstance.cosmetic.transform.SetPositionAndRotation(cosmeticPosition, cosmeticRotation);
                         SetAllChildrenLayer(cosmeticInstance.cosmetic.transform, ViewStateManager.modelLayer);
@@ -167,6 +169,6 @@ namespace ModelReplacement.Modules
             R_SHIN
         }
 
-        
+
     }
 }

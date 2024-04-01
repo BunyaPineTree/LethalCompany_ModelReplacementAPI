@@ -3,6 +3,8 @@ using BepInEx.Bootstrap;
 using BepInEx.Logging;
 using GameNetcodeStuff;
 using HarmonyLib;
+using ModelReplacement.Monobehaviors;
+using ModelReplacement.Monobehaviors.Enemies;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +15,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "2.3.9";
+        public const string VERSION = "2.4.0";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
@@ -47,6 +49,8 @@ namespace ModelReplacement
             tooManyEmotesPresent = IsPluginPresent("FlipMods.TooManyEmotes");
             recordingCameraPresent = IsPluginPresent("com.graze.gorillatag.placeablecamera");
 
+            MRAPI_NetworkingPresent = IsPluginPresent("meow.ModelReplacementAPI.Networking");
+
             Harmony harmony = new Harmony(PluginInfo.GUID);
             harmony.PatchAll();
             Logger.LogInfo($"Plugin {PluginInfo.GUID} is loaded!");
@@ -59,6 +63,8 @@ namespace ModelReplacement
         public static bool mirrorDecorPresent;
         public static bool tooManyEmotesPresent;
         public static bool recordingCameraPresent;
+
+        public static bool MRAPI_NetworkingPresent;
 
 
         //Other
@@ -260,7 +266,7 @@ namespace ModelReplacement
             try
             {
                 modelReplacement = player.gameObject.GetComponent<BodyReplacementBase>();
-                return (modelReplacement == null);
+                return (modelReplacement != null);
             }
             catch (Exception e)
             {
@@ -277,7 +283,7 @@ namespace ModelReplacement
         {
             try
             {
-                return (player.gameObject.GetComponent<BodyReplacementBase>() == null);
+                return (player.gameObject.GetComponent<BodyReplacementBase>() != null);
             }
             catch (Exception e)
             {
@@ -364,5 +370,9 @@ namespace ModelReplacement
             }
         }
         #endregion
+
+      
+
+
     }
 }

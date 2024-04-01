@@ -1,10 +1,11 @@
 ﻿using HarmonyLib;
+using ModelReplacement.Monobehaviors;
 using MoreCompany.Cosmetics;
 using UnityEngine;
 
 namespace ModelReplacement.Patches
 {
-    
+
     // Token: 0x02000005 RID: 5
     [HarmonyPatch(typeof(HUDManager), "AddPlayerChatMessageClientRpc")]
     internal class CosmeticPatch

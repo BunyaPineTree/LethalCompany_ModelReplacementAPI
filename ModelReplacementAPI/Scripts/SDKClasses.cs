@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-
+//        ModelReplacement.AvatarBodyUpdater, for SDK compat
 namespace ModelReplacement.AvatarBodyUpdater
 {
     #region model setup classes

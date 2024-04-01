@@ -2,6 +2,7 @@
 using HarmonyLib;
 using UnityEngine.Rendering;
 using UnityEngine;
+using ModelReplacement.Monobehaviors;
 
 namespace ModelReplacement.Patches
 {
@@ -13,6 +14,7 @@ namespace ModelReplacement.Patches
         public static void StartPatch(ref PlayerControllerB __instance)
         {
             __instance.gameObject.AddComponent<ViewStateManager>();
+            __instance.gameObject.AddComponent<MoreCompanyCosmeticManager>();
         }
 
 

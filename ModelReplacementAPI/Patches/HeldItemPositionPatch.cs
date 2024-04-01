@@ -1,6 +1,5 @@
 ﻿using HarmonyLib;
-using ModelReplacement;
-using ModelReplacement.Modules;
+using ModelReplacement.Monobehaviors;
 using UnityEngine;
 
 namespace ModelReplacement.Patches

@@ -1,43 +1,59 @@
 ﻿using GameNetcodeStuff;
-using ModelReplacement.AvatarBodyUpdater;
-using ModelReplacement.Enemies;
+using ModelReplacement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
+using ModelReplacement.AvatarBodyUpdater;
 
-namespace ModelReplacement.Enemies
+namespace ModelReplacement.Scripts.Enemies
 {
-    internal class MaskedAvatarUpdater : EnemyAvatarUpdaterBase
+
+    public class MaskedAvatarUpdater
     {
         //Third Person Avatar
+        protected SkinnedMeshRenderer enemyModelRenderer = null;
         protected Animator replacementAnimator = null;
+        protected GameObject enemy = null;
+        protected GameObject replacement = null;
+        public Vector3 ItemHolderPositionOffset { get; private set; } = Vector3.zero;
+        public Quaternion ItemHolderRotationOffset { get; private set; } = Quaternion.identity;
+        public Transform ItemHolder { get; private set; } = null;
+
         protected bool hasUpperChest = false;
         protected Vector3 rootPositionOffset = Vector3.zero;
-        protected Vector3 rootScale = Vector3.one;
 
 
 
-        public override void AssignModelReplacement(GameObject enemy, GameObject replacement)
+        public virtual void AssignModelReplacement(GameObject enemy, GameObject replacement)
         {
-            base.AssignModelReplacement(enemy, replacement);
+            MaskedPlayerEnemy enemyAI = enemy.GetComponent<MaskedPlayerEnemy>();
+            enemyModelRenderer = enemyAI.rendererLOD0;
+
+
+            this.enemy = enemy;
             replacementAnimator = replacement.GetComponentInChildren<Animator>();
+            this.replacement = replacement;
 
             OffsetBuilder offsetBuilder = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
+            ItemHolderPositionOffset = offsetBuilder.itemPositonOffset;
+            ItemHolderRotationOffset = offsetBuilder.itemRotationOffset;
+            ItemHolder = offsetBuilder.itemHolder.transform;
             rootPositionOffset = offsetBuilder.rootPositionOffset;
+
 
             Transform upperChestTransform = replacementAnimator.GetBoneTransform(HumanBodyBones.UpperChest);
             hasUpperChest = upperChestTransform != null;
         }
-        protected override void UpdateModel()
+
+        protected virtual void UpdateModel()
         {
-            foreach (Transform baseBone in enemyModelRenderers[0].bones)
+            foreach (Transform playerBone in enemyModelRenderer.bones)
             {
-                Transform modelBone = GetAvatarTransformFromBoneName(baseBone.name);
+                Transform modelBone = GetAvatarTransformFromBoneName(playerBone.name);
                 if (modelBone == null) { continue; }
 
-                modelBone.rotation = baseBone.rotation;
+                modelBone.rotation = playerBone.rotation;
                 RotationOffset offset = modelBone.GetComponent<RotationOffset>();
                 if (offset) { modelBone.rotation *= offset.offset; }
             }
@@ -46,6 +62,15 @@ namespace ModelReplacement.Enemies
             Transform playerRootBone = GetPlayerTransformFromBoneName("spine");
             rootBone.position = playerRootBone.position + playerRootBone.TransformVector(rootPositionOffset);
         }
+
+
+
+        public void Update()
+        {
+            if (enemyModelRenderer == null || replacementAnimator == null) { return; }
+            UpdateModel();
+        }
+
         public Transform GetAvatarTransformFromBoneName(string boneName)
         {
             if (boneName == "spine.002")
@@ -58,11 +83,6 @@ namespace ModelReplacement.Enemies
                 return hasUpperChest ? replacementAnimator.GetBoneTransform(HumanBodyBones.UpperChest) : replacementAnimator.GetBoneTransform(HumanBodyBones.Chest);
             }
 
-            if (boneName.Contains("PlayerRagdoll"))
-            {
-                return replacementAnimator.GetBoneTransform(HumanBodyBones.Hips);
-            }
-
             return modelToAvatarBone.TryGetValue(boneName, out HumanBodyBones avatarBone)
                 ? replacementAnimator.GetBoneTransform(avatarBone)
                 : null; // throw new Exception($"Failed to find bone {boneName}");
@@ -70,22 +90,15 @@ namespace ModelReplacement.Enemies
 
         public Transform GetPlayerTransformFromBoneName(string boneName)
         {
-            IEnumerable<Transform> playerBones = enemyModelRenderers[0].bones.Where(x => x.name == boneName);
+            IEnumerable<Transform> playerBones = enemyModelRenderer.bones.Where(x => x.name == boneName);
 
             if (playerBones.Any())
             {
                 return playerBones.First();
             }
 
-            if (boneName == "spine")
-            {
-                IEnumerable<Transform> ragdollBones = enemyModelRenderers[0].bones.Where(x => x.name.Contains("PlayerRagdoll"));
-                return ragdollBones.Any() ? ragdollBones.First() : null;
-            }
-
             return null;
         }
-
 
 
         //Remove spine.002 and .003 to implement logic
@@ -139,5 +152,8 @@ namespace ModelReplacement.Enemies
                 {"foot.R" , HumanBodyBones.RightFoot},
                 {"toe.R" , HumanBodyBones.RightToes},
         };
+
     }
+
+
 }

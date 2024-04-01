@@ -1,5 +1,6 @@
 ﻿using GameNetcodeStuff;
 using HarmonyLib;
+using ModelReplacement.Monobehaviors;
 
 namespace ModelReplacement.Patches
 {

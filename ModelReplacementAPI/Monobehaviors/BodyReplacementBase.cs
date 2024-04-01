@@ -1,6 +1,4 @@
 ﻿using GameNetcodeStuff;
-using ModelReplacement.Modules;
-using ModelReplacement.AvatarBodyUpdater;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,12 +9,18 @@ using UnityEngine.Rendering;
 using AsmResolver.IO;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using System.Reflection.Emit;
+using ModelReplacement.Scripts;
+using ModelReplacement.Scripts.Player;
+using ModelReplacement.Monobehaviors;
+using ModelReplacement.AvatarBodyUpdater;
 
+//        ModelReplacement, for backwards compatability.
 namespace ModelReplacement
 {
     public abstract class BodyReplacementBase : MonoBehaviour
     {
-        
+
         //Base components
         public AvatarUpdater avatar { get; private set; }
         public ViewModelUpdater viewModelAvatar { get; private set; }
@@ -66,6 +70,14 @@ namespace ModelReplacement
         /// </summary>
         /// <returns>Replacement viewModel GameObject</returns>
         protected virtual GameObject LoadAssetsAndReturnViewModel()
+        {
+            return null;
+        }
+        /// <summary>
+        /// Loads necessary assets from assetBundle, perform any necessary modifications on the replacement ragdoll and return it. Override if you intend on implementing your own viewmodel. 
+        /// </summary>
+        /// <returns>Replacement ragdoll GameObject</returns>
+        protected virtual GameObject LoadAssetsAndReturnRagdoll(CauseOfDeath causeOfDeath)
         {
             return null;
         }
@@ -194,13 +206,12 @@ namespace ModelReplacement
             tempReplacementModel.transform.localScale = Vector3.Scale(baseScale, rootScale);
 
             // Instantiate model
-            tempReplacementModel = UnityEngine.Object.Instantiate<GameObject>(tempReplacementModel);
+            tempReplacementModel = Instantiate(tempReplacementModel);
             tempReplacementModel.name += $"({controller.playerUsername})";
             tempReplacementModel.transform.localPosition = new Vector3(0, 0, 0);
             tempReplacementModel.SetActive(true);
             return tempReplacementModel;
         }
-
         private GameObject LoadViewModelreplacement()
         {
             GenerateViewModel = true;
@@ -209,11 +220,14 @@ namespace ModelReplacement
             GameObject TempReplacementViewModel = null;
             if (GenerateViewModel)
             {
-                TempReplacementViewModel = GameObject.Instantiate(replacementModel);
+                //Instantiate new replacement model
+                TempReplacementViewModel = Instantiate(replacementModel);
                 TempReplacementViewModel.name += $"(ViewModel)";
                 TempReplacementViewModel.transform.localPosition = new Vector3(0, 0, 0);
                 TempReplacementViewModel.SetActive(false); //Prevent flicker -> doesn't actually work
-                return TempReplacementViewModel; //Return generated viewmodel
+                
+                return MeshHelper.ConvertModelToViewModel(TempReplacementViewModel);
+
             }
 
             //Load custom viewModel, return null if it was null;
@@ -246,17 +260,86 @@ namespace ModelReplacement
             {
                 item.updateWhenOffscreen = true;
             }
-            foreach(Camera cam in TempReplacementViewModel.GetComponentsInChildren<Camera>())
+            foreach (Camera cam in TempReplacementViewModel.GetComponentsInChildren<Camera>())
             {
                 cam.enabled = false;
             }
 
             //Instantiate viewModel
-            TempReplacementViewModel = UnityEngine.Object.Instantiate<GameObject>(TempReplacementViewModel);
+            TempReplacementViewModel = Instantiate(TempReplacementViewModel);
             TempReplacementViewModel.name += $"({controller.playerUsername})(ViewModel)";
             TempReplacementViewModel.transform.localPosition = new Vector3(0, 0, 0);
             TempReplacementViewModel.SetActive(false); //Prevent flicker
             return TempReplacementViewModel;
+        }
+        private GameObject LoadRagdollReplacement(CauseOfDeath causeOfDeath)
+        {
+            // Load models
+            GameObject tempReplacementModel = LoadAssetsAndReturnRagdoll(causeOfDeath);
+
+            if (tempReplacementModel == null)
+            {
+                tempReplacementModel = Instantiate(replacementModel);
+                tempReplacementModel.name += $"(Ragdoll)";
+                return tempReplacementModel;
+            }
+
+            //Offset Builder Data
+            var replacementAnimator = tempReplacementModel.GetComponentInChildren<Animator>();
+            OffsetBuilder offsetBuilder = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
+            Vector3 rootScale = offsetBuilder.rootScale;
+
+
+            // Fix Materials and renderers
+            Material gameMat = controller.thisPlayerModel.GetComponent<SkinnedMeshRenderer>().sharedMaterial;
+            gameMat = new Material(gameMat); // Copy so that shared material isn't accidently changed by overriders of GetReplacementMaterial()
+
+            Renderer[] renderers = tempReplacementModel.GetComponentsInChildren<Renderer>();
+            SkinnedMeshRenderer[] skinnedRenderers = tempReplacementModel.GetComponentsInChildren<SkinnedMeshRenderer>();
+            Dictionary<Material, Material> matMap = new();
+            List<Material> materials = ListPool<Material>.Get();
+            foreach (Renderer renderer in renderers)
+            {
+                renderer.GetSharedMaterials(materials);
+                for (int i = 0; i < materials.Count; i++)
+                {
+                    Material mat = materials[i];
+                    if (!matMap.TryGetValue(mat, out Material replacementMat))
+                    {
+                        matMap[mat] = replacementMat = matHelper.GetReplacementMaterial(gameMat, mat);
+                    }
+                    materials[i] = replacementMat;
+                }
+                renderer.SetMaterials(materials);
+
+                renderer.shadowCastingMode = ShadowCastingMode.On;
+                renderer.gameObject.layer = viewState.VisibleLayer;
+            }
+            ListPool<Material>.Release(materials);
+            foreach (SkinnedMeshRenderer item in skinnedRenderers)
+            {
+                item.updateWhenOffscreen = true;
+            }
+            foreach (Camera cam in tempReplacementModel.GetComponentsInChildren<Camera>())
+            {
+                cam.enabled = false;
+            }
+
+            // Sets y extents to the same size for player body and extents.
+            //Vector3 playerBodyExtents = controller.thisPlayerModel.bounds.extents;
+            float playerHeight = 1.465f; //Hardcode player height to account for emote mods. 
+            float scale = playerHeight / GetBounds(tempReplacementModel).extents.y;
+            tempReplacementModel.transform.localScale *= scale;
+
+            Vector3 baseScale = tempReplacementModel.transform.localScale;
+            tempReplacementModel.transform.localScale = Vector3.Scale(baseScale, rootScale);
+
+            // Instantiate model
+            tempReplacementModel = Instantiate(tempReplacementModel);
+            tempReplacementModel.name += $"({controller.playerUsername})(Ragdoll)";
+            tempReplacementModel.transform.localPosition = new Vector3(0, 0, 0);
+            tempReplacementModel.SetActive(true);
+            return tempReplacementModel;
         }
         #endregion
 
@@ -265,10 +348,11 @@ namespace ModelReplacement
         protected virtual void Awake()
         {
             // basic
-            controller = base.GetComponent<PlayerControllerB>();
+            controller = GetComponent<PlayerControllerB>();
             ModelReplacementAPI.Instance.Logger.LogInfo($"Awake {controller.playerUsername} {this}");
-            viewState = base.GetComponent<ViewStateManager>();
-            matHelper = new MaterialHelper(this);
+            viewState = GetComponent<ViewStateManager>();
+            cosmeticManager = GetComponent<MoreCompanyCosmeticManager>();
+            matHelper = new MaterialHelper();
 
             // Load Models 
             replacementModel = LoadModelReplacement();
@@ -281,7 +365,7 @@ namespace ModelReplacement
                 ModelReplacementAPI.Instance.Logger.LogError($"Could not set all model scripts.\n Error: {e.Message}");
             }
             replacementViewModel = LoadViewModelreplacement();
-           
+
             // Assign avatars
             avatar = GetAvatarUpdater();
             viewModelAvatar = GetViewModelUpdater();
@@ -290,15 +374,10 @@ namespace ModelReplacement
             avatar.AssignModelReplacement(controller.gameObject, replacementModel);
             viewModelAvatar.AssignViewModelReplacement(controller.gameObject, replacementViewModel);
 
-            // Compatability
-            if (ModelReplacementAPI.moreCompanyPresent)
-            {
-                cosmeticManager = new MoreCompanyCosmeticManager(this);
-            }
-            
             //Misc
             SetAvatarRenderers(true);
             viewState.ReportBodyReplacementAddition(this);
+            cosmeticManager.ReportBodyReplacementAddition(this);
 
             //Colliders for nametag
             GameObject colliderObj = new GameObject("MRAPINameCollider");
@@ -317,8 +396,8 @@ namespace ModelReplacement
             ModelReplacementAPI.Instance.Logger.LogInfo($"AwakeEnd {controller.playerUsername}");
         }
 
-        protected virtual void Start() {}
-		
+        protected virtual void Start() { }
+
         public virtual void LateUpdate()
         {
             // Handle Ragdoll creation and destruction
@@ -328,19 +407,19 @@ namespace ModelReplacement
                 deadBody = controller.deadBody.gameObject;
             }
             catch { }
-            if (deadBody && (replacementDeadBody == null)) //Player died this frame
+            if (deadBody && replacementDeadBody == null) //Player died this frame
             {
                 cosmeticAvatar = ragdollAvatar;
                 CreateAndParentRagdoll(controller.deadBody);
                 OnDeath();
             }
-            if (replacementDeadBody && (deadBody == null)) //Player returned to life this frame
+            if (replacementDeadBody && deadBody == null) //Player returned to life this frame
             {
                 cosmeticAvatar = avatar;
                 Destroy(replacementDeadBody);
                 replacementDeadBody = null;
             }
-            if(deadBody && !deadBody.activeInHierarchy)
+            if (deadBody && !deadBody.activeInHierarchy)
             {
                 replacementDeadBody.SetActive(false);
             }
@@ -349,10 +428,6 @@ namespace ModelReplacement
             avatar.Update();
             ragdollAvatar.Update();
             viewModelAvatar.Update();
-            if (ModelReplacementAPI.moreCompanyPresent)
-            {
-                cosmeticManager.Update(true);
-            }
             UpdateItemTransform();
 
             //Bounding box calculation for nameTag
@@ -391,16 +466,12 @@ namespace ModelReplacement
             Destroy(replacementModel);
             Destroy(replacementViewModel);
             Destroy(replacementDeadBody);
-            if (ModelReplacementAPI.moreCompanyPresent)
-            {
-                cosmeticManager.Update(false);
-            }
         }
 
         #endregion
 
         #region Helpers, Materials, Ragdolls, Rendering, etc...
-        public bool CanPositionItemOnCustomViewModel => (replacementViewModel != null) && (viewModelAvatar.ItemHolderViewModel);
+        public bool CanPositionItemOnCustomViewModel => (replacementViewModel != null) && (viewModelAvatar.ItemHolderViewModel != null);
         public void UpdateItemTransform()
         {
             if (!heldItem) return;
@@ -410,7 +481,7 @@ namespace ModelReplacement
                 heldItem = null;
                 return;
             }
-           
+
             if (viewState.GetViewState() == ViewState.ThirdPerson)
             {
                 Transform parentObject = avatar.ItemHolder;
@@ -423,8 +494,8 @@ namespace ModelReplacement
                 vector = heldItem.parentObject.rotation * vector;
                 heldItem.transform.position += vector;
             }
-            
-            if ((viewState.GetViewState() == ViewState.FirstPerson) && CanPositionItemOnCustomViewModel)
+
+            if (viewState.GetViewState() == ViewState.FirstPerson && CanPositionItemOnCustomViewModel)
             {
                 Transform parentObject = viewModelAvatar.ItemHolderViewModel;
                 parentObject.localPosition = avatar.ItemHolderPositionOffset;
@@ -437,17 +508,17 @@ namespace ModelReplacement
                 heldItem.transform.position += vector;
 
             }
-            
+
 
         }
         private void CreateAndParentRagdoll(DeadBodyInfo bodyinfo)
         {
             deadBody = bodyinfo.gameObject;
 
+
             //Instantiate replacement Ragdoll and assign the avatar
             SkinnedMeshRenderer deadBodyRenderer = deadBody.GetComponentInChildren<SkinnedMeshRenderer>();
-            replacementDeadBody = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
-            replacementDeadBody.name += $"(Ragdoll)";
+            replacementDeadBody = LoadRagdollReplacement(bodyinfo.causeOfDeath);
             ragdollAvatar.AssignModelReplacement(deadBody, replacementDeadBody);
 
 
@@ -470,30 +541,10 @@ namespace ModelReplacement
                 Transform mappedTranform = ragdollAvatar.GetAvatarTransformFromBoneName(bloodParentTransform.name);
                 if (mappedTranform)
                 {
-                    UnityEngine.Object.Instantiate<GameObject>(item, mappedTranform);
+                    Instantiate(item, mappedTranform);
                 }
             }
 
-        }
-
-        public void CreateAndParentMasked(MaskedPlayerEnemy masked)
-        {
-            //Instantiate replacement Ragdoll and assign the avatar
-            replacementDeadBody = UnityEngine.Object.Instantiate<GameObject>(replacementModel);
-            replacementDeadBody.name += $"(Masked)";
-            ragdollAvatar.AssignModelReplacement(deadBody, replacementDeadBody);
-
-            Console.WriteLine("Masked Enemy Creation.");
-            //Enable all renderers in replacement ragdoll and disable renderer for original
-            foreach (Renderer renderer in replacementDeadBody.GetComponentsInChildren<Renderer>())
-            {
-                renderer.enabled = true;
-                renderer.shadowCastingMode = ShadowCastingMode.On;
-                renderer.gameObject.layer = viewState.VisibleLayer;
-            }
-            masked.rendererLOD0.enabled = false;
-            masked.rendererLOD1.enabled = false;
-            masked.rendererLOD2.enabled = false;
         }
 
 
@@ -503,7 +554,7 @@ namespace ModelReplacement
             {
                 renderer.enabled = enabled;
             }
-            if(replacementViewModel != null)
+            if (replacementViewModel != null)
             {
                 foreach (Renderer renderer in replacementViewModel.GetComponentsInChildren<Renderer>())
                 {
@@ -552,10 +603,6 @@ namespace ModelReplacement
 
         #endregion
 
-
-
-
-
         #region TooManyEmotes
 
         private int SafeGetEmoteID(int currentID)
@@ -577,7 +624,7 @@ namespace ModelReplacement
         #endregion
 
 
-        public class RaycastTarget:MonoBehaviour
+        public class RaycastTarget : MonoBehaviour
         {
             public PlayerControllerB controller = null;
             public BodyReplacementBase bodyReplacement = null;
@@ -585,9 +632,9 @@ namespace ModelReplacement
 
             private void Update()
             {
-                if((bodyReplacement == null) && (modelObj != null))
+                if (bodyReplacement == null && modelObj != null)
                 {
-                    
+
                 }
             }
         }

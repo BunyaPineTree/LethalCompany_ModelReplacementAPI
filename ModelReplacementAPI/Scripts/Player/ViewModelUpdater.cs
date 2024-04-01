@@ -1,12 +1,11 @@
 ﻿using GameNetcodeStuff;
 using ModelReplacement.AvatarBodyUpdater;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace ModelReplacement.Modules
+namespace ModelReplacement.Scripts.Player
 {
     public class ViewModelUpdater
     {
@@ -15,7 +14,6 @@ namespace ModelReplacement.Modules
         private Transform armsMetarig;
         private Animator viewModelAnimator;
         public Transform ItemHolderViewModel { get; private set; } = null;
-        private HashSet<Transform> stowedTransforms = new HashSet<Transform>();
 
         private bool hasShoulder = true;
         private string highestL => hasShoulder ? "shoulder.L" : "arm.L_upper";
@@ -38,13 +36,11 @@ namespace ModelReplacement.Modules
                 "arm.L_lower",
                 "hand.L",
             };
-            if((GetViewModelTransformFromBoneName("shoulder.L") == null) || (GetViewModelTransformFromBoneName("shoulder.R") == null)) { hasShoulder = false; }
-
-
+            if (GetViewModelTransformFromBoneName("shoulder.L") == null || GetViewModelTransformFromBoneName("shoulder.R") == null) { hasShoulder = false; }
 
             float armLength = 0;
             float viewModelLength = 0;
-            for (int i = hasShoulder ? 0 : 1 ; i < armNames.Count - 1; i++)
+            for (int i = hasShoulder ? 0 : 1; i < armNames.Count - 1; i++)
             {
                 Transform armBoneBase = GetArmTransformFromBoneName(armNames[i]);
                 Transform armBoneEnd = GetArmTransformFromBoneName(armNames[i + 1]);
@@ -56,64 +52,11 @@ namespace ModelReplacement.Modules
             }
 
             replacementViewModel.transform.localScale *= armLength / viewModelLength;
-
-            List<Transform> viewModelArmTransforms = new List<Transform>();
-
-            List<Transform> LTransforms = GetViewModelTransformFromBoneName(highestL).gameObject.GetComponentsInChildren<Transform>().ToList();
-            List<Transform> RTransforms = GetViewModelTransformFromBoneName(highestR).gameObject.GetComponentsInChildren<Transform>().ToList();
-            viewModelArmTransforms.AddRange(LTransforms);
-            viewModelArmTransforms.AddRange(RTransforms);
-
-            List<Transform> viewModelParents = new List<Transform>();
-
-            viewModelParents.AddRange(GetAllParents(GetViewModelTransformFromBoneName(highestL)));
-            viewModelParents.AddRange(GetAllParents(GetViewModelTransformFromBoneName(highestR)));
-
-            HashSet<Transform> essentialTransforms = new HashSet<Transform>();
-            essentialTransforms.Add(GetViewModelTransformFromBoneName(highestL));
-            essentialTransforms.Add(GetViewModelTransformFromBoneName(highestR));
-            viewModelParents.ForEach(x => essentialTransforms.Add(x));
-            viewModelArmTransforms.ForEach(x => essentialTransforms.Add(x));
-
-            //Delete all unnecessary transforms
-            List<Transform> AllTransforms = replacementViewModel.GetComponentsInChildren<Transform>().ToList();
-            foreach (Transform bone in AllTransforms)
-            {
-                if (!essentialTransforms.Contains(bone))
-                {
-                    if (!bone.gameObject.GetComponent<Renderer>())
-                    {
-                        //GameObject.Destroy(bone.gameObject);
-                        bone.gameObject.SetActive(false);
-                        bone.localScale = Vector3.zero;
-                        stowedTransforms.Add(bone);
-                    }
-                }
-            }
-            viewModelParents.ForEach(x => stowedTransforms.Add(x));
-            int arbitraryScale = 100;
-
-            viewModelParents.Last().transform.localScale /= arbitraryScale;
-            GetViewModelTransformFromBoneName(highestL).localScale *= arbitraryScale;
-            GetViewModelTransformFromBoneName(highestR).localScale *= arbitraryScale;
-            //StowViewModelUnnecessaryBones();
             replacementViewModel.SetActive(true);
         }
 
         protected virtual void UpdateViewModel()
         {
-            //StowViewModelUnnecessaryBones();
-            foreach (string boneName in ArmTransformNames)
-            {
-                Transform armBone = GetArmTransformFromBoneName(boneName);
-                Transform viewModelBone = GetViewModelTransformFromBoneName(boneName);
-                if ((!armBone) || (!viewModelBone)) continue;
-
-                viewModelBone.rotation = armBone.rotation;
-                RotationOffset offset = viewModelBone.GetComponent<RotationOffset>();
-                if (offset) { viewModelBone.rotation *= offset.offset; }
-            }
-
             GetViewModelTransformFromBoneName("arm.L_upper").position = GetArmTransformFromBoneName("arm.L_upper").position;
             GetViewModelTransformFromBoneName("arm.R_upper").position = GetArmTransformFromBoneName("arm.R_upper").position;
             if (hasShoulder)
@@ -121,6 +64,18 @@ namespace ModelReplacement.Modules
                 GetViewModelTransformFromBoneName("shoulder.L").position = GetArmTransformFromBoneName("shoulder.L").position;
                 GetViewModelTransformFromBoneName("shoulder.R").position = GetArmTransformFromBoneName("shoulder.R").position;
             }
+
+            foreach (string boneName in ArmTransformNames)
+            {
+                Transform armBone = GetArmTransformFromBoneName(boneName);
+                Transform viewModelBone = GetViewModelTransformFromBoneName(boneName);
+                if (!armBone || !viewModelBone) continue;
+
+                viewModelBone.rotation = armBone.rotation;
+                RotationOffset offset = viewModelBone.GetComponent<RotationOffset>();
+                if (offset) { viewModelBone.rotation *= offset.offset; }
+            }
+
         }
 
         public void Update()
@@ -141,29 +96,6 @@ namespace ModelReplacement.Modules
             IEnumerable<Transform> playerBones = armsMetarig.gameObject.GetComponentsInChildren<Transform>().Where(x => x.name == boneName);
             return playerBones.Any() ? playerBones.First() : null;
         }
-        private void StowViewModelUnnecessaryBones()
-        {
-            Vector3 stowPosition = 0.5f * (GetViewModelTransformFromBoneName(highestL).position + GetViewModelTransformFromBoneName(highestR).position);
-
-            foreach (var item in stowedTransforms)
-            {
-                item.position = stowPosition;
-            }
-
-        }
-        public List<Transform> GetAllParents(Transform child)
-        {
-            List<Transform> parents = new List<Transform>();
-
-            Transform getParent = child;
-            while (getParent != null)
-            {
-                if (getParent.parent) { parents.Add(getParent.parent); }
-                getParent = getParent.parent;
-            }
-            return parents;
-        }
-
 
         protected static Dictionary<string, HumanBodyBones> modelToAvatarBone = new Dictionary<string, HumanBodyBones>()
             {
@@ -229,6 +161,39 @@ namespace ModelReplacement.Modules
                 "finger2.R.001" ,
                 "finger1.R" ,
                 "finger1.R.001"
+        };
+
+        public static List<HumanBodyBones> ViewModelHumanBones = new List<HumanBodyBones>()
+        {
+                 HumanBodyBones.LeftShoulder,
+                 HumanBodyBones.LeftUpperArm,
+                 HumanBodyBones.LeftLowerArm,
+                 HumanBodyBones.LeftHand,
+                 HumanBodyBones.LeftLittleProximal,
+                 HumanBodyBones.LeftLittleIntermediate,
+                 HumanBodyBones.LeftRingProximal,
+                 HumanBodyBones.LeftRingIntermediate,
+                 HumanBodyBones.LeftMiddleProximal,
+                 HumanBodyBones.LeftMiddleIntermediate,
+                 HumanBodyBones.LeftIndexProximal,
+                 HumanBodyBones.LeftIndexIntermediate,
+                 HumanBodyBones.LeftThumbProximal,
+                 HumanBodyBones.LeftThumbDistal,
+
+                 HumanBodyBones.RightShoulder,
+                 HumanBodyBones.RightUpperArm,
+                 HumanBodyBones.RightLowerArm,
+                 HumanBodyBones.RightHand,
+                 HumanBodyBones.RightLittleProximal,
+                 HumanBodyBones.RightLittleIntermediate,
+                 HumanBodyBones.RightRingProximal,
+                 HumanBodyBones.RightRingIntermediate,
+                 HumanBodyBones.RightMiddleProximal,
+                 HumanBodyBones.RightMiddleIntermediate,
+                 HumanBodyBones.RightIndexProximal,
+                 HumanBodyBones.RightIndexIntermediate,
+                 HumanBodyBones.RightThumbProximal,
+                 HumanBodyBones.RightThumbDistal,
         };
     }
 }

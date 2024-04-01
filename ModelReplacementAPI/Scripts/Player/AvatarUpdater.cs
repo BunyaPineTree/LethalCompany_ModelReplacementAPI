@@ -1,9 +1,12 @@
 ﻿using GameNetcodeStuff;
+using ModelReplacement.Scripts;
+using ModelReplacement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+//        ModelReplacement.AvatarBodyUpdater, for backwards compat
 namespace ModelReplacement.AvatarBodyUpdater
 {
 
@@ -20,7 +23,6 @@ namespace ModelReplacement.AvatarBodyUpdater
 
         protected bool hasUpperChest = false;
         protected Vector3 rootPositionOffset = Vector3.zero;
-        protected Vector3 rootScale = Vector3.one;
 
 
 
@@ -52,6 +54,10 @@ namespace ModelReplacement.AvatarBodyUpdater
 
         protected virtual void UpdateModel()
         {
+            Transform rootBone = GetAvatarTransformFromBoneName("spine");
+            Transform playerRootBone = GetPlayerTransformFromBoneName("spine");
+            rootBone.position = playerRootBone.position + playerRootBone.TransformVector(rootPositionOffset);
+
             foreach (Transform playerBone in playerModelRenderer.bones)
             {
                 Transform modelBone = GetAvatarTransformFromBoneName(playerBone.name);
@@ -61,13 +67,9 @@ namespace ModelReplacement.AvatarBodyUpdater
                 RotationOffset offset = modelBone.GetComponent<RotationOffset>();
                 if (offset) { modelBone.rotation *= offset.offset; }
             }
-
-            Transform rootBone = GetAvatarTransformFromBoneName("spine");
-            Transform playerRootBone = GetPlayerTransformFromBoneName("spine");
-            rootBone.position = playerRootBone.position + playerRootBone.TransformVector(rootPositionOffset);
         }
 
-        
+
 
         public void Update()
         {
@@ -114,7 +116,7 @@ namespace ModelReplacement.AvatarBodyUpdater
 
             return null;
         }
-        
+
 
         //Remove spine.002 and .003 to implement logic
         protected static Dictionary<string, HumanBodyBones> modelToAvatarBone = new Dictionary<string, HumanBodyBones>()
@@ -167,7 +169,7 @@ namespace ModelReplacement.AvatarBodyUpdater
                 {"foot.R" , HumanBodyBones.RightFoot},
                 {"toe.R" , HumanBodyBones.RightToes},
         };
-        
+
     }
 
 
