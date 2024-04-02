@@ -214,11 +214,9 @@ namespace ModelReplacement
         }
         private GameObject LoadViewModelreplacement()
         {
-            GenerateViewModel = true;
-
             //Generate a view model with the replacement model if requested
             GameObject TempReplacementViewModel = null;
-            if (GenerateViewModel)
+            if (GenerateViewModel || ModelReplacementAPI.EnforceViewModelGeneration.Value)
             {
                 //Instantiate new replacement model
                 TempReplacementViewModel = Instantiate(replacementModel);
@@ -470,7 +468,7 @@ namespace ModelReplacement
 
         #endregion
 
-        #region Helpers, Materials, Ragdolls, Rendering, etc...
+        #region items
         public bool CanPositionItemOnCustomViewModel => (replacementViewModel != null) && (viewModelAvatar.ItemHolderViewModel != null);
         public void UpdateItemTransform()
         {
@@ -511,6 +509,11 @@ namespace ModelReplacement
 
 
         }
+        #endregion
+
+
+        #region Helpers, Materials, Ragdolls, Rendering, etc...
+
         private void CreateAndParentRagdoll(DeadBodyInfo bodyinfo)
         {
             deadBody = bodyinfo.gameObject;

@@ -1,8 +1,10 @@
 ﻿using BepInEx;
 using BepInEx.Bootstrap;
+using BepInEx.Configuration;
 using BepInEx.Logging;
 using GameNetcodeStuff;
 using HarmonyLib;
+using MirrorDecor;
 using ModelReplacement.Monobehaviors;
 using ModelReplacement.Monobehaviors.Enemies;
 using System;
@@ -31,9 +33,20 @@ namespace ModelReplacement
 
     public class ModelReplacementAPI : BaseUnityPlugin
     {
+        public static ConfigFile config;
 
+        // Universal config options 
+        public static ConfigEntry<bool> EnforceViewModelGeneration { get; private set; }
+
+        private static void InitConfig()
+        {
+            EnforceViewModelGeneration = config.Bind<bool>("Debug Settings", "Generate Viewmodels by default", false, "Enable to generate a viewmodel for all model replacements, regardless of the individual model's settings.");
+        }
         private void Awake()
         {
+            config = base.Config;
+            InitConfig();
+
             Logger = BepInEx.Logging.Logger.CreateLogSource(PluginInfo.GUID);
             // Plugin startup logic
             bool flag = ModelReplacementAPI.Instance == null;

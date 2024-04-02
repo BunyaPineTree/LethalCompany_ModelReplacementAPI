@@ -4,12 +4,28 @@
 ## Instructions
 For more info on making model replacements see the wiki at https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI , or message Bunya Pine Tree at the unofficial modding discord https://discord.gg/nYcQFEpXfU
 
+## Viewmodel Support
+Viewmodels are now supported and can be generated automatically from your character's model, but because not all models have high quality hands, or are mapped to the in game hands well, viewmodels will be implemented in an opt-in basis. 
+After custom viewmodel support is finished and guides are made, the SDK will be updated which will allow people to opt-in their models to use custom or automatic viewmodels. 
+In the meantime, I have added a config option to ModelReplacementAPI that will automatically generate viewmodels for every model replacement. This can be used as a debug tool to see if your model's arms are mapped well enough or would be better with a custom viewmodel.
+
+### Instructions on Enabling Viewmodels
+To enable, launch the game once with v2.4.0 to generate the config file. You can then change the config with a mod manager like r2modman, manually at `\BepInEx\config\meow.ModelReplacementAPI.cfg`, or in game via LethalConfig.
+Note that if you enable this config option while in a game, you will have to put on a new model for the viewmodel to generate. 
+
+## Masked Support (and Enemy support, soon enough)
+Masked enemies will now take on the model replacements of players. 
+If they are mimicking a player then they will take on that player's model, otherwise they will randomly take on the model replacement (or lack of) of any player. 
+We are currently working on a server-side mod that will synchronize that random model replacement for everyone. This goes for enemies as well, once enemy model replacements are finished. 
+
 ## Known Issues
 - More Company cosmetics behave strangely on ragdolls
 - Due to the implementation of post processing removal, some circumstances will prevent a noPostProcessing enabled model from appearing on cameras. An example of this is MirrorDecor, which will not immediately show your model. As of this moment this can be fixed by taking off your model replacement, and putting it back on. 
 - At this moment, some cameras do not display the base player model
 - Supporting no post process layers has required finding two layers that aren't used freqently, or ever, to render models without post process on. I have performed a thorough search this time to prevent purple rails, but just because nothing was on the layers I searched in doesn't mean nothing ever will be. If you find objects that don't look correct, please let me know.
 - Viewmodels rubberband
+- Items held in viewmodels may face a different direction, be in a different location, and drop to a place other than directly under you. 
+- Dropping dead players with a viewmodel can result in unexpected results
 
 ## Changelog
 	- v2.4.0
