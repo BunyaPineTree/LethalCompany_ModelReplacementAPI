@@ -1,0 +1,10 @@
+{
+    "name": "ModelReplacementAPI.Networking",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI",
+    "description": "Server-Side derivative to ModelReplacementAPI to allow networking of enemy models.",
+    "dependencies": [
+    "BepInEx-BepInExPack-5.4.2100",
+    "BunyaPineTree-ModelReplacementAPI-2.3.1"
+  ]
+}

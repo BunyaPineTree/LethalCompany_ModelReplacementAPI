@@ -1,33 +1,36 @@
 ﻿using HarmonyLib;
-using ModelReplacement;
+using ModelReplacement.Monobehaviors;
 using UnityEngine;
 
-[HarmonyPatch(typeof(GrabbableObject))]
-public class LocateHeldObjectsOnModelReplacementPatch
+namespace ModelReplacement.Patches
 {
-
-    [HarmonyPatch("LateUpdate")]
-    [HarmonyPostfix]
-    public static void LateUpdatePatch(ref GrabbableObject __instance)
+    [HarmonyPatch(typeof(GrabbableObject))]
+    public class LocateHeldObjectsOnModelReplacementPatch
     {
-        if (__instance.parentObject == null || __instance.playerHeldBy == null) return;
 
-        BodyReplacementBase bodyReplacement = __instance.playerHeldBy.gameObject.GetComponent<BodyReplacementBase>();
-        if (!bodyReplacement) return;
-
-        if (bodyReplacement.viewState.GetViewState() == ViewState.ThirdPerson)
+        [HarmonyPatch("LateUpdate")]
+        [HarmonyPrefix]
+        public static bool LateUpdatePatch(ref GrabbableObject __instance)
         {
-            Transform parentObject = bodyReplacement.avatar.ItemHolder;
+            if (__instance.parentObject == null || __instance.playerHeldBy == null) return true;
+            if (__instance.playerHeldBy.ItemSlots[__instance.playerHeldBy.currentItemSlot] != __instance) return true;
+            BodyReplacementBase bodyReplacement = __instance.playerHeldBy.gameObject.GetComponent<BodyReplacementBase>();
+            if (!bodyReplacement) return true;
+            if(bodyReplacement.viewState.GetViewState() != ViewState.FirstPerson)
+            {
+                bodyReplacement.heldItem = null;
+                return true;
+            }
+            if (!bodyReplacement.CanPositionItemOnCustomViewModel)
+            {
+                bodyReplacement.heldItem = null;
+                return true;
+            }
 
-            parentObject.localPosition = bodyReplacement.avatar.ItemHolderPositionOffset;
-            Transform playerItemHolder = bodyReplacement.avatar.GetPlayerItemHolder();
+            bodyReplacement.heldItem = __instance;
+            //bodyReplacement.UpdateItemTransform();
+            return false;
 
-            __instance.transform.rotation = playerItemHolder.rotation;
-            __instance.transform.Rotate(__instance.itemProperties.rotationOffset);
-            __instance.transform.position = parentObject.position;
-            Vector3 vector = __instance.itemProperties.positionOffset;
-            vector = playerItemHolder.rotation * vector;
-            __instance.transform.position += vector;
         }
     }
 }

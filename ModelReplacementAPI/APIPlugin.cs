@@ -1,8 +1,12 @@
 ﻿using BepInEx;
 using BepInEx.Bootstrap;
+using BepInEx.Configuration;
 using BepInEx.Logging;
 using GameNetcodeStuff;
 using HarmonyLib;
+using MirrorDecor;
+using ModelReplacement.Monobehaviors;
+using ModelReplacement.Monobehaviors.Enemies;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +17,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "2.3.9";
+        public const string VERSION = "2.4.0";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
@@ -29,10 +33,27 @@ namespace ModelReplacement
 
     public class ModelReplacementAPI : BaseUnityPlugin
     {
+        public static ConfigFile config;
 
+        // Universal config options 
+        public static ConfigEntry<bool> EnforceViewModelGeneration { get; private set; }
+
+        private static void InitConfig()
+        {
+            EnforceViewModelGeneration = config.Bind<bool>("Debug Settings", "Generate Viewmodels by default", false, "Enable to generate a viewmodel for all model replacements, regardless of the individual model's settings.");
+        }
         private void Awake()
         {
-            Instance = this;
+            config = base.Config;
+            InitConfig();
+
+            Logger = BepInEx.Logging.Logger.CreateLogSource(PluginInfo.GUID);
+            // Plugin startup logic
+            bool flag = ModelReplacementAPI.Instance == null;
+            if (flag)
+            {
+                ModelReplacementAPI.Instance = this;
+            }
 
             moreCompanyPresent = IsPluginPresent("me.swipez.melonloader.morecompany");
             thirdPersonPresent = IsPluginPresent("verity.3rdperson");
@@ -40,6 +61,8 @@ namespace ModelReplacement
             mirrorDecorPresent = IsPluginPresent("quackandcheese.mirrordecor");
             tooManyEmotesPresent = IsPluginPresent("FlipMods.TooManyEmotes");
             recordingCameraPresent = IsPluginPresent("com.graze.gorillatag.placeablecamera");
+
+            MRAPI_NetworkingPresent = IsPluginPresent("meow.ModelReplacementAPI.Networking");
 
             Harmony harmony = new Harmony(PluginInfo.GUID);
             harmony.PatchAll();
@@ -54,13 +77,12 @@ namespace ModelReplacement
         public static bool tooManyEmotesPresent;
         public static bool recordingCameraPresent;
 
+        public static bool MRAPI_NetworkingPresent;
+
 
         //Other
         public static ModelReplacementAPI Instance = null;
-
-        public new ManualLogSource Logger = new ManualLogSource(PluginInfo.NAME);
-
-
+        public new ManualLogSource Logger;
         private static int steamLobbyID => GameNetworkManager.Instance.currentLobby.HasValue ? (int)GameNetworkManager.Instance.currentLobby.Value.Id.Value : -1;
         public static bool IsLan => steamLobbyID == -1;
 
@@ -124,7 +146,7 @@ namespace ModelReplacement
                 return;
             }
 
-            Instance.Logger.LogDebug($"Registering body replacement type {type} to suit name {suitNameToReplace}.");
+            Instance.Logger.LogInfo($"Registering body replacement type {type} to suit name {suitNameToReplace}.");
             RegisteredModelReplacements.Add(suitNameToReplace, type);
         }
 
@@ -143,7 +165,7 @@ namespace ModelReplacement
                 return;
             }
 
-            Instance.Logger.LogDebug($"Registering body replacement {logType} type {type}.");
+            Instance.Logger.LogInfo($"Registering body replacement {logType} type {type}.");
             registeredType = type;
         }
 
@@ -257,7 +279,7 @@ namespace ModelReplacement
             try
             {
                 modelReplacement = player.gameObject.GetComponent<BodyReplacementBase>();
-                return (modelReplacement == null);
+                return (modelReplacement != null);
             }
             catch (Exception e)
             {
@@ -274,7 +296,7 @@ namespace ModelReplacement
         {
             try
             {
-                return (player.gameObject.GetComponent<BodyReplacementBase>() == null);
+                return (player.gameObject.GetComponent<BodyReplacementBase>() != null);
             }
             catch (Exception e)
             {
@@ -361,5 +383,9 @@ namespace ModelReplacement
             }
         }
         #endregion
+
+      
+
+
     }
 }
