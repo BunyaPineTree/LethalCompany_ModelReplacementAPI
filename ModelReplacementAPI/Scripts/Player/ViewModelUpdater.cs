@@ -1,8 +1,6 @@
-﻿using GameNetcodeStuff;
-using ModelReplacement.AvatarBodyUpdater;
+﻿using ModelReplacement.AvatarBodyUpdater;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace ModelReplacement.Scripts.Player
@@ -16,17 +14,24 @@ namespace ModelReplacement.Scripts.Player
         public Transform ItemHolderViewModel { get; private set; } = null;
 
         private bool hasShoulder = true;
-        private string highestL => hasShoulder ? "shoulder.L" : "arm.L_upper";
-        private string highestR => hasShoulder ? "shoulder.R" : "arm.R_upper";
+
         public virtual void AssignViewModelReplacement(GameObject player, GameObject replacementViewModel)
         {
             if (replacementViewModel == null) return;
+
+            // Get the first person arms metarig, however that is implemented in Content Warning
+            armsMetarig = null;
+
+            /* // Lethal Company implementation
             PlayerControllerB controller = player.GetComponent<PlayerControllerB>();
+            armsMetarig = controller.playerModelArmsMetarig;
+            */
+
             this.replacementViewModel = replacementViewModel;
             viewModelAnimator = replacementViewModel.GetComponentInChildren<Animator>();
             OffsetBuilder offsetBuilder = viewModelAnimator.gameObject.GetComponent<OffsetBuilder>();
             ItemHolderViewModel = offsetBuilder.itemHolder.transform;
-            armsMetarig = controller.playerModelArmsMetarig;
+
 
             //Scale by arm length
             List<string> armNames = new List<string>()

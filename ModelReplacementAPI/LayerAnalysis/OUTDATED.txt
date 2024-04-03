@@ -1,0 +1,6 @@
+﻿This layer analysis is obviously for lethal company, and not Content Warning. 
+
+If there is any intention of implementing No Post Processing in Content Warning then a similar layer analysis would need to be performed,
+as well as a method to remove that post processing. 
+
+Of course if there's no need then there's no need. Lethal Company was very crusty after all. 

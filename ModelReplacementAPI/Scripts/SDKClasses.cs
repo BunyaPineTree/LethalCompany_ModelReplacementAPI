@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 //        ModelReplacement.AvatarBodyUpdater, for SDK compat
 namespace ModelReplacement.AvatarBodyUpdater
 {

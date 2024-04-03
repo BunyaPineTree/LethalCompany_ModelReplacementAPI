@@ -8,7 +8,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-    <LethalCompanyPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\</LethalCompanyPath>
+    <GamePath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\</GamePath>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -16,9 +16,9 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <ReferencePath>$(ReferencePath);$(LethalCompanyPath)\Lethal Company_Data\Managed</ReferencePath>
-    <ReferencePath>$(ReferencePath);$(LethalCompanyPath)\Lethal Company_Data\Plugins</ReferencePath>
-    <ReferencePath>$(ReferencePath);$(LethalCompanyPath)\BepinEx\plugins</ReferencePath>
+    <ReferencePath>$(ReferencePath);$(GamePath)\Lethal Company_Data\Managed</ReferencePath>
+    <ReferencePath>$(ReferencePath);$(GamePath)\Lethal Company_Data\Plugins</ReferencePath>
+    <ReferencePath>$(ReferencePath);$(GamePath)\BepinEx\plugins</ReferencePath>
     <RootNamespace>ModelReplacement</RootNamespace>
   </PropertyGroup>
   
@@ -45,50 +45,20 @@
   </ItemGroup>
   
   <ItemGroup>
+    <!--
     <Reference Include="Assembly-CSharp" Publicize="true">
-      <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>$(GamePath)\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    -->
     <Reference Include="Facepunch.Steamworks.Win64" Publicize="true">
-      <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
+      <HintPath>$(GamePath)\Lethal Company_Data\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
       <Private>false</Private>
     </Reference>
-	<Reference Include="MirrorDecor">
-      <HintPath>..\Libraries\MirrorDecor.dll</HintPath>
-    <Private>false</Private>
-    </Reference>
-    <Reference Include="TooManyEmotes">
-      <HintPath>..\Libraries\TooManyEmotes.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="LCThirdPerson">
-      <HintPath>..\Libraries\LCThirdPerson.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="3rdPerson">
-    <HintPath>..\Libraries\3rdPerson.dll</HintPath>
-    <Private>false</Private>
-    </Reference>
-    <Reference Include="RecordingCamera">
-      <HintPath>..\Libraries\RecordingCamera.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="MoreCompany">
-      <HintPath>..\Libraries\MoreCompany.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Unity.InputSystem.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Unity.Netcode.Runtime">
-      <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Unity.Netcode.Runtime.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.HighDefinition.Runtime">
-      <HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Unity.RenderPipelines.HighDefinition.Runtime.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Patches\" />
   </ItemGroup>
   
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

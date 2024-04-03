@@ -1,8 +1,4 @@
-﻿using GameNetcodeStuff;
-using ModelReplacement.Scripts;
-using ModelReplacement;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -12,11 +8,13 @@ namespace ModelReplacement.AvatarBodyUpdater
 
     public class AvatarUpdater
     {
-        //Third Person Avatar
-        protected SkinnedMeshRenderer playerModelRenderer = null;
+        // Third Person Avatar
+        protected SkinnedMeshRenderer playerModelRenderer = null; // May or may not be necessary
         protected Animator replacementAnimator = null;
         protected GameObject player = null;
         protected GameObject replacement = null;
+
+        // Item logic. May need to be tailored to the game. 
         public Vector3 ItemHolderPositionOffset { get; private set; } = Vector3.zero;
         public Quaternion ItemHolderRotationOffset { get; private set; } = Quaternion.identity;
         public Transform ItemHolder { get; private set; } = null;
@@ -25,9 +23,13 @@ namespace ModelReplacement.AvatarBodyUpdater
         protected Vector3 rootPositionOffset = Vector3.zero;
 
 
-
         public virtual void AssignModelReplacement(GameObject player, GameObject replacement)
         {
+
+            // PlayerModelrenderer is used only to get a list of bones to perform transformations, and can be replaced with any equivalent structure that has those bones as well.
+            playerModelRenderer = null;
+
+            /* // Lethal Company Implementation
             PlayerControllerB controller = player.GetComponent<PlayerControllerB>();
             playerModelRenderer = controller ? controller.thisPlayerModel : player.GetComponentInChildren<SkinnedMeshRenderer>();
 
@@ -36,6 +38,7 @@ namespace ModelReplacement.AvatarBodyUpdater
                 ModelReplacementAPI.Instance.Logger.LogFatal("Failed to start AvatarBodyUpdater");
                 return;
             }
+            */
 
             this.player = player;
             replacementAnimator = replacement.GetComponentInChildren<Animator>();
@@ -54,6 +57,9 @@ namespace ModelReplacement.AvatarBodyUpdater
 
         protected virtual void UpdateModel()
         {
+            // rootBone corresponds to the Hip bone, which is what we are zeroing the replacement model's rig onto the original rig with.
+            // Probably isn't "spine" in Content warning
+            // Incidentally, if Content Warning implements a humanoid avatar to begin with, much of this can be simplified
             Transform rootBone = GetAvatarTransformFromBoneName("spine");
             Transform playerRootBone = GetPlayerTransformFromBoneName("spine");
             rootBone.position = playerRootBone.position + playerRootBone.TransformVector(rootPositionOffset);
@@ -79,16 +85,17 @@ namespace ModelReplacement.AvatarBodyUpdater
 
         public Transform GetAvatarTransformFromBoneName(string boneName)
         {
+            // This section handles models without an upper chest, may be implemented differently for Content Warning, or not at all.
             if (boneName == "spine.002")
             {
                 return hasUpperChest ? replacementAnimator.GetBoneTransform(HumanBodyBones.Chest) : null;
             }
-
             if (boneName == "spine.003")
             {
                 return hasUpperChest ? replacementAnimator.GetBoneTransform(HumanBodyBones.UpperChest) : replacementAnimator.GetBoneTransform(HumanBodyBones.Chest);
             }
 
+            // Handles dead body rigs, which don't use the same bone name for Hips, can most likely be deleted for Content Warning
             if (boneName.Contains("PlayerRagdoll"))
             {
                 return replacementAnimator.GetBoneTransform(HumanBodyBones.Hips);
@@ -108,6 +115,7 @@ namespace ModelReplacement.AvatarBodyUpdater
                 return playerBones.First();
             }
 
+            // Handles dead body rigs, which don't use the same bone name for Hips, can most likely be deleted for Content Warning
             if (boneName == "spine")
             {
                 IEnumerable<Transform> ragdollBones = playerModelRenderer.bones.Where(x => x.name.Contains("PlayerRagdoll"));
@@ -118,7 +126,8 @@ namespace ModelReplacement.AvatarBodyUpdater
         }
 
 
-        //Remove spine.002 and .003 to implement logic
+        // This list of bones will need to be changed for Content warning, if not entirely replaced with a different system. 
+        //Remove spine.002 and .003 to implement HasUpperBody logic
         protected static Dictionary<string, HumanBodyBones> modelToAvatarBone = new Dictionary<string, HumanBodyBones>()
             {
                 {"spine" , HumanBodyBones.Hips},

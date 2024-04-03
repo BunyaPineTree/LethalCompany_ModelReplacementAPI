@@ -2,11 +2,7 @@
 using BepInEx.Bootstrap;
 using BepInEx.Configuration;
 using BepInEx.Logging;
-using GameNetcodeStuff;
 using HarmonyLib;
-using MirrorDecor;
-using ModelReplacement.Monobehaviors;
-using ModelReplacement.Monobehaviors.Enemies;
 using System;
 using System.Collections.Generic;
 
@@ -17,18 +13,12 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "2.4.0";
+        public const string VERSION = "1.0.0";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
 
     [BepInPlugin(PluginInfo.GUID, PluginInfo.NAME, PluginInfo.VERSION)]
-    [BepInDependency("me.swipez.melonloader.morecompany", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("verity.3rdperson", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("LCThirdPerson", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("quackandcheese.mirrordecor", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("FlipMods.TooManyEmotes", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency("com.graze.gorillatag.placeablecamera", BepInDependency.DependencyFlags.SoftDependency)]
 
 
     public class ModelReplacementAPI : BaseUnityPlugin
@@ -55,36 +45,19 @@ namespace ModelReplacement
                 ModelReplacementAPI.Instance = this;
             }
 
-            moreCompanyPresent = IsPluginPresent("me.swipez.melonloader.morecompany");
-            thirdPersonPresent = IsPluginPresent("verity.3rdperson");
-            LCthirdPersonPresent = IsPluginPresent("LCThirdPerson");
-            mirrorDecorPresent = IsPluginPresent("quackandcheese.mirrordecor");
-            tooManyEmotesPresent = IsPluginPresent("FlipMods.TooManyEmotes");
-            recordingCameraPresent = IsPluginPresent("com.graze.gorillatag.placeablecamera");
-
-            MRAPI_NetworkingPresent = IsPluginPresent("meow.ModelReplacementAPI.Networking");
 
             Harmony harmony = new Harmony(PluginInfo.GUID);
             harmony.PatchAll();
             Logger.LogInfo($"Plugin {PluginInfo.GUID} is loaded!");
         }
 
-        //soft dependencies
-        public static bool moreCompanyPresent;
-        public static bool thirdPersonPresent;
-        public static bool LCthirdPersonPresent;
-        public static bool mirrorDecorPresent;
-        public static bool tooManyEmotesPresent;
-        public static bool recordingCameraPresent;
 
-        public static bool MRAPI_NetworkingPresent;
 
 
         //Other
         public static ModelReplacementAPI Instance = null;
         public new ManualLogSource Logger;
-        private static int steamLobbyID => GameNetworkManager.Instance.currentLobby.HasValue ? (int)GameNetworkManager.Instance.currentLobby.Value.Id.Value : -1;
-        public static bool IsLan => steamLobbyID == -1;
+
 
         #region Registry and API methods
 

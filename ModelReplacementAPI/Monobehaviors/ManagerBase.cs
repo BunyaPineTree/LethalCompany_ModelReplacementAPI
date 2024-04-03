@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.Rendering.HighDefinition;
-using UnityEngine.Rendering;
-using UnityEngine;
-using _3rdPerson.Helper;
-using LCThirdPerson;
-using System.Collections;
-using GameNetcodeStuff;
-using TooManyEmotes.Patches;
+﻿using UnityEngine;
 
 namespace ModelReplacement.Monobehaviors
 {
@@ -16,13 +6,13 @@ namespace ModelReplacement.Monobehaviors
     {
         protected bool bodyReplacementExists = false;
         protected BodyReplacementBase bodyReplacement;
-        protected PlayerControllerB controller;
+        //protected PlayerControllerB controller;
         protected GameObject replacementModel;
         protected GameObject replacementViewModel;
-        protected bool localPlayer => GameNetworkManager.Instance.localPlayerController == controller;
+        //protected bool localPlayer => GameNetworkManager.Instance.localPlayerController == controller;
         protected virtual void Awake()
         {
-            controller = GetComponent<PlayerControllerB>();
+            // controller = GetComponent<PlayerControllerB>();
         }
         protected virtual void Update()
         {
