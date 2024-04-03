@@ -1,32 +1,44 @@
-# LethalCompany_ModelReplacementAPI2
+# Generic_ModelReplacementAPI
 
-Helps the user create model replacement mods in Lethal Company. [See the wiki](https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI/wiki) for more info. Developers [see the SDK repo(in progress)](https://github.com/BunyaPineTree/LethalCompany_ModelReplacementSDK) if you want to contribute to its development.    
-
-Features
+Notes
 -
-- A unity package manager based workflow to simplify model replacement and assetbundle creation.
-- A skin registry that allows the user to set specific skin names to specific models, default models replacements, or override that entirely and make all players the same model. It is also possible to except a model replacement from the registry entirely, and implement your own logic.
-- Native support for [UnityJigglePhysics](https://github.com/naelstrof/UnityJigglePhysics) as a free and highly functional method to implement bone physics into your model without needing to struggle with Assembly Definitions. 
-- Seemingly client side
-- More Company cosmetic support
-- TooManyEmotes, MoreEmotes, TooManyEmotes support
-- MirrorDecor, 3rdPerson, LCThirdPerson, Recording Camera support
+I have gone through the mod and made most things game agnostic, or at least provided explanations when I couldn't. This is in no way a working mod, and doesn't even compile. It is just a starting point for porting to another game. Lethal Company had lots of game specific code, and whatever game is being ported to will have just as much that needs to be considered. 
 
-How it works
+Known Challenges to Porting This mod
 -
-This mod maps the bone rotations from the base game character model to the unity Humanoid Avatar Definition, and then from your model's humanoid avatar to the underlying bones. A result of this is that you do not need to make custom animations, but the result will not be as high quality as if you did and made your model replacement mod from scratch. 
-Players with an active model replacement are given a `BodyReplacement` component derived from `BodyReplacementBase`, which on each call of `Update()` sets your model replacement's bone rotations via the above method. The mod maker can set which skins activate any given `BodyReplacement` with the skin registry.
-* See the Miku example project for a demonstration on how your registered model replacement can make use of bepinex configs. 
+Reliance on `PlayerControllerB`. Generally we only use `PlayerControllerB` to get things like suit names, player names, and the base game gameobject, but given how entrenched it is in the original code it would be difficult to work without an analog. So long as an equivalent exists this can probably be directly replaced without issue. 
 
-Known issues
+Registry Methods also rely on `PlayerControllerB`, and honestly I'm not sure that the registry system I have in place is the best option. You will probably need to devise some new method for whatever game is being ported to. The only requirement is that you have a consistent means of putting a `BodyReplacement` somewhere on the character. In Lethal Company I just ran a loop on `Update` that checks if somebody's suit name has changed, and if so it put on the `BodyReplacement` registered to that suit. 
+
+
+Overview of Workflow
 -
-* Ragdoll behaves strangely at times
-* Blood decals are not currently visible on the ragdoll replacement.
-* Dying at the company may make the dead individual respawn without a model, but it may also return at a later point in time. 
+Implementing this mod requires a few monobehaviors to be placed at some point on the character GameObject tree. 
+It would also be useful to have an analog for the Lethal Company `PlayerControllerB` monobehavior, which keeps most player related info in one spot. ModelReplacementAPI is highly dependent on `PlayerControllerB`, and would probably require a fair bit of refactoring if no analog exists. 
 
-Unknown issues
--
-* Many.
+## Monobehaviors
 
-And a special thanks to squire, mina, linkoid, notnotnotswipez, naelstrof and everybody else who has been a huge help. 
+### `BodyReplacementBase`
+The way this mod functions is via an abstract `BodyReplacementBase` class that is derived from for some specific `BodyReplacement` class. This means the only effort required by the user of `BodyReplacementBase` is to fill in the required abstract methods, and optional overridable methods, which are used by the abstract base class to handle everything else. The `BodyReplacement` is then instantiated as a component somewhere on the character GameObject. 
+
+This class outsources rendering logic to `ViewStateManager`, replacement model rig update logic to `AvatarUpdater`, and replacement viewmodel rig update logic to `ViewModelUpdater`
+
+### `ViewStateManager` : `ManagerBase`
+Handling all first/third person and rendering logic was outsourced to the `ViewStateManager` instead of managing it in `BodyReplacementBase`. In LethalCompany this was useful given the frequency with which models were changed, as some info needed to persist in between `BodyReplacements`, which were destroyed and reinstantiated with model change. 
+
+`ViewStateManager` also handled everything to do with layers. In Lethal Company the general crustiness and visual quality required a No PostProcessing layer to be implemented, which would make things such as anime models function. This may not be necessary in general, and so the majority of the logic in `ViewStateManager` can be removed
+
+### `ManagerBase`
+This abstract class is derived by `ViewStateManager`, as well as other MonoBehaviors that need a reference to the current `BodyReplacement`. It splits its update logic into `UpdatePlayer()` and `UpdateModelReplacement()` methods to differentiate whether a model replacement is active. When a `BodyReplacement` calls `Awake()`, it reports to every `ManagerBase` its existence, which changes the reference in the `ManagerBase` classes. 
+
+## Scripts
+
+### `AvatarUpdater`
+This script handles everything to do with rigs, and is both game specific and sometimes model specific.
+Generally, it maps replacement model bones to the HumanoidAvatarDefinition, and then from the HumanoidAvatarDefinition to the base game rigs. So long as the replacement model is Humanoid, the only thing necessary is to define the map from the base game rig to the humanoid one. 
+
+### `ViewModelUpdater`
+The exact same thing as above, but for first person viewmodels. Note that we currently have the ability to generate first person viewmodels from the replacement model, given that the replacement model has a humanoid avatar. This code is in the MeshHelper class, and is probably the only thing that should translate without issue to any game. 
+
+
 
