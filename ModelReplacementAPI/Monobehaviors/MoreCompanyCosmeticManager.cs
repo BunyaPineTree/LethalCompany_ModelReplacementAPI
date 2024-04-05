@@ -106,7 +106,7 @@ namespace ModelReplacement.Monobehaviors
 
 
                         cosmeticInstance.cosmetic.transform.SetPositionAndRotation(cosmeticPosition, cosmeticRotation);
-                        SetAllChildrenLayer(cosmeticInstance.cosmetic.transform, ViewStateManager.modelLayer);
+                        SetAllChildrenLayer(cosmeticInstance.cosmetic.transform, localPlayer ? ViewStateManager.modelLayer : ViewStateManager.visibleLayer);
                     }
                     else
                     {

@@ -28,6 +28,7 @@ namespace ModelReplacement.AvatarBodyUpdater
 
         public virtual void AssignModelReplacement(GameObject player, GameObject replacement)
         {
+            if(replacement == null) { return; }
             PlayerControllerB controller = player.GetComponent<PlayerControllerB>();
             playerModelRenderer = controller ? controller.thisPlayerModel : player.GetComponentInChildren<SkinnedMeshRenderer>();
 
@@ -73,7 +74,7 @@ namespace ModelReplacement.AvatarBodyUpdater
 
         public void Update()
         {
-            if (playerModelRenderer == null || replacementAnimator == null) { return; }
+            if ((replacement == null) || playerModelRenderer == null || replacementAnimator == null) { return; }
             UpdateModel();
         }
 

@@ -37,6 +37,10 @@ namespace ModelReplacement
         protected GameObject deadBody = null;
         protected GameObject replacementDeadBody = null;
 
+        //Shadow components
+        public AvatarUpdater shadowAvatar { get; private set; }
+        public GameObject replacementModelShadow = null;
+
         //Misc components
         private MaterialHelper matHelper = null;
         private int danceNumber = 0;
@@ -362,14 +366,26 @@ namespace ModelReplacement
             {
                 ModelReplacementAPI.Instance.Logger.LogError($"Could not set all model scripts.\n Error: {e.Message}");
             }
+            if (viewState.localPlayer)
+            {
+                replacementModelShadow = GameObject.Instantiate(replacementModel);
+                replacementModelShadow.name += $"(Shadow)";
+                foreach (Renderer renderer in replacementModelShadow.GetComponentsInChildren<Renderer>())
+                {
+                    renderer.shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+                    renderer.gameObject.layer = viewState.VisibleLayer;
+                }
+            }
             replacementViewModel = LoadViewModelreplacement();
 
             // Assign avatars
             avatar = GetAvatarUpdater();
+            shadowAvatar = GetAvatarUpdater();
             viewModelAvatar = GetViewModelUpdater();
             ragdollAvatar = new AvatarUpdater();
             cosmeticAvatar = avatar;
             avatar.AssignModelReplacement(controller.gameObject, replacementModel);
+            shadowAvatar.AssignModelReplacement(controller.gameObject, replacementModelShadow);
             viewModelAvatar.AssignViewModelReplacement(controller.gameObject, replacementViewModel);
 
             //Misc
@@ -424,6 +440,7 @@ namespace ModelReplacement
 
             // Update replacement models
             avatar.Update();
+            shadowAvatar.Update();
             ragdollAvatar.Update();
             viewModelAvatar.Update();
             UpdateItemTransform();
@@ -462,6 +479,7 @@ namespace ModelReplacement
         {
             ModelReplacementAPI.Instance.Logger.LogInfo($"Destroy body component for {controller.playerUsername}");
             Destroy(replacementModel);
+            Destroy(replacementModelShadow);
             Destroy(replacementViewModel);
             Destroy(replacementDeadBody);
         }

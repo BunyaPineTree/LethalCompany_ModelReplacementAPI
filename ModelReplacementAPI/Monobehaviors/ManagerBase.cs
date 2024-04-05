@@ -19,7 +19,7 @@ namespace ModelReplacement.Monobehaviors
         protected PlayerControllerB controller;
         protected GameObject replacementModel;
         protected GameObject replacementViewModel;
-        protected bool localPlayer => GameNetworkManager.Instance.localPlayerController == controller;
+        public bool localPlayer => GameNetworkManager.Instance.localPlayerController == controller;
         protected virtual void Awake()
         {
             controller = GetComponent<PlayerControllerB>();

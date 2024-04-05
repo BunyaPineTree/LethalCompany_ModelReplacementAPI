@@ -90,6 +90,13 @@ namespace ModelReplacement.Monobehaviors.Enemies
             enemyAI.rendererLOD1.shadowCastingMode = ShadowCastingMode.Off;
             enemyAI.rendererLOD2.shadowCastingMode = ShadowCastingMode.Off;
 
+            // Remove Nametag
+            MeshRenderer[] gameObjects = enemyAI.gameObject.GetComponentsInChildren<MeshRenderer>();
+            gameObjects.Where(x => x.gameObject.name == "LevelSticker").First().enabled = false;
+            gameObjects.Where(x => x.gameObject.name == "BetaBadge").First().enabled = false;
+
+
+
             /*
             //Colliders for nametag
             GameObject colliderObj = new GameObject("MRAPINameCollider");

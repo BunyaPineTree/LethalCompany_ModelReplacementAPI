@@ -10,6 +10,7 @@ using System.Collections;
 using GameNetcodeStuff;
 using TooManyEmotes.Patches;
 using ModelReplacement.Monobehaviors;
+using Steamworks;
 //
 //This component exists to manageand patch the layers and cullingMasks for players and cameras.
 //This is in an attempt to support all third person mods simultaneously without numerous individual patches, which historically are not a robust solution.
@@ -94,9 +95,9 @@ namespace ModelReplacement
         private MeshRenderer nameTagObj = null;
         private MeshRenderer nameTagObj2 = null;
         GameObject playerHUD = null;
+        MeshRenderer helmet = null;
+        bool playerHUDDefault = true;
         private bool UseNoPostProcessing => bodyReplacementExists ? bodyReplacement.UseNoPostProcessing : false;
-        private bool DebugRenderPlayer => bodyReplacementExists ? bodyReplacement.DebugRenderPlayer : false;
-        private bool DebugRenderModel => bodyReplacementExists ? bodyReplacement.DebugRenderModel : false;
         public int ModelLayer => UseNoPostProcessing ? NoPostModelLayer : modelLayer;
         public int ArmsLayer => armsLayer;
         public int VisibleLayer => UseNoPostProcessing ? NoPostVisibleLayer : visibleLayer;
@@ -109,6 +110,8 @@ namespace ModelReplacement
             nameTagObj = gameObjects.Where(x => x.gameObject.name == "LevelSticker").First();
             nameTagObj2 = gameObjects.Where(x => x.gameObject.name == "BetaBadge").First();
             playerHUD = GameObject.Find("Systems/Rendering/PlayerHUDHelmetModel");
+            helmet = playerHUD.GetComponentInChildren<MeshRenderer>();
+            playerHUDDefault = playerHUD.activeSelf;
         }
         public void Start()
         {
@@ -120,6 +123,222 @@ namespace ModelReplacement
             base.ReportBodyReplacementAddition(replacement);
             PatchViewState();
         }
+        public override void UpdatePlayer()
+        {
+            ViewState state = GetViewState();
+            SetPlayerRenderers(true, true);
+            controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
+            if (state == ViewState.None)
+            {
+                SetArmLayers(InvisibleLayer);
+                SetPlayerLayers(invisibleLayer);
+                playerHUD.SetActive(false);
+            }
+            else if (state == ViewState.FirstPerson)
+            {
+                SetArmLayers(ArmsLayer);
+                SetPlayerLayers(modelLayer);
+                playerHUD.SetActive(playerHUDDefault);
+            }
+            else if (state == ViewState.ThirdPerson)
+            {
+                SetArmLayers(InvisibleLayer);
+                SetPlayerLayers(visibleLayer);
+                playerHUD.SetActive(false);
+                if (ModelReplacementAPI.LCthirdPersonPresent)
+                {
+                    controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
+                }
+            }
+        }
+        public override void UpdateModelReplacement()
+        {
+            ViewState state = GetViewState();
+            DisableScavengerModel();
+            SetPlayerLayers(modelLayer);
+            SetShadowModel(false);
+            controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
+            if (state == ViewState.None)
+            {
+                SetArmLayers(InvisibleLayer);
+                SetAvatarLayers(InvisibleLayer, ShadowCastingMode.Off);
+            }
+            else if (state == ViewState.FirstPerson)
+            {
+                SetArmLayers(ArmsLayer);
+                SetAvatarLayers(ModelLayer, ShadowCastingMode.On);
+                SetShadowModel(true);
+                playerHUD.SetActive(bodyReplacement.RemoveHelmet ? false : playerHUDDefault);
+            }
+            else if (state == ViewState.ThirdPerson)
+            {
+                SetArmLayers(InvisibleLayer);
+                SetAvatarLayers(VisibleLayer, ShadowCastingMode.On);
+                playerHUD.SetActive(false);
+                if (ModelReplacementAPI.LCthirdPersonPresent)
+                {
+                    controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
+                }
+            }
+        }
+
+
+
+
+        public ViewState GetViewState()
+        {
+            if (!controller.isPlayerControlled) //Dead, render nothing
+            {
+                return ViewState.None;
+            }
+            if (GameNetworkManager.Instance.localPlayerController != controller) //Other player, render third person
+            {
+                return ViewState.ThirdPerson;
+            }
+            if (ModelReplacementAPI.thirdPersonPresent && Safe3rdPersonActive()) //If any of these are true, we are in third person mode and must render third person
+            {
+                return ViewState.ThirdPerson;
+            }
+            if (ModelReplacementAPI.LCthirdPersonPresent && SafeLCActive())
+            {
+                return ViewState.ThirdPerson;
+            }
+            if (ModelReplacementAPI.recordingCameraPresent && SafeRecCamActive())
+            {
+                return ViewState.ThirdPerson;
+            }
+            if (ModelReplacementAPI.tooManyEmotesPresent && SafeTMEActive())
+            {
+                return ViewState.ThirdPerson;
+            }
+            return ViewState.FirstPerson; //Because none of the above triggered, we are in first person
+
+        }
+
+        #region Set,Layer helpers
+        public void SetPlayerRenderers(bool enabled, bool helmetShadow)
+        {
+            if (localPlayer)
+            {
+                controller.thisPlayerModel.enabled = enabled;
+                controller.thisPlayerModelLOD1.enabled = enabled;
+                controller.thisPlayerModelLOD2.enabled = enabled;
+
+                controller.thisPlayerModel.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
+                controller.thisPlayerModelLOD1.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
+                controller.thisPlayerModelLOD2.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
+
+                /*
+                controller.thisPlayerModel.enabled = enabled;
+                controller.thisPlayerModel.shadowCastingMode = ShadowCastingMode.On;
+                controller.thisPlayerModelLOD1.enabled = enabled;
+                controller.thisPlayerModelLOD1.shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+                controller.thisPlayerModelLOD2.enabled = false;
+                */
+
+                helmet.shadowCastingMode = helmetShadow ? ShadowCastingMode.On : ShadowCastingMode.Off;
+            }
+            else
+            {
+                controller.thisPlayerModel.enabled = enabled;
+                controller.thisPlayerModelLOD1.enabled = enabled;
+                controller.thisPlayerModelLOD2.enabled = enabled;
+
+                controller.thisPlayerModel.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
+                controller.thisPlayerModelLOD1.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
+                controller.thisPlayerModelLOD2.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
+
+            }
+
+            nameTagObj.enabled = enabled;
+            nameTagObj2.enabled = enabled;
+        }
+
+        public void DisableScavengerModel()
+        {
+            if (localPlayer)
+            {
+                controller.thisPlayerModel.shadowCastingMode = ShadowCastingMode.Off;
+                controller.thisPlayerModelLOD1.shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+                helmet.shadowCastingMode = ShadowCastingMode.Off;
+            }
+            else
+            {
+                controller.thisPlayerModel.shadowCastingMode = ShadowCastingMode.Off;
+                controller.thisPlayerModelLOD1.shadowCastingMode = ShadowCastingMode.Off;
+                controller.thisPlayerModelLOD2.shadowCastingMode = ShadowCastingMode.Off;
+            }
+
+            controller.thisPlayerModel.enabled = false;
+            controller.thisPlayerModelLOD1.enabled = false;
+            controller.thisPlayerModelLOD2.enabled = false;
+            nameTagObj.enabled = false;
+            nameTagObj2.enabled = false;
+
+        }
+        public void SetPlayerLayers(int layer)
+        {
+            controller.thisPlayerModel.gameObject.layer = layer;
+            controller.thisPlayerModelLOD1.gameObject.layer = layer;
+            controller.thisPlayerModelLOD2.gameObject.layer = layer;
+            nameTagObj.gameObject.layer = layer;
+            nameTagObj2.gameObject.layer = layer;
+        }
+        public void SetAvatarLayers(int layer, ShadowCastingMode mode)
+        {
+            if (replacementModel == null) { return; }
+            Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                renderer.shadowCastingMode = mode;
+                renderer.gameObject.layer = layer;
+            }
+        }
+        public void SetArmLayers(int layer)
+        {
+            if (replacementViewModel)
+            {
+                controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
+                Renderer[] renderers = replacementViewModel.GetComponentsInChildren<Renderer>();
+                foreach (Renderer renderer in renderers)
+                {
+                    renderer.gameObject.layer = layer;
+                    renderer.shadowCastingMode = ShadowCastingMode.Off;
+                }
+            }
+            else
+            {
+                controller.thisPlayerModelArms.gameObject.layer = layer;
+            }
+        }
+        public void SetShadowModel(bool enabled)
+        {
+            if(bodyReplacement.replacementModelShadow == null) { return; }  
+            bodyReplacement.replacementModelShadow.SetActive(enabled);
+        }
+        #endregion
+
+        #region Compatability and Patches
+        public void RendererPatches()
+        {
+            PatchViewState();
+
+
+
+            if (ModelReplacementAPI.recordingCameraPresent)
+            {
+                SafeFixRecordingCamera();
+            }
+
+            if (ModelReplacementAPI.thirdPersonPresent)
+            {
+                SafeFix3rdPerson();
+            }
+            if (ModelReplacementAPI.LCthirdPersonPresent)
+            {
+            }
+        }
+
         public static void PatchViewState()
         {
             var cpass = GameObject.Find("Systems/Rendering/CustomPass").GetComponent<CustomPassVolume>().customPasses.First();
@@ -159,11 +378,6 @@ namespace ModelReplacement
                     */
 
                 }
-
-
-
-
-
             }
             Camera cam1 = GameObject.Find("Environment/HangarShip/Cameras/FrontDoorSecurityCam/SecurityCamera").GetComponent<Camera>();
             if ((cam1.cullingMask & 1 << modelLayer) == 0) //If the bitwise and is 0, then cullingMask culls the modelLayer, and needs to have modelLayer added.
@@ -175,203 +389,6 @@ namespace ModelReplacement
             if ((cam2.cullingMask & 1 << modelLayer) == 0) //If the bitwise and is 0, then cullingMask culls the modelLayer, and needs to have modelLayer added.
             {
                 cam2.cullingMask += 1 << modelLayer;
-            }
-        }
-        public override void UpdatePlayer()
-        {
-            ViewState state = GetViewState();
-            SetPlayerRenderers(true);
-            controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
-            if (state == ViewState.None)
-            {
-                SetArmLayers(InvisibleLayer);
-                SetPlayerLayers(invisibleLayer);
-            }
-            else if (state == ViewState.FirstPerson)
-            {
-                SetArmLayers(ArmsLayer);
-                SetPlayerLayers(modelLayer);
-                playerHUD.SetActive(true);
-            }
-            else if (state == ViewState.ThirdPerson)
-            {
-                SetArmLayers(InvisibleLayer);
-                SetPlayerLayers(visibleLayer);
-                playerHUD.SetActive(false);
-                if (ModelReplacementAPI.LCthirdPersonPresent)
-                {
-                    controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
-                }
-            }
-        }
-        public override void UpdateModelReplacement()
-        {
-            ViewState state = GetViewState();
-            SetPlayerRenderers(false);
-            SetPlayerLayers(modelLayer);
-            controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
-            if (state == ViewState.None)
-            {
-                SetArmLayers(InvisibleLayer);
-                SetAvatarLayers(InvisibleLayer, ShadowCastingMode.Off);
-            }
-            else if (state == ViewState.FirstPerson)
-            {
-                SetArmLayers(ArmsLayer);
-                //SetAvatarLayers(ModelLayer, ShadowCastingMode.On);
-                SetAvatarLayers(VisibleLayer, ShadowCastingMode.ShadowsOnly);
-                playerHUD.SetActive(!bodyReplacement.RemoveHelmet);
-            }
-            else if (state == ViewState.ThirdPerson)
-            {
-                SetArmLayers(InvisibleLayer);
-                SetAvatarLayers(VisibleLayer, ShadowCastingMode.On);
-                playerHUD.SetActive(false);
-                if (ModelReplacementAPI.LCthirdPersonPresent)
-                {
-                    controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
-                }
-            }
-            else if (state == ViewState.Debug)
-            {
-                if (DebugRenderModel)
-                {
-                    SetAvatarLayers(VisibleLayer, ShadowCastingMode.On);
-                }
-                else
-                {
-                    SetAvatarLayers(InvisibleLayer, ShadowCastingMode.Off);
-                }
-                if (DebugRenderPlayer)
-                {
-                    SetPlayerRenderers(true);
-                    SetPlayerLayers(visibleLayer);
-                }
-                else
-                {
-                    SetPlayerRenderers(false);
-                    SetPlayerLayers(invisibleLayer);
-                }
-                if (ModelReplacementAPI.LCthirdPersonPresent)
-                {
-                    controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
-                }
-
-            }
-
-        }
-
-
-
-
-        public ViewState GetViewState()
-        {
-            if (DebugRenderModel || DebugRenderPlayer)
-            {
-                return ViewState.Debug;
-            }
-            if (!controller.isPlayerControlled) //Dead, render nothing
-            {
-                return ViewState.None;
-            }
-            if (GameNetworkManager.Instance.localPlayerController != controller) //Other player, render third person
-            {
-                return ViewState.ThirdPerson;
-            }
-            if (ModelReplacementAPI.thirdPersonPresent && Safe3rdPersonActive()) //If any of these are true, we are in third person mode and must render third person
-            {
-                return ViewState.ThirdPerson;
-            }
-            if (ModelReplacementAPI.LCthirdPersonPresent && SafeLCActive())
-            {
-                return ViewState.ThirdPerson;
-            }
-            if (ModelReplacementAPI.recordingCameraPresent && SafeRecCamActive())
-            {
-                return ViewState.ThirdPerson;
-            }
-            if (ModelReplacementAPI.tooManyEmotesPresent && SafeTMEActive())
-            {
-                return ViewState.ThirdPerson;
-            }
-            return ViewState.FirstPerson; //Because none of the above triggered, we are in first person
-
-        }
-        public void SetPlayerRenderers(bool enabled)
-        {
-            if (localPlayer)
-            {
-                controller.thisPlayerModel.enabled = enabled;
-                controller.thisPlayerModelLOD1.enabled = false;
-                controller.thisPlayerModelLOD2.enabled = false;
-            }
-            else
-            {
-                controller.thisPlayerModel.enabled = enabled;
-                controller.thisPlayerModelLOD1.enabled = enabled;
-                controller.thisPlayerModelLOD2.enabled = enabled;
-            }
-
-
-            controller.thisPlayerModel.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
-            controller.thisPlayerModelLOD1.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
-            controller.thisPlayerModelLOD2.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
-
-            nameTagObj.enabled = enabled;
-            nameTagObj2.enabled = enabled;
-        }
-        public void SetPlayerLayers(int layer)
-        {
-            controller.thisPlayerModel.gameObject.layer = layer;
-            controller.thisPlayerModelLOD1.gameObject.layer = layer;
-            controller.thisPlayerModelLOD2.gameObject.layer = layer;
-            nameTagObj.gameObject.layer = layer;
-            nameTagObj2.gameObject.layer = layer;
-        }
-        public void SetAvatarLayers(int layer, ShadowCastingMode mode)
-        {
-            if (replacementModel == null) { return; }
-            Renderer[] renderers = replacementModel.GetComponentsInChildren<Renderer>();
-            foreach (Renderer renderer in renderers)
-            {
-                renderer.shadowCastingMode = mode;
-                renderer.gameObject.layer = layer;
-            }
-        }
-        public void SetArmLayers(int layer)
-        {
-            if (replacementViewModel)
-            {
-                controller.thisPlayerModelArms.gameObject.layer = InvisibleLayer;
-                Renderer[] renderers = replacementViewModel.GetComponentsInChildren<Renderer>();
-                foreach (Renderer renderer in renderers)
-                {
-                    renderer.gameObject.layer = layer;
-                    renderer.shadowCastingMode = ShadowCastingMode.Off;
-                }
-            }
-            else
-            {
-                controller.thisPlayerModelArms.gameObject.layer = layer;
-            }
-        }
-        public void RendererPatches()
-        {
-            PatchViewState();
-
-
-
-            if (ModelReplacementAPI.recordingCameraPresent)
-            {
-                SafeFixRecordingCamera();
-            }
-
-            if (ModelReplacementAPI.thirdPersonPresent)
-            {
-                SafeFix3rdPerson();
-            }
-            if (ModelReplacementAPI.LCthirdPersonPresent)
-            {
             }
         }
 
@@ -424,5 +441,7 @@ namespace ModelReplacement
             }
             catch { return false; }
         }
+
+        #endregion
     }
 }

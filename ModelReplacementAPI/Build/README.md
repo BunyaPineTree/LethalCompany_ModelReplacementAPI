@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.4.0
+# ModelReplacementAPI v2.4.1
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -28,6 +28,10 @@ We are currently working on a server-side mod that will synchronize that random 
 - Dropping dead players with a viewmodel can result in unexpected results
 
 ## Changelog
+	- v2.4.1
+		- Removed Masked nametags
+		- Fixed incompatability with other mods that remove the hud
+		- Fixed bug that prevented MoreCompany cosmetics from being seen in the first person camera
 	- v2.4.0
 		- ViewModel support added
 		- Masked support added
@@ -38,7 +42,7 @@ We are currently working on a server-side mod that will synchronize that random 
 		- Removed MoreCompany Cosmetic errors from console.
 		- Removed debug line that occasionally caused masked errors.
 		- Fixed character sizing issue when in the middle of an emote. 
-		- Fixed rubberbanding
+		- Fixed rubberbanding(?)
 	- v2.3.7
 		- Invisible scav dead bodies made visible. Huge thanks to SylviBlossom for locating the problem and providing the solution. 
 	- v2.3.6
