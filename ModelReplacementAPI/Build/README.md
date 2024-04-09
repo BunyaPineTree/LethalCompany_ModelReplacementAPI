@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.4.1
+# ModelReplacementAPI v2.4.2
 ### Simplifies character model replacement for modders
 
 ## Instructions

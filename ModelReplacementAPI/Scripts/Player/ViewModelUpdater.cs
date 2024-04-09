@@ -10,14 +10,11 @@ namespace ModelReplacement.Scripts.Player
     public class ViewModelUpdater
     {
         protected GameObject replacementViewModel = null;
-        protected Vector3 spinePositionOffset = Vector3.zero;
         private Transform armsMetarig;
         private Animator viewModelAnimator;
-        public Transform ItemHolderViewModel { get; private set; } = null;
+        public Transform ItemHolderViewModel { get; protected set; } = null;
 
         private bool hasShoulder = true;
-        private string highestL => hasShoulder ? "shoulder.L" : "arm.L_upper";
-        private string highestR => hasShoulder ? "shoulder.R" : "arm.R_upper";
         public virtual void AssignViewModelReplacement(GameObject player, GameObject replacementViewModel)
         {
             if (replacementViewModel == null) return;
