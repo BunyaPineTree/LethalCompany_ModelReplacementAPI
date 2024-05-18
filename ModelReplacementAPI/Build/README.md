@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.4.2
+# ModelReplacementAPI v2.4.5
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -28,6 +28,9 @@ We are currently working on a server-side mod that will synchronize that random 
 - Dropping dead players with a viewmodel can result in unexpected results
 
 ## Changelog
+	- v2.4.5
+		- LOD issues should be resolved. 
+		- Thanks to 1A3 for fixing the masked related error messages in console.
 	- v2.4.1
 		- Removed Masked nametags
 		- Fixed incompatability with other mods that remove the hud

@@ -7,7 +7,7 @@ namespace ModelReplacement.Patches
 {
 
     // Token: 0x02000005 RID: 5
-    [HarmonyPatch(typeof(HUDManager), "AddTextMessageClientRpc")]
+    //[HarmonyPatch(typeof(HUDManager), "AddTextMessageClientRpc")]
     internal class CosmeticPatch
     {
         // Token: 0x06000005 RID: 5 RVA: 0x00002100 File Offset: 0x00000300

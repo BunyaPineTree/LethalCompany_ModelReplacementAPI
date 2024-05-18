@@ -154,7 +154,7 @@ namespace ModelReplacement
         public override void UpdateModelReplacement()
         {
             ViewState state = GetViewState();
-            DisableScavengerModel();
+            SetPlayerRenderers(false, false);
             SetPlayerLayers(modelLayer);
             SetShadowModel(false);
             controller.gameplayCamera.cullingMask = CullingMaskFirstPerson;
@@ -220,70 +220,28 @@ namespace ModelReplacement
         {
             if (localPlayer)
             {
-                controller.thisPlayerModel.enabled = enabled;
-                controller.thisPlayerModelLOD1.enabled = enabled;
-                controller.thisPlayerModelLOD2.enabled = enabled;
-
-                controller.thisPlayerModel.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
-                controller.thisPlayerModelLOD1.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
-                controller.thisPlayerModelLOD2.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
-
-                /*
-                controller.thisPlayerModel.enabled = enabled;
-                controller.thisPlayerModel.shadowCastingMode = ShadowCastingMode.On;
-                controller.thisPlayerModelLOD1.enabled = enabled;
-                controller.thisPlayerModelLOD1.shadowCastingMode = ShadowCastingMode.ShadowsOnly;
-                controller.thisPlayerModelLOD2.enabled = false;
-                */
-
                 helmet.shadowCastingMode = helmetShadow ? ShadowCastingMode.On : ShadowCastingMode.Off;
             }
-            else
-            {
-                controller.thisPlayerModel.enabled = enabled;
-                controller.thisPlayerModelLOD1.enabled = enabled;
-                controller.thisPlayerModelLOD2.enabled = enabled;
 
-                controller.thisPlayerModel.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
-                controller.thisPlayerModelLOD1.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
-                controller.thisPlayerModelLOD2.shadowCastingMode = enabled ? ShadowCastingMode.On : ShadowCastingMode.Off;
-
-            }
-
+            controller.thisPlayerModel.enabled = enabled;
+            controller.thisPlayerModel.shadowCastingMode = ShadowCastingMode.On;
+            controller.thisPlayerModelLOD1.enabled = enabled;
+            controller.thisPlayerModelLOD1.shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+            controller.thisPlayerModelLOD2.enabled = false;
+                
             nameTagObj.enabled = enabled;
             nameTagObj2.enabled = enabled;
         }
 
-        public void DisableScavengerModel()
-        {
-            if (localPlayer)
-            {
-                controller.thisPlayerModel.shadowCastingMode = ShadowCastingMode.Off;
-                controller.thisPlayerModelLOD1.shadowCastingMode = ShadowCastingMode.ShadowsOnly;
-                helmet.shadowCastingMode = ShadowCastingMode.Off;
-            }
-            else
-            {
-                controller.thisPlayerModel.shadowCastingMode = ShadowCastingMode.Off;
-                controller.thisPlayerModelLOD1.shadowCastingMode = ShadowCastingMode.Off;
-                controller.thisPlayerModelLOD2.shadowCastingMode = ShadowCastingMode.Off;
-            }
-
-            controller.thisPlayerModel.enabled = false;
-            controller.thisPlayerModelLOD1.enabled = false;
-            controller.thisPlayerModelLOD2.enabled = false;
-            nameTagObj.enabled = false;
-            nameTagObj2.enabled = false;
-
-        }
         public void SetPlayerLayers(int layer)
         {
             controller.thisPlayerModel.gameObject.layer = layer;
-            controller.thisPlayerModelLOD1.gameObject.layer = layer;
-            controller.thisPlayerModelLOD2.gameObject.layer = layer;
+            controller.thisPlayerModelLOD1.gameObject.layer = visibleLayer;
+            controller.thisPlayerModelLOD2.gameObject.layer = visibleLayer;
             nameTagObj.gameObject.layer = layer;
             nameTagObj2.gameObject.layer = layer;
         }
+
         public void SetAvatarLayers(int layer, ShadowCastingMode mode)
         {
             if (replacementModel == null) { return; }

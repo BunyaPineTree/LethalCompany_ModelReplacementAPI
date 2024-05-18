@@ -15,6 +15,8 @@ namespace ModelReplacement.Patches
         {
             __instance.gameObject.AddComponent<ViewStateManager>();
             __instance.gameObject.AddComponent<MoreCompanyCosmeticManager>();
+
+            __instance.gameObject.transform.Find("ScavengerModel").GetComponent<LODGroup>().enabled = false;
         }
 
 
@@ -87,8 +89,8 @@ namespace ModelReplacement.Patches
                 PlayerControllerB playerControllerB = __instance;
                 playerControllerB.thisPlayerModel.shadowCastingMode = ShadowCastingMode.On;
                 playerControllerB.thisPlayerModel.gameObject.layer = ViewStateManager.modelLayer;
-                playerControllerB.thisPlayerModelLOD1.gameObject.layer = ViewStateManager.modelLayer;
-                playerControllerB.thisPlayerModelLOD2.gameObject.layer = ViewStateManager.modelLayer;
+                playerControllerB.thisPlayerModelLOD1.gameObject.layer = ViewStateManager.visibleLayer;
+                playerControllerB.thisPlayerModelLOD2.gameObject.layer = ViewStateManager.visibleLayer;
                 playerControllerB.thisPlayerModelArms.gameObject.layer = ViewStateManager.armsLayer;
                 playerControllerB.gameplayCamera.cullingMask = ViewStateManager.CullingMaskFirstPerson;
             }
