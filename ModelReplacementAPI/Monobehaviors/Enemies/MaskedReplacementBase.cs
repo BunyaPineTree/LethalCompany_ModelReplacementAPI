@@ -137,8 +137,10 @@ namespace ModelReplacement.Monobehaviors.Enemies
 
         protected virtual void OnDestroy()
         {
-            ModelReplacementAPI.Instance.Logger.LogInfo($"Destroy masked body component {replacementModel.name}");
-            Destroy(replacementModel);
+            if (replacementModel != null) {
+                ModelReplacementAPI.Instance.Logger.LogInfo($"Destroy masked body component {replacementModel.name}");
+                Destroy(replacementModel);
+            }
         }
 
         #endregion
