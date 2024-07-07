@@ -10,7 +10,7 @@ namespace ModelReplacement.AvatarBodyUpdater
     {
         public Quaternion offset = Quaternion.identity;
 
-        public bool RenderMCC = false;
+        public bool RenderMCC = true;
         public Vector3 MCCPosition = Vector3.zero;
         public Quaternion MCCRotation = Quaternion.identity;
         public Vector3 MCCScale = Vector3.one;

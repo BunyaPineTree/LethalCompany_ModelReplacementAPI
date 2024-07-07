@@ -17,7 +17,7 @@ namespace ModelReplacement
     {
         public const string GUID = "meow.ModelReplacementAPI";
         public const string NAME = "ModelReplacementAPI";
-        public const string VERSION = "2.4.5";
+        public const string VERSION = "2.4.7";
         public const string WEBSITE = "https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI";
     }
 
@@ -40,7 +40,7 @@ namespace ModelReplacement
 
         private static void InitConfig()
         {
-            EnforceViewModelGeneration = config.Bind<bool>("Debug Settings", "Generate Viewmodels by default", false, "Enable to generate a viewmodel for all model replacements, regardless of the individual model's settings.");
+            EnforceViewModelGeneration = config.Bind<bool>("Debug Settings", "Generate Viewmodels by default", true, "Enable to generate a viewmodel for all model replacements, regardless of the individual model's settings.");
         }
         private void Awake()
         {

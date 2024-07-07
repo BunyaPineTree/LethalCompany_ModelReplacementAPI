@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.4.5
+# ModelReplacementAPI v2.4.7
 ### Simplifies character model replacement for modders
 
 ## Instructions
@@ -28,6 +28,10 @@ We are currently working on a server-side mod that will synchronize that random 
 - Dropping dead players with a viewmodel can result in unexpected results
 
 ## Changelog
+	- v2.4.7
+		- Fixed vanishing trees
+	- v2.4.6
+		- Thanks to DiFFoZ for finding a bug that reduced performance.
 	- v2.4.5
 		- LOD issues should be resolved. 
 		- Thanks to 1A3 for fixing the masked related error messages in console.

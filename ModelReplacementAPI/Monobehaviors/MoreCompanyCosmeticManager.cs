@@ -11,8 +11,6 @@ namespace ModelReplacement.Monobehaviors
 {
     public class MoreCompanyCosmeticManager : ManagerBase
     {
-        private BodyReplacementBase bodyReplacement;
-        private PlayerControllerB controller;
         private AvatarUpdater cosmeticAvatar => bodyReplacement.cosmeticAvatar;
 
         private string lastException = "";
@@ -28,6 +26,19 @@ namespace ModelReplacement.Monobehaviors
             if (ModelReplacementAPI.moreCompanyPresent) { SafeRenderCosmetics(true); }
         }
 
+        public override void ReportBodyReplacementAddition(BodyReplacementBase replacement)
+        {
+            base.ReportBodyReplacementAddition(replacement);
+            cosmeticTransformPairs.Clear();
+            cosmeticInstances.Clear();
+        }
+        public override void ReportBodyReplacementRemoval()
+        {
+            base.ReportBodyReplacementRemoval();
+            cosmeticTransformPairs.Clear();
+            cosmeticInstances.Clear();
+        }
+
         private void SafeRenderCosmetics(bool useAvatarTransforms)
         {
             try
@@ -36,6 +47,7 @@ namespace ModelReplacement.Monobehaviors
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.ToString());
                 lastException = e.Message;
             }
 
@@ -57,39 +69,46 @@ namespace ModelReplacement.Monobehaviors
 
             if (cosmeticInstances.Count == 0)
             {
-                CosmeticApplication application = controller.gameObject.GetComponentInChildren<CosmeticApplication>();
-                if (application == null)
-                {
-                    return;
-                }
-                foreach (CosmeticInstance cosmeticInstance in application.spawnedCosmetics)
-                {
-                    Transform transform = GetCosmeticTransform(cosmeticInstance.cosmeticType);
+                var applications = controller.gameObject.GetComponentsInChildren<CosmeticApplication>();
 
-                    CosmeticInstance2 instance2 = new CosmeticInstance2();
-                    instance2.modelParent = transform;
-                    instance2.cosmetic = cosmeticInstance.gameObject;
-                    instance2.DoRender = false;
-                    if (transform)
+                foreach (var application in applications)
+                {
+                    if(application.spawnedCosmetics.Count == 0) { continue; }
+                    foreach (CosmeticInstance cosmeticInstance in application.spawnedCosmetics)
                     {
-                        var MMCOffset = transform.GetComponent<RotationOffset>();
-                        if (MMCOffset)
+                        Transform transform = GetCosmeticTransform(cosmeticInstance.cosmeticType);
+
+                        CosmeticInstance2 instance2 = new CosmeticInstance2();
+                        instance2.modelParent = transform;
+                        instance2.cosmetic = cosmeticInstance.gameObject;
+                        instance2.DoRender = false;
+                        if (transform)
                         {
-                            var offset = instance2.modelOffset = new Transform();
-                            instance2.DoRender = MMCOffset.RenderMCC;
-                            offset.position = MMCOffset.MCCPosition;
-                            offset.rotation = MMCOffset.MCCRotation;
-                            offset.localScale = MMCOffset.MCCScale;
+                            var MMCOffset = transform.GetComponent<RotationOffset>();
+                            if (MMCOffset)
+                            {
+                                instance2.DoRender = MMCOffset.RenderMCC;
+                                instance2.positionOffset = MMCOffset.MCCPosition;
+                                instance2.rotationOffset = MMCOffset.MCCRotation;
+                            }
                         }
+
+                        cosmeticInstances.Add(instance2);
                     }
                 }
+
+                
 
             }
         }
 
         private void DangerousRenderCosmetics(bool useAvatarTransforms)
         {
-            RefreshCosmetics();
+            if(bodyReplacementExists)
+            {
+                RefreshCosmetics();
+            }
+            
 
             if (useAvatarTransforms)
             {
@@ -99,10 +118,10 @@ namespace ModelReplacement.Monobehaviors
                     {
                         cosmeticInstance.cosmetic.SetActive(true);
                         cosmeticInstance.cosmetic.transform.parent = null;
-                        cosmeticInstance.cosmetic.transform.localScale = cosmeticInstance.modelOffset.localScale;
+                        //cosmeticInstance.cosmetic.transform.localScale = cosmeticInstance.modelOffset.localScale;
 
-                        Vector3 cosmeticPosition = cosmeticInstance.modelParent.transform.position + cosmeticInstance.modelOffset.position;
-                        Quaternion cosmeticRotation = cosmeticInstance.modelParent.transform.rotation * cosmeticInstance.modelOffset.rotation;
+                        Vector3 cosmeticPosition = cosmeticInstance.modelParent.transform.position + cosmeticInstance.positionOffset;
+                        Quaternion cosmeticRotation = cosmeticInstance.modelParent.transform.rotation * cosmeticInstance.rotationOffset;
 
 
                         cosmeticInstance.cosmetic.transform.SetPositionAndRotation(cosmeticPosition, cosmeticRotation);
@@ -120,7 +139,7 @@ namespace ModelReplacement.Monobehaviors
                 application.RefreshAllCosmeticPositions();
                 foreach (CosmeticInstance cosmeticInstance in application.spawnedCosmetics)
                 {
-                    cosmeticInstance.transform.localScale = Vector3.one;
+                    //cosmeticInstance.transform.localScale = Vector3.one;
                     cosmeticInstance.gameObject.SetActive(true);
                 }
             }
@@ -145,7 +164,8 @@ namespace ModelReplacement.Monobehaviors
             public Transform modelParent = null;
             public GameObject cosmetic = null;
 
-            public Transform modelOffset = null;
+            public Vector3 positionOffset = Vector3.zero;
+            public Quaternion rotationOffset = Quaternion.identity;
             public bool DoRender = false;
 
         }

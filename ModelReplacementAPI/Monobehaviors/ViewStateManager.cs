@@ -54,43 +54,47 @@ namespace ModelReplacement
         //ThirdPerson        0100001001110110001011111111111 model, no arm = > 557520895
         //Mirror             0100001101110110001011101011111 model, no arm
         //ship camera        0000000000110000000001101001001 model, no arm
-        //First Person       1100001001110110001011111110111 arm, no model = > 1631262711
+        //First Person old   1100001001110110001011111110111 arm, no model = > 1631262711
+        //first person new   0100011001110110001011111111111
 
         //Base CustomPass    1111111111111111111111111111111 => 2147483647 
         //Adj CustomPass     1110111111111011111111111111111 => 2013134847
         //                      |         |
         //                      |  Adjusted with NoPost
-        //ThirdPerson        0101001101110110001011111111111 model, no arm => 700127231
-        //First Person       1101001001110010001011111111111 arm, no model => 1765349375
+
+
+        // Adjusted firstperson/thirdperson culling masks can be determined by taking the main camera cullingg mask and making adjustments based on the below requirements
+        //Visible layers     0001000000000000000000000000001
+        //Arm  layers        1000000000000000000000000000000
+        //Model layers       0000000100000100000000000000000
+        //ThirdPerson        0101011101110110001011111111111 model, no arm, visible => 733681663
+        //First Person       1101011001110010001011111111111 arm, no model, visible => 1798903807
         //Mirror             0100001101110110001011101011111 model, no arm
         //ship camera        0000000000110000000001101001001 model, no arm 
         //Model  23                 x
-        //Arms  30           x                                                  
-        //Visible 0                                        x
-        //FIX
         //NoPostModel 17                  x
-        //NoPostArms 
+        //Arms  30           x
+        //NoPostArms (not used) 
+        //Visible 0                                        x
         //NoPostVisible 27      x
 
         //Invisible 31      x
 
-        //Using adjusted values here, other cameras will have their masks converted via patch.
-        private static int CullingMaskThirdPerson = 700127231; //Base game MainCamera culling mask                                 
-        public static int CullingMaskFirstPerson = 1765349375; //Modified base game to provide layers for arms and body 
-        private static int CullingNoPostExcluded = 2013134847; //CustomPassVolume adjusted mask to remove postProcessing on designated layers.  
-                                                               // public static int AllMask = (1 << visibleLayer) + (1 << NoPostVisibleLayer) + 1;
+        //Culling masks calculated on awake
+        private static int CullingMaskThirdPerson = 0;                               
+        public static int CullingMaskFirstPerson = 0;
+        private static int CullingNoPostExcluded = 0;
 
-
-        public static int modelLayer = 23; //Arbitrarily decided
-        public static int armsLayer = 30; //Most cullingMasks shouldn't have a 30 slot, so I will use that one to place arms. 
-        public static int visibleLayer = 0; // Likely all culling masks show layer 0
+        // Standard in game layers
+        public static int modelLayer = 23; 
+        public static int armsLayer = 4; 
+        public static int visibleLayer = 0;
+        private static int invisibleLayer = 31; //No culling mask shows layer 31
 
         //These layers behave identically to their corresponding layers, with the additional trait of being excluded from the CustomPassVolume postProcessing
         public static int NoPostModelLayer = 17;
-        //private static int NoPostArmsLayer;
         public static int NoPostVisibleLayer = 27;
-
-        private static int invisibleLayer = 31; //No culling mask shows layer 31
+        //private static int NoPostArmsLayer;
 
         private MeshRenderer nameTagObj = null;
         private MeshRenderer nameTagObj2 = null;
@@ -112,6 +116,27 @@ namespace ModelReplacement
             playerHUD = GameObject.Find("Systems/Rendering/PlayerHUDHelmetModel");
             helmet = playerHUD.GetComponentInChildren<MeshRenderer>();
             playerHUDDefault = playerHUD.activeSelf;
+
+            // Masks for each rendering mode
+            int MaskModel = (1 << modelLayer) + (1 << NoPostModelLayer);
+            int MaskArms = (1 << armsLayer);
+            int MaskVisible = (1 << visibleLayer) + (1 << NoPostVisibleLayer);
+            int MaskNoPost = (1 << NoPostModelLayer) + (1 << NoPostVisibleLayer);
+
+            // Perform patches on the base game camera to form the first person/ third person cull masks
+            CullingMaskFirstPerson = controller.gameplayCamera.cullingMask;
+            CullingMaskFirstPerson = CullingMaskFirstPerson | MaskArms; // Turn on arms
+            CullingMaskFirstPerson = CullingMaskFirstPerson & ~MaskModel; // Turn off model
+            CullingMaskFirstPerson = CullingMaskFirstPerson | MaskVisible; // Turn on visible
+            //
+            CullingMaskThirdPerson = controller.gameplayCamera.cullingMask;
+            CullingMaskThirdPerson = CullingMaskThirdPerson & ~MaskArms; // Turn off arms
+            CullingMaskThirdPerson = CullingMaskThirdPerson | MaskModel; // Turn on model
+            CullingMaskThirdPerson = CullingMaskThirdPerson | MaskVisible; // Turn on visible
+
+            // Perform a patch on the post processing culling mask to exclude necessary layers
+            CullingNoPostExcluded = 2147483647; // 30 1's in a row
+            CullingNoPostExcluded = CullingNoPostExcluded & ~MaskNoPost; // Remove the nopost layers from the post processing culling mask
         }
         public void Start()
         {
