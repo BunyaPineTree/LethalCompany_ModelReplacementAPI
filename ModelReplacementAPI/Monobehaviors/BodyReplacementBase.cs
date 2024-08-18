@@ -34,8 +34,8 @@ namespace ModelReplacement
 
         //Ragdoll components
         public AvatarUpdater ragdollAvatar { get; private set; }
-        protected GameObject deadBody = null;
-        protected GameObject replacementDeadBody = null;
+        public GameObject deadBody = null;
+        public GameObject replacementDeadBody = null;
 
         //Shadow components
         public AvatarUpdater shadowAvatar { get; private set; }

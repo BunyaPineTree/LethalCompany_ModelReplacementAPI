@@ -157,22 +157,35 @@ namespace ModelReplacement
             {
                 SetArmLayers(InvisibleLayer);
                 SetPlayerLayers(invisibleLayer);
-                playerHUD.SetActive(false);
+                
+                if (localPlayer)
+                {
+                    playerHUD.SetActive(false);
+                }
             }
             else if (state == ViewState.FirstPerson)
             {
                 SetArmLayers(ArmsLayer);
                 SetPlayerLayers(modelLayer);
-                playerHUD.SetActive(playerHUDDefault);
+
+                if (localPlayer)
+                {
+                    playerHUD.SetActive(playerHUDDefault);
+                }
             }
             else if (state == ViewState.ThirdPerson)
             {
                 SetArmLayers(InvisibleLayer);
                 SetPlayerLayers(visibleLayer);
-                playerHUD.SetActive(false);
+
                 if (ModelReplacementAPI.LCthirdPersonPresent)
                 {
                     controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
+                }
+
+                if (localPlayer)
+                {
+                    playerHUD.SetActive(false);
                 }
             }
         }
@@ -193,16 +206,25 @@ namespace ModelReplacement
                 SetArmLayers(ArmsLayer);
                 SetAvatarLayers(ModelLayer, ShadowCastingMode.On);
                 SetShadowModel(true);
-                playerHUD.SetActive(bodyReplacement.RemoveHelmet ? false : playerHUDDefault);
+                
+                if (localPlayer)
+                {
+                    playerHUD.SetActive(bodyReplacement.RemoveHelmet ? false : playerHUDDefault);
+                }
             }
             else if (state == ViewState.ThirdPerson)
             {
                 SetArmLayers(InvisibleLayer);
                 SetAvatarLayers(VisibleLayer, ShadowCastingMode.On);
-                playerHUD.SetActive(false);
+                
                 if (ModelReplacementAPI.LCthirdPersonPresent)
                 {
                     controller.gameplayCamera.cullingMask = CullingMaskThirdPerson;
+                }
+
+                if (localPlayer)
+                {
+                    playerHUD.SetActive(false);
                 }
             }
         }
