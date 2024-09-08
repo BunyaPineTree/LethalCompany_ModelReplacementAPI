@@ -1,8 +1,8 @@
-# ModelReplacementAPI v2.4.8
+# ModelReplacementAPI v2.4.9
 ### Simplifies character model replacement for modders
 
 ## Instructions
-For more info on making model replacements see the wiki at https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI , or message Bunya Pine Tree at the unofficial modding discord https://discord.gg/nYcQFEpXfU
+For more info on making model replacements see the wiki at https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI
 
 ## Viewmodel Support
 Viewmodels are now supported and can be generated automatically from your character's model, but because not all models have high quality hands, or are mapped to the in game hands well, viewmodels will be implemented in an opt-in basis. 
@@ -13,10 +13,9 @@ In the meantime, I have added a config option to ModelReplacementAPI that will a
 To enable, launch the game once with v2.4.0 to generate the config file. You can then change the config with a mod manager like r2modman, manually at `\BepInEx\config\meow.ModelReplacementAPI.cfg`, or in game via LethalConfig.
 Note that if you enable this config option while in a game, you will have to put on a new model for the viewmodel to generate. 
 
-## Masked Support (and Enemy support, soon enough)
+## Masked Support 
 Masked enemies will now take on the model replacements of players. 
 If they are mimicking a player then they will take on that player's model, otherwise they will randomly take on the model replacement (or lack of) of any player. 
-We are currently working on a server-side mod that will synchronize that random model replacement for everyone. This goes for enemies as well, once enemy model replacements are finished. 
 
 ## Known Issues
 - More Company cosmetics behave strangely on ragdolls
@@ -28,6 +27,11 @@ We are currently working on a server-side mod that will synchronize that random 
 - Dropping dead players with a viewmodel can result in unexpected results
 
 ## Changelog
+	- v2.4.9
+		- Fixed ragdoll collision issues. 
+		- Fixed the chance of company cruisers inexplicably exploding when dead bodies are placed inside. 
+		- Fixed weather effects disappearing when in third person. 
+		- Removed some error messages from console.
 	- v2.4.7
 		- Fixed vanishing trees
 	- v2.4.6

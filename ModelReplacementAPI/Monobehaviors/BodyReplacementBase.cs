@@ -178,6 +178,7 @@ namespace ModelReplacement
             List<Material> materials = ListPool<Material>.Get();
             foreach (Renderer renderer in renderers)
             {
+                renderer.renderingLayerMask = (1 << 0) + (1 << 9);
                 renderer.GetSharedMaterials(materials);
                 for (int i = 0; i < materials.Count; i++)
                 {
@@ -532,16 +533,37 @@ namespace ModelReplacement
 
         #region Helpers, Materials, Ragdolls, Rendering, etc...
 
+        static List<Transform> GetAllTransforms(Transform parent)
+        {
+            var transformList = new List<Transform>();
+            BuildTransformList(transformList, parent);
+            return transformList;
+        }
+
+        private static void BuildTransformList(ICollection<Transform> transforms, Transform parent)
+        {
+            if (parent == null) { return; }
+            foreach (Transform t in parent)
+            {
+                transforms.Add(t);
+                BuildTransformList(transforms, t);
+            }
+        }
+
         private void CreateAndParentRagdoll(DeadBodyInfo bodyinfo)
         {
             deadBody = bodyinfo.gameObject;
-
+            deadBody.layer = ViewStateManager.ragdollLayer;
 
             //Instantiate replacement Ragdoll and assign the avatar
             SkinnedMeshRenderer deadBodyRenderer = deadBody.GetComponentInChildren<SkinnedMeshRenderer>();
             replacementDeadBody = LoadRagdollReplacement(bodyinfo.causeOfDeath);
             ragdollAvatar.AssignModelReplacement(deadBody, replacementDeadBody);
 
+            foreach (var item in GetAllTransforms(replacementDeadBody.transform))
+            {
+                item.gameObject.layer = ViewStateManager.ragdollLayer;
+            }
 
             //Enable all renderers in replacement ragdoll and disable renderer for original
             foreach (Renderer renderer in replacementDeadBody.GetComponentsInChildren<Renderer>())
@@ -549,12 +571,15 @@ namespace ModelReplacement
                 renderer.enabled = true;
                 renderer.shadowCastingMode = ShadowCastingMode.On;
                 renderer.gameObject.layer = viewState.VisibleLayer;
+                renderer.renderingLayerMask = (1 << 0) + (1 << 9);
             }
             deadBodyRenderer.enabled = false;
 
+
+
             Console.WriteLine("Ragdoll Creation.");
 
-            //blood decals not working
+            //blood decals not working?
             foreach (GameObject item in bodyinfo.bodyBloodDecals)
             {
                 Transform bloodParentTransform = item.transform.parent;
@@ -565,6 +590,8 @@ namespace ModelReplacement
                     Instantiate(item, mappedTranform);
                 }
             }
+
+
 
         }
 

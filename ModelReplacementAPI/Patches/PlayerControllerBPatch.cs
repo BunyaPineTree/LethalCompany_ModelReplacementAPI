@@ -65,12 +65,13 @@ namespace ModelReplacement.Patches
         }
         [HarmonyPatch("SpawnDeadBody")]
         [HarmonyPostfix]
-        public static void SpawnDeadBody(int playerId, Vector3 bodyVelocity, int causeOfDeath, PlayerControllerB deadPlayerController, int deathAnimation = 0, Transform overridePosition = null)
+        public static void SpawnDeadBody(int playerId, Vector3 bodyVelocity, int causeOfDeath, PlayerControllerB deadPlayerController, int deathAnimation = 0, Transform overridePosition = null, Vector3 positionOffset = default(Vector3))
         {
             var renderers = deadPlayerController.deadBody.gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+            deadPlayerController.deadBody.gameObject.layer = ViewStateManager.ragdollLayer;
             foreach (var renderer in renderers)
             {
-                renderer.gameObject.layer = ViewStateManager.visibleLayer;
+                //renderer.gameObject.layer = ViewStateManager.visibleLayer;
             }
         }
     }

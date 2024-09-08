@@ -47,7 +47,6 @@ namespace ModelReplacement.Monobehaviors
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
                 lastException = e.Message;
             }
 

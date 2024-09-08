@@ -91,16 +91,23 @@ namespace ModelReplacement
         public static int visibleLayer = 0;
         private static int invisibleLayer = 31; //No culling mask shows layer 31
 
+
         //These layers behave identically to their corresponding layers, with the additional trait of being excluded from the CustomPassVolume postProcessing
         public static int NoPostModelLayer = 17;
         public static int NoPostVisibleLayer = 27;
         //private static int NoPostArmsLayer;
 
+        public static int ragdollLayer = 20; //This is set in game
+
         private MeshRenderer nameTagObj = null;
         private MeshRenderer nameTagObj2 = null;
-        GameObject playerHUD = null;
+
+        Renderer Hud = null;
+
+
+
         MeshRenderer helmet = null;
-        bool playerHUDDefault = true;
+        bool HUDDefault = true;
         private bool UseNoPostProcessing => bodyReplacementExists ? bodyReplacement.UseNoPostProcessing : false;
         public int ModelLayer => UseNoPostProcessing ? NoPostModelLayer : modelLayer;
         public int ArmsLayer => armsLayer;
@@ -113,9 +120,11 @@ namespace ModelReplacement
             MeshRenderer[] gameObjects = controller.gameObject.GetComponentsInChildren<MeshRenderer>();
             nameTagObj = gameObjects.Where(x => x.gameObject.name == "LevelSticker").First();
             nameTagObj2 = gameObjects.Where(x => x.gameObject.name == "BetaBadge").First();
-            playerHUD = GameObject.Find("Systems/Rendering/PlayerHUDHelmetModel");
-            helmet = playerHUD.GetComponentInChildren<MeshRenderer>();
-            playerHUDDefault = playerHUD.activeSelf;
+
+            helmet = GameObject.Find("Systems/Rendering/PlayerHUDHelmetModel").GetComponentInChildren<MeshRenderer>();
+
+            Hud = controller.localVisor.transform.GetChild(0).GetComponent<Renderer>();
+            HUDDefault = Hud.enabled;
 
             // Masks for each rendering mode
             int MaskModel = (1 << modelLayer) + (1 << NoPostModelLayer);
@@ -137,6 +146,23 @@ namespace ModelReplacement
             // Perform a patch on the post processing culling mask to exclude necessary layers
             CullingNoPostExcluded = 2147483647; // 30 1's in a row
             CullingNoPostExcluded = CullingNoPostExcluded & ~MaskNoPost; // Remove the nopost layers from the post processing culling mask
+
+            // Disable collision between additional layers and ragdoll. 
+
+            int[] layersToDeleteCollision = new int[] { ragdollLayer, 21, 3, 14, 22, 6 };
+
+            foreach (int layer in layersToDeleteCollision)
+            {
+                Physics.IgnoreLayerCollision(layer, modelLayer);
+                Physics.IgnoreLayerCollision(layer, NoPostModelLayer);
+                Physics.IgnoreLayerCollision(layer, visibleLayer);
+                Physics.IgnoreLayerCollision(layer, NoPostVisibleLayer);
+                Physics.IgnoreLayerCollision(layer, armsLayer);
+                Physics.IgnoreLayerCollision(layer, invisibleLayer);
+            }
+
+           
+
         }
         public void Start()
         {
@@ -160,7 +186,7 @@ namespace ModelReplacement
                 
                 if (localPlayer)
                 {
-                    playerHUD.SetActive(false);
+                    Hud.enabled = false;
                 }
             }
             else if (state == ViewState.FirstPerson)
@@ -170,7 +196,7 @@ namespace ModelReplacement
 
                 if (localPlayer)
                 {
-                    playerHUD.SetActive(playerHUDDefault);
+                    Hud.enabled = HUDDefault;
                 }
             }
             else if (state == ViewState.ThirdPerson)
@@ -185,7 +211,7 @@ namespace ModelReplacement
 
                 if (localPlayer)
                 {
-                    playerHUD.SetActive(false);
+                    Hud.enabled = false;
                 }
             }
         }
@@ -209,7 +235,7 @@ namespace ModelReplacement
                 
                 if (localPlayer)
                 {
-                    playerHUD.SetActive(bodyReplacement.RemoveHelmet ? false : playerHUDDefault);
+                    Hud.enabled =  (bodyReplacement.RemoveHelmet ? false : HUDDefault);
                 }
             }
             else if (state == ViewState.ThirdPerson)
@@ -224,7 +250,7 @@ namespace ModelReplacement
 
                 if (localPlayer)
                 {
-                    playerHUD.SetActive(false);
+                    Hud.enabled = (false);
                 }
             }
         }
