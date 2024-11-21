@@ -1,11 +1,10 @@
-﻿using GameNetcodeStuff;
-using MoreCompany.Cosmetics;
+﻿using MoreCompany.Cosmetics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using ModelReplacement.Scripts;
-using ModelReplacement.Scripts.Player;
 using ModelReplacement.AvatarBodyUpdater;
+using MoreCompany;
 
 namespace ModelReplacement.Monobehaviors
 {
@@ -15,6 +14,7 @@ namespace ModelReplacement.Monobehaviors
 
         private string lastException = "";
 
+        private bool wasUsingAvatarTransforms = false;
 
         public override void UpdatePlayer()
         {
@@ -95,9 +95,6 @@ namespace ModelReplacement.Monobehaviors
                         cosmeticInstances.Add(instance2);
                     }
                 }
-
-                
-
             }
         }
 
@@ -108,39 +105,38 @@ namespace ModelReplacement.Monobehaviors
                 RefreshCosmetics();
             }
             
-
             if (useAvatarTransforms)
             {
                 foreach (CosmeticInstance2 cosmeticInstance in cosmeticInstances)
                 {
                     if (cosmeticInstance.DoRender)
                     {
-                        cosmeticInstance.cosmetic.SetActive(true);
+                        cosmeticInstance.cosmetic.SetActive(MainClass.cosmeticsSyncOther.Value);
                         cosmeticInstance.cosmetic.transform.parent = null;
                         //cosmeticInstance.cosmetic.transform.localScale = cosmeticInstance.modelOffset.localScale;
 
                         Vector3 cosmeticPosition = cosmeticInstance.modelParent.transform.position + cosmeticInstance.positionOffset;
                         Quaternion cosmeticRotation = cosmeticInstance.modelParent.transform.rotation * cosmeticInstance.rotationOffset;
-
-
                         cosmeticInstance.cosmetic.transform.SetPositionAndRotation(cosmeticPosition, cosmeticRotation);
                         SetAllChildrenLayer(cosmeticInstance.cosmetic.transform, localPlayer ? ViewStateManager.modelLayer : ViewStateManager.visibleLayer);
                     }
-                    else
+                    else if (cosmeticInstance.cosmetic.activeSelf)
                     {
                         cosmeticInstance.cosmetic.SetActive(false);
                     }
                 }
+
+                if (!wasUsingAvatarTransforms)
+                {
+                    wasUsingAvatarTransforms = true;
+                }
             }
-            else
+            else if (wasUsingAvatarTransforms)
             {
                 CosmeticApplication application = controller.gameObject.GetComponentInChildren<CosmeticApplication>();
                 application.RefreshAllCosmeticPositions();
-                foreach (CosmeticInstance cosmeticInstance in application.spawnedCosmetics)
-                {
-                    //cosmeticInstance.transform.localScale = Vector3.one;
-                    cosmeticInstance.gameObject.SetActive(true);
-                }
+                application.UpdateAllCosmeticVisibilities(localPlayer);
+                wasUsingAvatarTransforms = false;
             }
         }
 
