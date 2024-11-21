@@ -153,12 +153,12 @@ namespace ModelReplacement
 
             foreach (int layer in layersToDeleteCollision)
             {
-                Physics.IgnoreLayerCollision(layer, modelLayer);
-                Physics.IgnoreLayerCollision(layer, NoPostModelLayer);
-                Physics.IgnoreLayerCollision(layer, visibleLayer);
-                Physics.IgnoreLayerCollision(layer, NoPostVisibleLayer);
-                Physics.IgnoreLayerCollision(layer, armsLayer);
-                Physics.IgnoreLayerCollision(layer, invisibleLayer);
+                //Physics.IgnoreLayerCollision(layer, modelLayer);
+                //Physics.IgnoreLayerCollision(layer, NoPostModelLayer);
+                //Physics.IgnoreLayerCollision(layer, visibleLayer);
+                //Physics.IgnoreLayerCollision(layer, NoPostVisibleLayer);
+                //Physics.IgnoreLayerCollision(layer, armsLayer);
+                //Physics.IgnoreLayerCollision(layer, invisibleLayer);
             }
 
            
