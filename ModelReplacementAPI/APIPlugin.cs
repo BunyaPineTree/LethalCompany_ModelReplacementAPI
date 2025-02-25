@@ -326,6 +326,7 @@ namespace ModelReplacement
         {
 
             [HarmonyPatch("Update")]
+            [HarmonyPatch("OnDisable")]
             [HarmonyPostfix]
             public static void ManageRegistryBodyReplacements(ref PlayerControllerB __instance)
             {
