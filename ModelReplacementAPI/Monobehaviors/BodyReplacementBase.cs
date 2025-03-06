@@ -444,6 +444,7 @@ namespace ModelReplacement
             shadowAvatar.Update();
             ragdollAvatar.Update();
             viewModelAvatar.Update();
+            cosmeticManager.UpdateModelReplacement();
             UpdateItemTransform();
 
             //Bounding box calculation for nameTag
@@ -488,7 +489,7 @@ namespace ModelReplacement
         #endregion
 
         #region items
-        public bool CanPositionItemOnCustomViewModel => (replacementViewModel != null) && (viewModelAvatar.ItemHolderViewModel != null);
+        public bool CanPositionItemOnCustomViewModel => (replacementViewModel != null);
         public void UpdateItemTransform()
         {
             if (!heldItem) return;
@@ -499,34 +500,58 @@ namespace ModelReplacement
                 return;
             }
 
-            if (viewState.GetViewState() == ViewState.ThirdPerson)
-            {
-                Transform parentObject = avatar.ItemHolder;
-                parentObject.localPosition = avatar.ItemHolderPositionOffset;
+            bool inFirstPerson = viewState.GetViewState() == ViewState.FirstPerson;
+            if(inFirstPerson && !CanPositionItemOnCustomViewModel) return;
 
-                heldItem.transform.rotation = heldItem.parentObject.rotation;
-                heldItem.transform.Rotate(heldItem.itemProperties.rotationOffset);
-                heldItem.transform.position = parentObject.position;
-                Vector3 vector = heldItem.itemProperties.positionOffset;
-                vector = heldItem.parentObject.rotation * vector;
-                heldItem.transform.position += vector;
+            Vector3 rootPos;
+            Quaternion rootRot;
+            if(inFirstPerson)
+            {
+                rootPos = controller.localItemHolder.position;
+                rootRot = controller.localItemHolder.rotation;
+
+                if(heldItem.itemProperties.twoHandedAnimation)
+                    rootPos += (viewModelAvatar.ItemOffsetLeft + viewModelAvatar.ItemOffsetRight) / 2;
+                else
+                    rootPos += viewModelAvatar.ItemOffsetRight;
+            }
+            else
+            {
+                if(heldItem.itemProperties.twoHandedAnimation)
+                {
+                    rootPos = controller.serverItemHolder.position;
+                    rootRot = controller.serverItemHolder.rotation;
+
+                    rootPos += (avatar.ItemOffsetLeft + avatar.ItemOffsetRight) / 2;
+                }
+                else
+                {
+                    // Copy the local transform from the localItemHolder to replicate anims for things like knives
+                    rootPos = controller.serverItemHolder.parent.TransformPoint(controller.localItemHolder.localPosition);
+                    rootRot = controller.serverItemHolder.parent.rotation * controller.localItemHolder.localRotation;
+
+                    rootPos += avatar.ItemOffsetRight;
+                }
             }
 
-            if (viewState.GetViewState() == ViewState.FirstPerson && CanPositionItemOnCustomViewModel)
+            heldItem.transform.rotation = rootRot;
+            heldItem.transform.Rotate(heldItem.itemProperties.rotationOffset);
+            heldItem.transform.position = rootPos;
+            Vector3 vector = heldItem.itemProperties.positionOffset;
+            vector = rootRot * vector;
+            heldItem.transform.position += vector;
+
+            // Update jetpack backpack
+            if(heldItem is JetpackItem jet)
             {
-                Transform parentObject = viewModelAvatar.ItemHolderViewModel;
-                parentObject.localPosition = avatar.ItemHolderPositionOffset;
+                Quaternion baseRot = avatar.lowerSpine.rotation * avatar.jetpackRotOffset;
 
-                heldItem.transform.rotation = heldItem.parentObject.rotation;
-                heldItem.transform.Rotate(heldItem.itemProperties.rotationOffset);
-                heldItem.transform.position = parentObject.position;
-                Vector3 vector = heldItem.itemProperties.positionOffset;
-                vector = heldItem.parentObject.rotation * vector;
-                heldItem.transform.position += vector;
-
+                jet.backPart.rotation = baseRot;
+                heldItem.transform.Rotate(jet.backPartRotationOffset); // This is heldItem instead of backPart intentionally
+                jet.backPart.position = avatar.lowerSpine.position;
+                vector = baseRot * jet.backPartPositionOffset;
+                jet.backPart.position += vector;
             }
-
-
         }
         #endregion
 

@@ -17,12 +17,22 @@ namespace ModelReplacement.AvatarBodyUpdater
         protected Animator replacementAnimator = null;
         protected GameObject player = null;
         protected GameObject replacement = null;
-        public Vector3 ItemHolderPositionOffset { get; private set; } = Vector3.zero;
-        public Quaternion ItemHolderRotationOffset { get; private set; } = Quaternion.identity;
-        public Transform ItemHolder { get; private set; } = null;
+        //public Vector3 ItemHolderPositionOffset { get; private set; } = Vector3.zero;
+        //public Quaternion ItemHolderRotationOffset { get; private set; } = Quaternion.identity;
+        //public Transform ItemHolder { get; private set; } = null;
 
         protected bool hasUpperChest = false;
         protected Vector3 rootPositionOffset = Vector3.zero;
+
+        public Transform lowerSpine { get; private set; } = null;
+        public Quaternion jetpackRotOffset { get; private set; } = Quaternion.identity;
+        public Transform HandTransformLeft { get; private set; } = null;
+        public Transform HandTransformRight { get; private set; } = null;
+        public Transform CustomHandTransformLeft { get; private set; } = null;
+        public Transform CustomHandTransformRight { get; private set; } = null;
+
+        public Vector3 ItemOffsetLeft => CustomHandTransformLeft.position - HandTransformLeft.position;
+        public Vector3 ItemOffsetRight => CustomHandTransformRight.position - HandTransformRight.position;
 
 
 
@@ -43,14 +53,25 @@ namespace ModelReplacement.AvatarBodyUpdater
             this.replacement = replacement;
 
             OffsetBuilder offsetBuilder = replacementAnimator.gameObject.GetComponent<OffsetBuilder>();
-            ItemHolderPositionOffset = offsetBuilder.itemPositonOffset;
-            ItemHolderRotationOffset = offsetBuilder.itemRotationOffset;
-            ItemHolder = offsetBuilder.itemHolder.transform;
+            //ItemHolderPositionOffset = offsetBuilder.itemPositonOffset;
+            //ItemHolderRotationOffset = offsetBuilder.itemRotationOffset;
+            //ItemHolder = offsetBuilder.itemHolder.transform;
             rootPositionOffset = offsetBuilder.rootPositionOffset;
 
 
             Transform upperChestTransform = replacementAnimator.GetBoneTransform(HumanBodyBones.UpperChest);
             hasUpperChest = upperChestTransform != null;
+
+            lowerSpine = GetAvatarTransformFromBoneName("spine.001");
+            RotationOffset offset = lowerSpine.GetComponent<RotationOffset>();
+            if (offset)
+                jetpackRotOffset = Quaternion.Inverse(offset.offset);
+
+            HandTransformLeft = GetPlayerTransformFromBoneName("hand.L");
+            HandTransformRight = GetPlayerTransformFromBoneName("hand.R");
+
+            CustomHandTransformLeft = GetAvatarTransformFromBoneName("hand.L");
+            CustomHandTransformRight = GetAvatarTransformFromBoneName("hand.R");
         }
 
         protected virtual void UpdateModel()
@@ -102,17 +123,16 @@ namespace ModelReplacement.AvatarBodyUpdater
 
         public Transform GetPlayerTransformFromBoneName(string boneName)
         {
-            IEnumerable<Transform> playerBones = playerModelRenderer.bones.Where(x => x.name == boneName);
+            Transform[] boneList = playerModelRenderer.bones;
+            Transform playerBone = boneList.FirstOrDefault(x => x.name == boneName);
 
-            if (playerBones.Any())
-            {
-                return playerBones.First();
-            }
+            if (playerBone != null)
+                return playerBone;
 
             if (boneName == "spine")
             {
-                IEnumerable<Transform> ragdollBones = playerModelRenderer.bones.Where(x => x.name.Contains("PlayerRagdoll"));
-                return ragdollBones.Any() ? ragdollBones.First() : null;
+                playerBone = boneList.FirstOrDefault(x => x.name.Contains("PlayerRagdoll"));
+                return playerBone;
             }
 
             return null;
