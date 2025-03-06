@@ -468,7 +468,7 @@ namespace ModelReplacement
         {
             try
             {
-                return ThirdPersonEmoteController.emoteCamera.enabled;
+                return false;//return ThirdPersonEmoteController.emoteCamera.enabled;
             }
             catch { return false; }
         }
