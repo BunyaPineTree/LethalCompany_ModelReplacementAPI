@@ -12,7 +12,15 @@ namespace ModelReplacement.Scripts.Player
         protected GameObject replacementViewModel = null;
         private Transform armsMetarig;
         private Animator viewModelAnimator;
-        public Transform ItemHolderViewModel { get; protected set; } = null;
+        //public Transform ItemHolderViewModel { get; protected set; } = null;
+
+        public Transform HandTransformLeft { get; private set; } = null;
+        public Transform HandTransformRight { get; private set; } = null;
+        public Transform CustomHandTransformLeft { get; private set; } = null;
+        public Transform CustomHandTransformRight { get; private set; } = null;
+
+        public Vector3 ItemOffsetLeft => CustomHandTransformLeft.position - HandTransformLeft.position;
+        public Vector3 ItemOffsetRight => CustomHandTransformRight.position - HandTransformRight.position;
 
         private bool hasShoulder = true;
         public virtual void AssignViewModelReplacement(GameObject player, GameObject replacementViewModel)
@@ -21,8 +29,8 @@ namespace ModelReplacement.Scripts.Player
             PlayerControllerB controller = player.GetComponent<PlayerControllerB>();
             this.replacementViewModel = replacementViewModel;
             viewModelAnimator = replacementViewModel.GetComponentInChildren<Animator>();
-            OffsetBuilder offsetBuilder = viewModelAnimator.gameObject.GetComponent<OffsetBuilder>();
-            ItemHolderViewModel = offsetBuilder.itemHolder.transform;
+            //OffsetBuilder offsetBuilder = viewModelAnimator.gameObject.GetComponent<OffsetBuilder>();
+            //ItemHolderViewModel = offsetBuilder.itemHolder.transform;
             armsMetarig = controller.playerModelArmsMetarig;
 
             //Scale by arm length
@@ -48,12 +56,20 @@ namespace ModelReplacement.Scripts.Player
                 viewModelLength += (viewModelBoneEnd.position - viewModelBoneBase.position).magnitude;
             }
 
+            HandTransformLeft = GetArmTransformFromBoneName("hand.L");
+            HandTransformRight = GetArmTransformFromBoneName("hand.R");
+
+            CustomHandTransformLeft = GetViewModelTransformFromBoneName("hand.L");
+            CustomHandTransformRight = GetViewModelTransformFromBoneName("hand.R");
+
             replacementViewModel.transform.localScale *= armLength / viewModelLength;
             replacementViewModel.SetActive(true);
         }
 
         protected virtual void UpdateViewModel()
         {
+            replacementViewModel.transform.SetPositionAndRotation(armsMetarig.position,armsMetarig.rotation);
+
             GetViewModelTransformFromBoneName("arm.L_upper").position = GetArmTransformFromBoneName("arm.L_upper").position;
             GetViewModelTransformFromBoneName("arm.R_upper").position = GetArmTransformFromBoneName("arm.R_upper").position;
             if (hasShoulder)
@@ -90,8 +106,7 @@ namespace ModelReplacement.Scripts.Player
 
         public Transform GetArmTransformFromBoneName(string boneName)
         {
-            IEnumerable<Transform> playerBones = armsMetarig.gameObject.GetComponentsInChildren<Transform>().Where(x => x.name == boneName);
-            return playerBones.Any() ? playerBones.First() : null;
+            return armsMetarig.gameObject.GetComponentsInChildren<Transform>().FirstOrDefault(x => x.name == boneName);
         }
 
         protected static Dictionary<string, HumanBodyBones> modelToAvatarBone = new Dictionary<string, HumanBodyBones>()

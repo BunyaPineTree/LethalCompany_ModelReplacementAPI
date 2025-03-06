@@ -16,6 +16,14 @@ namespace ModelReplacement.Monobehaviors
 
         private bool wasUsingAvatarTransforms = false;
 
+        // Only update here for default model, bodyreplacementbase will call this manually
+        protected override void Update()
+        {
+            if (bodyReplacementExists && bodyReplacement == null) { ReportBodyReplacementRemoval(); }
+            if (!bodyReplacementExists)
+                UpdatePlayer();
+        }
+
         public override void UpdatePlayer()
         {
             if (ModelReplacementAPI.moreCompanyPresent) { SafeRenderCosmetics(false); }
