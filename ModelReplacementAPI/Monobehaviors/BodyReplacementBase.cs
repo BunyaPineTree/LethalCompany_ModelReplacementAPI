@@ -436,7 +436,10 @@ namespace ModelReplacement
             }
             if (deadBody && !deadBody.activeInHierarchy)
             {
-                replacementDeadBody.SetActive(false);
+                if (replacementDeadBody != null)
+                {
+                    replacementDeadBody.SetActive(false);
+                }
             }
 
             // Update replacement models
@@ -448,30 +451,36 @@ namespace ModelReplacement
             UpdateItemTransform();
 
             //Bounding box calculation for nameTag
-            Bounds modelBounds = GetBounds(replacementModel);
-            nameTagCollider.center = modelBounds.center;
-            nameTagCollider.size = modelBounds.size;
+            if (replacementModel != null)
+            {
+                Bounds modelBounds = GetBounds(replacementModel);
+                nameTagCollider.center = modelBounds.center;
+                nameTagCollider.size = modelBounds.size;
+            }
 
             //Emotes
             previousDanceNumber = danceNumber;
-            int danceHash = controller.playerBodyAnimator.GetCurrentAnimatorStateInfo(1).fullPathHash;
-            if (controller.performingEmote)
+            if (controller.playerBodyAnimator != null)
             {
-                if (danceHash == -462656950) { danceNumber = 1; }
-                else if (danceHash == 2103786480) { danceNumber = 2; }
-                else { danceNumber = 3; }
-            }
-            else { danceNumber = 0; }
-            if (ModelReplacementAPI.tooManyEmotesPresent)
-            {
-                danceNumber = SafeGetEmoteID(danceNumber);
-            }
+                int danceHash = controller.playerBodyAnimator.GetCurrentAnimatorStateInfo(1).fullPathHash;
+                if (controller.performingEmote)
+                {
+                    if (danceHash == -462656950) { danceNumber = 1; }
+                    else if (danceHash == 2103786480) { danceNumber = 2; }
+                    else { danceNumber = 3; }
+                }
+                else { danceNumber = 0; }
+                if (ModelReplacementAPI.tooManyEmotesPresent)
+                {
+                    danceNumber = SafeGetEmoteID(danceNumber);
+                }
 
-            if (danceNumber != previousDanceNumber)
-            {
-                if (previousDanceNumber == 0) { StartCoroutine(WaitForDanceNumberChange()); } //Start new animation, takes time to switch to new animation state
-                else if (danceNumber == 0) { OnEmoteEnd(); } // No dance, where there was previously dance.
-                else { if (!emoteOngoing) { OnEmoteStart(danceNumber); } } //An animation did not start nor end, go immediately into the different animation
+                if (danceNumber != previousDanceNumber)
+                {
+                    if (previousDanceNumber == 0) { StartCoroutine(WaitForDanceNumberChange()); } //Start new animation, takes time to switch to new animation state
+                    else if (danceNumber == 0) { OnEmoteEnd(); } // No dance, where there was previously dance.
+                    else { if (!emoteOngoing) { OnEmoteStart(danceNumber); } } //An animation did not start nor end, go immediately into the different animation
+                }     
             }
         }
 
