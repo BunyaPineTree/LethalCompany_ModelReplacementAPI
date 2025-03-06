@@ -547,8 +547,7 @@ namespace ModelReplacement
                 Quaternion baseRot = avatar.lowerSpine.rotation * avatar.jetpackRotOffset;
 
                 jet.backPart.rotation = baseRot;
-                jet.backPart.Rotate(-jet.backPartRotationOffset);
-                heldItem.transform.Rotate(jet.backPartRotationOffset); // This looks wrong but they do this in base game
+                heldItem.transform.Rotate(jet.backPartRotationOffset); // This is heldItem instead of backPart intentionally
                 jet.backPart.position = avatar.lowerSpine.position;
                 vector = baseRot * jet.backPartPositionOffset;
                 jet.backPart.position += vector;
