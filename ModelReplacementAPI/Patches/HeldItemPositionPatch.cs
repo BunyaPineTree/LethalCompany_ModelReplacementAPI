@@ -18,13 +18,6 @@ namespace ModelReplacement.Patches
             BodyReplacementBase bodyReplacement = __instance.playerHeldBy.gameObject.GetComponent<BodyReplacementBase>();
             if (!bodyReplacement) return true;
 
-            if(!bodyReplacement.CanPositionItemOnCustomViewModel || bodyReplacement.viewState.GetViewState() != ViewState.FirstPerson)
-            {
-                if (bodyReplacement.heldItem != null)
-                    bodyReplacement.heldItem = null;
-                return true;
-            }
-
             if (bodyReplacement.heldItem != __instance)
                 bodyReplacement.heldItem = __instance;
 

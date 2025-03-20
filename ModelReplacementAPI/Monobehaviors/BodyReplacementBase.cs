@@ -498,19 +498,16 @@ namespace ModelReplacement
         #endregion
 
         #region items
-        public bool CanPositionItemOnCustomViewModel => (replacementViewModel != null);
         public void UpdateItemTransform()
         {
             if (!heldItem) return;
-            if (heldItem.parentObject == null || heldItem.playerHeldBy == null) return;
-            if (heldItem.playerHeldBy != controller)
+            if (heldItem.parentObject == null || heldItem.playerHeldBy != controller)
             {
                 heldItem = null;
                 return;
             }
 
             bool inFirstPerson = viewState.GetViewState() == ViewState.FirstPerson;
-            if(inFirstPerson && !CanPositionItemOnCustomViewModel) return;
 
             Vector3 rootPos;
             Quaternion rootRot;
@@ -526,21 +523,13 @@ namespace ModelReplacement
             }
             else
             {
+                rootPos = controller.serverItemHolder.position;
+                rootRot = controller.serverItemHolder.rotation;
+
                 if(heldItem.itemProperties.twoHandedAnimation)
-                {
-                    rootPos = controller.serverItemHolder.position;
-                    rootRot = controller.serverItemHolder.rotation;
-
                     rootPos += (avatar.ItemOffsetLeft + avatar.ItemOffsetRight) / 2;
-                }
                 else
-                {
-                    // Copy the local transform from the localItemHolder to replicate anims for things like knives
-                    rootPos = controller.serverItemHolder.parent.TransformPoint(controller.localItemHolder.localPosition);
-                    rootRot = controller.serverItemHolder.parent.rotation * controller.localItemHolder.localRotation;
-
                     rootPos += avatar.ItemOffsetRight;
-                }
             }
 
             heldItem.transform.rotation = rootRot;
