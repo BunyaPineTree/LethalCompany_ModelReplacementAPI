@@ -342,6 +342,9 @@ namespace ModelReplacement
 
             private static void ManageBodyReplacements(PlayerControllerB player)
             {
+                if (StartOfRound.Instance.allPlayerScripts[player.playerClientId] != player)
+                    return;
+
                 BodyReplacementBase currentReplacement = player.thisPlayerBody.gameObject.GetComponent<BodyReplacementBase>();
 
                 if (currentReplacement != null && RegisteredModelReplacementExceptions.Contains(currentReplacement.GetType()))
