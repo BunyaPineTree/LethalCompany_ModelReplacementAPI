@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.4.15
+# ModelReplacementAPI v2.4.16
 
 ## Instructions
 For more info on making model replacements see the wiki at https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI
@@ -26,6 +26,8 @@ If they are mimicking a player then they will take on that player's model, other
 - Dropping dead players with a viewmodel can result in unexpected results
 
 ## Changelog
+	- V2.4.16
+		- Thanks to Wheatly126 for performance improvements.  
 	- V2.4.15
 		- Huge thanks to Wheatly126 for fixing bugs related to holding items, weapons, jetpacks, as well as resolving the rubber banding of first person viewmodels.
 		- Thanks to TheSlowlyy for resolving some errors in the console.
