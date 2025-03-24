@@ -20,6 +20,7 @@ namespace ModelReplacement
 {
     public abstract class BodyReplacementBase : MonoBehaviour
     {
+        public static List<BodyReplacementBase> allBodies = new();
 
         //Base components
         public AvatarUpdater avatar { get; private set; }
@@ -407,7 +408,7 @@ namespace ModelReplacement
             target.bodyReplacement = this;
             target.modelObj = replacementModel;
 
-
+            allBodies.Add(this);
             ModelReplacementAPI.Instance.Logger.LogInfo($"AwakeEnd {controller.playerUsername}");
         }
 
@@ -448,7 +449,7 @@ namespace ModelReplacement
             ragdollAvatar.Update();
             viewModelAvatar.Update();
             cosmeticManager.UpdateModelReplacement();
-            UpdateItemTransform();
+            //UpdateItemTransform();
 
             //Bounding box calculation for nameTag
             if (replacementModel != null)
@@ -484,11 +485,27 @@ namespace ModelReplacement
             }
         }
 
+        static BodyReplacementBase()
+        {
+            RenderPipelineManager.beginContextRendering += ReallyLateUpdate;
+        }
+
+        public static void ReallyLateUpdate(ScriptableRenderContext context, List<Camera> cameras)
+        {
+            for (int i = 0; i < allBodies.Count; i++)
+            {
+                BodyReplacementBase body = allBodies[i];
+                if (!body || !body.isActiveAndEnabled) continue;
+                body.UpdateItemTransform();
+            }
+        }
 
 
         protected virtual void OnDestroy()
         {
             ModelReplacementAPI.Instance.Logger.LogInfo($"Destroy body component for {controller.playerUsername}");
+            allBodies.Remove(this);
+
             Destroy(replacementModel);
             Destroy(replacementModelShadow);
             Destroy(replacementViewModel);
@@ -501,7 +518,7 @@ namespace ModelReplacement
         public void UpdateItemTransform()
         {
             if (!heldItem) return;
-            if (heldItem.parentObject == null || heldItem.playerHeldBy != controller)
+            if (heldItem.parentObject == null || heldItem.playerHeldBy != controller || controller.ItemSlots[controller.currentItemSlot] != heldItem)
             {
                 heldItem = null;
                 return;
@@ -509,35 +526,28 @@ namespace ModelReplacement
 
             bool inFirstPerson = viewState.GetViewState() == ViewState.FirstPerson;
 
-            Vector3 rootPos;
-            Quaternion rootRot;
             if(inFirstPerson)
             {
-                rootPos = controller.localItemHolder.position;
-                rootRot = controller.localItemHolder.rotation;
-
                 if(heldItem.itemProperties.twoHandedAnimation)
-                    rootPos += (viewModelAvatar.ItemOffsetLeft + viewModelAvatar.ItemOffsetRight) / 2;
+                    heldItem.transform.Translate((viewModelAvatar.ItemOffsetLeft + viewModelAvatar.ItemOffsetRight) / 2, Space.World);
                 else
-                    rootPos += viewModelAvatar.ItemOffsetRight;
+                    heldItem.transform.Translate(viewModelAvatar.ItemOffsetRight, Space.World);
             }
             else
             {
-                rootPos = controller.serverItemHolder.position;
-                rootRot = controller.serverItemHolder.rotation;
+                if (viewState.localPlayer)
+                {
+                    // Reset transform to serverItemHolder position
+                    heldItem.transform.rotation = controller.serverItemHolder.rotation;
+                    heldItem.transform.Rotate(heldItem.itemProperties.rotationOffset);
+                    heldItem.transform.position = controller.serverItemHolder.position + controller.serverItemHolder.rotation * heldItem.itemProperties.positionOffset;
+                }
 
                 if(heldItem.itemProperties.twoHandedAnimation)
-                    rootPos += (avatar.ItemOffsetLeft + avatar.ItemOffsetRight) / 2;
+                    heldItem.transform.Translate((avatar.ItemOffsetLeft + avatar.ItemOffsetRight) / 2, Space.World);
                 else
-                    rootPos += avatar.ItemOffsetRight;
+                    heldItem.transform.Translate(avatar.ItemOffsetRight, Space.World);
             }
-
-            heldItem.transform.rotation = rootRot;
-            heldItem.transform.Rotate(heldItem.itemProperties.rotationOffset);
-            heldItem.transform.position = rootPos;
-            Vector3 vector = heldItem.itemProperties.positionOffset;
-            vector = rootRot * vector;
-            heldItem.transform.position += vector;
 
             // Update jetpack backpack
             if(heldItem is JetpackItem jet)
@@ -545,10 +555,8 @@ namespace ModelReplacement
                 Quaternion baseRot = avatar.lowerSpine.rotation * avatar.jetpackRotOffset;
 
                 jet.backPart.rotation = baseRot;
-                heldItem.transform.Rotate(jet.backPartRotationOffset); // This is heldItem instead of backPart intentionally
-                jet.backPart.position = avatar.lowerSpine.position;
-                vector = baseRot * jet.backPartPositionOffset;
-                jet.backPart.position += vector;
+                jet.backPart.Rotate(jet.backPartRotationOffset);
+                jet.backPart.position = avatar.lowerSpine.position + baseRot * jet.backPartPositionOffset;
             }
         }
         #endregion
