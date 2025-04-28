@@ -9,27 +9,17 @@ namespace ModelReplacement.Patches
     {
 
         [HarmonyPatch("LateUpdate")]
-        [HarmonyPrefix]
-        public static bool LateUpdatePatch(ref GrabbableObject __instance)
+        [HarmonyPostfix]
+        public static void LateUpdatePatch(ref GrabbableObject __instance)
         {
-            if (__instance.parentObject == null || __instance.playerHeldBy == null) return true;
-            if (__instance.playerHeldBy.ItemSlots[__instance.playerHeldBy.currentItemSlot] != __instance) return true;
+            if (__instance.parentObject == null || __instance.playerHeldBy == null) return;
+            if (__instance.playerHeldBy.ItemSlots[__instance.playerHeldBy.currentItemSlot] != __instance) return;
 
             BodyReplacementBase bodyReplacement = __instance.playerHeldBy.gameObject.GetComponent<BodyReplacementBase>();
-            if (!bodyReplacement) return true;
-
-            if(!bodyReplacement.CanPositionItemOnCustomViewModel || bodyReplacement.viewState.GetViewState() != ViewState.FirstPerson)
-            {
-                if (bodyReplacement.heldItem != null)
-                    bodyReplacement.heldItem = null;
-                return true;
-            }
+            if (!bodyReplacement) return;
 
             if (bodyReplacement.heldItem != __instance)
                 bodyReplacement.heldItem = __instance;
-
-            return false;
-
         }
     }
 }
