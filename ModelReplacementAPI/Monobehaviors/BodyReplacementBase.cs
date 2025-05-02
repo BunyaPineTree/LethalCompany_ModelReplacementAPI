@@ -494,9 +494,19 @@ namespace ModelReplacement
         {
             for (int i = 0; i < allBodies.Count; i++)
             {
-                BodyReplacementBase body = allBodies[i];
-                if (!body || !body.isActiveAndEnabled) continue;
-                body.UpdateItemTransform();
+                try
+                {
+                    BodyReplacementBase body = allBodies[i];
+                    if (!body || !body.isActiveAndEnabled) continue;
+                    if (body.viewModelAvatar.replacementViewModel)
+                    {
+                        body.UpdateItemTransform();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
         }
 
@@ -526,7 +536,8 @@ namespace ModelReplacement
 
             bool inFirstPerson = viewState.GetViewState() == ViewState.FirstPerson;
 
-            if(inFirstPerson)
+
+            if (inFirstPerson)
             {
                 if(heldItem.itemProperties.twoHandedAnimation)
                     heldItem.transform.Translate((viewModelAvatar.ItemOffsetLeft + viewModelAvatar.ItemOffsetRight) / 2, Space.World);

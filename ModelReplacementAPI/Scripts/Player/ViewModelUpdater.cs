@@ -1,5 +1,6 @@
 ﻿using GameNetcodeStuff;
 using ModelReplacement.AvatarBodyUpdater;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -9,7 +10,7 @@ namespace ModelReplacement.Scripts.Player
 {
     public class ViewModelUpdater
     {
-        protected GameObject replacementViewModel = null;
+        public GameObject replacementViewModel { get; private set; } = null;
         private Transform armsMetarig;
         private Animator viewModelAnimator;
         //public Transform ItemHolderViewModel { get; protected set; } = null;
@@ -23,6 +24,7 @@ namespace ModelReplacement.Scripts.Player
         public Vector3 ItemOffsetRight => CustomHandTransformRight.position - HandTransformRight.position;
 
         private bool hasShoulder = true;
+
         public virtual void AssignViewModelReplacement(GameObject player, GameObject replacementViewModel)
         {
             if (replacementViewModel == null) return;
