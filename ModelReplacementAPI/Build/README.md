@@ -1,4 +1,4 @@
-# ModelReplacementAPI v2.4.18
+# ModelReplacementAPI v2.4.19
 
 ## Instructions
 For more info on making model replacements see the wiki at https://github.com/BunyaPineTree/LethalCompany_ModelReplacementAPI
@@ -24,8 +24,12 @@ If they are mimicking a player then they will take on that player's model, other
 - Viewmodels rubberband
 - Items held in viewmodels may face a different direction, be in a different location, and drop to a place other than directly under you. 
 - Dropping dead players with a viewmodel can result in unexpected results
+- Sapsucker death animations aren't supported yet for model replacements.
 
 ## Changelog
+	- v2.4.19
+		- Thanks to Wheatly126 for improvements to item offsets. 
+		- Thanks to baerchen201 for fixing the bug that caused the game to freeze when dying to the new enemy. 
 	- v2.4.18
 		- Fixed bug where rendering would break if the user attempted to pick up an item with generate viewmodels = false. 
 	- v2.4.17

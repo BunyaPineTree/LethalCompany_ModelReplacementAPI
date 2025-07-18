@@ -3,6 +3,7 @@ using HarmonyLib;
 using UnityEngine.Rendering;
 using UnityEngine;
 using ModelReplacement.Monobehaviors;
+using System;
 
 namespace ModelReplacement.Patches
 {
