@@ -498,10 +498,7 @@ namespace ModelReplacement
                 {
                     BodyReplacementBase body = allBodies[i];
                     if (!body || !body.isActiveAndEnabled) continue;
-                    if (body.viewModelAvatar.replacementViewModel)
-                    {
-                        body.UpdateItemTransform();
-                    }
+                    body.UpdateItemTransform();
                 }
                 catch (Exception e)
                 {
@@ -539,10 +536,13 @@ namespace ModelReplacement
 
             if (inFirstPerson)
             {
-                if(heldItem.itemProperties.twoHandedAnimation)
-                    heldItem.transform.Translate((viewModelAvatar.ItemOffsetLeft + viewModelAvatar.ItemOffsetRight) / 2, Space.World);
-                else
-                    heldItem.transform.Translate(viewModelAvatar.ItemOffsetRight, Space.World);
+                if (replacementViewModel)
+                {
+                    if(heldItem.itemProperties.twoHandedAnimation)
+                        heldItem.transform.Translate((viewModelAvatar.ItemOffsetLeft + viewModelAvatar.ItemOffsetRight) / 2, Space.World);
+                    else
+                        heldItem.transform.Translate(viewModelAvatar.ItemOffsetRight, Space.World);
+                }
             }
             else
             {
